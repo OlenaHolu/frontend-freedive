@@ -8,7 +8,6 @@ import ProtectedRoute from "../components/ProtectedRoute";
 
 export default function AppRoutes() {
   return (
-    <AuthProvider>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
@@ -17,6 +16,5 @@ export default function AppRoutes() {
           <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
         </Routes>
       </BrowserRouter>
-    </AuthProvider>
   );
 }

@@ -17,11 +17,12 @@ export function AuthProvider({ children }) {
           const userData = await getUser(token);
           setUser(userData);
         } catch (error) {
-          console.error("Error al obtener usuario:", error);
+          console.error("Error fetching user from API:", error);
           setUser(null);
         }
       } else {
         setUser(null);
+        localStorage.removeItem("firebaseToken"); // 🔹 Remove token on logout
       }
       setLoading(false);
     });
@@ -31,11 +32,12 @@ export function AuthProvider({ children }) {
 
   const logout = async () => {
     try {
-      await signOut(auth); // 🔹 Cerrar sesión en Firebase
-      setUser(null); // 🔹 Resetear el estado del usuario
-      console.log("Sesión cerrada con éxito");
+      await signOut(auth); // 🔹 Firebase sign out
+      setUser(null); // 🔹 Reset user state
+      localStorage.removeItem("firebaseToken"); // 🔹 Clear stored token
+      console.log("Logged out successfully");
     } catch (error) {
-      console.error("Error al cerrar sesión:", error);
+      console.error("Error during logout:", error);
     }
   };
 

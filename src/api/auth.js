@@ -1,5 +1,6 @@
 import axios from "axios";
 import { auth } from "./firebase";
+import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth";
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
@@ -9,9 +10,11 @@ export const register = async (email, password, name) => {
   const userCredential = await createUserWithEmailAndPassword(auth, email, password);
   const token = await userCredential.user.getIdToken();
 
+  console.log("Enviando token a backend:", token);
+
   return axios.post(`${BACKEND_URL}/api/register`, {
     firebase_token: token,
-    name: name || userCredential.user.displayName,
+    name: name,
   });
 };
 
@@ -35,6 +38,30 @@ export const login = async (email, password) => {
     return res.data;
   } catch (error) {
     console.error("Error en login:", error);
+    throw error;
+  }
+};
+
+export const loginWithGoogle = async () => {
+  try {
+    const provider = new GoogleAuthProvider();
+    const result = await signInWithPopup(auth, provider);
+    
+    // 🔹 Obtener usuario autenticado
+    const user = result.user;
+    if (!user) throw new Error("No se pudo autenticar con Google");
+
+    // 🔹 Obtener token de Firebase
+    const token = await user.getIdToken();
+
+    console.log("Token obtenido de Google:", token);
+
+    // 🔹 Enviar el token al backend
+    const res = await axios.post(`${BACKEND_URL}/api/login`, { firebase_token: token });
+
+    return res.data;
+  } catch (error) {
+    console.error("Error en login con Google:", error);
     throw error;
   }
 };

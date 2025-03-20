@@ -6,15 +6,15 @@ export default function Dashboard() {
   const navigate = useNavigate();
 
   const handleLogout = async () => {
-    await logout(); // 🔹 Llamar a logout()
-    navigate("/login"); // 🔹 Redirigir al login después de cerrar sesión
+    await logout();
+    navigate("/login");
   };
 
   return (
     <div>
       <h1>Dashboard</h1>
       <p>Bienvenido, {user?.name}</p>
-      <img src={user?.photo} alt="userPhoto" />
+      {user?.photo && <img src={user.photo} alt="Profile" style={{ width: "100px", borderRadius: "50%" }} />}
       <button onClick={handleLogout}>Cerrar Sesión</button>
     </div>
   );
