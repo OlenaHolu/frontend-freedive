@@ -10,7 +10,7 @@ const Navbar = () => {
       {/* Logo */}
       <div className="text-lg font-bold">Freedive Analyzer</div>
 
-      {/* Menú para pantallas grandes */}
+      {/* Menu for grand screens */}
       <div className="hidden md:flex space-x-6">
         <a href="/" className="hover:underline">Home</a>
         <a href="/dashboard" className="hover:underline">Dashboard</a>
@@ -19,7 +19,6 @@ const Navbar = () => {
         <a href="/about" className="hover:underline">About Us</a>
       </div>
 
-      {/* Botón de Login (Siempre visible) */}
       <button 
         className="hidden md:block bg-gray-900 px-4 py-2 rounded-lg border border-white"
         onClick={() => navigate("/login")}
@@ -27,12 +26,12 @@ const Navbar = () => {
         Login
       </button>
 
-      {/* Botón de menú hamburguesa en móviles */}
+        {/* Hamburger menu for mobile */}
       <button className="md:hidden text-2xl" onClick={() => setMenuOpen(!menuOpen)}>
         ☰
       </button>
 
-      {/* Menú desplegable en móviles */}
+        {/* Menu for mobile */}
       {menuOpen && (
         <div className="absolute top-14 left-0 w-full bg-black bg-opacity-90 flex flex-col items-center py-4 space-y-4">
           <a href="/" className="hover:underline">Home</a>

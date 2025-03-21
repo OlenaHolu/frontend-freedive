@@ -1,10 +1,16 @@
-import { Navigate } from "react-router-dom";
+import { Navigate, useLocation } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 
 export default function ProtectedRoute({ children }) {
   const { user, loading } = useAuth();
+  const location = useLocation();
 
-  if (loading) return <p>Cargando...</p>; // 🔹 No redirigir si aún se está cargando
+  if (loading) return <p>Loading...</p>;
 
-  return user ? children : <Navigate to="/login" />;
+  // Prevent redirect loop during registration
+  const isAuthPage = location.pathname === "/register" || location.pathname === "/login";
+
+  if (!user && !isAuthPage) return <Navigate to="/login" />;
+
+  return children;
 }

@@ -1,32 +1,10 @@
 import React, { useState } from 'react';
-import axios from 'axios';
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import { initializeApp } from "firebase/app";
-
-const firebaseConfig = {
-
-    apiKey: "AIzaSyAJ8HGhjF8GsBmsXuU7cOd3oo1xJhskWyM",
-  
-    authDomain: "freedive-app-10426.firebaseapp.com",
-  
-    projectId: "freedive-app-10426",
-  
-    storageBucket: "freedive-app-10426.firebasestorage.app",
-  
-    messagingSenderId: "404518774710",
-  
-    appId: "1:404518774710:web:86066735bbe368a0cac317",
-  
-    measurementId: "G-01E2NMR51T"
-  
-  };
-  
-
-// 🔹 Inicializar Firebase
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
+import Swal from 'sweetalert2';
+import { useNavigate } from 'react-router-dom';
+import { register } from '../api/auth';
 
 function Register() {
+    const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [name, setName] = useState('');
@@ -39,25 +17,27 @@ function Register() {
         setLoading(true);
 
         try {
-            // 🔹 Registrar usuario en Firebase
-            const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-            const user = userCredential.user;
+            await register(email, password, name);
 
-            // 🔹 Obtener token de Firebase
-            const token = await user.getIdToken();
+            await Swal.fire({
+                icon: 'success',
+                title: 'Registration successful!',
+                text: 'You will be redirected to your dashboard.',
+                confirmButtonText: 'Continue'
+              });
 
-            // 🔹 Enviar token al backend de Laravel
-            const res = await axios.post('http://localhost/api/register', {
-                name,
-                email,
-                firebase_token: token
-            });
-
-            console.log('✅ Registro exitoso:', res.data);
-            alert('Registro exitoso');
+              navigate('/dashboard');
+              
         } catch (err) {
-            console.error('❌ Error en el registro:', err);
-            setError(err.message || 'Error registrando');
+            console.error('❌ Registration error:', err);
+            setError(err.message || 'Registration failed');
+
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: err.message || 'Something went wrong during registration!',
+              });
+
         } finally {
             setLoading(false);
         }

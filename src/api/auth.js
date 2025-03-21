@@ -18,30 +18,6 @@ export const register = async (email, password, name) => {
   });
 };
 
-// Iniciar sesión en Firebase
-export const login = async (email, password) => {
-  try {
-    // 🔹 Iniciar sesión con Firebase
-    const userCredential = await signInWithEmailAndPassword(auth, email, password);
-    const user = userCredential.user;
-
-    if (!user) throw new Error("Usuario no autenticado en Firebase");
-
-    // 🔹 Obtener el token de Firebase
-    const token = await user.getIdToken();
-
-    console.log("Enviando token a backend:", token);
-
-    // 🔹 Enviar el token al backend
-    const res = await axios.post(`${BACKEND_URL}/api/login`, { firebase_token: token });
-
-    return res.data;
-  } catch (error) {
-    console.error("Error en login:", error);
-    throw error;
-  }
-};
-
 export const loginWithGoogle = async () => {
   try {
     const provider = new GoogleAuthProvider();
@@ -62,6 +38,29 @@ export const loginWithGoogle = async () => {
     return res.data;
   } catch (error) {
     console.error("Error en login con Google:", error);
+    throw error;
+  }
+};
+
+export const login = async (email, password) => {
+  try {
+    // 🔹 Iniciar sesión con Firebase
+    const userCredential = await signInWithEmailAndPassword(auth, email, password);
+    const user = userCredential.user;
+
+    if (!user) throw new Error("Usuario no autenticado en Firebase");
+
+    // 🔹 Obtener el token de Firebase
+    const token = await user.getIdToken();
+
+    console.log("Enviando token a backend:", token);
+
+    // 🔹 Enviar el token al backend
+    const res = await axios.post(`${BACKEND_URL}/api/login`, { firebase_token: token });
+
+    return res.data;
+  } catch (error) {
+    console.error("Error en login:", error);
     throw error;
   }
 };
