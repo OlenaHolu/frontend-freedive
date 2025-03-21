@@ -1,53 +1,44 @@
 import { useState, useEffect } from "react";
 import { login, loginWithGoogle } from "../api/auth";
-import { useNavigate } from "react-router-dom";
+import { replace, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import Swal from "sweetalert2";
+import GoogleLoginButton from "../components/GoogleLoginButton";
 
-const Login = () => {
-  const { user, loading, setUser } = useAuth();
+export default function Login() {
   const navigate = useNavigate();
+  const { user, loading } = useAuth();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
 
   useEffect(() => {
     if (!loading && user) {
-      navigate("/dashboard");
+      navigate("/dashboard", { replace: true });
     }
   }, [user, loading, navigate]);
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    setError("");
+    setSubmitting(true);
     try {
-      const userData = await login(email, password);
+      await login(email, password);
 
-      // 🔹 Store token in local storage
-      localStorage.setItem("firebaseToken", userData.token);
-
-      // 🔹 Update user state
-      setUser(userData.user);
-
-      // 🔹 Redirect to dashboard
       navigate("/dashboard");
-    } catch (err) {
-      setError("Invalid credentials or user not registered.");
-    }
-  };
+     } catch (err) {
+      console.error("❌ Error en login:", err);
+      setError(err.message || "Error al iniciar sesión.");
 
-  const handleGoogleLogin = async () => {
-    try {
-      const userData = await loginWithGoogle();
-
-      // 🔹 Store token in local storage
-      localStorage.setItem("firebaseToken", userData.token);
-
-      // 🔹 Update user state
-      setUser(userData.user);
-
-      // 🔹 Redirect to dashboard
-      navigate("/dashboard");
-    } catch (err) {
-      setError("Error logging in with Google.");
+      Swal.fire({
+        icon: "error",
+        title: "Error al iniciar sesión",
+        text: err.message || "Credenciales incorrectas.",
+      });
+    } finally {
+      setSubmitting(false);
     }
   };
 
@@ -59,8 +50,6 @@ const Login = () => {
       style={{ backgroundImage: "url('/assets/background.png')" }}
     >
       <h1 className="text-3xl font-bold text-white mb-6">Login</h1>
-
-      {error && <p className="text-red-500 mb-4">{error}</p>}
 
       <form 
         onSubmit={handleLogin} 
@@ -84,9 +73,10 @@ const Login = () => {
         />
         <button
           type="submit"
+          disabled={submitting}
           className="w-full bg-blue-500 text-white py-3 rounded font-bold"
         >
-          Login
+          {submitting ? "Logging in..." : "Login"}
         </button>
       </form>
 
@@ -94,14 +84,7 @@ const Login = () => {
         Don't have an account? <a href="/register" className="underline">Register here</a>
       </p>
 
-      <button
-        onClick={handleGoogleLogin}
-        className="mt-4 bg-red-500 text-white px-6 py-3 rounded font-bold"
-      >
-        Login with Google
-      </button>
+      <GoogleLoginButton />
     </div>
   );
 };
-
-export default Login;

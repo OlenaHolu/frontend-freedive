@@ -22,7 +22,6 @@ const Home = () => {
       className="relative w-full h-screen bg-cover bg-center"
       style={{ backgroundImage: "url('/assets/background.png')" }}
     >
-      {/* Navbar Reutilizable */}
       <Navbar />
 
       {/* Main Content */}

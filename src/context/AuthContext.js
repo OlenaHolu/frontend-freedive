@@ -14,15 +14,16 @@ export function AuthProvider({ children }) {
       if (firebaseUser) {
         try {
           const token = await firebaseUser.getIdToken();
+          localStorage.setItem("firebaseToken", token);
           const userData = await getUser(token);
           setUser(userData);
         } catch (error) {
-          console.error("Error fetching user from API:", error);
+          console.error("Error fetching user:", error);
           setUser(null);
         }
       } else {
         setUser(null);
-        localStorage.removeItem("firebaseToken"); // 🔹 Remove token on logout
+        localStorage.removeItem("firebaseToken");
       }
       setLoading(false);
     });
@@ -32,17 +33,16 @@ export function AuthProvider({ children }) {
 
   const logout = async () => {
     try {
-      await signOut(auth); // 🔹 Firebase sign out
-      setUser(null); // 🔹 Reset user state
-      localStorage.removeItem("firebaseToken"); // 🔹 Clear stored token
-      console.log("Logged out successfully");
+      await signOut(auth);
+      setUser(null);
+      localStorage.removeItem("firebaseToken");
     } catch (error) {
-      console.error("Error during logout:", error);
+      console.error("Logout error:", error);
     }
   };
 
   return (
-    <AuthContext.Provider value={{ user, setUser, loading, logout }}>
+    <AuthContext.Provider value={{ user, loading, logout }}>
       {children}
     </AuthContext.Provider>
   );
