@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
-import bgImage from '../assets/background.png';
 
 const Home = () => {
   const [email, setEmail] = useState("");
@@ -21,7 +20,7 @@ const Home = () => {
   return (
     <div
       className="relative w-full h-screen bg-cover bg-center"
-      style={{ backgroundImage: `url(${bgImage})` }}
+      style={{ backgroundImage: "url('/assets/background.png')" }}
     >
       <Navbar />
 
