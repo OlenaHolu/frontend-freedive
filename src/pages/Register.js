@@ -48,7 +48,7 @@ export default function Register() {
     return (
         <div
             className="h-screen flex flex-col justify-center items-center bg-cover bg-center px-6"
-            style={{ backgroundImage: "url('/assets/background.png')" }}
+            style={{ backgroundImage: "url('/background.png')" }}
         >
             <h1 className="text-3xl font-bold text-white mb-6">Register</h1>
             {error && <p style={{ color: 'red' }}>{error}</p>}

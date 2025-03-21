@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
-import { login, loginWithGoogle } from "../api/auth";
-import { replace, useNavigate } from "react-router-dom";
+import { login } from "../api/auth";
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import Swal from "sweetalert2";
 import GoogleLoginButton from "../components/GoogleLoginButton";
+import Navbar from "../components/Navbar";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -47,8 +48,9 @@ export default function Login() {
   return (
     <div
       className="h-screen flex flex-col justify-center items-center bg-cover bg-center px-6"
-      style={{ backgroundImage: "url('/assets/background.png')" }}
+      style={{ backgroundImage: "url('/background.png')" }}
     >
+      <Navbar />
       <h1 className="text-3xl font-bold text-white mb-6">Login</h1>
 
       <form 
