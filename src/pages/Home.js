@@ -20,7 +20,7 @@ const Home = () => {
   return (
     <div
       className="relative w-full h-screen bg-cover bg-center"
-      style={{ backgroundImage: "url('/assets/background.png')" }}
+      style={{ backgroundImage: "url('/background.png')" }}
     >
       <Navbar />
 
