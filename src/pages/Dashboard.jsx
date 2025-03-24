@@ -5,6 +5,7 @@ import DiveList from "../components/DiveList";
 import { useEffect, useState } from "react";
 import { getDives } from "../api/dive";
 import { useTranslation } from "react-i18next";
+import Footer from "../components/Footer";
 
 export default function Dashboard() {
   const { user, loading } = useAuth();
@@ -62,6 +63,7 @@ export default function Dashboard() {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 }
