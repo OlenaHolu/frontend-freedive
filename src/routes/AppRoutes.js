@@ -3,7 +3,7 @@ import { AuthProvider } from "../context/AuthContext";
 import Home from "../pages/Home";
 import Dashboard from "../pages/Dashboard";
 import Login from "../pages/Login";
-import Register from "../pages/Register";
+import Signin from "../pages/Signin";
 import ProtectedRoute from "../components/ProtectedRoute";
 
 export default function AppRoutes() {
@@ -12,7 +12,7 @@ export default function AppRoutes() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
+          <Route path="/register" element={<Signin />} />
           <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
         </Routes>
       </BrowserRouter>

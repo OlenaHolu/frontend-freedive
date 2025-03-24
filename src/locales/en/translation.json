@@ -1,0 +1,37 @@
+{
+  "home": "Home",
+  "dashboard": "Dashboard",
+  "leaderboard": "Leaderboard",
+  "community": "Community",
+  "about": "About Us",
+  "logout": "Logout",
+  "discover": "Discover the depths!",
+  "enterEmail": "Enter your email",
+  "invalidEmail": "Please enter a valid email.",
+  "loading": "Loading...",
+  "signIn": {
+    "title": "Create Account",
+    "name": "Name",
+    "email": "Email",
+    "password": "Password",
+    "button": "Register",
+    "loading": "Registering...",
+    "already_account": "Already have an account?",
+    "login_link": "Log in",
+    "success": "Success!",
+    "welcome": "Welcome to Freedive Analyzer 🎉",
+    "error": "Oops...",
+    "error_generic": "Something went wrong during registration"
+  },
+  "login": {
+    "title": "Log in",
+    "email": "Email address",
+    "password": "Password",
+    "button": "Login",
+    "loading": "Logging in...",
+    "no_account": "Don't have an account?",
+    "register_link": "Register here",
+    "error_title": "Login failed",
+    "error_generic": "Invalid credentials"
+  }
+}

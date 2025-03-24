@@ -1,0 +1,36 @@
+{
+    "home": "Inicio",
+    "dashboard": "Panel",
+    "leaderboard": "Clasificación",
+    "community": "Comunidad",
+    "about": "Sobre Nosotros",
+    "logout": "Cerrar Sesión",
+    "discover": "¡Descubre las profundidades!",
+    "enterEmail": "Introduce tu correo",
+    "invalidEmail": "Por favor, introduce un correo válido.",
+    "register": {
+        "title": "Crear Cuenta",
+        "name": "Nombre",
+        "email": "Correo Electrónico",
+        "password": "Contraseña",
+        "button": "Registrarse",
+        "loading": "Registrando...",
+        "already_account": "¿Ya tienes una cuenta?",
+        "login_link": "Iniciar sesión",
+        "success": "¡Éxito!",
+        "welcome": "Bienvenido a Freedive Analyzer 🎉",
+        "error": "Ups...",
+        "error_generic": "Algo salió mal durante el registro"
+    },
+    "login": {
+        "title": "Iniciar sesión",
+        "email": "Correo electrónico",
+        "password": "Contraseña",
+        "button": "Entrar",
+        "loading": "Iniciando...",
+        "no_account": "¿No tienes cuenta?",
+        "register_link": "Regístrate aquí",
+        "error_title": "Error al iniciar sesión",
+        "error_generic": "Correo o contraseña incorrectos"
+      }
+}

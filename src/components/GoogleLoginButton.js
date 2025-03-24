@@ -12,7 +12,7 @@ export default function GoogleLoginButton() {
     try {
       await loginWithGoogle();
 
-      navigate("/dashboard"); // 🔹 Redirigir después de la alerta
+      navigate("/dashboard");
     } catch (error) {
       console.error("Google login error:", error);
       await Swal.fire({

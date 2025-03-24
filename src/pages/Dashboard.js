@@ -1,6 +1,4 @@
 import { useAuth } from "../context/AuthContext";
-import Swal from "sweetalert2";
-import { useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
 
 export default function Dashboard() {
