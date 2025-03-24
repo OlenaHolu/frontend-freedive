@@ -3,7 +3,7 @@ import { auth } from "./firebase";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth";
 
-const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+const BACKEND_URL = import.meta.env.VITE_APP_BACKEND_URL;
 
 // Registrar usuario en Firebase y Laravel
 export const register = async (email, password, name) => {
