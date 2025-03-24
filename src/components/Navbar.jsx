@@ -18,7 +18,7 @@ const Navbar = () => {
             {/* Menu desktop */}
             <div className="hidden md:flex space-x-6">
                 <a href="/" className="hover:underline">{t("home")}</a>
-                <a href="/dashboard" className="hover:underline">{t("dashboard")}</a>
+                <a href="/dashboard" className="hover:underline">{t("dashboard.name")}</a>
                 <a href="/leaderboard" className="hover:underline">{t("leaderboard")}</a>
                 <a href="/community" className="hover:underline">{t("community")}</a>
                 <a href="/about" className="hover:underline">{t("about")}</a>

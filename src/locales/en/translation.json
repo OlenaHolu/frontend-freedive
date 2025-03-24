@@ -1,6 +1,5 @@
 {
   "home": "Home",
-  "dashboard": "Dashboard",
   "leaderboard": "Leaderboard",
   "community": "Community",
   "about": "About Us",
@@ -9,6 +8,16 @@
   "enterEmail": "Enter your email",
   "invalidEmail": "Please enter a valid email.",
   "loading": "Loading...",
+  "profilePhoto": "Profile Photo",
+  "dashboard": {
+    "name": "Dashboard",
+    "welcome": "Welcome",
+    "diver": "Diver",
+    "logDive": "Log a New Dive",
+    "yourDives": "Your Dives",
+    "comingSoon": "Coming soon: Dive Stats & Graphs",
+    "chartHere": "Chart will appear here"
+  },
   "signIn": {
     "title": "Create Account",
     "name": "Name",
@@ -33,5 +42,21 @@
     "register_link": "Register here",
     "error_title": "Login failed",
     "error_generic": "Invalid credentials"
+  },
+  "form": {
+    "missingFieldTitle": "Missing Field",
+    "missingFieldText": "Please fill all required fields.",
+    "savingTitle": "Saving Dive...",
+    "savingText": "Please wait while your dive is being saved.",
+    "successTitle": "Dive Saved!",
+    "successText": "Your dive was saved successfully.",
+    "errorTitle": "Error saving dive",
+    "addDiveButton": "Add Dive",
+    "maxDepth": "Max Depth (m)",
+    "duration": "Duration (min)",
+    "startTemp": "Start Temp (°C)",
+    "bottomTemp": "Bottom Temp (°C)",
+    "endTemp": "End Temp (°C)",
+    "previousMax": "Previous Max Depth (m)"
   }
 }

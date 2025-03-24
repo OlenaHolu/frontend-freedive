@@ -1,6 +1,5 @@
 {
     "home": "Inicio",
-    "dashboard": "Panel",
     "leaderboard": "Clasificación",
     "community": "Comunidad",
     "about": "Sobre Nosotros",
@@ -8,7 +7,18 @@
     "discover": "¡Descubre las profundidades!",
     "enterEmail": "Introduce tu correo",
     "invalidEmail": "Por favor, introduce un correo válido.",
-    "register": {
+    "loading": "Cargando...",
+    "profilePhoto": "Foto de Perfil",
+    "dashboard": {
+        "name": "Panel de control",
+        "welcome": "Bienvenido",
+        "diver": "Buceador",
+        "logDive": "Registrar una nueva inmersión",
+        "yourDives": "Tus inmersiones",
+        "comingSoon": "Próximamente: estadísticas y gráficos de inmersión",
+        "chartHere": "Aquí aparecerá el gráfico"
+    },
+    "signIn": {
         "title": "Crear Cuenta",
         "name": "Nombre",
         "email": "Correo Electrónico",
@@ -32,5 +42,21 @@
         "register_link": "Regístrate aquí",
         "error_title": "Error al iniciar sesión",
         "error_generic": "Correo o contraseña incorrectos"
-      }
+    },
+    "form": {
+        "missingFieldTitle": "Campo obligatorio",
+        "missingFieldText": "Por favor completa todos los campos requeridos.",
+        "savingTitle": "Guardando inmersión...",
+        "savingText": "Por favor espera mientras se guarda tu inmersión.",
+        "successTitle": "¡Inmersión guardada!",
+        "successText": "Tu inmersión se guardó correctamente.",
+        "errorTitle": "Error al guardar la inmersión",
+        "addDiveButton": "Guardar Inmersión",
+        "maxDepth": "Profundidad Máxima (m)",
+        "duration": "Duración (min)",
+        "startTemp": "Temp Inicial (°C)",
+        "bottomTemp": "Temp Fondo (°C)",
+        "endTemp": "Temp Final (°C)",
+        "previousMax": "Profundidad Máxima Anterior (m)"
+    }
 }
