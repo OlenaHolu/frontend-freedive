@@ -56,9 +56,9 @@ export default function Dashboard() {
         </div>
 
         <div className="mt-10 text-center">
-          <h3 className="text-xl font-semibold mb-2">📈 {t("dashboard.comingSoon")}</h3>
+          <h3 className="text-xl font-semibold mb-2">📈  {t("dashboard.comingSoon")}</h3>
           <div className="w-full h-40 bg-white bg-opacity-20 backdrop-blur-md rounded-xl flex items-center justify-center text-white">
-            <p className="italic text-lg">📊 {t("dashboard.chartHere")}</p>
+            <p className="italic text-lg">📊  {t("dashboard.chartHere")}</p>
           </div>
         </div>
       </div>
