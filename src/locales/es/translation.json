@@ -86,6 +86,12 @@
     },
     "divesList": {
         "title": "Mis Inmersiones",
-        "noDives": "No hay inmersiones para mostrar."
+        "noDives": "No se encontraron inmersiones.",
+        "searchPlaceholder": "Buscar por fecha, profundidad, duración...",
+        "filters": {
+            "all": "Todas",
+            "last7": "Últimos 7 días",
+            "last30": "Últimos 30 días"
+        }
     }
 }
