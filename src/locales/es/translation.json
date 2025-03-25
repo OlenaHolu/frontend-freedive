@@ -8,11 +8,17 @@
     "enterEmail": "Introduce tu correo",
     "invalidEmail": "Por favor, introduce un correo válido.",
     "loading": "Cargando...",
+    "close": "Cerrar",
     "sidebar": {
         "profile": "Perfil",
         "log": "Registrar Inmersión",
         "list": "Mis Inmersiones",
         "stats": "Estadísticas"
+    },
+    "dashboard": {
+        "name": "Panel de control",
+        "welcome": "Bienvenido",
+        "description": "Este es tu panel de control de apnea. Utiliza el menú para registrar y ver inmersiones."
     },
     "profile": {
         "title": "Mi Perfil",
@@ -22,14 +28,11 @@
         "settings": "Configuración de Cuenta",
         "comingSoon": "Aquí podrás actualizar tus preferencias"
     },
-    "dashboard": {
-        "name": "Panel de control",
-        "welcome": "Bienvenido",
-        "description": "Este es tu panel de control de apnea. Utiliza el menú para registrar y ver inmersiones.",
-        "logDive": "Registrar una nueva inmersión",
-        "yourDives": "Tus inmersiones",
-        "chartTitle": "Profundidad de inmersiones en el tiempo",
-        "noDives": "No hay datos disponibles para el gráfico."
+    "log": {
+        "title": "Registrar una nueva inmersión"
+    },
+    "stats": {
+        "title": "Profundidad de Inmersión a lo largo del tiempo"
     },
     "signIn": {
         "title": "Crear Cuenta",
@@ -56,7 +59,7 @@
         "error_title": "Error al iniciar sesión",
         "error_generic": "Correo o contraseña incorrectos"
     },
-    "form": {
+    "dive": {
         "missingFieldTitle": "Campo obligatorio",
         "missingFieldText": "Por favor completa todos los campos requeridos.",
         "savingTitle": "Guardando inmersión...",
@@ -66,18 +69,23 @@
         "errorTitle": "Error al guardar la inmersión",
         "addDiveButton": "Guardar Inmersión",
         "updateDiveButton": "Actualizar Inmersión",
+        "diveDetails": "Detalles de la Inmersión",
+        "editDive": "Editar Inmersión",
+        "startTime": "Hora de Inicio",
         "maxDepth": "Profundidad Máxima (m)",
         "duration": "Duración (min)",
+        "surfaceInterval": "Intervalo de Superficie (min)",
+        "temp": "Temp (°C)",
         "startTemp": "Temp Inicial (°C)",
         "bottomTemp": "Temp Fondo (°C)",
         "endTemp": "Temp Final (°C)",
-        "previousMax": "Profundidad Máxima Anterior (m)"
-    },
-    "dive": {
-        "depth": "Profundidad",
-        "duration": "Duración",
+        "previousMax": "Profundidad Máxima Anterior (m)",
         "view": "Ver",
         "edit": "Editar",
         "delete": "Eliminar"
+    },
+    "divesList": {
+        "title": "Mis Inmersiones",
+        "noDives": "No hay inmersiones para mostrar."
     }
 }

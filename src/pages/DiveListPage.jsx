@@ -37,10 +37,10 @@ const DiveListPage = () => {
 
     return (
         <div>
-            <h2 className="text-2xl font-semibold mb-4">📋 My Dives</h2>
+            <h2 className="text-2xl font-semibold mb-4">📋 {t("divesList.title")}</h2>
             <div className="grid gap-4">
                 {dives.length === 0 ? (
-                    <p>{t("dashboard.noDives")}</p>
+                    <p>{t("diveslist.noDives")}</p>
                 ) : (
                     dives.map((dive) => <DiveCard key={dive.id} dive={dive} onDiveUpdated={fetchDives} />)
                 )}

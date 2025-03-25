@@ -8,11 +8,17 @@
   "enterEmail": "Enter your email",
   "invalidEmail": "Please enter a valid email.",
   "loading": "Loading...",
+  "close": "Close",
   "sidebar": {
     "profile": "Profile",
     "log": "Log Dive",
     "list": "My Dives",
     "stats": "Stats"
+  },
+  "dashboard": {
+    "name": "Dashboard",
+    "welcome": "Welcome",
+    "description": "This is your freediving dashboard. Use the menu to log and view dives."
   },
   "profile": {
     "title": "My Profile",
@@ -22,14 +28,11 @@
     "settings": "Account Settings",
     "comingSoon": "Here you’ll be able to update your preferences"
   },
-  "dashboard": {
-    "name": "Dashboard",
-    "welcome": "Welcome",
-    "description": "This is your freediving dashboard. Use the menu to log and view dives.",
-    "logDive": "Log a New Dive",
-    "yourDives": "Your Dives",
-    "chartTitle": "Dive Depth Over Time",
-    "noDives": "No data available for chart."
+  "log": {
+    "title": "Log a New Dive"
+  },
+  "stats": {
+    "title": "Dive Depth Over Time"
   },
   "signIn": {
     "title": "Create Account",
@@ -56,7 +59,7 @@
     "error_title": "Login failed",
     "error_generic": "Invalid credentials"
   },
-  "form": {
+  "dive": {
     "missingFieldTitle": "Missing Field",
     "missingFieldText": "Please fill all required fields.",
     "savingTitle": "Saving Dive...",
@@ -66,18 +69,23 @@
     "errorTitle": "Error saving dive",
     "addDiveButton": "Add Dive",
     "updateDiveButton": "Update Dive",
+    "diveDetails": "Dive Details",
+    "editDive": "Edit Dive",
+    "startTime": "Start Time",
     "maxDepth": "Max Depth (m)",
     "duration": "Duration (min)",
+    "surfaceInterval": "Surface Interval (min)",
+    "temp": "Temp (°C)",
     "startTemp": "Start Temp (°C)",
     "bottomTemp": "Bottom Temp (°C)",
     "endTemp": "End Temp (°C)",
-    "previousMax": "Previous Max Depth (m)"
-  },
-  "dive": {
-    "depth": "Depth",
-    "duration": "Duration",
+    "previousMax": "Previous Max Depth (m)",
     "view": "View",
     "edit": "Edit",
     "delete": "Delete"
+  },
+  "divesList": {
+    "title": "My Dives",
+    "noDives": "No dives to display."
   }
 }

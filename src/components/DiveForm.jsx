@@ -28,16 +28,16 @@ export default function DiveForm({ editMode, initialData = {}, onClose }) {
     if (missing) {
       Swal.fire({
         icon: "error",
-        title: t("form.missingFieldTitle"),
-        text: t("form.missingFieldText"),
+        title: t("dive.missingFieldTitle"),
+        text: t("dive.missingFieldText"),
       });
       return;
     }
 
     try {
       Swal.fire({
-        title: t("form.savingTitle"),
-        text: t("form.savingText"),
+        title: t("dive.savingTitle"),
+        text: t("dive.savingText"),
         allowOutsideClick: false,
         didOpen: () => {
           Swal.showLoading();
@@ -59,7 +59,7 @@ export default function DiveForm({ editMode, initialData = {}, onClose }) {
 
       if (onClose) onClose();
 
-      Swal.fire(t("form.successTitle"), t("form.successText"), "success");
+      Swal.fire(t("dive.successTitle"), t("dive.successText"), "success");
 
       setForm({
         startTime: "",
@@ -72,7 +72,7 @@ export default function DiveForm({ editMode, initialData = {}, onClose }) {
       });
     } catch (err) {
       console.error(err);
-      Swal.fire(t("form.errorTitle"), err.message, "error");
+      Swal.fire(t("dive.errorTitle"), err.message, "error");
     }
   };
 
@@ -87,37 +87,37 @@ export default function DiveForm({ editMode, initialData = {}, onClose }) {
       className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 animate-fadeIn"
     >
       <div>
-        <label className={labelClass}>{t("form.startTime")}</label>
+        <label className={labelClass}>{t("dive.startTime")}</label>
         <input name="startTime" type="datetime-local" value={form.startTime} onChange={handleChange} className={inputClass} required />
       </div>
 
       <div>
-        <label className={labelClass}>{t("form.maxDepth")} *</label>
+        <label className={labelClass}>{t("dive.maxDepth")} *</label>
         <input name="depth" type="number" placeholder="e.g. 25" value={form.depth} onChange={handleChange} className={inputClass} />
       </div>
 
       <div>
-        <label className={labelClass}>{t("form.duration")} *</label>
+        <label className={labelClass}>{t("dive.duration")} *</label>
         <input name="duration" type="number" placeholder="e.g. 60" value={form.duration} onChange={handleChange} className={inputClass} />
       </div>
 
       <div>
-        <label className={labelClass}>{t("form.startTemp")}</label>
+        <label className={labelClass}>{t("dive.startTemp")}</label>
         <input name="startTemperature" type="number" value={form.startTemperature} onChange={handleChange} className={inputClass} />
       </div>
 
       <div>
-        <label className={labelClass}>{t("form.bottomTemp")}</label>
+        <label className={labelClass}>{t("dive.bottomTemp")}</label>
         <input name="bottomTemperature" type="number" value={form.bottomTemperature} onChange={handleChange} className={inputClass} />
       </div>
 
       <div>
-        <label className={labelClass}>{t("form.endTemp")}</label>
+        <label className={labelClass}>{t("dive.endTemp")}</label>
         <input name="endTemperature" type="number" value={form.endTemperature} onChange={handleChange} className={inputClass} />
       </div>
 
       <div className="md:col-span-2 lg:col-span-3">
-        <label className={labelClass}>{t("form.previousMax")}</label>
+        <label className={labelClass}>{t("dive.previousMax")}</label>
         <input name="previousMaxDepth" type="number" value={form.previousMaxDepth} onChange={handleChange} className={inputClass} />
       </div>
 
@@ -126,7 +126,7 @@ export default function DiveForm({ editMode, initialData = {}, onClose }) {
           type="submit"
           className="bg-blue-600 hover:bg-blue-700 text-white py-3 px-6 rounded-xl text-lg font-bold shadow-lg transition"
         >
-          {isEdit ? t("form.updateDiveButton") : t("form.addDiveButton")}
+          {isEdit ? t("dive.updateDiveButton") : t("dive.addDiveButton")}
         </button>
       </div>
     </form>

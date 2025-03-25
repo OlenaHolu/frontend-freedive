@@ -11,7 +11,7 @@ export default function DiveCard({ dive, onDiveUpdated }) {
   return (
     <div className="bg-white text-black rounded-lg p-4 shadow relative">
       <p><strong>📅 {new Date(dive.StartTime).toLocaleString()}</strong></p>
-      <p>🌊 {t("dive.depth")}: {dive.MaxDepth} m</p>
+      <p>🌊 {t("dive.maxDepth")}: {dive.MaxDepth} m</p>
       <p>🕒 {t("dive.duration")}: {dive.Duration} min</p>
 
       <div className="mt-4 flex gap-2">
