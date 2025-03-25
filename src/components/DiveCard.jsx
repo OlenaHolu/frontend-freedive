@@ -1,29 +1,31 @@
 import { useState } from "react";
 import DiveDetailsModal from "./modals/DiveDetailsModal";
 import EditDiveModal from "./modals/EditDiveModal";
+import { useTranslation } from "react-i18next";
 
 export default function DiveCard({ dive, onDiveUpdated }) {
   const [showDetails, setShowDetails] = useState(false);
   const [showEdit, setShowEdit] = useState(false);
+  const { t } = useTranslation();
 
   return (
     <div className="bg-white text-black rounded-lg p-4 shadow relative">
       <p><strong>📅 {new Date(dive.StartTime).toLocaleString()}</strong></p>
-      <p>🌊 Depth: {dive.MaxDepth} m</p>
-      <p>🕒 Duration: {dive.Duration} min</p>
+      <p>🌊 {t("dive.depth")}: {dive.MaxDepth} m</p>
+      <p>🕒 {t("dive.duration")}: {dive.Duration} min</p>
 
       <div className="mt-4 flex gap-2">
         <button
           onClick={() => setShowDetails(true)}
           className="bg-gray-200 px-3 py-1 rounded hover:bg-gray-300"
         >
-          🔍 View
+          🔍 {t("dive.view")}
         </button>
         <button
           onClick={() => setShowEdit(true)}
           className="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600"
         >
-          ✏️ Edit
+          ✏️ {t("dive.edit")}
         </button>
       </div>
 

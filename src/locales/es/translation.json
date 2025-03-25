@@ -72,5 +72,12 @@
         "bottomTemp": "Temp Fondo (°C)",
         "endTemp": "Temp Final (°C)",
         "previousMax": "Profundidad Máxima Anterior (m)"
+    },
+    "dive": {
+        "depth": "Profundidad",
+        "duration": "Duración",
+        "view": "Ver",
+        "edit": "Editar",
+        "delete": "Eliminar"
     }
 }
