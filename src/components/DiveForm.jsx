@@ -52,20 +52,15 @@ export default function DiveForm({ editMode, initialData = {}, onClose }) {
         BottomTemperature: form.bottomTemperature,
         EndTemperature: form.endTemperature,
         PreviousMaxDepth: form.previousMaxDepth,
-        Mode: 3 // por defecto FreeDive
+        Mode: 3
       };
 
-      if (isEdit) {
-        await updateDive(initialData.id, payload);
-      }else {
-        await saveDive(payload);
-      }
+      isEdit ? await updateDive(initialData.id, payload) : await saveDive(payload);
 
       if (onClose) onClose();
 
       Swal.fire(t("form.successTitle"), t("form.successText"), "success");
 
-      // Reset
       setForm({
         startTime: "",
         depth: "",
@@ -81,18 +76,59 @@ export default function DiveForm({ editMode, initialData = {}, onClose }) {
     }
   };
 
+  const inputClass =
+    "w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition";
+
+  const labelClass = "block text-sm font-medium text-gray-700 mb-1";
+
   return (
-    <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-3 gap-4">
-      <input name="startTime" type="datetime-local" value={form.startTime} onChange={handleChange} className="p-3 border rounded" required />
-      <input name="depth" type="number" placeholder={`${t("form.maxDepth")}*`} value={form.depth} onChange={handleChange} className="p-3 border rounded" />
-      <input name="duration" type="number" placeholder={`${t("form.duration")}*`} value={form.duration} onChange={handleChange} className="p-3 border rounded" />
-      <input name="startTemperature" type="number" placeholder={t("form.startTemp")} value={form.startTemperature} onChange={handleChange} className="p-3 border rounded" />
-      <input name="bottomTemperature" type="number" placeholder={t("form.bottomTemp")} value={form.bottomTemperature} onChange={handleChange} className="p-3 border rounded" />
-      <input name="endTemperature" type="number" placeholder={t("form.endTemp")} value={form.endTemperature} onChange={handleChange} className="p-3 border rounded" />
-      <input name="previousMaxDepth" type="number" placeholder={t("form.previousMax")} value={form.previousMaxDepth} onChange={handleChange} className="p-3 border rounded" />
-      <button type="submit" className="md:col-span-3 bg-blue-600 text-white py-3 px-4 rounded font-bold hover:bg-blue-700 transition">
-        {isEdit ? t("form.updateDiveButton") : t("form.addDiveButton")}
-      </button>
+    <form
+      onSubmit={handleSubmit}
+      className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 animate-fadeIn"
+    >
+      <div>
+        <label className={labelClass}>{t("form.startTime")}</label>
+        <input name="startTime" type="datetime-local" value={form.startTime} onChange={handleChange} className={inputClass} required />
+      </div>
+
+      <div>
+        <label className={labelClass}>{t("form.maxDepth")} *</label>
+        <input name="depth" type="number" placeholder="e.g. 25" value={form.depth} onChange={handleChange} className={inputClass} />
+      </div>
+
+      <div>
+        <label className={labelClass}>{t("form.duration")} *</label>
+        <input name="duration" type="number" placeholder="e.g. 60" value={form.duration} onChange={handleChange} className={inputClass} />
+      </div>
+
+      <div>
+        <label className={labelClass}>{t("form.startTemp")}</label>
+        <input name="startTemperature" type="number" value={form.startTemperature} onChange={handleChange} className={inputClass} />
+      </div>
+
+      <div>
+        <label className={labelClass}>{t("form.bottomTemp")}</label>
+        <input name="bottomTemperature" type="number" value={form.bottomTemperature} onChange={handleChange} className={inputClass} />
+      </div>
+
+      <div>
+        <label className={labelClass}>{t("form.endTemp")}</label>
+        <input name="endTemperature" type="number" value={form.endTemperature} onChange={handleChange} className={inputClass} />
+      </div>
+
+      <div className="md:col-span-2 lg:col-span-3">
+        <label className={labelClass}>{t("form.previousMax")}</label>
+        <input name="previousMaxDepth" type="number" value={form.previousMaxDepth} onChange={handleChange} className={inputClass} />
+      </div>
+
+      <div className="md:col-span-2 lg:col-span-3 text-center mt-4">
+        <button
+          type="submit"
+          className="bg-blue-600 hover:bg-blue-700 text-white py-3 px-6 rounded-xl text-lg font-bold shadow-lg transition"
+        >
+          {isEdit ? t("form.updateDiveButton") : t("form.addDiveButton")}
+        </button>
+      </div>
     </form>
   );
 }
