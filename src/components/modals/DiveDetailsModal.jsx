@@ -1,6 +1,7 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import Modal from "react-modal";
+import { formatDuration } from "../../utils/time";
 
 Modal.setAppElement("#root");
 
@@ -18,7 +19,7 @@ export default function DiveDetailsModal({ dive, isOpen, onClose }) {
       <h2 className="text-xl font-bold mb-4">{t("dive.diveDetails")}</h2>
       <p><strong>{t("dive.startTime")}:</strong> {dive.StartTime}</p>
       <p><strong>{t("dive.maxDepth")}:</strong> {dive.MaxDepth} m</p>
-      <p><strong>{t("dive.duration")}:</strong> {dive.Duration} min</p>
+      <p><strong>{t("dive.duration")}:</strong> {formatDuration(dive.Duration)} min</p>
       <p><strong>{t("dive.temp")}:</strong> {dive.StartTemperature}° ➝ {dive.BottomTemperature}° ➝ {dive.EndTemperature}°</p>
       <p><strong>{t("dive.previousMax")}:</strong> {dive.PreviousMaxDepth} m</p>
       <button onClick={onClose} className="mt-4 bg-blue-600 text-white px-4 py-2 rounded">{t("close")}</button>

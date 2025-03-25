@@ -2,14 +2,19 @@ import { useState } from "react";
 import { saveDive, updateDive } from "../api/dive";
 import Swal from "sweetalert2";
 import { useTranslation } from "react-i18next";
+import { formatDuration, mmssToSeconds } from "../utils/time";
 
 export default function DiveForm({ editMode, initialData = {}, onClose }) {
   const isEdit = editMode && initialData?.id;
   const { t } = useTranslation();
+
   const [form, setForm] = useState({
     startTime: initialData.StartTime || "",
     depth: initialData.MaxDepth || "",
     duration: initialData.Duration || "",
+    durationFormatted: initialData.Duration 
+      ? formatDuration(initialData.Duration)
+      : "",
     startTemperature: initialData.StartTemperature || "",
     bottomTemperature: initialData.BottomTemperature || "",
     endTemperature: initialData.EndTemperature || "",
@@ -65,6 +70,7 @@ export default function DiveForm({ editMode, initialData = {}, onClose }) {
         startTime: "",
         depth: "",
         duration: "",
+        durationFormatted: "",
         startTemperature: "",
         bottomTemperature: "",
         endTemperature: "",
@@ -87,9 +93,18 @@ export default function DiveForm({ editMode, initialData = {}, onClose }) {
       className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 animate-fadeIn"
     >
       <div>
-        <label className={labelClass}>{t("dive.startTime")}</label>
-        <input name="startTime" type="datetime-local" value={form.startTime} onChange={handleChange} className={inputClass} required />
+        <label className="block text-sm font-medium text-gray-700 mb-1">{t("dive.startTime")}*</label>
+        <input
+          type="datetime-local"
+          name="startTime"
+          step="1"
+          value={form.startTime}
+          onChange={handleChange}
+          className="w-full p-3 border rounded bg-white text-black"
+          required
+        />
       </div>
+
 
       <div>
         <label className={labelClass}>{t("dive.maxDepth")} *</label>
@@ -98,25 +113,74 @@ export default function DiveForm({ editMode, initialData = {}, onClose }) {
 
       <div>
         <label className={labelClass}>{t("dive.duration")} *</label>
-        <input name="duration" type="number" placeholder="e.g. 60" value={form.duration} onChange={handleChange} className={inputClass} />
+        <input 
+          name="durationFormatted" 
+          type="text" 
+          placeholder="mm:ss"
+          value={form.durationFormatted} 
+          onChange={(e) => {
+            const value = e.target.value;
+            setForm({
+              ...form,
+              durationFormatted: value,
+              duration: mmssToSeconds(value),
+            });
+          }} 
+          className={inputClass} 
+          required
+        />
       </div>
 
+      {/* Start Temperature */}
       <div>
         <label className={labelClass}>{t("dive.startTemp")}</label>
-        <input name="startTemperature" type="number" value={form.startTemperature} onChange={handleChange} className={inputClass} />
+        <div className="flex items-center border rounded px-3 py-2 bg-white text-black">
+          <input
+            name="startTemperature"
+            type="number"
+            value={form.startTemperature}
+            onChange={handleChange}
+            className="flex-1 outline-none bg-transparent"
+            placeholder="e.g. 22"
+          />
+          <span className="ml-2 text-gray-600">°C</span>
+        </div>
       </div>
 
+      {/* Bottom Temperature */}
       <div>
         <label className={labelClass}>{t("dive.bottomTemp")}</label>
-        <input name="bottomTemperature" type="number" value={form.bottomTemperature} onChange={handleChange} className={inputClass} />
+        <div className="flex items-center border rounded px-3 py-2 bg-white text-black">
+          <input
+            name="bottomTemperature"
+            type="number"
+            value={form.bottomTemperature}
+            onChange={handleChange}
+            className="flex-1 outline-none bg-transparent"
+            placeholder="e.g. 10"
+          />
+          <span className="ml-2 text-gray-600">°C</span>
+        </div>
       </div>
 
+      {/* End Temperature */}
       <div>
         <label className={labelClass}>{t("dive.endTemp")}</label>
-        <input name="endTemperature" type="number" value={form.endTemperature} onChange={handleChange} className={inputClass} />
+        <div className="flex items-center border rounded px-3 py-2 bg-white text-black">
+          <input
+            name="endTemperature"
+            type="number"
+            value={form.endTemperature}
+            onChange={handleChange}
+            className="flex-1 outline-none bg-transparent"
+            placeholder="e.g. 24"
+          />
+          <span className="ml-2 text-gray-600">°C</span>
+        </div>
       </div>
 
-      <div className="md:col-span-2 lg:col-span-3">
+
+      <div>
         <label className={labelClass}>{t("dive.previousMax")}</label>
         <input name="previousMaxDepth" type="number" value={form.previousMaxDepth} onChange={handleChange} className={inputClass} />
       </div>

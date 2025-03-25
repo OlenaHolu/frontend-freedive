@@ -8,11 +8,18 @@ export default function DiveCard({ dive, onDiveUpdated }) {
   const [showEdit, setShowEdit] = useState(false);
   const { t } = useTranslation();
 
+  const formatDuration = (seconds) => {
+    const mins = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
+  };
+  
+
   return (
     <div className="bg-white text-black rounded-lg p-4 shadow relative">
       <p><strong>📅 {new Date(dive.StartTime).toLocaleString()}</strong></p>
       <p>🌊 {t("dive.maxDepth")}: {dive.MaxDepth} m</p>
-      <p>🕒 {t("dive.duration")}: {dive.Duration} min</p>
+      <p>🕒 {t("dive.duration")}: {formatDuration(dive.Duration)}</p>
 
       <div className="mt-4 flex gap-2">
         <button
