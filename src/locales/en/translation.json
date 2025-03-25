@@ -8,15 +8,28 @@
   "enterEmail": "Enter your email",
   "invalidEmail": "Please enter a valid email.",
   "loading": "Loading...",
-  "profilePhoto": "Profile Photo",
+  "sidebar": {
+    "profile": "Profile",
+    "log": "Log Dive",
+    "list": "My Dives",
+    "stats": "Stats"
+  },
+  "profile": {
+    "title": "My Profile",
+    "profile.avatar": "Profile Avatar",
+    "name": "Name",
+    "email": "Email",
+    "settings": "Account Settings",
+    "comingSoon": "Here you’ll be able to update your preferences"
+  },
   "dashboard": {
     "name": "Dashboard",
     "welcome": "Welcome",
-    "diver": "Diver",
+    "description": "This is your freediving dashboard. Use the menu to log and view dives.",
     "logDive": "Log a New Dive",
     "yourDives": "Your Dives",
-    "comingSoon": "Coming soon: Dive Stats & Graphs",
-    "chartHere": "Chart will appear here"
+    "chartTitle": "Dive Depth Over Time",
+    "noDives": "No data available for chart."
   },
   "signIn": {
     "title": "Create Account",
@@ -52,6 +65,7 @@
     "successText": "Your dive was saved successfully.",
     "errorTitle": "Error saving dive",
     "addDiveButton": "Add Dive",
+    "updateDiveButton": "Update Dive",
     "maxDepth": "Max Depth (m)",
     "duration": "Duration (min)",
     "startTemp": "Start Temp (°C)",

@@ -1,20 +1,19 @@
 import { useState } from "react";
-import { useAuth } from "../context/AuthContext";
-import { saveDive, getDives } from "../api/dive";
+import { saveDive, updateDive } from "../api/dive";
 import Swal from "sweetalert2";
 import { useTranslation } from "react-i18next";
 
-export default function DiveForm({ onAddDive }) {
-  const { user } = useAuth();
+export default function DiveForm({ editMode, initialData = {}, onClose }) {
+  const isEdit = editMode && initialData?.id;
   const { t } = useTranslation();
   const [form, setForm] = useState({
-    startTime: "",
-    depth: "",
-    duration: "",
-    startTemperature: "",
-    bottomTemperature: "",
-    endTemperature: "",
-    previousMaxDepth: ""
+    startTime: initialData.StartTime || "",
+    depth: initialData.MaxDepth || "",
+    duration: initialData.Duration || "",
+    startTemperature: initialData.StartTemperature || "",
+    bottomTemperature: initialData.BottomTemperature || "",
+    endTemperature: initialData.EndTemperature || "",
+    previousMaxDepth: initialData.PreviousMaxDepth || ""
   });
 
   const handleChange = (e) => {
@@ -56,10 +55,13 @@ export default function DiveForm({ onAddDive }) {
         Mode: 3 // por defecto FreeDive
       };
 
-      await saveDive(payload);
+      if (isEdit) {
+        await updateDive(initialData.id, payload);
+      }else {
+        await saveDive(payload);
+      }
 
-      const updetedDives = await getDives();
-      onAddDive(updetedDives.dives);
+      if (onClose) onClose();
 
       Swal.fire(t("form.successTitle"), t("form.successText"), "success");
 
@@ -89,7 +91,7 @@ export default function DiveForm({ onAddDive }) {
       <input name="endTemperature" type="number" placeholder={t("form.endTemp")} value={form.endTemperature} onChange={handleChange} className="p-3 border rounded" />
       <input name="previousMaxDepth" type="number" placeholder={t("form.previousMax")} value={form.previousMaxDepth} onChange={handleChange} className="p-3 border rounded" />
       <button type="submit" className="md:col-span-3 bg-blue-600 text-white py-3 px-4 rounded font-bold hover:bg-blue-700 transition">
-        {t("form.addDiveButton")}
+        {isEdit ? t("form.updateDiveButton") : t("form.addDiveButton")}
       </button>
     </form>
   );

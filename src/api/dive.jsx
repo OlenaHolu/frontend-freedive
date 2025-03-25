@@ -13,6 +13,16 @@ export const saveDive = async (diveData) => {
   });
 };
 
+export const updateDive = async (diveId, diveData) => {
+  const token = await auth.currentUser.getIdToken();
+
+  return axios.put(`${BASE_URL}/api/dives/${diveId}`, diveData, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+}
+
 export const getDives = async () => {
   const token = await auth.currentUser.getIdToken();
 

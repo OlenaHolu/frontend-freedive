@@ -8,15 +8,28 @@
     "enterEmail": "Introduce tu correo",
     "invalidEmail": "Por favor, introduce un correo válido.",
     "loading": "Cargando...",
-    "profilePhoto": "Foto de Perfil",
+    "sidebar": {
+        "profile": "Perfil",
+        "log": "Registrar Inmersión",
+        "list": "Mis Inmersiones",
+        "stats": "Estadísticas"
+    },
+    "profile": {
+        "title": "Mi Perfil",
+        "profile.avatar": "Avatar de Perfil",
+        "name": "Nombre",
+        "email": "Correo Electrónico",
+        "settings": "Configuración de Cuenta",
+        "comingSoon": "Aquí podrás actualizar tus preferencias"
+    },
     "dashboard": {
         "name": "Panel de control",
         "welcome": "Bienvenido",
-        "diver": "Buceador",
+        "description": "Este es tu panel de control de apnea. Utiliza el menú para registrar y ver inmersiones.",
         "logDive": "Registrar una nueva inmersión",
         "yourDives": "Tus inmersiones",
-        "comingSoon": "Próximamente: estadísticas y gráficos de inmersión",
-        "chartHere": "Aquí aparecerá el gráfico"
+        "chartTitle": "Profundidad de inmersiones en el tiempo",
+        "noDives": "No hay datos disponibles para el gráfico."
     },
     "signIn": {
         "title": "Crear Cuenta",
@@ -52,6 +65,7 @@
         "successText": "Tu inmersión se guardó correctamente.",
         "errorTitle": "Error al guardar la inmersión",
         "addDiveButton": "Guardar Inmersión",
+        "updateDiveButton": "Actualizar Inmersión",
         "maxDepth": "Profundidad Máxima (m)",
         "duration": "Duración (min)",
         "startTemp": "Temp Inicial (°C)",
