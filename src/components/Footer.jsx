@@ -23,7 +23,7 @@ const Footer = () => {
           </a>
 
           <a
-            href="https://www.facebook.com/freedive_analyzer"
+            href="https://www.facebook.com/profile.php?id=61574604633661"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Facebook"
@@ -33,7 +33,7 @@ const Footer = () => {
           </a>
 
           <a
-            href="https://twitter.com/freedive_analyzer"
+            href="https://x.com/FreediveA"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Twitter"
