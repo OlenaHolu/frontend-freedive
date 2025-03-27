@@ -55,7 +55,7 @@ const StatsPage = () => {
       <h2 className="text-2xl font-semibold mb-6">📈 {t("stats.title")}</h2>
 
       {chartData.length === 0 ? (
-        <p className="text-gray-200">{t("dashboard.noDives")}</p>
+        <p className="text-gray-500">{t("divesList.noDives")}</p>
       ) : (
         <ResponsiveContainer width="100%" height={300}>
           <LineChart data={chartData}>

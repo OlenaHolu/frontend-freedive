@@ -1,12 +1,29 @@
 import { useTranslation } from "react-i18next";
 import DiveForm from "../components/DiveForm";
 import ImportDiveButton from "../components/ImportDiveButton";
+import { parseDiveXml, parseSmlDive } from "../utils/diveParsers";
+import { saveMultipleDives } from "../api/dive";
 
 const DiveFormPage = () => {
   const { t } = useTranslation();
 
-  const handleImportedFile = (file) => {
-    console.log("Imported file:", file);
+  const handleImportedFile = async (file) => {
+    const reader = new FileReader();
+
+    reader.onload = async (event) => {
+      const xmlText = event.target.result;
+    
+      const parsedDives = file.name.endsWith(".sml")
+      ? parseSmlDive(xmlText)
+      : parseDiveXml(xmlText);
+    
+      console.log("Dives extraidos:", parsedDives);
+
+      await saveMultipleDives(parsedDives);
+      alert(`Importacion exitosa: ${parsedDives.length} inmersiones importadas`);
+    };
+
+    reader.readAsText(file);
   };
 
   return (

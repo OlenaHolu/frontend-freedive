@@ -34,3 +34,14 @@ export const getDives = async () => {
 
   return res.data;
 };
+
+export const saveMultipleDives = async (dives) => {
+  const token = await auth.currentUser.getIdToken();
+
+  return axios.post(`${BASE_URL}/api/dives/bulk`, dives, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+  });
+}
