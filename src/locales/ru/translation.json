@@ -84,7 +84,15 @@
         "edit": "Редактировать",
         "delete": "Удалить",
         "importTitle": "Импорт погружений",
-        "importDivesButton": "Импортировать погружения"
+        "importDivesButton": "Импортировать погружения",
+        "diveChartTitle": "График погружения",
+        "loadingChart": "Загрузка графика...",
+        "noValidSamples": "Нет доступных данных для отображения профиля.",
+        "time": "Время",
+        "depth": "Глубина",
+        "viewChart": "Показать График",
+        "maxDepthLabel": "Макс",
+        "start": "Старт"
     },
     "divesList": {
         "title": "Мои погружения",

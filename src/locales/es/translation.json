@@ -84,7 +84,15 @@
         "edit": "Editar",
         "delete": "Eliminar",
         "importTitle": "Importar Inmersiones",
-        "importDivesButton": "Importar Inmersiones"
+        "importDivesButton": "Importar Inmersiones",
+        "diveChartTitle": "Gráfico de inmersión",
+        "loadingChart": "Cargando Gráfico...",
+        "noValidSamples": "No hay datos válidos para mostrar el Gráfico.",
+        "time": "Tiempo",
+        "depth": "Profundidad",
+        "viewChart": "Ver gráfico",
+        "maxDepthLabel": "Máxima",
+        "start": "Inicio"
     },
     "divesList": {
         "title": "Mis Inmersiones",

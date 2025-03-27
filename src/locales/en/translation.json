@@ -84,7 +84,15 @@
     "edit": "Edit",
     "delete": "Delete",
     "importTitle": "Import Dives",
-    "importDivesButton": "Import Dives"
+    "importDivesButton": "Import Dives",
+    "diveChartTitle": "Dive Chart",
+    "loadingChart": "Loading Chart...",
+    "noValidSamples": "No valid data to show the Chart.",
+    "time": "Time",
+    "depth": "Depth",
+    "viewChart": "View Chart",
+    "maxDepthLabel": "Max",
+    "start": "Start"
   },
   "divesList": {
     "title": "My Dives",

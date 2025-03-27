@@ -35,6 +35,18 @@ export const getDives = async () => {
   return res.data;
 };
 
+export const getDiveById = async (diveId) => {
+  const token = await auth.currentUser.getIdToken();
+
+  const res = await axios.get(`${BASE_URL}/api/dives/${diveId}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  return res.data;
+}
+
 export const saveMultipleDives = async (dives) => {
   const token = await auth.currentUser.getIdToken();
 
