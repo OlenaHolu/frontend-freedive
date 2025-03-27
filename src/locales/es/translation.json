@@ -82,7 +82,9 @@
         "previousMax": "Profundidad Máxima Anterior (m)",
         "view": "Ver",
         "edit": "Editar",
-        "delete": "Eliminar"
+        "delete": "Eliminar",
+        "importTitle": "Importar Inmersiones",
+        "importDivesButton": "Importar Inmersiones"
     },
     "divesList": {
         "title": "Mis Inmersiones",

@@ -143,7 +143,6 @@ export default function DiveForm({ editMode, initialData = {}, onClose }) {
             className="flex-1 outline-none bg-transparent"
             placeholder="e.g. 22"
           />
-          <span className="ml-2 text-gray-600">°C</span>
         </div>
       </div>
 
@@ -159,7 +158,6 @@ export default function DiveForm({ editMode, initialData = {}, onClose }) {
             className="flex-1 outline-none bg-transparent"
             placeholder="e.g. 10"
           />
-          <span className="ml-2 text-gray-600">°C</span>
         </div>
       </div>
 
@@ -175,7 +173,6 @@ export default function DiveForm({ editMode, initialData = {}, onClose }) {
             className="flex-1 outline-none bg-transparent"
             placeholder="e.g. 24"
           />
-          <span className="ml-2 text-gray-600">°C</span>
         </div>
       </div>
 
