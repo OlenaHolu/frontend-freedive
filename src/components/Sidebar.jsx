@@ -66,7 +66,7 @@ const Sidebar = ({ mobile }) => {
   }
 
   return (
-    <aside className="w-64 bg-black text-white p-6 hidden md:flex flex-col min-h-screen shadow-lg">
+    <aside className="w-64 bg-black text-white p-6 hidden md:flex flex-col sticky top-0 h-screen shadow-lg">
       <nav className="space-y-3">
         <NavLink to="/dashboard/profile" className={linkClass}>
           <User size={20} />
