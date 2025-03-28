@@ -1,16 +1,15 @@
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 
-const MainLayout = ({ children }) => {
+const MainLayout = ({ children, backgroundImage }) => {
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
 
-      {/* Imagen de fondo comienza aquí */}
       <main
         className="flex-1 w-full bg-cover bg-center bg-no-repeat"
         style={{
-          backgroundImage: "url('/background.png')",
+          backgroundImage: `url(${backgroundImage || "/default-bg.png"})`,
           backgroundPosition: "top",
         }}
       >

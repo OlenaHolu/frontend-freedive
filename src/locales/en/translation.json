@@ -2,7 +2,6 @@
   "home": "Home",
   "leaderboard": "Leaderboard",
   "community": "Community",
-  "about": "About Us",
   "logout": "Logout",
   "discover": "Discover the depths!",
   "enterEmail": "Enter your email",
@@ -21,12 +20,18 @@
     "description": "This is your freediving dashboard. Use the menu to log and view dives."
   },
   "profile": {
-    "title": "My Profile",
-    "profile.avatar": "Profile Avatar",
+    "title": "Profile",
+    "avatar": "User Avatar",
+    "change_photo": "Change Photo",
+    "update_button": "Update Avatar",
+    "uploading": "Uploading avatar...",
+    "updated": "Avatar updated!",
+    "error": "Upload failed",
+    "upload_error": "There was a problem uploading your avatar.",
     "name": "Name",
     "email": "Email",
-    "settings": "Account Settings",
-    "comingSoon": "Here you’ll be able to update your preferences"
+    "settings": "Settings",
+    "comingSoon": "More settings coming soon"
   },
   "log": {
     "title": "Log a New Dive"
@@ -83,8 +88,6 @@
     "view": "View",
     "edit": "Edit",
     "delete": "Delete",
-    "importTitle": "Import Dives",
-    "importDivesButton": "Import Dives",
     "diveChartTitle": "Dive Chart",
     "loadingChart": "Loading Chart...",
     "noValidSamples": "No valid data to show the Chart.",
@@ -92,13 +95,21 @@
     "depth": "Depth",
     "viewChart": "View Chart",
     "maxDepthLabel": "Max",
-    "start": "Start"
+    "start": "Start",
+    "import": {
+      "title": "Import Dives",
+      "loading": "Importing...",
+      "processingFile": "Processing dive file",
+      "success": "Import successful!",
+      "divesImported": "dives imported successfully",
+      "error": "Could not import the file. Check the format or try again."
+    }
   },
   "divesList": {
     "title": "My Dives",
     "noDives": "No dives found.",
     "searchPlaceholder": "Search by date, depth, duration...",
-    "filters":{
+    "filters": {
       "all": "All",
       "last7": "Last 7 days",
       "last30": "Last 30 days"
@@ -106,5 +117,76 @@
     "clearFilters": "Clear Filters",
     "prev": "Previous",
     "next": "Next"
+  },
+  "about": {
+    "title": "About Us",
+    "intro": "At Freedive Analyzer, we are passionate about freediving and technology. Our goal is to help freedivers analyze their performance and progress safely.",
+    "who_title": "Who are we?",
+    "who_text": "We are a multidisciplinary team of developers, freediving coaches and data experts, creating tools to improve your training.",
+    "mission_title": "Our Mission",
+    "mission_text": "To make high-level performance analysis accessible to all freedivers, from beginners to pros.",
+    "offer_title": "What we offer",
+    "offer_1": "Session analysis for dynamic and static apnea",
+    "offer_2": "Progress tracking and personalized stats",
+    "offer_3": "Data-based recommendations",
+    "offer_4": "Safe, simple, and intuitive platform",
+    "why_title": "Why choose us?",
+    "why_text": "Because we love freediving as much as you do. Everything we build is focused on helping you improve and dive safer.",
+    "closing": "Thank you for being part of the Freedive Analyzer community. We dive with you!"
+  },
+  "privacy": {
+    "title": "Política de Privacidad",
+    "intro": "Esta aplicación respeta tu privacidad y cumple con el Reglamento General de Protección de Datos (RGPD/GDPR).",
+    "collect_title": "Datos que recopilamos",
+    "collect_desc": "Solo recogemos la información mínima necesaria para identificarte y guardar tus datos personales en la aplicación. Esto puede incluir:",
+    "collect_email": "Dirección de correo electrónico",
+    "collect_data": "Datos que tú introduces voluntariamente",
+    "usage_title": "Uso de los datos",
+    "usage_desc": "Tus datos se utilizan exclusivamente para ofrecerte la funcionalidad de la aplicación. No se comparten con terceros ni se usan con fines publicitarios.",
+    "storage_title": "Almacenamiento seguro",
+    "storage_desc": "Utilizamos Firebase como proveedor seguro para autenticación y almacenamiento de datos. Puedes consultar su política de privacidad en",
+    "storage_link": "este enlace",
+    "rights_title": "Tus derechos",
+    "rights_desc": "De acuerdo con la legislación vigente, tienes derecho a acceder, modificar o eliminar tus datos personales. Puedes ejercer este derecho contactándonos.",
+    "contact_title": "Contacto",
+    "contact_desc": "Si tienes dudas o deseas ejercer tus derechos sobre la protección de datos, puedes escribirnos a:"
+  },
+  "contact": {
+    "title": "Contact",
+    "description": "Have a question, suggestion, or need support? Fill out the form or write us directly.",
+    "form": {
+      "name": "Name",
+      "email": "Email",
+      "message": "Message",
+      "submit": "Send Message"
+    },
+    "also_contact": "You can also reach us at:",
+    "location": "Spain (City: Moncofa)"
+  },
+  "terms": {
+    "title": "Terms and Conditions of Use",
+    "last_update": "Last updated: ",
+    "intro": "Welcome to Freedive Analyzer. By accessing or using this website (www.freediveanalyzer.com), you agree to be bound by the following Terms and Conditions. If you do not agree, please do not use this site.",
+    "general_title": "1. General Information",
+    "general_text": "This website is operated by Freedive Analyzer. We reserve the right to modify or update these terms at any time, so we recommend checking them regularly.",
+    "service_title": "2. Description of Service",
+    "service_text": "Freedive Analyzer provides tools and resources for performance tracking in freediving. This website is for informational purposes only and does not replace professional or medical advice.",
+    "usage_title": "3. Terms of Use",
+    "usage_age": "You must be at least 18 years old or have the consent of a legal guardian.",
+    "usage_respect": "You agree to use the site legally and respectfully.",
+    "usage_account": "If you register, you are responsible for maintaining your account securely.",
+    "ip_title": "4. Intellectual Property",
+    "ip_text": "All content on this site is owned by Freedive Analyzer or its licensors and is protected by Spanish and international intellectual property laws. Reproduction without permission is not allowed.",
+    "liability_title": "5. Limitation of Liability",
+    "liability_text": "We do not guarantee the information is always accurate or up to date. Freedive Analyzer is not responsible for misuse of the data or resulting damages.",
+    "privacy_title": "6. Privacy",
+    "privacy_text": "Personal data is handled in accordance with GDPR. Please review our Privacy Policy for more information.",
+    "links_title": "7. Third-Party Links",
+    "links_text": "Freedive Analyzer may contain links to third-party websites. We are not responsible for their content or policies.",
+    "modifications_title": "8. Service Modifications",
+    "modifications_text": "We reserve the right to modify or suspend the website or parts of it at any time without prior notice.",
+    "law_title": "9. Governing Law and Jurisdiction",
+    "law_text": "These terms are governed by Spanish law. In case of dispute, the parties submit to the courts of {{city}}.",
+    "contact_text": "If you have any questions about these terms, contact us at:"
   }
 }

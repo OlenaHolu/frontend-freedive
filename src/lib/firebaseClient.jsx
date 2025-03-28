@@ -15,3 +15,12 @@ const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 export const logout = () => signOut(auth);
 export default app;
+
+// Devuelve el token JWT del usuario actual
+export async function getFirebaseToken() {
+  const user = auth.currentUser;
+
+  if (!user) throw new Error("No user logged in");
+  return await user.getIdToken();
+}
+

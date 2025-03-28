@@ -2,7 +2,6 @@
     "home": "Inicio",
     "leaderboard": "Clasificación",
     "community": "Comunidad",
-    "about": "Sobre Nosotros",
     "logout": "Cerrar Sesión",
     "discover": "¡Descubre las profundidades!",
     "enterEmail": "Introduce tu correo",
@@ -21,12 +20,18 @@
         "description": "Este es tu panel de control de apnea. Utiliza el menú para registrar y ver inmersiones."
     },
     "profile": {
-        "title": "Mi Perfil",
-        "profile.avatar": "Avatar de Perfil",
+        "title": "Perfil",
+        "avatar": "Avatar del usuario",
+        "change_photo": "Cambiar foto",
+        "update_button": "Actualizar avatar",
+        "uploading": "Subiendo avatar...",
+        "updated": "Avatar actualizado",
+        "error": "Error al subir",
+        "upload_error": "Hubo un problema al subir el avatar.",
         "name": "Nombre",
-        "email": "Correo Electrónico",
-        "settings": "Configuración de Cuenta",
-        "comingSoon": "Aquí podrás actualizar tus preferencias"
+        "email": "Correo electrónico",
+        "settings": "Configuraciones",
+        "comingSoon": "Más configuraciones próximamente"
     },
     "log": {
         "title": "Registrar una nueva inmersión"
@@ -83,8 +88,6 @@
         "view": "Ver",
         "edit": "Editar",
         "delete": "Eliminar",
-        "importTitle": "Importar Inmersiones",
-        "importDivesButton": "Importar Inmersiones",
         "diveChartTitle": "Gráfico de inmersión",
         "loadingChart": "Cargando Gráfico...",
         "noValidSamples": "No hay datos válidos para mostrar el Gráfico.",
@@ -92,7 +95,15 @@
         "depth": "Profundidad",
         "viewChart": "Ver gráfico",
         "maxDepthLabel": "Máxima",
-        "start": "Inicio"
+        "start": "Inicio",
+        "import": {
+            "title": "Import Dives",
+            "loading": "Importing...",
+            "processingFile": "Processing dive file",
+            "success": "Import successful!",
+            "divesImported": "dives imported successfully",
+            "error": "Could not import the file. Check the format or try again."
+        }
     },
     "divesList": {
         "title": "Mis Inmersiones",
@@ -106,5 +117,76 @@
         "clearFilters": "Quitar filtros",
         "prev": "Anterior",
         "next": "Siguiente"
+    },
+    "about": {
+        "title": "Sobre Nosotros",
+        "intro": "En Freedive Analyzer, somos apasionados del buceo libre y la tecnología. Nuestro objetivo es ayudarte a analizar tu rendimiento y progresar con seguridad.",
+        "who_title": "¿Quiénes somos?",
+        "who_text": "Somos un equipo multidisciplinario de desarrolladores, entrenadores y expertos en datos, creando herramientas para mejorar tu entrenamiento.",
+        "mission_title": "Nuestra Misión",
+        "mission_text": "Hacer accesible el análisis avanzado del rendimiento a todos los apneístas, desde principiantes hasta profesionales.",
+        "offer_title": "Lo que ofrecemos",
+        "offer_1": "Análisis de sesiones de apnea dinámica y estática",
+        "offer_2": "Seguimiento del progreso y estadísticas personalizadas",
+        "offer_3": "Recomendaciones basadas en datos",
+        "offer_4": "Plataforma segura, simple e intuitiva",
+        "why_title": "¿Por qué elegirnos?",
+        "why_text": "Porque amamos la apnea tanto como tú. Todo lo que desarrollamos está enfocado en ayudarte a mejorar y bucear con más seguridad.",
+        "closing": "Gracias por ser parte de la comunidad de Freedive Analyzer. ¡Nos sumergimos contigo!"
+    },
+    "privacy": {
+        "title": "Privacy Policy",
+        "intro": "This application respects your privacy and complies with the General Data Protection Regulation (GDPR).",
+        "collect_title": "Data We Collect",
+        "collect_desc": "We only collect the minimum necessary information to identify you and store your personal data in the app. This may include:",
+        "collect_email": "Email address",
+        "collect_data": "Data you voluntarily provide",
+        "usage_title": "Use of Data",
+        "usage_desc": "Your data is used solely to provide app functionality. It is not shared with third parties or used for advertising.",
+        "storage_title": "Secure Storage",
+        "storage_desc": "We use Firebase as a secure provider for authentication and data storage. You can review their privacy policy at",
+        "storage_link": "this link",
+        "rights_title": "Your Rights",
+        "rights_desc": "Under current legislation, you have the right to access, modify, or delete your personal data. You may exercise this right by contacting us.",
+        "contact_title": "Contact",
+        "contact_desc": "If you have questions or want to exercise your data protection rights, you can write to us at:"
+    },
+    "contact": {
+        "title": "Contacto",
+        "description": "¿Tienes alguna pregunta, sugerencia o necesitas soporte? Rellena el formulario o escríbenos directamente.",
+        "form": {
+            "name": "Nombre",
+            "email": "Correo electrónico",
+            "message": "Mensaje",
+            "submit": "Enviar mensaje"
+        },
+        "also_contact": "También puedes contactarnos en:",
+        "location": "España (Ciudad: Moncofa)"
+    },
+    "terms": {
+        "title": "Términos y Condiciones de Uso",
+        "last_update": "Última actualización: ",
+        "intro": "Bienvenido a Freedive Analyzer. Al acceder o utilizar este sitio web (www.freediveanalyzer.com), usted acepta quedar vinculado por los siguientes Términos y Condiciones. Si no está de acuerdo con alguno de ellos, por favor, no utilice este sitio web.",
+        "general_title": "1. Información general",
+        "general_text": "Este sitio web es operado por Freedive Analyzer. Nos reservamos el derecho de modificar o actualizar estos términos en cualquier momento, por lo que le recomendamos revisarlos periódicamente.",
+        "service_title": "2. Descripción del servicio",
+        "service_text": "Freedive Analyzer proporciona herramientas y recursos para el análisis y seguimiento del rendimiento en apnea y buceo libre. El uso del sitio es únicamente con fines informativos y no sustituye asesoramiento médico o profesional.",
+        "usage_title": "3. Condiciones de uso",
+        "usage_age": "Debe tener al menos 18 años o consentimiento de un tutor legal.",
+        "usage_respect": "Se compromete a un uso lícito y respetuoso del sitio.",
+        "usage_account": "En caso de registro, es responsable de mantener su cuenta segura.",
+        "ip_title": "4. Propiedad intelectual",
+        "ip_text": "Todo el contenido de este sitio es propiedad de Freedive Analyzer o sus licenciantes y está protegido por la legislación española e internacional. No se permite su reproducción sin autorización expresa.",
+        "liability_title": "5. Limitación de responsabilidad",
+        "liability_text": "No garantizamos que la información sea siempre precisa o actualizada. Freedive Analyzer no se hace responsable por el uso indebido de los datos ofrecidos ni por daños derivados.",
+        "privacy_title": "6. Privacidad",
+        "privacy_text": "El tratamiento de datos personales se realiza conforme al RGPD. Consulte nuestra Política de Privacidad para más información.",
+        "links_title": "7. Enlaces a terceros",
+        "links_text": "Freedive Analyzer puede contener enlaces a sitios de terceros. No tenemos control sobre su contenido ni políticas, por lo que no asumimos responsabilidad.",
+        "modifications_title": "8. Modificaciones del servicio",
+        "modifications_text": "Nos reservamos el derecho de modificar o suspender el sitio o sus partes en cualquier momento sin previo aviso.",
+        "law_title": "9. Legislación aplicable y jurisdicción",
+        "law_text": "Estos Términos se rigen por la legislación española. En caso de conflicto, las partes se someten a los tribunales de {{city}}.",
+        "contact_text": "Si tienes dudas sobre estos términos, contáctanos a:"
     }
 }

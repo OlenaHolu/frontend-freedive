@@ -43,7 +43,7 @@ export default function Login() {
   if (loading) return <p>{t("loading")}</p>;
 
   return (
-    <MainLayout>
+    <MainLayout backgroundImage="/home-bg.png">
       <div className="w-full max-w-md mx-auto bg-white p-8 rounded-lg shadow-lg text-black">
         <h1 className="text-2xl font-bold mb-6 text-center">{t("login.title")}</h1>
 

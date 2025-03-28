@@ -9,9 +9,10 @@ import DiveListPage from "../pages/DiveListPage";
 import StatsPage from "../pages/StatsPage";
 import ProfilePage from "../pages/PofilePage";
 import DashboardLayout from "../layouts/DashboardLayout";
-import LeaderboardPage from "../pages/LeaderboardPage";
-import CommunitydPage from "../pages/CommunityPage";
 import AboutPage from "../pages/AboutPage";
+import PrivacyPage from "../pages/PrivacyPage";
+import TermsPage from "../pages/TermsPage";
+import ContactPage from "../pages/ContactPage";
 
 export default function AppRoutes() {
   return (
@@ -20,9 +21,11 @@ export default function AppRoutes() {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Signin />} />
-          <Route path="/leaderboard" element={<LeaderboardPage />} />
-          <Route path="/community" element={<CommunitydPage />} />
           <Route path="/about" element={<AboutPage />} />
+          <Route path="/privacy" element={<PrivacyPage />} />
+          <Route path="/terms" element={<TermsPage />} />
+          <Route path="/contact" element={<ContactPage />} />
+
           <Route path="/dashboard" element={<ProtectedRoute><DashboardLayout /></ProtectedRoute>} >
             <Route index element={<DashboardHome />} />
             <Route path="profile" element={<ProfilePage />} />
@@ -30,6 +33,7 @@ export default function AppRoutes() {
             <Route path="list" element={<DiveListPage />} />
             <Route path="stats" element={<StatsPage />} />
           </Route>
+
         </Routes>
       </BrowserRouter>
   );

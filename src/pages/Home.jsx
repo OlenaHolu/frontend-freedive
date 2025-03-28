@@ -21,7 +21,7 @@ const Home = () => {
   };
 
   return (
-    <MainLayout>
+    <MainLayout backgroundImage="/home-bg.png">
       <h1 className="text-5xl md:text-6xl font-bold">FREEDIVE <br /> ANALYZER</h1>
       <p className="text-md md:text-lg mt-2">{t("discover")}</p>
 
@@ -55,13 +55,6 @@ const Home = () => {
         </button>
       </div>
 
-      {/* Floating Button */}
-      <button
-        className="absolute bottom-6 right-6 md:top-1/3 md:right-8 bg-white text-black w-12 h-12 md:w-16 md:h-16 rounded-full flex items-center justify-center text-2xl md:text-3xl font-bold shadow-lg"
-        onClick={() => navigate("/login")}
-      >
-        +
-      </button>
     </MainLayout>
   );
 };

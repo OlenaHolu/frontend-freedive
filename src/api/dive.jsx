@@ -1,5 +1,5 @@
 import axios from "axios";
-import { auth } from "./firebase";
+import { auth } from "../lib/firebaseClient";
 
 const BASE_URL = import.meta.env.VITE_APP_BACKEND_URL;
 

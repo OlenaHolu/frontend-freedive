@@ -48,7 +48,7 @@ export default function Signin() {
   };
 
   return (
-    <MainLayout>
+    <MainLayout backgroundImage="/home-bg.png">
       <div className="w-full max-w-md mx-auto bg-white p-8 rounded-lg shadow-lg text-black">
         <h1 className="text-2xl font-bold mb-4">{t("signIn.title")}</h1>
         {error && <p style={{ color: 'red' }}>{error}</p>}
