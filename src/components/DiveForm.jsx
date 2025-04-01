@@ -12,7 +12,7 @@ export default function DiveForm({ editMode, initialData = {}, onClose }) {
     startTime: initialData.StartTime || "",
     depth: initialData.MaxDepth || "",
     duration: initialData.Duration || "",
-    durationFormatted: initialData.Duration 
+    durationFormatted: initialData.Duration
       ? formatDuration(initialData.Duration)
       : "",
     startTemperature: initialData.StartTemperature || "",
@@ -113,11 +113,11 @@ export default function DiveForm({ editMode, initialData = {}, onClose }) {
 
       <div>
         <label className={labelClass}>{t("dive.duration")} *</label>
-        <input 
-          name="durationFormatted" 
-          type="text" 
+        <input
+          name="durationFormatted"
+          type="text"
           placeholder="mm:ss"
-          value={form.durationFormatted} 
+          value={form.durationFormatted}
           onChange={(e) => {
             const value = e.target.value;
             setForm({
@@ -125,8 +125,8 @@ export default function DiveForm({ editMode, initialData = {}, onClose }) {
               durationFormatted: value,
               duration: mmssToSeconds(value),
             });
-          }} 
-          className={inputClass} 
+          }}
+          className={inputClass}
           required
         />
       </div>
@@ -182,10 +182,10 @@ export default function DiveForm({ editMode, initialData = {}, onClose }) {
         <input name="previousMaxDepth" type="number" value={form.previousMaxDepth} onChange={handleChange} className={inputClass} />
       </div>
 
-      <div className="md:col-span-2 lg:col-span-3 text-center mt-4">
+      <div className="md:col-span-2 lg:col-span-3 flex flex-col sm:flex-row sm:justify-center gap-4 mt-4">
         <button
           type="submit"
-          className="bg-blue-600 hover:bg-blue-700 text-white py-3 px-6 rounded-xl text-lg font-bold shadow-lg transition"
+          className="bg-blue-600 hover:bg-blue-700 text-white py-3 px-6 rounded-xl text-lg font-bold shadow-lg transition w-full sm:w-auto"
         >
           {isEdit ? t("dive.updateDiveButton") : t("dive.addDiveButton")}
         </button>
@@ -194,7 +194,7 @@ export default function DiveForm({ editMode, initialData = {}, onClose }) {
           <button
             type="button"
             onClick={onClose}
-            className="ml-4 bg-gray-300 hover:bg-gray-400 text-black py-3 px-6 rounded-xl text-lg font-bold shadow-lg transition"
+            className="bg-gray-300 hover:bg-gray-400 text-black py-3 px-6 rounded-xl text-lg font-bold shadow-lg transition w-full sm:w-auto"
           >
             {t("cancel")}
           </button>
