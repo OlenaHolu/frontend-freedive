@@ -3,7 +3,17 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 
 const AboutPage = () => {
-    const { t } = useTranslation();
+    const { t, ready } = useTranslation(undefined, {useSuspense: false});
+
+    if (!ready) {
+        return (
+          <MainLayout>
+            <div className="text-center py-20 text-gray-600 text-lg font-medium">
+              {t("loading")}
+            </div>
+          </MainLayout>
+        );
+      }
 
     return (
         <MainLayout>

@@ -10,12 +10,15 @@ import {
 } from "recharts";
 import { useTranslation } from "react-i18next";
 
-Modal.setAppElement("#root");
-
 export default function DiveChartModal({ samples, isOpen, onClose }) {
   const { t } = useTranslation();
 
-  if (!samples) return null;
+  const modalClass =
+    "bg-white rounded-lg p-6 max-w-3xl w-full mx-4 shadow-xl overflow-auto max-h-screen";
+  const overlayClass =
+    "fixed inset-0 bg-black bg-opacity-50 flex items-start justify-center z-50";
+
+  if (!isOpen || !samples) return null;
 
   // Preprocesamiento
   let formattedSamples = samples
@@ -47,12 +50,15 @@ export default function DiveChartModal({ samples, isOpen, onClose }) {
       <Modal
         isOpen={isOpen}
         onRequestClose={onClose}
-        className="bg-white rounded-lg p-6 max-w-3xl w-full mx-4 shadow-xl overflow-auto max-h-screen"
-        overlayClassName="fixed inset-0 bg-black bg-opacity-50 flex items-start justify-center z-50"
+        className={modalClass}
+        overlayClassName={overlayClass} 
       >
         <h2 className="text-xl font-bold mb-4">{t("dive.diveChartTitle")}</h2>
         <p>{t("dive.noValidSamples")}</p>
-        <button onClick={onClose} className="mt-4 bg-blue-600 text-white px-4 py-2 rounded">
+        <button 
+          onClick={onClose} 
+          className="mt-4 bg-blue-600 text-white px-4 py-2 rounded"
+        >
           {t("close")}
         </button>
       </Modal>
@@ -87,8 +93,8 @@ export default function DiveChartModal({ samples, isOpen, onClose }) {
     <Modal
       isOpen={isOpen}
       onRequestClose={onClose}
-      className="bg-white rounded-lg p-6 max-w-3xl w-full mx-4 shadow-xl overflow-auto max-h-screen"
-      overlayClassName="fixed inset-0 bg-black bg-opacity-50 flex items-start justify-center z-50"
+      className={modalClass}
+      overlayClassName={overlayClass}
     >
       <h2 className="text-xl font-bold mb-4">{t("dive.diveChartTitle")}</h2>
 

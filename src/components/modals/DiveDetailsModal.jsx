@@ -3,8 +3,6 @@ import { useTranslation } from "react-i18next";
 import Modal from "react-modal";
 import { formatDuration } from "../../utils/time";
 
-Modal.setAppElement("#root");
-
 export default function DiveDetailsModal({ dive, isOpen, onClose }) {
   if (!dive) return null;
   const { t } = useTranslation();

@@ -7,7 +7,12 @@
   "enterEmail": "Enter your email",
   "invalidEmail": "Please enter a valid email.",
   "loading": "Loading...",
+  "search": "Search...",
   "close": "Close",
+  "network": {
+    "offline": "You are offline. Please check your internet connection.",
+    "restored": "Connection restored. You are back online."
+  },
   "sidebar": {
     "profile": "Profile",
     "log": "Log Dive",

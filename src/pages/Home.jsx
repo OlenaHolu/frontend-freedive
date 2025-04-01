@@ -8,7 +8,17 @@ const Home = () => {
   const { email, setEmail } = useAuth();
   const [error, setError] = useState("");
   const navigate = useNavigate();
-  const { t } = useTranslation();
+  const { t, ready } = useTranslation(undefined, {useSuspense: false});
+
+    if (!ready) {
+        return (
+          <MainLayout>
+            <div className="text-center py-20 text-gray-600 text-lg font-medium">
+              {t("loading")}
+            </div>
+          </MainLayout>
+        );
+      }
 
   const validateEmail = (email) => /\S+@\S+\.\S+/.test(email);
 

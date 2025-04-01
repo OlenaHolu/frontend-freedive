@@ -8,6 +8,11 @@
     "invalidEmail": "Por favor, introduce un correo válido.",
     "loading": "Cargando...",
     "close": "Cerrar",
+    "search": "Buscar",
+    "network": {
+        "offline": "Estás desconectado. Por favor, revisa tu conexión a internet.",
+        "restored": "Conexión restaurada. Estás de nuevo en línea."
+    },
     "sidebar": {
         "profile": "Perfil",
         "log": "Registrar Inmersión",

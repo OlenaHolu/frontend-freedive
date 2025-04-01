@@ -1,10 +1,17 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { getDives } from "../api/dive";
 import DiveCard from "../components/DiveCard";
 import DiveSearch from "../components/DiveSearch";
 import { useAuth } from "../context/AuthContext";
 import { useTranslation } from "react-i18next";
 import { formatDuration } from "../utils/time";
+import { filterByPeriod, filterBySearch } from "../utils/diveFilters";
+import Swal from "sweetalert2";
+import DiveDetailsModal from "../components/modals/DiveDetailsModal";
+import DiveChartModal from "../components/modals/DiveChartModal";
+import EditDiveModal from "../components/modals/EditDiveModal";
+import { getDiveById } from "../api/dive";
+
 
 export default function DiveListPage() {
     const { user, loading } = useAuth();
@@ -17,39 +24,53 @@ export default function DiveListPage() {
     const [currentPage, setCurrentPage] = useState(1);
     const divesPerPage = 10;
     const totalPages = Math.ceil(allDives.length / divesPerPage);
+    const [activeDive, setActiveDive] = useState(null);
+    const [openModal, setOpenModal] = useState(null);
+    const [diveSamples, setDiveSamples] = useState(null);
 
-    const fetchDives = async (query = searchQuery) => {
+    useEffect(() => {
+        const loadSamples = async () => {
+            if (openModal === "chart" && activeDive) {
+                try {
+                    Swal.fire({
+                        title: t("loading"),
+                        text: t("dive.loadingChart"),
+                        allowOutsideClick: false,
+                        didOpen: () => {
+                            Swal.showLoading();
+                        },
+                    });
+                    const res = await getDiveById(activeDive.id);
+                    setDiveSamples(res.dive.samples);
+                    Swal.close();
+                } catch (err) {
+                    console.error("Failed to load dive with samples", err);
+                    Swal.fire({
+                        icon: "error",
+                        title: t("error"),
+                        text: t("dive.errorLoadingChart"),
+                    });
+                }
+            }
+        };
+        loadSamples();
+    }, [openModal, activeDive]);
+
+    const fetchDives = useCallback(async (query = searchQuery) => {
         try {
             setLoadingDives(true);
             const res = await getDives();
-            let filtered = res.dives;
-            filtered = filtered.sort((a, b) => new Date(b.StartTime) - new Date(a.StartTime));
+
+            let filtered = res.dives.sort((a, b) => new Date(b.StartTime) - new Date(a.StartTime));
             setAllDives(filtered);
 
-            if (period === "all") {
+            filtered = filterByPeriod(filtered, period);
+            filtered = filterBySearch(filtered, query, formatDuration);
+
+            if (period === "all" && query.trim() === "") {
                 const startIndex = (currentPage - 1) * divesPerPage;
                 const endIndex = startIndex + divesPerPage;
                 filtered = filtered.slice(startIndex, endIndex);
-            }
-            if (period === "7d") {
-                const date7 = new Date();
-                date7.setDate(date7.getDate() - 7);
-                filtered = filtered.filter(d => new Date(d.StartTime) >= date7);
-            }
-            if (period === "30d") {
-                const date30 = new Date();
-                date30.setDate(date30.getDate() - 30);
-                filtered = filtered.filter(d => new Date(d.StartTime) >= date30);
-            }
-
-            // Search by date/depth/duration
-            if (query.trim() !== "") {
-                const q = query.toLowerCase();
-                filtered = filtered.filter(dive =>
-                    dive.MaxDepth.toString().includes(q) ||
-                    formatDuration(dive.Duration).includes(q) ||
-                    new Date(dive.StartTime).toLocaleDateString().includes(q)
-                );
             }
 
             setDives(filtered);
@@ -58,7 +79,7 @@ export default function DiveListPage() {
         } finally {
             setLoadingDives(false);
         }
-    };
+    }, [period, currentPage, searchQuery]);
 
     useEffect(() => {
         if (user) fetchDives();
@@ -68,6 +89,19 @@ export default function DiveListPage() {
         setSearchQuery(query);
         fetchDives(query);
     };
+
+    const resetFilters = () => {
+        setSearchQuery("");
+        setPeriod("all");
+        setCurrentPage(1);
+        fetchDives("");
+    };
+
+    const handleCloseModal = () => {
+        setActiveDive(null);
+        setOpenModal(null);
+    };
+
 
     if (loading || !user) {
         return (
@@ -88,11 +122,7 @@ export default function DiveListPage() {
                 {(searchQuery.trim() !== "" || period !== "all") && (
                     <div className="mt-2">
                         <button
-                            onClick={() => {
-                                setSearchQuery("");
-                                setPeriod("all");
-                                setCurrentPage(1);
-                            }}
+                            onClick={resetFilters}
                             className="px-4 py-2 bg-gray-300 text-black rounded hover:bg-gray-400 transition"
                         >
                             {t("divesList.clearFilters")}
@@ -135,7 +165,15 @@ export default function DiveListPage() {
                             <p>{t("divesList.noDives")}</p>
                         ) : (
                             dives.map((dive) => (
-                                <DiveCard key={dive.id} dive={dive} onDiveUpdated={fetchDives} />
+                                <DiveCard
+                                    key={dive.id}
+                                    dive={dive}
+                                    onDiveUpdated={fetchDives}
+                                    onOpenModal={(type) => {
+                                        setActiveDive(dive);
+                                        setOpenModal(type);
+                                    }}
+                                />
                             ))
                         )}
                     </div>
@@ -147,8 +185,8 @@ export default function DiveListPage() {
                                     key={pageNum}
                                     onClick={() => setCurrentPage(pageNum)}
                                     className={`px-4 py-2 rounded ${currentPage === pageNum
-                                            ? "bg-blue-600 text-white"
-                                            : "bg-gray-300 hover:bg-gray-400"
+                                        ? "bg-blue-600 text-white"
+                                        : "bg-gray-300 hover:bg-gray-400"
                                         }`}
                                 >
                                     {pageNum}
@@ -160,6 +198,34 @@ export default function DiveListPage() {
                 </div>
             )}
 
+            {/* Modals */}
+            {activeDive && openModal === "details" && (
+                <DiveDetailsModal
+                    dive={activeDive}
+                    isOpen={true}
+                    onClose={handleCloseModal}
+                />
+            )}
+
+            {activeDive && openModal === "edit" && (
+                <EditDiveModal
+                    dive={activeDive}
+                    isOpen={true}
+                    onClose={handleCloseModal}
+                    onDiveUpdated={fetchDives}
+                />
+            )}
+            {activeDive && openModal === "chart" && (
+                <DiveChartModal
+                    dive={activeDive}
+                    samples={diveSamples}
+                    isOpen={true}
+                    onClose={() => {
+                        handleCloseModal();
+                        setDiveSamples(null);
+                    }}
+                />
+            )}
         </div>
     );
 }
