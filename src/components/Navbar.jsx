@@ -18,7 +18,7 @@ const Navbar = () => {
             {/* Menu desktop */}
             <div className="hidden md:flex space-x-6">
                 <a href="/" className="hover:underline">{t("home")}</a>
-                <a href="/dashboard" className="hover:underline">{t("dashboard.name")}</a>
+                <a href="/dashboard" className="hover:underline">{t("dashboard.title")}</a>
                 <a href="/about" className="hover:underline">{t("about.title")}</a>
             </div>
 
@@ -45,10 +45,8 @@ const Navbar = () => {
             {menuOpen && (
                 <div className="absolute top-14 left-0 w-full bg-black bg-opacity-90 flex flex-col items-center py-4 space-y-4">
                     <a href="/">{t("home")}</a>
-                    <a href="/dashboard">{t("dashboard")}</a>
-                    <a href="/leaderboard">{t("leaderboard")}</a>
-                    <a href="/community">{t("community")}</a>
-                    <a href="/about">{t("about")}</a>
+                    <a href="/dashboard">{t("dashboard.title")}</a>
+                    <a href="/about">{t("about.title")}</a>
                     <LanguageSwitcher />
                     {user ? (
                         <button onClick={logout} className="bg-gray-900 px-4 py-2 rounded-lg border border-white">

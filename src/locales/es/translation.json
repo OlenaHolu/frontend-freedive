@@ -20,7 +20,7 @@
         "stats": "Estadísticas"
     },
     "dashboard": {
-        "name": "Panel de control",
+        "title": "Panel de control",
         "welcome": "Bienvenido",
         "description": "Este es tu panel de control de apnea. Utiliza el menú para registrar y ver inmersiones."
     },

@@ -20,7 +20,7 @@
     "stats": "Stats"
   },
   "dashboard": {
-    "name": "Dashboard",
+    "title": "Dashboard",
     "welcome": "Welcome",
     "description": "This is your freediving dashboard. Use the menu to log and view dives."
   },
