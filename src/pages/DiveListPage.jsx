@@ -9,7 +9,6 @@ import { filterByPeriod, filterBySearch } from "../utils/diveFilters";
 import Swal from "sweetalert2";
 import DiveDetailsModal from "../components/modals/DiveDetailsModal";
 import DiveChartModal from "../components/modals/DiveChartModal";
-import EditDiveModal from "../components/modals/EditDiveModal";
 import { getDiveById } from "../api/dive";
 import { useNavigate } from "react-router-dom";
 
