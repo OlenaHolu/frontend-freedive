@@ -8,6 +8,7 @@
     "invalidEmail": "Por favor, introduce un correo válido.",
     "loading": "Cargando...",
     "close": "Cerrar",
+    "cancel": "Cancelar",
     "search": "Buscar",
     "network": {
         "offline": "Estás desconectado. Por favor, revisa tu conexión a internet.",

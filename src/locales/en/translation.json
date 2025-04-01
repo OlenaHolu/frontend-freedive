@@ -9,6 +9,7 @@
   "loading": "Loading...",
   "search": "Search...",
   "close": "Close",
+  "cancel": "Cancel",
   "network": {
     "offline": "You are offline. Please check your internet connection.",
     "restored": "Connection restored. You are back online."
