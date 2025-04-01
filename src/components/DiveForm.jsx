@@ -189,6 +189,16 @@ export default function DiveForm({ editMode, initialData = {}, onClose }) {
         >
           {isEdit ? t("dive.updateDiveButton") : t("dive.addDiveButton")}
         </button>
+
+        {onClose && (
+          <button
+            type="button"
+            onClick={onClose}
+            className="ml-4 bg-gray-300 hover:bg-gray-400 text-black py-3 px-6 rounded-xl text-lg font-bold shadow-lg transition"
+          >
+            {t("cancel")}
+          </button>
+        )}
       </div>
     </form>
   );
