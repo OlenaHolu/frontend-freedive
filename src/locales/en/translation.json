@@ -70,6 +70,7 @@
     "error_generic": "Invalid credentials"
   },
   "dive": {
+    "loading": "Loading dive data...",
     "missingFieldTitle": "Missing Field",
     "missingFieldText": "Please fill all required fields.",
     "savingTitle": "Saving Dive...",

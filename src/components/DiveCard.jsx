@@ -1,8 +1,10 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 
 const DiveCard = ({ dive, onDiveUpdated, onOpenModal }) => {
   const { t } = useTranslation();
+  const navigate = useNavigate();
 
   const formatDuration = (seconds) => {
     const mins = Math.floor(seconds / 60);
@@ -33,7 +35,7 @@ const DiveCard = ({ dive, onDiveUpdated, onOpenModal }) => {
         </button>
 
         <button
-          onClick={() => onOpenModal("edit")}
+          onClick={() => navigate(`/dashboard/dives/edit/${dive.id}`)}
           className="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600"
         >
           ✏️ {t("dive.edit")}

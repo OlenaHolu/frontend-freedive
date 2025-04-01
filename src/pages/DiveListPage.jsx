@@ -11,6 +11,7 @@ import DiveDetailsModal from "../components/modals/DiveDetailsModal";
 import DiveChartModal from "../components/modals/DiveChartModal";
 import EditDiveModal from "../components/modals/EditDiveModal";
 import { getDiveById } from "../api/dive";
+import { useNavigate } from "react-router-dom";
 
 
 export default function DiveListPage() {
@@ -27,6 +28,7 @@ export default function DiveListPage() {
     const [activeDive, setActiveDive] = useState(null);
     const [openModal, setOpenModal] = useState(null);
     const [diveSamples, setDiveSamples] = useState(null);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const loadSamples = async () => {
@@ -207,14 +209,6 @@ export default function DiveListPage() {
                 />
             )}
 
-            {activeDive && openModal === "edit" && (
-                <EditDiveModal
-                    dive={activeDive}
-                    isOpen={true}
-                    onClose={handleCloseModal}
-                    onDiveUpdated={fetchDives}
-                />
-            )}
             {activeDive && openModal === "chart" && (
                 <DiveChartModal
                     dive={activeDive}

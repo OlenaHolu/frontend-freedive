@@ -70,6 +70,7 @@
         "error_generic": "Correo o contraseña incorrectos"
     },
     "dive": {
+        "loading": "Cargando inmersión...",
         "missingFieldTitle": "Campo obligatorio",
         "missingFieldText": "Por favor completa todos los campos requeridos.",
         "savingTitle": "Guardando inmersión...",

@@ -13,6 +13,7 @@ import AboutPage from "../pages/AboutPage";
 import PrivacyPage from "../pages/PrivacyPage";
 import TermsPage from "../pages/TermsPage";
 import ContactPage from "../pages/ContactPage";
+import EditDivePage from "../pages/EditDivePage";
 
 export default function AppRoutes() {
   return (
@@ -32,6 +33,7 @@ export default function AppRoutes() {
             <Route path="log" element={<DiveFormPage />} />
             <Route path="list" element={<DiveListPage />} />
             <Route path="stats" element={<StatsPage />} />
+            <Route path="dives/edit/:diveId" element={<EditDivePage />} />
           </Route>
 
         </Routes>
