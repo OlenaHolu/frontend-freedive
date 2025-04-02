@@ -108,7 +108,13 @@ export default function DiveForm({ editMode, initialData = {}, onClose }) {
 
       <div>
         <label className={labelClass}>{t("dive.maxDepth")} *</label>
-        <input name="depth" type="number" placeholder="e.g. 25" value={form.depth} onChange={handleChange} className={inputClass} />
+        <input 
+          name="depth" 
+          type="number" 
+          placeholder="e.g. 25" 
+          value={form.depth} 
+          onChange={handleChange} 
+          className={inputClass} />
       </div>
 
       <div>

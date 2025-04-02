@@ -10,7 +10,7 @@ import {
 } from "recharts";
 import { useTranslation } from "react-i18next";
 
-export default function DiveChartModal({ samples, isOpen, onClose }) {
+export default function DiveChartModal({ samples, isOpen, onClose, diveMaxDepth }) {
   const { t } = useTranslation();
 
   const modalClass =
@@ -18,61 +18,94 @@ export default function DiveChartModal({ samples, isOpen, onClose }) {
   const overlayClass =
     "fixed inset-0 bg-black bg-opacity-50 flex items-start justify-center z-50";
 
-  if (!isOpen || !samples) return null;
+  if (!isOpen | !samples) return null;
 
   // Preprocesamiento
   let formattedSamples = samples
-    .filter((s) => s.depth !== null && s.depth !== undefined && !isNaN(s.depth))
-    .map((s) => ({
-      time: s.time,
-      depth: parseFloat(Number(s.depth).toFixed(2)),
-    }))
+    .map((s) => {
+      const time = Number(s.time);
+      const depth = Number(s.depth);
+
+      if (!isFinite(time) || !isFinite(depth) || depth < 0 || depth > 200) {
+        return null;
+      }
+
+      return {
+        time,
+        depth: parseFloat(depth.toFixed(2)),
+      };
+    })
+    .filter(Boolean)
     .sort((a, b) => a.time - b.time);
+
+  // Detectar max depth real y tiempo correspondiente
+  const maxDepthInSamples = Math.max(...formattedSamples.map((s) => s.depth));
+  const maxSample = formattedSamples.find((s) => s.depth === maxDepthInSamples);
+  const maxDepthTime = maxSample?.time || 0;
+
+  // Añadir punto con diveMaxDepth si no está incluido
+  const isMaxIncluded = formattedSamples.some(
+    (s) => Math.abs(s.depth - diveMaxDepth) < 0.01
+  );
+
+  if (diveMaxDepth && !isMaxIncluded) {
+    const newTime =
+      diveMaxDepth <= maxDepthInSamples
+        ? Math.max(0, maxDepthTime - 1)
+        : maxDepthTime + 1;
+
+    formattedSamples.push({
+      time: newTime,
+      depth: diveMaxDepth,
+      fake: true,
+    });
+
+    formattedSamples.sort((a, b) => a.time - b.time);
+  }
 
   // Añadir 0 al inicio
   if (formattedSamples.length > 0 && formattedSamples[0].depth !== 0) {
-    formattedSamples.unshift({
-      time: t("dive.start"),
-      depth: 0,
-    });
+    formattedSamples.unshift({ time: 0, depth: 0 });
   }
 
   // Añadir 0 al final
-  if (formattedSamples.length > 1 && formattedSamples[formattedSamples.length - 1].depth !== 0) {
+  // Evitar añadir un punto en tiempo duplicado
+if (formattedSamples.length > 1 && formattedSamples.at(-1).depth !== 0) {
+  const lastTime = formattedSamples.at(-1).time;
+  const newTime = lastTime + 1;
+
+  // Evitar duplicados:
+  if (!formattedSamples.some(sample => sample.time === newTime)) {
     formattedSamples.push({
-      time: formattedSamples[formattedSamples.length - 1].time + 1,
+      time: newTime,
       depth: 0,
     });
   }
+}
+const ticks = Array.from(new Set(formattedSamples.map(s => s.time)));
 
   if (formattedSamples.length === 0) {
     return (
-      <Modal
-        isOpen={isOpen}
-        onRequestClose={onClose}
-        className={modalClass}
-        overlayClassName={overlayClass} 
-      >
+      <Modal isOpen={isOpen} onRequestClose={onClose} className={modalClass} overlayClassName={overlayClass}>
         <h2 className="text-xl font-bold mb-4">{t("dive.diveChartTitle")}</h2>
         <p>{t("dive.noValidSamples")}</p>
-        <button 
-          onClick={onClose} 
-          className="mt-4 bg-blue-600 text-white px-4 py-2 rounded"
-        >
+        <button onClick={onClose} className="mt-4 bg-blue-600 text-white px-4 py-2 rounded">
           {t("close")}
         </button>
       </Modal>
     );
   }
 
-  // Detectar profundidad máxima
-  const maxDepthValue = Math.max(...formattedSamples.map((s) => s.depth));
+  const safeMaxDepth = Math.max(...formattedSamples.map((s) => s.depth));
+  const yMax = Math.ceil(safeMaxDepth + 1);
 
-  // Punto personalizado para maxDepth
-  const renderCustomDot = ({ cx, cy, payload }) => {
-    if (payload.depth === maxDepthValue) {
+  const renderCustomDot = ({ cx, cy, payload, index }) => {
+    if (
+      Math.abs(payload.depth - diveMaxDepth) < 0.01 ||
+      payload.fake // marcar aunque haya duplicados
+    ) {
       return (
-        <>
+        <React.Fragment key={`dot-${index}`}>
           <circle cx={cx} cy={cy} r={6} fill="#ef4444" stroke="#b91c1c" strokeWidth={2} />
           <text
             x={cx + 10}
@@ -83,40 +116,31 @@ export default function DiveChartModal({ samples, isOpen, onClose }) {
           >
             {t("dive.maxDepthLabel")} {payload.depth} m
           </text>
-        </>
+        </React.Fragment>
       );
     }
     return null;
   };
+  
 
   return (
-    <Modal
-      isOpen={isOpen}
-      onRequestClose={onClose}
-      className={modalClass}
-      overlayClassName={overlayClass}
-    >
+    <Modal isOpen={isOpen} onRequestClose={onClose} className={modalClass} overlayClassName={overlayClass}>
       <h2 className="text-xl font-bold mb-4">{t("dive.diveChartTitle")}</h2>
 
       <ResponsiveContainer width="100%" height={300}>
         <LineChart data={formattedSamples}>
           <XAxis
             dataKey="time"
-            label={{
-              value: t("dive.time") + " (s)",
-              position: "insideBottom",
-              offset: -5,
-            }}
+            type="number"
+            domain={["dataMin", "dataMax"]}
+            ticks={ticks}
+            label={{ value: t("dive.time") + " (s)", position: "insideBottom", offset: -5 }}
             tick={{ fontSize: 12 }}
           />
           <YAxis
-            domain={[0, "dataMax + 2"]}
+            domain={[0, yMax]}
             reversed={true}
-            label={{
-              value: t("dive.depth") + " (m)",
-              angle: -90,
-              position: "insideLeft",
-            }}
+            label={{ value: t("dive.depth") + " (m)", angle: -90, position: "insideLeft" }}
             tick={{ fontSize: 12 }}
           />
           <Tooltip
@@ -135,10 +159,7 @@ export default function DiveChartModal({ samples, isOpen, onClose }) {
       </ResponsiveContainer>
 
       <div className="flex justify-end mt-6">
-        <button
-          onClick={onClose}
-          className="bg-blue-600 text-white px-4 py-2 rounded"
-        >
+        <button onClick={onClose} className="bg-blue-600 text-white px-4 py-2 rounded">
           {t("close")}
         </button>
       </div>

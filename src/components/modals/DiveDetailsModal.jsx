@@ -24,3 +24,4 @@ export default function DiveDetailsModal({ dive, isOpen, onClose }) {
     </Modal>
   );
 }
+

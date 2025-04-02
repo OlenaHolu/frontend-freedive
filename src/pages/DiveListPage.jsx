@@ -211,6 +211,7 @@ export default function DiveListPage() {
             {activeDive && openModal === "chart" && (
                 <DiveChartModal
                     dive={activeDive}
+                    diveMaxDepth={activeDive?.MaxDepth}
                     samples={diveSamples}
                     isOpen={true}
                     onClose={() => {

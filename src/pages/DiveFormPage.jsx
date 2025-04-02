@@ -16,11 +16,22 @@ const DiveFormPage = () => {
       const parsed = file.name.endsWith(".sml")
         ? parseSmlDive(text)
         : parseDiveXml(text);
-  
+    
+      // 🔍 Agregá este bloque para ver los samples parseados
       if (Array.isArray(parsed)) {
+        parsed.forEach((dive, index) => {
+          console.log(`📄 Archivo: ${file.name} | Dive #${index + 1}`);
+          dive.samples?.forEach((s, i) => {
+            if (s.depth && s.depth > 3) {
+              console.warn(`⚠️ Sample sospechoso (depth > 3) en index ${i}:`, s);
+            }
+          });
+        });
+    
         totalDives = [...totalDives, ...parsed];
       }
     }
+    
   
     if (totalDives.length === 0) {
       return Swal.fire({

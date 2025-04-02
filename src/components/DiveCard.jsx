@@ -21,17 +21,10 @@ const DiveCard = ({ dive, onDiveUpdated, onOpenModal }) => {
       <div className="mt-4 flex gap-2">
 
         <button
-          onClick={() => onOpenModal("details")}
+          onClick={() => navigate(`/dashboard/dives/${dive.id}`)}
           className="bg-gray-200 px-3 py-1 rounded hover:bg-gray-300"
         >
           🔍 {t("dive.view")}
-        </button>
-
-        <button
-          onClick={() => onOpenModal("chart")}
-          className="bg-gray-200 px-3 py-1 rounded hover:bg-gray-300"
-        >
-          🔍 {t("dive.viewChart")}
         </button>
 
         <button
