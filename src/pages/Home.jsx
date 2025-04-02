@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import MainLayout from "../layouts/MainLayout";
 import { useTranslation } from "react-i18next";
 import { useAuth } from "../context/AuthContext";
+import { Helmet } from "react-helmet";
 
 const Home = () => {
   const { email, setEmail } = useAuth();
@@ -32,6 +33,15 @@ const Home = () => {
 
   return (
     <MainLayout backgroundImage="/home-bg.png">
+       <Helmet>
+        <title>{t("seo.title")}</title>
+        <meta name="description" content={t("app_description")} />
+        <meta property="og:title" content={t("app_title")} />
+        <meta property="og:description" content={t("app_description")} />
+        <meta property="og:url" content="https://frontend-freedive.vercel.app/" />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+      </Helmet>
       <h1 className="text-5xl md:text-6xl font-bold">FREEDIVE <br /> ANALYZER</h1>
       <p className="text-md md:text-lg mt-2">{t("discover")}</p>
 
