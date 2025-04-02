@@ -39,7 +39,15 @@
     "name": "Name",
     "email": "Email",
     "settings": "Settings",
-    "comingSoon": "More settings coming soon"
+    "comingSoon": "More settings coming soon",
+    "delete_button": "Delete profile",
+    "confirm_delete_title": "Are you sure?",
+    "confirm_delete_text": "This action will permanently delete your account.",
+    "confirm_delete_button": "Yes, delete",
+    "deleted": "Account deleted",
+    "deleted_message": "Your account has been successfully deleted.",
+    "delete_error": "An error occurred while deleting your account.",
+    "deleting": "Deleting profile..."
   },
   "log": {
     "title": "Log a New Dive"
@@ -170,7 +178,7 @@
       "submit": "Send Message"
     },
     "also_contact": "You can also reach us at:",
-    "location": "Spain (City: Moncofa)"
+    "location": "Spain"
   },
   "terms": {
     "title": "Terms and Conditions of Use",

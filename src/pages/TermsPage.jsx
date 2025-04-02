@@ -61,16 +61,16 @@ const TermsPage = () => {
 
         <section className="mb-6">
           <h2 className="text-xl font-semibold mb-2">{t("terms.law_title")}</h2>
-          <p>{t("terms.law_text", { city: "[tu ciudad en España]" })}</p>
+          <p>{t("terms.law_text", { city: "Madrid" })}</p>
         </section>
 
         <p className="mt-10">
           {t("terms.contact_text")}{" "}
           <a
-            href="mailto:tuemail@freediveanalyzer.com"
+            href="mailto:oleholu@gmail.com"
             className="text-blue-600 underline"
           >
-            tuemail@freediveanalyzer.com
+            oleholu@gmail.com
           </a>
         </p>
       </div>

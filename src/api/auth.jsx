@@ -1,7 +1,7 @@
 import axios from "axios";
 import { auth, getFirebaseToken } from "../lib/firebaseClient";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut } from "firebase/auth";
 import { supabase } from "../lib/supabaseClient";
 
 const BACKEND_URL = import.meta.env.VITE_APP_BACKEND_URL;
@@ -10,8 +10,6 @@ const BACKEND_URL = import.meta.env.VITE_APP_BACKEND_URL;
 export const register = async (email, password, name) => {
   const userCredential = await createUserWithEmailAndPassword(auth, email, password);
   const token = await userCredential.user.getIdToken();
-
-  console.log("Enviando token a backend:", token);
 
   return axios.post(`${BACKEND_URL}/api/register`, {
     firebase_token: token,
@@ -30,8 +28,6 @@ export const loginWithGoogle = async () => {
 
     // 🔹 Obtener token de Firebase
     const token = await user.getIdToken();
-
-    console.log("Token obtenido de Google:", token);
 
     // 🔹 Enviar el token al backend
     const res = await axios.post(`${BACKEND_URL}/api/login`, { firebase_token: token });
@@ -53,8 +49,6 @@ export const login = async (email, password) => {
 
     // 🔹 Obtener el token de Firebase
     const token = await user.getIdToken();
-
-    console.log("Enviando token a backend:", token);
 
     // 🔹 Enviar el token al backend
     const res = await axios.post(`${BACKEND_URL}/api/login`, { firebase_token: token });
@@ -134,3 +128,14 @@ export async function updateUserPhoto(base64Image) {
   const { user: updatedUser } = await response.json();
   return updatedUser;
 }
+
+export const deleteProfile = async () => {
+  const token = await getFirebaseToken();
+
+  await axios.delete(`${BACKEND_URL}/api/user/delete`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};
+

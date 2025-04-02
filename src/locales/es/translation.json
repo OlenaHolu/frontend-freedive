@@ -39,7 +39,15 @@
         "name": "Nombre",
         "email": "Correo electrónico",
         "settings": "Configuraciones",
-        "comingSoon": "Más configuraciones próximamente"
+        "comingSoon": "Más configuraciones próximamente",
+        "delete_button": "Eliminar perfil",
+        "confirm_delete_title": "¿Estás seguro?",
+        "confirm_delete_text": "Esta acción eliminará tu cuenta de forma permanente.",
+        "confirm_delete_button": "Sí, eliminar",
+        "deleted": "Cuenta eliminada",
+        "deleted_message": "Tu cuenta ha sido eliminada correctamente.",
+        "delete_error": "Ocurrió un error al eliminar tu cuenta.",
+        "deleting": "Eliminando perfil..."
     },
     "log": {
         "title": "Registrar una nueva inmersión"
@@ -170,7 +178,7 @@
             "submit": "Enviar mensaje"
         },
         "also_contact": "También puedes contactarnos en:",
-        "location": "España (Ciudad: Moncofa)"
+        "location": "España"
     },
     "terms": {
         "title": "Términos y Condiciones de Uso",
