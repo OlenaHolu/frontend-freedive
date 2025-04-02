@@ -2,7 +2,7 @@ import { useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { UploadCloud } from "lucide-react";
 
-export default function ImportDiveButton({ onFileSelected }) {
+export default function ImportDiveButton({ onFilesSelected }) {
     const fileInput = useRef();
     const { t } = useTranslation();
 
@@ -11,8 +11,10 @@ export default function ImportDiveButton({ onFileSelected }) {
     };
 
     const handleFileChange = (event) => {
-        const file = event.target.files[0];
-        onFileSelected(file);
+        const files = Array.from(event.target.files);
+        if (files.length > 0){
+            onFilesSelected(files);
+        }
     };
 
     return (
@@ -27,6 +29,7 @@ export default function ImportDiveButton({ onFileSelected }) {
             <input
                 ref={fileInput}
                 type="file"
+                multiple
                 accept=".xml, .sml"
                 className="hidden"
                 onChange={handleFileChange}
