@@ -15,8 +15,8 @@ const DiveCard = ({ dive, onDiveUpdated, onOpenModal }) => {
   return (
     <div className="bg-white text-black rounded-lg p-4 shadow relative">
       <p><strong>📅 {new Date(dive.StartTime).toLocaleString()}</strong></p>
-      <p>🌊 {t("dive.maxDepth")}: {dive.MaxDepth} m</p>
-      <p>🕒 {t("dive.duration")}: {formatDuration(dive.Duration)}</p>
+      <p>🌊 {t("dive.details.maxDepth")}: {dive.MaxDepth} m</p>
+      <p>🕒 {t("dive.details.duration")}: {formatDuration(dive.Duration)}</p>
 
       <div className="mt-4 flex gap-2">
 

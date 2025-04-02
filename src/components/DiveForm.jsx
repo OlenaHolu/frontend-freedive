@@ -93,7 +93,7 @@ export default function DiveForm({ editMode, initialData = {}, onClose }) {
       className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 animate-fadeIn"
     >
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">{t("dive.startTime")}*</label>
+        <label className="block text-sm font-medium text-gray-700 mb-1">{t("dive.details.startTime")}*</label>
         <input
           type="datetime-local"
           name="startTime"
@@ -107,7 +107,7 @@ export default function DiveForm({ editMode, initialData = {}, onClose }) {
 
 
       <div>
-        <label className={labelClass}>{t("dive.maxDepth")} *</label>
+        <label className={labelClass}>{t("dive.details.maxDepth")} *</label>
         <input 
           name="depth" 
           type="number" 
@@ -118,7 +118,7 @@ export default function DiveForm({ editMode, initialData = {}, onClose }) {
       </div>
 
       <div>
-        <label className={labelClass}>{t("dive.duration")} *</label>
+        <label className={labelClass}>{t("dive.details.duration")} *</label>
         <input
           name="durationFormatted"
           type="text"
@@ -184,7 +184,7 @@ export default function DiveForm({ editMode, initialData = {}, onClose }) {
 
 
       <div>
-        <label className={labelClass}>{t("dive.previousMax")}</label>
+        <label className={labelClass}>{t("dive.details.previousMax")}</label>
         <input name="previousMaxDepth" type="number" value={form.previousMaxDepth} onChange={handleChange} className={inputClass} />
       </div>
 
