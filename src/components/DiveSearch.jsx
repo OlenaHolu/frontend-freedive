@@ -10,13 +10,13 @@ export default function DiveSearch({ onSearch }) {
   };
 
   return (
-    <div className="flex gap-2 w-full md:w-1/3">
+    <div className="flex gap-2 w-full md:w-1/2">
       <input
         type="text"
         value={inputValue}
         onChange={(e) => setInputValue(e.target.value)}
         placeholder={t("divesList.searchPlaceholder")}
-        className="flex-1 p-2 border rounded"
+        className="flex-1 p-2 border border-gray-300 rounded"
       />
       <button
         onClick={handleClick}

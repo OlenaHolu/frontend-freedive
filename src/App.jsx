@@ -1,13 +1,10 @@
 import AppRoutes from "./routes/AppRoutes";
 import { AuthProvider } from "./context/AuthContext";
 import 'sweetalert2/dist/sweetalert2.min.css';
-import Modal from "react-modal";
 import { useNetworkStatus } from "./hooks/useNetworkStatus";
 import { useTranslation } from "react-i18next";
 import { useEffect, useRef } from "react";
 import Swal from "sweetalert2";
-
-Modal.setAppElement("#root");
 
 export default function App() {
   const isOnline = useNetworkStatus();
