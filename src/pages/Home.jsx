@@ -18,7 +18,7 @@ const Home = () => {
               {t("loading")}
             </div>
           </MainLayout>
-        );
+        );   
       }
 
   const validateEmail = (email) => /\S+@\S+\.\S+/.test(email);
@@ -79,4 +79,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Home; 

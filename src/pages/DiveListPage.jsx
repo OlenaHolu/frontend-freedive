@@ -1,80 +1,47 @@
-import { useCallback, useEffect, useState } from "react";
-import { getDives } from "../api/dive";
-import DiveSearch from "../components/DiveSearch";
+import { useEffect, useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import { useTranslation } from "react-i18next";
-import { formatDuration } from "../utils/time";
-import { filterByPeriod, filterBySearch } from "../utils/diveFilters";
 import { useNavigate } from "react-router-dom";
+import DivesTable from "../components/DivesTable";
+import DiveSearch from "../components/DiveSearch";
+import Pagination from "../components/Pagination";
+import PeriodFilter from "../components/PeriodFilter";
+import useDives from "../hooks/useDives";
 
 export default function DiveListPage() {
     const { user, loading } = useAuth();
     const { t } = useTranslation();
     const navigate = useNavigate();
 
-    const [dives, setDives] = useState([]);
-    const [allDives, setAllDives] = useState([]);
-    const [loadingDives, setLoadingDives] = useState(true);
     const [searchQuery, setSearchQuery] = useState("");
     const [period, setPeriod] = useState("all");
     const [currentPage, setCurrentPage] = useState(1);
     const [sortColumn, setSortColumn] = useState("StartTime");
-    const [sortDirection, setSortDirection] = useState("desc"); // o "asc"
-
+    const [sortDirection, setSortDirection] = useState("desc");
 
     const divesPerPage = 10;
-    const totalPages = Math.ceil(allDives.length / divesPerPage);
 
-    const fetchDives = useCallback(async (query = searchQuery) => {
-        try {
-            setLoadingDives(true);
-            const res = await getDives();
-
-            let filtered = res.dives.sort(
-                (a, b) => new Date(b.StartTime) - new Date(a.StartTime)
-            );
-            setAllDives(filtered);
-
-            filtered = filterByPeriod(filtered, period);
-            filtered = filterBySearch(filtered, query, formatDuration);
-
-            if (period === "all" && query.trim() === "") {
-                const startIndex = (currentPage - 1) * divesPerPage;
-                const endIndex = startIndex + divesPerPage;
-                filtered = filtered.slice(startIndex, endIndex);
-            }
-
-            setDives(filtered);
-        } catch (err) {
-            console.error("Error fetching dives:", err);
-        } finally {
-            setLoadingDives(false);
-        }
-    }, [period, currentPage, searchQuery]);
+    const {
+        dives,
+        loadingDives,
+        totalPages,
+        refetch: fetchDives,
+    } = useDives(user, period, searchQuery, currentPage, divesPerPage);
 
     useEffect(() => {
         if (user) fetchDives();
-    }, [user, period, currentPage]);
+    }, [user, period, currentPage, searchQuery]);
 
     const handleSearch = (query) => {
         setSearchQuery(query);
-        fetchDives(query);
+        setCurrentPage(1);
     };
 
     const resetFilters = () => {
         setSearchQuery("");
         setPeriod("all");
         setCurrentPage(1);
-        fetchDives("");
     };
-
-    if (loading || !user) {
-        return (
-            <div className="text-center text-gray-500 text-lg py-10">
-                {t("loading")}
-            </div>
-        );
-    }
 
     const handleSort = (column) => {
         if (sortColumn === column) {
@@ -85,27 +52,13 @@ export default function DiveListPage() {
         }
     };
 
-    const getSortedDives = () => {
-        return [...dives].sort((a, b) => {
-            let valA = a[sortColumn];
-            let valB = b[sortColumn];
-
-            if (sortColumn === "StartTime") {
-                valA = new Date(valA);
-                valB = new Date(valB);
-            }
-
-            if (sortColumn === "Duration" || sortColumn === "MaxDepth") {
-                valA = Number(valA);
-                valB = Number(valB);
-            }
-
-            if (valA < valB) return sortDirection === "asc" ? -1 : 1;
-            if (valA > valB) return sortDirection === "asc" ? 1 : -1;
-            return 0;
-        });
-    };
-
+    if (loading || !user) {
+        return (
+            <div className="text-center text-gray-500 text-lg py-10">
+                {t("loading")}
+            </div>
+        );
+    }
 
     return (
         <div className="max-w-5xl mx-auto px-4 py-6">
@@ -116,18 +69,7 @@ export default function DiveListPage() {
                 <DiveSearch onSearch={handleSearch} />
 
                 <div className="flex items-center gap-2 flex-wrap">
-                    {["all", "7d", "30d"].map((p) => (
-                        <button
-                            key={p}
-                            className={`px-4 py-2 rounded transition ${period === p
-                                ? "bg-blue-600 text-white"
-                                : "bg-gray-200 hover:bg-gray-300"
-                                }`}
-                            onClick={() => setPeriod(p)}
-                        >
-                            {t(`divesList.filters.${p === "all" ? "all" : p === "7d" ? "last7" : "last30"}`)}
-                        </button>
-                    ))}
+                    <PeriodFilter period={period} setPeriod={setPeriod} t={t} />
 
                     {(searchQuery || period !== "all") && (
                         <button
@@ -149,69 +91,21 @@ export default function DiveListPage() {
                         {dives.length === 0 ? (
                             <p className="text-center text-gray-600 italic">{t("divesList.noDives")}</p>
                         ) : (
-                            <table className="min-w-full border divide-y divide-gray-200 text-sm">
-                                <thead className="bg-gray-100 text-left text-sm text-gray-600">
-                                    <tr>
-                                        <th className="px-4 py-2 cursor-pointer" onClick={() => handleSort("StartTime")}>
-                                            📅 {t("dive.details.startTime")} {sortColumn === "StartTime" && (sortDirection === "asc" ? "▲" : "▼")}
-                                        </th>
-                                        <th className="px-4 py-2 cursor-pointer" onClick={() => handleSort("MaxDepth")}>
-                                            🌊 {t("dive.details.maxDepth")} {sortColumn === "MaxDepth" && (sortDirection === "asc" ? "▲" : "▼")}
-                                        </th>
-                                        <th className="px-4 py-2 cursor-pointer" onClick={() => handleSort("Duration")}>
-                                            🕒 {t("dive.details.duration")} {sortColumn === "Duration" && (sortDirection === "asc" ? "▲" : "▼")}
-                                        </th>
-                                        <th className="px-4 py-2">{t("actions")}</th>
-                                    </tr>
-                                </thead>
-
-                                <tbody className="bg-white divide-y divide-gray-100">
-                                    {getSortedDives().map((dive) => (
-                                        <tr key={dive.id} className="hover:bg-gray-50">
-                                            <td className="px-4 py-2">
-                                                {new Date(dive.StartTime).toLocaleString()}
-                                            </td>
-                                            <td className="px-4 py-2">{dive.MaxDepth} m</td>
-                                            <td className="px-4 py-2">{formatDuration(dive.Duration)}</td>
-                                            <td className="px-4 py-2 space-x-2">
-                                                <button
-                                                    onClick={() => navigate(`/dashboard/dives/${dive.id}`)}
-                                                    className="text-sm bg-gray-100 px-2 py-1 rounded hover:bg-gray-200"
-                                                >
-                                                    🔍 {t("dive.view")}
-                                                </button>
-                                                <button
-                                                    onClick={() => navigate(`/dashboard/dives/edit/${dive.id}`)}
-                                                    className="text-sm bg-blue-500 text-white px-2 py-1 rounded hover:bg-blue-600"
-                                                >
-                                                    ✏️ {t("dive.edit")}
-                                                </button>
-                                            </td>
-                                        </tr>
-                                    ))}
-                                </tbody>
-                            </table>
+                            <DivesTable
+                                dives={dives}
+                                sortColumn={sortColumn}
+                                sortDirection={sortDirection}
+                                handleSort={handleSort}
+                            />
                         )}
                     </div>
 
+                    <Pagination
+                        currentPage={currentPage}
+                        totalPages={totalPages}
+                        onPageChange={(page) => !loadingDives && setCurrentPage(page)}
+                    />
 
-                    {/* Pagination */}
-                    {period === "all" && !searchQuery && totalPages > 1 && (
-                        <div className="mt-8 flex justify-center gap-2 flex-wrap">
-                            {Array.from({ length: totalPages }, (_, i) => i + 1).map((pageNum) => (
-                                <button
-                                    key={pageNum}
-                                    onClick={() => setCurrentPage(pageNum)}
-                                    className={`px-4 py-2 rounded ${currentPage === pageNum
-                                        ? "bg-blue-600 text-white"
-                                        : "bg-gray-200 hover:bg-gray-300"
-                                        }`}
-                                >
-                                    {pageNum}
-                                </button>
-                            ))}
-                        </div>
-                    )}
                 </>
             )}
         </div>
