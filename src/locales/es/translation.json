@@ -138,7 +138,8 @@
             "previousMax": "Profundidad máxima anterior"
         },
         "import": {
-            "title": "Import Dives",
+            "title": "Importar Inmersiones",
+            "description": "Importa tus registros de inmersiones para analizar tu progreso y mejorar tu nivel. Formatos compatibles: .xml y .sml.",
             "loading": "Importing...",
             "processingFile": "Processing dive file",
             "success": "Import successful!",

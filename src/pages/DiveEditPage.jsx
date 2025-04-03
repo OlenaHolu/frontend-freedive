@@ -5,7 +5,7 @@ import DiveForm from "../components/DiveForm";
 import { useTranslation } from "react-i18next";
 import Swal from "sweetalert2";
 
-export default function EditDivePage() {
+export default function DiveEditPage() {
   const { t } = useTranslation();
   const { diveId } = useParams();
   const [dive, setDive] = useState(null);

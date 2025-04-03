@@ -141,8 +141,10 @@
       "weight": "Weight",
       "diveNumberInSerie": "Dive Number in Serie"
     },
+    
     "import": {
       "title": "Import Dives",
+      "description": "Import your dive logs to track progress and analyze your performance. Supported formats: .xml and .sml.",
       "loading": "Importing...",
       "processingFile": "Processing dive file",
       "success": "Import successful!",

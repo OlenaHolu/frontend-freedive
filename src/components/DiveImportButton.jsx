@@ -2,7 +2,7 @@ import { useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { UploadCloud } from "lucide-react";
 
-export default function ImportDiveButton({ onFilesSelected }) {
+export default function DiveImportButton({ onFilesSelected }) {
     const fileInput = useRef();
     const { t } = useTranslation();
 

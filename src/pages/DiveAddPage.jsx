@@ -1,11 +1,11 @@
 import { useTranslation } from "react-i18next";
 import DiveForm from "../components/DiveForm";
 import Swal from "sweetalert2";
-import ImportDiveButton from "../components/ImportDiveButton";
+import DiveImportButton from "../components/DiveImportButton";
 import { parseDiveXml, parseSmlDive } from "../utils/diveParsers";
 import { saveMultipleDives } from "../api/dive";
 
-const DiveFormPage = () => {
+const DiveAddPage = () => {
   const { t } = useTranslation();
 
   const handleImportedFiles = async (files) => {
@@ -71,10 +71,10 @@ const DiveFormPage = () => {
     <div className="max-w-3xl mx-auto px-4 py-8">
       {/* Import Section */}
       <div className="bg-white border border-gray-200 rounded-2xl shadow-sm p-6 mb-6">
-        <h3 className="text-lg font-semibold mb-4 text-gray-700">
-          {t("dive.import.title")}
+        <h3 className="text-sm mb-4 text-gray-700">
+          {t("dive.import.description")}
         </h3>
-        <ImportDiveButton onFilesSelected={handleImportedFiles} />
+        <DiveImportButton onFilesSelected={handleImportedFiles} />
 
       </div>
 
@@ -89,4 +89,4 @@ const DiveFormPage = () => {
   );
 };
 
-export default DiveFormPage;
+export default DiveAddPage;
