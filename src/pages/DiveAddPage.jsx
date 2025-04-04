@@ -9,48 +9,97 @@ const DiveAddPage = () => {
   const { t } = useTranslation();
 
   const handleImportedFiles = async (files) => {
+    const totalFiles = files.length;
+
+    // ❗ Límite de archivos
+    if (totalFiles > 50) {
+      return Swal.fire({
+        icon: "warning",
+        title: t("dive.import.tooManyFiles"),
+        text: t("dive.import.maxFilesMessage"),
+      });
+    }
+
     let totalDives = [];
-  
-    for (const file of files) {
+
+    const simulateProgressUntilDone = async (start, end, duration, isDone) => {
+      const steps = end - start;
+      const delay = duration / steps;
+
+      for (let i = 1; i <= steps; i++) {
+        if (isDone()) break;
+
+        await new Promise((res) => setTimeout(res, delay));
+        const percent = start + i;
+        const bar = document.getElementById("swal-progress-bar");
+        const textEl = document.getElementById("swal-progress-text");
+        if (bar && textEl) {
+          bar.style.width = `${percent}%`;
+          textEl.textContent = `${percent}%`;
+        }
+      }
+    };
+
+    Swal.fire({
+      title: t("import.loading"),
+      html: `
+        <div style="margin-top: 10px;">
+          <div style="width: 100%; background-color: #eee; border-radius: 8px; overflow: hidden; height: 20px;">
+            <div id="swal-progress-bar" style="width: 0%; height: 100%; background-color: #10b981; transition: width 0.2s;"></div>
+          </div>
+          <div id="swal-progress-text" style="margin-top: 8px; font-size: 14px; font-weight: 500; text-align: center;">0%</div>
+        </div>
+      `,
+      allowOutsideClick: false,
+      showConfirmButton: false,
+      didOpen: () => Swal.showLoading(),
+    });
+
+    // Fase 1: parseo real (0-1%)
+    for (let i = 0; i < totalFiles; i++) {
+      const file = files[i];
       const text = await file.text();
       const parsed = file.name.endsWith(".sml")
         ? parseSmlDive(text)
         : parseDiveXml(text);
-    
-      // 🔍 Agregá este bloque para ver los samples parseados
-      if (Array.isArray(parsed)) {
-        parsed.forEach((dive, index) => {
-          console.log(`📄 Archivo: ${file.name} | Dive #${index + 1}`);
-          dive.samples?.forEach((s, i) => {
-            if (s.depth && s.depth > 3) {
-              console.warn(`⚠️ Sample sospechoso (depth > 3) en index ${i}:`, s);
-            }
-          });
-        });
-    
-        totalDives = [...totalDives, ...parsed];
+      totalDives = [...totalDives, ...parsed];
+
+      const percent = Math.round(((i + 1) / totalFiles) * 1);
+      const bar = document.getElementById("swal-progress-bar");
+      const textEl = document.getElementById("swal-progress-text");
+      if (bar && textEl) {
+        bar.style.width = `${percent}%`;
+        textEl.textContent = `${percent}%`;
       }
     }
-    
-  
+
     if (totalDives.length === 0) {
       return Swal.fire({
         icon: "warning",
         title: t("dive.import.noValidData"),
-        text: t("dive.import.noDivesFound"),
+        text: t("dive.import.noItemsFound"),
       });
     }
-  
+
     try {
-      Swal.fire({
-        title: t("dive.import.loading"),
-        text: t("dive.import.processingFile"),
-        allowOutsideClick: false,
-        didOpen: () => Swal.showLoading(),
+      // Fase 3: simulación + guardado
+      let savingDone = false;
+      const savePromise = saveMultipleDives(totalDives).then(() => {
+        savingDone = true;
       });
-  
-      await saveMultipleDives(totalDives);
-  
+
+      await simulateProgressUntilDone(1, 98, 100000, () => savingDone);
+      await savePromise;
+
+      // Asegurarse que se muestre 100%
+      const bar = document.getElementById("swal-progress-bar");
+      const textEl = document.getElementById("swal-progress-text");
+      if (bar && textEl) {
+        bar.style.width = `100%`;
+        textEl.textContent = `100%`;
+      }
+      await new Promise((res) => setTimeout(res, 1500));
+
       Swal.fire({
         icon: "success",
         title: t("dive.import.success"),
@@ -62,20 +111,33 @@ const DiveAddPage = () => {
       Swal.fire({
         icon: "error",
         title: "❌ Error",
-        text: t("dive.import.error"),
+        text: t("import.error"),
       });
     }
-  };  
+  };
+
+  const ImportDescription = () => {
+    const { t } = useTranslation();
+
+    return (
+      <div className="text-sm text-gray-700 space-y-2">
+        <h3 className="text-lg font-semibold mb-4 text-gray-700">
+          ➕ {t("dive.import.description.title")}
+        </h3>
+        <p>{t("dive.import.description.text")}</p>
+        <p>✔️ <strong>{t("dive.import.description.formats")}</strong></p>
+        <p>📁 <strong>{t("dive.import.description.limit")}</strong></p>
+      </div>
+    );
+  };
+
 
   return (
     <div className="max-w-3xl mx-auto px-4 py-8">
       {/* Import Section */}
       <div className="bg-white border border-gray-200 rounded-2xl shadow-sm p-6 mb-6">
-        <h3 className="text-sm mb-4 text-gray-700">
-          {t("dive.import.description")}
-        </h3>
+        <ImportDescription />
         <DiveImportButton onFilesSelected={handleImportedFiles} />
-
       </div>
 
       {/* Form Section */}

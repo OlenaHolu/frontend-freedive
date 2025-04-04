@@ -7,6 +7,7 @@ import DiveSearch from "../components/DiveSearch";
 import Pagination from "../components/Pagination";
 import PeriodFilter from "../components/PeriodFilter";
 import useDives from "../hooks/useDives";
+import { deleteDive } from "../api/dive";
 
 export default function DiveListPage() {
     const { user, loading } = useAuth();
@@ -52,6 +53,17 @@ export default function DiveListPage() {
         }
     };
 
+    const handleDelete = async (diveId) => {
+        if (window.confirm(t("divesList.deleteConfirmation"))) {
+            try {
+                await deleteDive(diveId);
+                fetchDives();
+            } catch (error) {
+                console.error("Error deleting dive:", error);
+                alert(t("divesList.deleteError"));
+            }
+        }
+    };
     if (loading || !user) {
         return (
             <div className="text-center text-gray-500 text-lg py-10">
@@ -96,6 +108,7 @@ export default function DiveListPage() {
                                 sortColumn={sortColumn}
                                 sortDirection={sortDirection}
                                 handleSort={handleSort}
+                                handleDelete={handleDelete}
                             />
                         )}
                     </div>

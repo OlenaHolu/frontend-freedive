@@ -57,3 +57,13 @@ export const saveMultipleDives = async (dives) => {
     },
   });
 }
+
+export const deleteDive = async (diveId) => {
+  const token = await auth.currentUser.getIdToken();
+
+  return axios.delete(`${BASE_URL}/api/dives/${diveId}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};

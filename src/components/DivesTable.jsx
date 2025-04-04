@@ -1,8 +1,9 @@
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { formatDuration } from "../utils/time";
+import { deleteDive } from "../api/dive";
 
-export default function DivesTable({ dives, sortColumn, sortDirection, handleSort }) {
+export default function DivesTable({ dives, sortColumn, sortDirection, handleSort, handleDelete }) {
     const navigate = useNavigate();
     const { t } = useTranslation();
 
@@ -62,6 +63,12 @@ export default function DivesTable({ dives, sortColumn, sortDirection, handleSor
                                 className="text-sm bg-blue-500 text-white px-2 py-1 rounded hover:bg-blue-600"
                             >
                                 ✏️ {t("dive.edit")}
+                            </button>
+                            <button
+                                 onClick={() => handleDelete(dive.id)}
+                                className="text-sm bg-red-500 text-white px-2 py-1 rounded hover:bg-red-600"
+                            >
+                                ❌ {t("dive.delete")}
                             </button>
                         </td>
                     </tr>

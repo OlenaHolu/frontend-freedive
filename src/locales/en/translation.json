@@ -144,8 +144,13 @@
     
     "import": {
       "title": "Import Dives",
-      "description": "Import your dive logs to track progress and analyze your performance. Supported formats: .xml and .sml.",
+      "description.title": "Import your dive logs",
+      "description.text": "Track your progress and improve your performance.",
+      "description.formats": "Supported formats: .xml and .sml",
+      "description.limit": "Limit: up to 50 files per upload",
       "loading": "Importing...",
+      "tooManyFiles": "Too many files",
+      "maxFilesMessage": "You can only upload up to 50 .sml or .xml files at once.",
       "processingFile": "Processing dive file",
       "success": "Import successful!",
       "divesImported": "dives imported successfully",

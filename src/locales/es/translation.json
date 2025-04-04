@@ -138,9 +138,13 @@
             "previousMax": "Profundidad máxima anterior"
         },
         "import": {
-            "title": "Importar Inmersiones",
-            "description": "Importa tus registros de inmersiones para analizar tu progreso y mejorar tu nivel. Formatos compatibles: .xml y .sml.",
+            "description.title": "Importa tus registros de inmersiones",
+            "description.text": "Lleva un seguimiento de tu progreso y mejora tu rendimiento.",
+            "description.formats": "Formatos compatibles: .xml y .sml",
+            "description.limit": "Límite: hasta 50 archivos por carga",
             "loading": "Importing...",
+            "tooManyFiles": "Demasiados archivos",
+            "maxFilesMessage": "Solo puedes subir hasta 50 archivos .sml o .xml a la vez.",
             "processingFile": "Processing dive file",
             "success": "Import successful!",
             "divesImported": "dives imported successfully",
