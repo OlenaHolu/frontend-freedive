@@ -10,16 +10,16 @@ const DiveAddPage = () => {
 
   const handleImportedFiles = async (files) => {
     const totalFiles = files.length;
-
+/*
     // ❗ Límite de archivos
-    if (totalFiles > 50) {
+    if (totalFiles > 100) {
       return Swal.fire({
         icon: "warning",
         title: t("dive.import.tooManyFiles"),
         text: t("dive.import.maxFilesMessage"),
       });
     }
-
+*/
     let totalDives = [];
 
     const simulateProgressUntilDone = async (start, end, duration, isDone) => {
@@ -84,12 +84,29 @@ const DiveAddPage = () => {
     try {
       // Fase 3: simulación + guardado
       let savingDone = false;
-      const savePromise = saveMultipleDives(totalDives).then(() => {
-        savingDone = true;
-      });
+      let saveError = null;
+
+      const savePromise = saveMultipleDives(totalDives)
+        .then(() => {
+          savingDone = true;
+        })
+        .catch((err) => {
+          saveError = err;       // guardar error sin lanzar
+          savingDone = true;     // marcar progreso como terminado
+        });
+
 
       await simulateProgressUntilDone(1, 98, 100000, () => savingDone);
       await savePromise;
+
+      if (saveError) {
+        console.error("Import error:", saveError);
+        return Swal.fire({
+          icon: "error",
+          title: "❌ Error",
+          text: t("import.error"),
+        });
+      }
 
       // Asegurarse que se muestre 100%
       const bar = document.getElementById("swal-progress-bar");
@@ -126,7 +143,8 @@ const DiveAddPage = () => {
         </h3>
         <p>{t("dive.import.description.text")}</p>
         <p>✔️ <strong>{t("dive.import.description.formats")}</strong></p>
-        <p>📁 <strong>{t("dive.import.description.limit")}</strong></p>
+        
+        { /* <p>📁 <strong>{t("dive.import.description.limit")}</strong></p> */}
       </div>
     );
   };

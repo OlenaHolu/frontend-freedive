@@ -13,6 +13,7 @@
     "loadingError": "Error al cargar los datos.",
     "close": "Cerrar",
     "cancel": "Cancelar",
+    "confirm": "Confirmar",
     "search": "Buscar",
     "network": {
         "offline": "Estás desconectado. Por favor, revisa tu conexión a internet.",
@@ -141,10 +142,10 @@
             "description.title": "Importa tus registros de inmersiones",
             "description.text": "Lleva un seguimiento de tu progreso y mejora tu rendimiento.",
             "description.formats": "Formatos compatibles: .xml y .sml",
-            "description.limit": "Límite: hasta 50 archivos por carga",
+            "description.limit": "Límite: hasta 100 archivos por carga",
             "loading": "Importing...",
             "tooManyFiles": "Demasiados archivos",
-            "maxFilesMessage": "Solo puedes subir hasta 50 archivos .sml o .xml a la vez.",
+            "maxFilesMessage": "Solo puedes subir hasta 100 archivos .sml o .xml a la vez.",
             "processingFile": "Processing dive file",
             "success": "Import successful!",
             "divesImported": "dives imported successfully",
@@ -162,7 +163,16 @@
         },
         "clearFilters": "Quitar filtros",
         "prev": "Anterior",
-        "next": "Siguiente"
+        "next": "Siguiente",
+        "deleteSelected": "Eliminar inmersiones seleccionadas",
+        "deleteMultipleConfirmation": "¿Eliminar inmersiones seleccionadas?",
+        "thisActionCannotBeUndone": "Esta acción no se puede deshacer.",
+        "deleting": "Eliminando...",
+        "divesInProgress": "inmersiones en proceso",
+        "deletionCompleted": "Eliminación completada",
+        "divesDeleted": "inmersiones eliminadas",
+        "deleteError": "Error al eliminar",
+        "failedToDelete": "No se pudo eliminar"
     },
     "about": {
         "title": "Sobre Nosotros",

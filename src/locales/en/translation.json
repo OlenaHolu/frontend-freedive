@@ -14,6 +14,7 @@
   "search": "Search...",
   "close": "Close",
   "cancel": "Cancel",
+  "confirm": "Confirm",
   "network": {
     "offline": "You are offline. Please check your internet connection.",
     "restored": "Connection restored. You are back online."
@@ -147,10 +148,10 @@
       "description.title": "Import your dive logs",
       "description.text": "Track your progress and improve your performance.",
       "description.formats": "Supported formats: .xml and .sml",
-      "description.limit": "Limit: up to 50 files per upload",
+      "description.limit": "Limit: up to 100 files per upload",
       "loading": "Importing...",
       "tooManyFiles": "Too many files",
-      "maxFilesMessage": "You can only upload up to 50 .sml or .xml files at once.",
+      "maxFilesMessage": "You can only upload up to 100 .sml or .xml files at once.",
       "processingFile": "Processing dive file",
       "success": "Import successful!",
       "divesImported": "dives imported successfully",
@@ -168,7 +169,15 @@
     },
     "clearFilters": "Clear Filters",
     "prev": "Previous",
-    "next": "Next"
+    "next": "Next",
+    "deleteMultipleConfirmation": "Delete selected dives?",
+    "thisActionCannotBeUndone": "This action cannot be undone.",
+    "deleteSelected": "Delete selected",
+    "deleting": "Deleting",
+    "deletionCompleted": "Deletion completed",
+    "divesDeleted": "dives deleted",
+    "deleteError": "Error deleting dive",
+    "failedToDelete": "Failed to delete"
   },
   "about": {
     "title": "About Us",

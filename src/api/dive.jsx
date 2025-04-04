@@ -67,3 +67,16 @@ export const deleteDive = async (diveId) => {
     },
   });
 };
+
+export const deleteManyDives = async (ids) => {
+  const token = await auth.currentUser.getIdToken();
+
+  return axios.post(`${BASE_URL}/api/dives/delete-many`, { ids }, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+  });
+};
+
+

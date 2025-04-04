@@ -13,6 +13,7 @@
     "loadingError": "Ошибка загрузки данных.",
     "close": "Закрыть",
     "cancel": "Отмена",
+    "confirm": "Подтвердить",
     "search": "Поиск...",
     "network": {
         "offline": "Вы оффлайн. Проверьте подключение к интернету.",
@@ -145,10 +146,10 @@
             "description.title": "Импортируйте свои журналы погружений",
             "description.text": "Отслеживайте прогресс и улучшайте результаты.",
             "description.formats": "Поддерживаемые форматы: .xml и .sml",
-            "description.limit": "Лимит: до 50 файлов за загрузку",
+            "description.limit": "Лимит: до 100 файлов за загрузку",
             "loading": "Импорт...",
             "tooManyFiles": "Слишком много файлов",
-            "maxFilesMessage": "Вы можете загрузить не более 50 файлов .sml или .xml за один раз.",
+            "maxFilesMessage": "Вы можете загрузить не более 100 файлов .sml или .xml за один раз.",
             "processingFile": "Обработка файла с погружениями",
             "success": "Импорт завершён успешно!",
             "divesImported": "погружений успешно импортировано",
@@ -166,7 +167,16 @@
         },
         "clearFilters": "Сбросить фильтры",
         "prev": "Предыдущая",
-        "next": "Следующая"
+        "next": "Следующая",
+        "deleteSelected": "Удалить выбранные погружения",
+        "deleteMultipleConfirmation": "Удалить выбранные погружения?",
+        "thisActionCannotBeUndone": "Это действие невозможно отменить.",
+        "deleting": "Удаление...",
+        "divesInProgress": "погружений в процессе",
+        "deletionCompleted": "Удаление завершено",
+        "divesDeleted": "погружений удалено",
+        "deleteError": "Ошибка при удалении",
+        "failedToDelete": "Не удалось удалить"
     },
     "about": {
         "title": "О нас",
