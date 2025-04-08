@@ -45,7 +45,7 @@ export function AuthProvider({ children }) {
         }
       } else {
         setUser(null);
-        localStorage.removeItem("firebaseToken"); // 🔹 Remove token when user logs out
+        localStorage.removeItem("firebaseToken");
       }
     });
 
@@ -54,9 +54,9 @@ export function AuthProvider({ children }) {
 
   const logout = async () => {
     try {
-      await signOut(auth); // 🔹 Firebase sign out
+      await signOut(auth);
       setUser(null);
-      localStorage.removeItem("firebaseToken"); // 🔹 Remove stored token
+      localStorage.removeItem("firebaseToken");
       console.log("Logged out successfully");
     } catch (error) {
       console.error("Error during logout:", error);

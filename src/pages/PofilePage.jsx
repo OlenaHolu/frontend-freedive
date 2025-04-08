@@ -7,6 +7,16 @@ import { signOut } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
+const tabs = [
+  { key: "posts", label: "Posts" },
+  { key: "tagged", label: "Tagged" }
+];
+
+const fakePosts = new Array(9).fill(null).map((_, i) => ({
+  id: i,
+  image: `https://source.unsplash.com/300x300/?freedive,sea,${i}`
+}));
+
 export default function ProfilePage() {
   const { user, setUser } = useAuth();
   const { t } = useTranslation();
@@ -15,6 +25,7 @@ export default function ProfilePage() {
   const [preview, setPreview] = useState(user?.photo || null);
   const [selectedFile, setSelectedFile] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [activeTab, setActiveTab] = useState("posts");
 
   if (!user) {
     return <p className="text-white text-center mt-8">{t("loading")}</p>;
@@ -131,56 +142,116 @@ export default function ProfilePage() {
   };
 
   return (
-    <div className="max-w-3xl mx-auto px-6 py-10 bg-white rounded-3xl shadow-xl text-gray-900">
-      <h1 className="text-4xl font-extrabold text-center mb-10">{t("profile.title")}</h1>
-  
+    <div className="max-w-3xl mx-auto px-4 py-10 text-black">
+      {/* Header */}
       {/* Avatar + Upload */}
-<div className="flex flex-col items-center justify-center gap-4 mb-10">
-  <div className="relative group cursor-pointer">
-    <img
-      src={preview || "/default-avatar.png"}
-      alt={t("profile.avatar")}
-      className="w-32 h-32 rounded-full border-4 border-blue-500 shadow object-cover transition duration-300 group-hover:brightness-75"
-      referrerPolicy="no-referrer"
-    />
-    <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition">
-      <span className="bg-black bg-opacity-50 text-white text-sm px-3 py-1 rounded-full">
-        {t("profile.change_photo")}
-      </span>
-    </div>
-    {/* Hidden input */}
-    <input
-      type="file"
-      accept="image/*"
-      onChange={handleFileChange}
-      aria-label={t("profile.change_photo")}
-      className="absolute inset-0 opacity-0 cursor-pointer"
-    />
-  </div>
+      <div className="flex flex-col items-center gap-4">
+        <div className="relative group cursor-pointer">
+          <img
+            src={preview || "/default-avatar.png"}
+            alt={t("profile.avatar")}
+            className="w-32 h-32 rounded-full border-4 border-blue-500 shadow object-cover transition duration-300 group-hover:brightness-75"
+            referrerPolicy="no-referrer"
+          />
+          <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition">
+            <span className="bg-black bg-opacity-50 text-white text-sm px-3 py-1 rounded-full">
+              {t("profile.change_photo")}
+            </span>
+          </div>
+          {/* Hidden input */}
+          <input
+            type="file"
+            accept="image/*"
+            onChange={handleFileChange}
+            aria-label={t("profile.change_photo")}
+            className="absolute inset-0 opacity-0 cursor-pointer"
+          />
+        </div>
 
-  {selectedFile && (
-    <button
-      onClick={handleUpload}
-      disabled={loading}
-      className="bg-blue-600 text-white py-2 px-5 rounded-md shadow hover:bg-blue-700 transition disabled:opacity-50 disabled:cursor-not-allowed"
-    >
-      {loading ? t("profile.uploading") : t("profile.update_button")}
-    </button>
-  )}
-</div>
+        {selectedFile && (
+          <button
+            onClick={handleUpload}
+            disabled={loading}
+            className="bg-blue-600 text-white py-2 px-5 rounded-md shadow hover:bg-blue-700 transition disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            {loading ? t("profile.uploading") : t("profile.update_button")}
+          </button>
+        )}
 
-  
-      {/* Info */}
-      <div className="mb-10 space-y-2 text-base text-gray-800">
-        <p><strong>{t("profile.name")}:</strong> {user.name}</p>
-        <p><strong>{t("profile.email")}:</strong> {user.email}</p>
+
+        <h1 className="text-xl font-semibold">{user.name}</h1>
+
+        <div className="flex gap-6 text-sm text-gray-600">
+          <div><strong>0</strong> {t("posts")}</div>
+          <div><strong>0</strong> {t("followers")}</div>
+          <div><strong>0</strong> {t("following")}</div>
+        </div>
+
+        <div className="flex gap-2 mt-2">
+          <button 
+            className="bg-gray-200 text-sm px-4 py-1 rounded-md font-medium">
+            {t("profile.edit")}
+          </button>
+        </div>
       </div>
-  
+
+      {/* Highlights */}
+      <div className="mt-10 flex justify-center gap-4">
+        <div className="flex flex-col items-center text-sm">
+          <div className="w-16 h-16 rounded-full border flex items-center justify-center bg-white shadow-inner text-3xl text-gray-400">
+            +
+          </div>
+          <span className="mt-1">New</span>
+        </div>
+      </div>
+
+      {/* Tabs */}
+      <div className="mt-10 border-t border-gray-300">
+        <div className="flex justify-around text-sm font-medium text-gray-500">
+          {tabs.map((tab) => (
+            <button
+              key={tab.key}
+              onClick={() => setActiveTab(tab.key)}
+              className={`py-3 w-full ${
+                activeTab === tab.key
+                  ? "border-t-2 border-black text-black"
+                  : "hover:text-black"
+              }`}
+            >
+              {tab.label}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Content */}
+      <div className="mt-6">
+        {activeTab === "posts" && (
+          <div className="grid grid-cols-3 gap-1">
+            {fakePosts.map((post) => (
+              <div key={post.id} className="aspect-square bg-gray-200">
+                <img
+                  src={post.image}
+                  alt={`Post ${post.id}`}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            ))}
+          </div>
+        )}
+
+        {activeTab === "tagged" && (
+          <div className="text-center text-sm text-gray-500 py-10 italic">
+            {t("profile.no_tagged")}
+          </div>
+        )}
+      </div>
+
       {/* Ajustes y eliminación */}
       <div className="pt-6 border-t border-gray-200">
         <h2 className="text-xl font-semibold mb-2">{t("profile.settings")}</h2>
         <p className="text-sm text-gray-500 mb-6">{t("profile.comingSoon")} ⚙️</p>
-  
+
         <div className="flex justify-end">
           <button
             onClick={handleDeleteProfile}
