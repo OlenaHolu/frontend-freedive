@@ -43,11 +43,11 @@ export default function useDives(user, period, searchQuery, currentPage, divesPe
     } finally {
       setLoadingDives(false);
     }
-  }, [user]);
+  }, []);
 
   useEffect(() => {
-    fetchDives();
-  }, [fetchDives]);
+    if (user) fetchDives();
+  }, [user, period, currentPage, searchQuery, fetchDives]);
 
   return {
     dives,

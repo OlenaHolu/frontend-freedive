@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
@@ -31,10 +31,6 @@ export default function DiveListPage() {
         refetch: fetchDives,
     } = useDives(user, period, searchQuery, currentPage, divesPerPage);
 
-    useEffect(() => {
-        if (user) fetchDives();
-    }, [user, period, currentPage, searchQuery]);
-
     const handleSearch = (query) => {
         setSearchQuery(query);
         setCurrentPage(1);
@@ -55,64 +51,9 @@ export default function DiveListPage() {
         }
     };
 
-    const handleDelete = async (diveId) => {
-
+    const confirmAndDelete = async ({ ids, isMultiple }) => {
         const confirmed = await Swal.fire({
-            title: t("divesList.deleteConfirmation"),
-            text: t("divesList.thisActionCannotBeUndone"),
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonText: t("confirm"),
-            cancelButtonText: t("cancel"),
-        });
-
-        if (!confirmed.isConfirmed) return;
-
-            try {
-                Swal.fire({
-                    title: t("divesList.deleting"),
-                    allowOutsideClick: false,
-                    allowEscapeKey: false,
-                    showConfirmButton: false,
-                    didOpen: () => {
-                        Swal.showLoading();
-                    },
-                });
-
-                await deleteDive(diveId);
-
-                Swal.fire({
-                    icon: "success",
-                    title: t("divesList.deletionCompleted"),
-                    text: `${selectedDives.length} ${t("divesList.divesDeleted")}`,
-                    timer: 2000,
-                    showConfirmButton: false,
-                });
-
-                fetchDives();
-            } catch (error) {
-                console.error("Error deleting dive:", error);
-                Swal.fire({
-                icon: "error",
-                title: t("divesList.deleteError"),
-                text: t("divesList.failedToDelete"),
-            });
-            }
-        
-    };
-    if (loading || !user) {
-        return (
-            <div className="text-center text-gray-500 text-lg py-10">
-                {t("loading")}
-            </div>
-        );
-    }
-
-    const handleDeleteMultiple = async () => {
-        if (selectedDives.length === 0) return;
-
-        const confirmed = await Swal.fire({
-            title: t("divesList.deleteMultipleConfirmation"),
+            title: isMultiple ? t("divesList.deleteMultipleConfirmation") : t("divesList.deleteConfirmation"),
             text: t("divesList.thisActionCannotBeUndone"),
             icon: "warning",
             showCancelButton: true,
@@ -128,26 +69,28 @@ export default function DiveListPage() {
                 allowOutsideClick: false,
                 allowEscapeKey: false,
                 showConfirmButton: false,
-                didOpen: () => {
-                    Swal.showLoading();
-                },
+                didOpen: () => Swal.showLoading(),
             });
 
-            await deleteManyDives(selectedDives);
+            if (isMultiple) {
+                await deleteManyDives(ids);
+            } else {
+                await deleteDive(ids[0]);
+            }
 
-            // Mostrar mensaje de éxito
             Swal.fire({
                 icon: "success",
                 title: t("divesList.deletionCompleted"),
-                text: `${selectedDives.length} ${t("divesList.divesDeleted")}`,
+                text: `${ids.length} ${t("divesList.divesDeleted")}`,
                 timer: 2000,
                 showConfirmButton: false,
             });
 
-            setSelectedDives([]);
+            if (isMultiple) setSelectedDives([]);
+
             fetchDives();
         } catch (err) {
-            console.error("Bulk delete failed:", err);
+            console.error("Delete error:", err);
             Swal.fire({
                 icon: "error",
                 title: t("divesList.deleteError"),
@@ -155,6 +98,18 @@ export default function DiveListPage() {
             });
         }
     };
+
+    const handleDelete = (id) => confirmAndDelete({ ids: [id], isMultiple: false });
+    const handleDeleteMultiple = () => confirmAndDelete({ ids: selectedDives, isMultiple: true });
+
+
+    if (loading || !user) {
+        return (
+            <div className="text-center text-gray-500 text-lg py-10">
+                {t("loading")}
+            </div>
+        );
+    }
 
     return (
         <div className="max-w-5xl mx-auto px-4 py-6">
@@ -218,7 +173,7 @@ export default function DiveListPage() {
                         onPageChange={(page) => !loadingDives && setCurrentPage(page)}
                     />
 
-                    
+
                 </>
             )}
         </div>
