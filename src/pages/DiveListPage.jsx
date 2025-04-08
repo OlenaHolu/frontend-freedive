@@ -56,15 +56,49 @@ export default function DiveListPage() {
     };
 
     const handleDelete = async (diveId) => {
-        if (window.confirm(t("divesList.deleteConfirmation"))) {
+
+        const confirmed = await Swal.fire({
+            title: t("divesList.deleteConfirmation"),
+            text: t("divesList.thisActionCannotBeUndone"),
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: t("confirm"),
+            cancelButtonText: t("cancel"),
+        });
+
+        if (!confirmed.isConfirmed) return;
+
             try {
+                Swal.fire({
+                    title: t("divesList.deleting"),
+                    allowOutsideClick: false,
+                    allowEscapeKey: false,
+                    showConfirmButton: false,
+                    didOpen: () => {
+                        Swal.showLoading();
+                    },
+                });
+
                 await deleteDive(diveId);
+
+                Swal.fire({
+                    icon: "success",
+                    title: t("divesList.deletionCompleted"),
+                    text: `${selectedDives.length} ${t("divesList.divesDeleted")}`,
+                    timer: 2000,
+                    showConfirmButton: false,
+                });
+
                 fetchDives();
             } catch (error) {
                 console.error("Error deleting dive:", error);
-                alert(t("divesList.deleteError"));
+                Swal.fire({
+                icon: "error",
+                title: t("divesList.deleteError"),
+                text: t("divesList.failedToDelete"),
+            });
             }
-        }
+        
     };
     if (loading || !user) {
         return (
@@ -89,7 +123,6 @@ export default function DiveListPage() {
         if (!confirmed.isConfirmed) return;
 
         try {
-            // Mostrar spinner de carga
             Swal.fire({
                 title: t("divesList.deleting"),
                 allowOutsideClick: false,
@@ -100,7 +133,6 @@ export default function DiveListPage() {
                 },
             });
 
-            // Llamada única al backend
             await deleteManyDives(selectedDives);
 
             // Mostrar mensaje de éxito

@@ -168,8 +168,6 @@ export default function DiveDetailsPage() {
             <InfoRow icon={<Waves size={16} />} label={t("dive.details.maxDepth")} value={`${dive.MaxDepth} m`} />
             <InfoRow icon={<Compass size={16} />} label={t("dive.details.avgDepth")} value={`${dive.AvgDepth ?? "—"} m`} />
             <InfoRow icon={<Clock size={16} />} label={t("dive.details.sampleInterval")} value={`${dive.SampleInterval ?? "—"} s`} />
-            <InfoRow icon={<Cpu size={16} />} label={t("dive.details.mode")} value={dive.Mode ?? "—"} />
-            <InfoRow icon={<FileText size={16} />} label={t("dive.details.source")} value={dive.Source || "—"} />
             <InfoRow icon={<TrendingDown size={16} />} label={t("dive.details.previousMax")} value={`${dive.PreviousMaxDepth ?? "—"} m`} />
             <InfoRow icon={<Clock size={16} />} label={t("dive.details.diveTime")} value={`${dive.DiveTime ?? "—"} s`} />
             <InfoRow icon={<Weight size={16} />} label={t("dive.details.weight")} value={`${dive.Weight ?? "—"} kg`} />
@@ -180,7 +178,9 @@ export default function DiveDetailsPage() {
 
         {activeTab === "temperatures" && (
           <TableSection>
-            <InfoRow icon={<Thermometer size={16} />} label={t("dive.details.temps")} value={`${dive.StartTemperature}° ➝ ${dive.BottomTemperature}° ➝ ${dive.EndTemperature}°`} />
+            <InfoRow icon={<Thermometer size={16} />} label={t("dive.details.startTemp")} value={`${dive.StartTemperature}°`} />
+            <InfoRow icon={<Thermometer size={16} />} label={t("dive.details.bottomTemp")} value={`${dive.BottomTemperature}°`} />
+            <InfoRow icon={<Thermometer size={16} />} label={t("dive.details.endTemp")} value={`${dive.EndTemperature}°`} />
           </TableSection>
         )}
 
@@ -198,6 +198,8 @@ export default function DiveDetailsPage() {
 
         {activeTab === "device" && (
           <TableSection>
+            <InfoRow icon={<FileText size={16} />} label={t("dive.details.source")} value={dive.Source || "—"} />
+            <InfoRow icon={<Cpu size={16} />} label={t("dive.details.mode")} value={dive.Mode ?? "—"} />
             <InfoRow icon={<Settings size={16} />} label={t("dive.details.personalMode")} value={dive.PersonalMode ?? "—"} />
             <InfoRow icon={<Cpu size={16} />} label={t("dive.details.serial")} value={dive.SerialNumber || "—"} />
             <InfoRow icon={<BatteryFull size={16} />} label={t("dive.details.battery")} value={`${dive.Battery ?? "—"} %`} />
