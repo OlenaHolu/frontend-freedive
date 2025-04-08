@@ -131,63 +131,60 @@ export default function ProfilePage() {
   };
 
   return (
-    <div className="max-w-2xl mx-auto px-6 py-10 bg-white rounded-2xl shadow-lg text-gray-900">
-      <h1 className="text-4xl font-bold mb-8 text-center">{t("profile.title")}</h1>
-
+    <div className="max-w-3xl mx-auto px-6 py-10 bg-white rounded-3xl shadow-xl text-gray-900">
+      <h1 className="text-4xl font-extrabold text-center mb-10">{t("profile.title")}</h1>
+  
       {/* Avatar + Upload */}
-      <div className="flex flex-col sm:flex-row items-center gap-6 mb-8">
-        <img
-          src={preview || "/default-avatar.png"}
-          alt={t("profile.avatar")}
-          className="w-28 h-28 rounded-full border-4 border-blue-500 shadow-md object-cover transition"
-          referrerPolicy="no-referrer"
-        />
+<div className="flex flex-col items-center justify-center gap-4 mb-10">
+  <div className="relative group cursor-pointer">
+    <img
+      src={preview || "/default-avatar.png"}
+      alt={t("profile.avatar")}
+      className="w-32 h-32 rounded-full border-4 border-blue-500 shadow object-cover transition duration-300 group-hover:brightness-75"
+      referrerPolicy="no-referrer"
+    />
+    <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition">
+      <span className="bg-black bg-opacity-50 text-white text-sm px-3 py-1 rounded-full">
+        {t("profile.change_photo")}
+      </span>
+    </div>
+    {/* Hidden input */}
+    <input
+      type="file"
+      accept="image/*"
+      onChange={handleFileChange}
+      aria-label={t("profile.change_photo")}
+      className="absolute inset-0 opacity-0 cursor-pointer"
+    />
+  </div>
 
-        <div className="flex flex-col gap-3 text-sm w-full sm:w-auto">
-          <label htmlFor="avatarUpload" className="font-medium">
-            {t("profile.change_photo")}
-          </label>
-          <input
-            id="avatarUpload"
-            type="file"
-            accept="image/*"
-            onChange={handleFileChange}
-            aria-label={t("profile.change_photo")}
-            className="text-sm bg-white border border-gray-300 rounded-md px-3 py-1 shadow-sm file:mr-4 file:py-1 file:px-4 file:rounded file:border-0 file:bg-blue-600 file:text-white hover:file:bg-blue-700 transition cursor-pointer"
-          />
+  {selectedFile && (
+    <button
+      onClick={handleUpload}
+      disabled={loading}
+      className="bg-blue-600 text-white py-2 px-5 rounded-md shadow hover:bg-blue-700 transition disabled:opacity-50 disabled:cursor-not-allowed"
+    >
+      {loading ? t("profile.uploading") : t("profile.update_button")}
+    </button>
+  )}
+</div>
 
-          <button
-            onClick={handleUpload}
-            disabled={loading || !selectedFile}
-            className={`bg-blue-600 text-white rounded-md py-1.5 px-4 shadow-md hover:bg-blue-700 transition ${
-              (loading || !selectedFile) && "opacity-50 cursor-not-allowed"
-            }`}
-          >
-            {loading ? t("profile.uploading") : t("profile.update_button")}
-          </button>
-        </div>
-      </div>
-
+  
       {/* Info */}
-      <div className="text-base space-y-2 mb-8">
-        <p>
-          <strong>{t("profile.name")}:</strong> {user.name}
-        </p>
-        <p>
-          <strong>{t("profile.email")}:</strong> {user.email}
-        </p>
+      <div className="mb-10 space-y-2 text-base text-gray-800">
+        <p><strong>{t("profile.name")}:</strong> {user.name}</p>
+        <p><strong>{t("profile.email")}:</strong> {user.email}</p>
       </div>
-
-      {/* Settings */}
-      <div className="border-t border-gray-200 pt-6">
+  
+      {/* Ajustes y eliminación */}
+      <div className="pt-6 border-t border-gray-200">
         <h2 className="text-xl font-semibold mb-2">{t("profile.settings")}</h2>
-        <p className="text-sm text-gray-500">{t("profile.comingSoon")} ⚙️</p>
-
-        {/* Delete */}
-        <div className="mt-6">
+        <p className="text-sm text-gray-500 mb-6">{t("profile.comingSoon")} ⚙️</p>
+  
+        <div className="flex justify-end">
           <button
             onClick={handleDeleteProfile}
-            className="bg-red-600 text-white rounded-md py-2 px-4 shadow-md hover:bg-red-700 transition"
+            className="bg-red-600 text-white py-2 px-5 rounded-md shadow hover:bg-red-700 transition"
           >
             {t("profile.delete_button")}
           </button>
@@ -195,4 +192,4 @@ export default function ProfilePage() {
       </div>
     </div>
   );
-}
+}  
