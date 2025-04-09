@@ -50,7 +50,8 @@
         "deleted": "Cuenta eliminada",
         "deleted_message": "Tu cuenta ha sido eliminada correctamente.",
         "delete_error": "Ocurrió un error al eliminar tu cuenta.",
-        "deleting": "Eliminando perfil..."
+        "deleting": "Eliminando perfil...",
+        "edit": "Editar perfil"
     },
     "log": {
         "title": "Registrar una nueva inmersión"

@@ -50,7 +50,8 @@
     "deleted": "Account deleted",
     "deleted_message": "Your account has been successfully deleted.",
     "delete_error": "An error occurred while deleting your account.",
-    "deleting": "Deleting profile..."
+    "deleting": "Deleting profile...",
+    "edit": "Edit Profile"
   },
   "log": {
     "title": "Log a New Dive"

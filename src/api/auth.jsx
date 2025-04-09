@@ -6,7 +6,6 @@ import { supabase } from "../lib/supabaseClient";
 
 const BACKEND_URL = import.meta.env.VITE_APP_BACKEND_URL;
 
-// Registrar usuario en Firebase y Laravel
 export const register = async (email, password, name) => {
   const userCredential = await createUserWithEmailAndPassword(auth, email, password);
   const token = await userCredential.user.getIdToken();

@@ -22,14 +22,15 @@ const Sidebar = ({ mobile }) => {
   if (mobile) {
     return (
       <nav className="fixed bottom-0 left-0 w-full bg-black bg-opacity-95 text-white flex justify-around py-2 z-50 shadow-lg md:hidden">
+        
         <NavLink
-          to="/dashboard/profile"
+          to="/dashboard/list"
           className={({ isActive }) =>
             `${baseClasses} ${isActive ? activeClass : ""} ${hoverClass}`
           }
         >
-          <User size={22} />
-          <span>{t("sidebar.profile")}</span>
+          <ClipboardList size={22} />
+          <span>{t("sidebar.list")}</span>
         </NavLink>
 
         <NavLink
@@ -43,16 +44,6 @@ const Sidebar = ({ mobile }) => {
         </NavLink>
 
         <NavLink
-          to="/dashboard/list"
-          className={({ isActive }) =>
-            `${baseClasses} ${isActive ? activeClass : ""} ${hoverClass}`
-          }
-        >
-          <ClipboardList size={22} />
-          <span>{t("sidebar.list")}</span>
-        </NavLink>
-
-        <NavLink
           to="/dashboard/stats"
           className={({ isActive }) =>
             `${baseClasses} ${isActive ? activeClass : ""} ${hoverClass}`
@@ -61,6 +52,16 @@ const Sidebar = ({ mobile }) => {
           <BarChart2 size={22} />
           <span>{t("sidebar.stats")}</span>
         </NavLink>
+
+        <NavLink
+          to="/dashboard/profile"
+          className={({ isActive }) =>
+            `${baseClasses} ${isActive ? activeClass : ""} ${hoverClass}`
+          }
+        >
+          <User size={22} />
+          <span>{t("sidebar.profile")}</span>
+        </NavLink>
       </nav>
     );
   }
@@ -68,21 +69,21 @@ const Sidebar = ({ mobile }) => {
   return (
     <aside className="w-64 bg-black text-white p-6 hidden md:flex flex-col sticky top-0 h-screen shadow-lg">
       <nav className="space-y-3">
-        <NavLink to="/dashboard/profile" className={linkClass}>
-          <User size={20} />
-          {t("sidebar.profile")}
+        <NavLink to="/dashboard/list" className={linkClass}>
+          <ClipboardList size={20} />
+          {t("sidebar.list")}
         </NavLink>
         <NavLink to="/dashboard/log" className={linkClass}>
           <Plus size={20} />
           {t("sidebar.log")}
         </NavLink>
-        <NavLink to="/dashboard/list" className={linkClass}>
-          <ClipboardList size={20} />
-          {t("sidebar.list")}
-        </NavLink>
         <NavLink to="/dashboard/stats" className={linkClass}>
           <BarChart2 size={20} />
           {t("sidebar.stats")}
+        </NavLink>
+        <NavLink to="/dashboard/profile" className={linkClass}>
+          <User size={20} />
+          {t("sidebar.profile")}
         </NavLink>
       </nav>
     </aside>

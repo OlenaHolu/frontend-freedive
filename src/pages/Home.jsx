@@ -28,7 +28,7 @@ const Home = () => {
       setError(t("invalidEmail"));
       return;
     }
-    navigate("/register");
+    navigate("/signin");
   };
 
   return (

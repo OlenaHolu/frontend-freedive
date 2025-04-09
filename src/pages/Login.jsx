@@ -10,9 +10,8 @@ import { useTranslation } from "react-i18next";
 export default function Login() {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const { user, loading } = useAuth();
+  const { user, loading, email, setEmail } = useAuth();
 
-  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [submitting, setSubmitting] = useState(false);
 
@@ -75,7 +74,7 @@ export default function Login() {
 
         <p className="text-center text-sm mt-4">
           {t("login.no_account")}{" "}
-          <Link to="/register" className="text-blue-600 underline">
+          <Link to="/signin" className="text-blue-600 underline">
             {t("login.register_link")}
           </Link>
         </p>
