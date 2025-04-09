@@ -6,15 +6,15 @@ import { useAuth } from "../context/AuthContext";
 import GoogleLoginButton from '../components/GoogleLoginButton';
 import MainLayout from '../layouts/MainLayout';
 import { t } from 'i18next';
+import { getTranslatedError } from '../utils/getTranslatedError';
 
-export default function Signin() {
+export default function SigninPage() {
   const navigate = useNavigate();
   const { user, loading } = useAuth();
 
   const { email, setEmail } = useAuth();
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
-  const [error, setError] = useState("");
   const [submitting, setSubmitting] = useState(false);
 
   // 🔁 Redirección automática si ya está autenticado
@@ -26,20 +26,16 @@ export default function Signin() {
 
   const handleRegister = async (e) => {
     e.preventDefault();
-    setError('');
     setSubmitting(true);
 
     try {
       await register(email, password, name);
 
     } catch (err) {
-      console.error('❌ Registration error:', err);
-      setError(err.message || t('signIn.error_generic'));
-
       Swal.fire({
         icon: "error",
-        title: t("register.error"),
-        text: err.message || t("signIn.error_generic"),
+        title: t("signIn.error_title"),
+        text: getTranslatedError(t, err),
       });
 
     } finally {
@@ -51,8 +47,6 @@ export default function Signin() {
     <MainLayout backgroundImage="/home-bg.png">
       <div className="w-full max-w-md mx-auto bg-white p-8 rounded-lg shadow-lg text-black">
         <h1 className="text-2xl font-bold mb-4">{t("signIn.title")}</h1>
-        {error && <p style={{ color: 'red' }}>{error}</p>}
-
         <form
           onSubmit={handleRegister}
           className="bg-white p-6 rounded-lg shadow-md w-full max-w-sm"

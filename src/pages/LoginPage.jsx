@@ -6,8 +6,9 @@ import Swal from "sweetalert2";
 import GoogleLoginButton from "../components/GoogleLoginButton";
 import MainLayout from "../layouts/MainLayout";
 import { useTranslation } from "react-i18next";
+import { getTranslatedError } from "../utils/getTranslatedError";
 
-export default function Login() {
+export default function LoginPage() {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const { user, loading, email, setEmail } = useAuth();
@@ -32,8 +33,8 @@ export default function Login() {
       Swal.fire({
         icon: "error",
         title: t("login.error_title"),
-        text: err.message || t("login.error_generic"),
-      });
+        text: getTranslatedError(t, err)
+      });      
     } finally {
       setSubmitting(false);
     }

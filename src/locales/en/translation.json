@@ -70,8 +70,7 @@
     "login_link": "Log in",
     "success": "Success!",
     "welcome": "Welcome to Freedive Analyzer 🎉",
-    "error": "Oops...",
-    "error_generic": "Something went wrong during registration"
+    "error_title": "Registration failed"
   },
   "login": {
     "title": "Log in",
@@ -107,7 +106,6 @@
     "depth": "Depth",
     "viewChart": "View Chart",
     "maxDepthLabel": "Max",
-
     "details": {
       "title": "Dive Details",
       "general": "General",
@@ -142,7 +140,6 @@
       "weight": "Weight",
       "diveNumberInSerie": "Dive Number in Serie"
     },
-    
     "import": {
       "title": "Import Dives",
       "description.title": "Import your dive logs",
@@ -251,5 +248,20 @@
     "law_title": "9. Governing Law and Jurisdiction",
     "law_text": "These terms are governed by Spanish law. In case of dispute, the parties submit to the courts of {{city}}.",
     "contact_text": "If you have any questions about these terms, contact us at:"
+  },
+  "errors": {
+    "1000": "Something went wrong on our end. Please try again later.",
+    "1001": "An unexpected error occurred.",
+    "1101": "Please log in to continue.",
+    "1102": "Your session has expired. Please log in again.",
+    "1103": "You don't have permission to do this.",
+    "1401": "We couldn’t verify your account. Please try again.",
+    "1402": "There was a problem signing in with Google. Please try again.",
+    "1403": "Please enter a valid email address.",
+    "1404": "Incorrect email or password. Please try again.",
+    "1405": "This email is already registered. Try logging in instead.",
+    "1406": "We couldn't delete your account right now. Please try again later.",
+    "1501": "No account found with that email.",
+    "1502": "Some required information is missing."
   }
 }

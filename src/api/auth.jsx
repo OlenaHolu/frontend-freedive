@@ -3,63 +3,104 @@ import { auth, getFirebaseToken } from "../lib/firebaseClient";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut } from "firebase/auth";
 import { supabase } from "../lib/supabaseClient";
+import { mapFirebaseAuthError } from "../utils/firebaseErrorMapper";
 
 const BACKEND_URL = import.meta.env.VITE_APP_BACKEND_URL;
 
 export const register = async (email, password, name) => {
+  try{
   const userCredential = await createUserWithEmailAndPassword(auth, email, password);
   const token = await userCredential.user.getIdToken();
 
-  return axios.post(`${BACKEND_URL}/api/register`, {
+  const res = await axios.post(`${BACKEND_URL}/api/register`, {
     firebase_token: token,
     name: name,
   });
+
+  return res.data;
+  } catch (error) {
+    if (error.code?.startsWith("auth/")) {
+      const mappedError = mapFirebaseAuthError(error);
+      throw { response: { data: mappedError } };
+    }
+
+    throw {
+      response: {
+        data: {
+          errorCode: 1000,
+          error: "Something went wrong. Please try again.",
+        },
+      },
+    };
+  }
 };
 
 export const loginWithGoogle = async () => {
   try {
     const provider = new GoogleAuthProvider();
     const result = await signInWithPopup(auth, provider);
-
-    // 🔹 Obtener usuario autenticado
     const user = result.user;
-    if (!user) throw new Error("No se pudo autenticar con Google");
 
-    // 🔹 Obtener token de Firebase
+    if (!user){
+      throw {
+        response: {
+          data: {
+            errorCode: 1402,
+            error: "Google login failed. Please try again.",
+          },
+        },
+      }
+    }
+
     const token = await user.getIdToken();
 
-    // 🔹 Enviar el token al backend
     const res = await axios.post(`${BACKEND_URL}/api/login`, { firebase_token: token });
 
     return res.data;
   } catch (error) {
-    console.error("Error en login con Google:", error);
-    throw error;
+    if (error.code?.startsWith("auth/")) {
+      const mappedError = mapFirebaseAuthError(error);
+      throw { response: { data: mappedError } };
+    }
+
+    throw {
+      response: {
+        data: {
+          errorCode: 1402,
+          error: "Google login failed. Please try again.",
+        },
+      },
+    };
   }
 };
 
 export const login = async (email, password) => {
   try {
-    // 🔹 Iniciar sesión con Firebase
     const userCredential = await signInWithEmailAndPassword(auth, email, password);
-    const user = userCredential.user;
+    const token = await userCredential.user.getIdToken();
 
-    if (!user) throw new Error("Usuario no autenticado en Firebase");
-
-    // 🔹 Obtener el token de Firebase
-    const token = await user.getIdToken();
-
-    // 🔹 Enviar el token al backend
-    const res = await axios.post(`${BACKEND_URL}/api/login`, { firebase_token: token });
+    const res = await axios.post(`${BACKEND_URL}/api/login`, { 
+      firebase_token: token,
+     });
 
     return res.data;
   } catch (error) {
-    console.error("Error en login:", error);
-    throw error;
+    if (error.code?.startsWith("auth/")) {
+      const mappedError = mapFirebaseAuthError(error);
+      throw { response: { data: mappedError } };
+    }
+
+    throw {
+      response: {
+        data: {
+          errorCode: 1000,
+          error: "Something went wrong. Please try again.",
+        },
+      },
+    };
   }
 };
 
-// Obtener usuario autenticado desde Laravel
 export const getUser = async (token) => {
   if (!token) return null; // 🔹 Evita llamadas innecesarias si no hay token
 

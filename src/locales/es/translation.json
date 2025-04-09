@@ -70,8 +70,7 @@
         "login_link": "Iniciar sesión",
         "success": "¡Éxito!",
         "welcome": "Bienvenido a Freedive Analyzer 🎉",
-        "error": "Ups...",
-        "error_generic": "Algo salió mal durante el registro"
+        "error_title": "Error al crear cuenta"
     },
     "login": {
         "title": "Iniciar sesión",
@@ -246,5 +245,20 @@
         "law_title": "9. Legislación aplicable y jurisdicción",
         "law_text": "Estos Términos se rigen por la legislación española. En caso de conflicto, las partes se someten a los tribunales de {{city}}.",
         "contact_text": "Si tienes dudas sobre estos términos, contáctanos a:"
+    },
+    "errors": {
+        "1000": "Algo salió mal de nuestro lado. Por favor, intenta nuevamente más tarde.",
+        "1001": "Ocurrió un error inesperado.",
+        "1101": "Por favor, inicia sesión para continuar.",
+        "1102": "Tu sesión ha expirado. Inicia sesión nuevamente.",
+        "1103": "No tienes permiso para realizar esta acción.",
+        "1401": "No pudimos verificar tu cuenta. Intenta nuevamente.",
+        "1402": "Ocurrió un problema al iniciar sesión con Google. Intenta de nuevo.",
+        "1403": "Por favor, ingresa una dirección de correo válida.",
+        "1404": "Email o contraseña incorrectos. Intenta nuevamente.",
+        "1405": "Este correo ya está registrado. Intenta iniciar sesión.",
+        "1406": "No pudimos eliminar tu cuenta en este momento. Por favor, intenta nuevamente más tarde.",
+        "1501": "No se encontró una cuenta con ese correo electrónico.",
+        "1502": "Faltan algunos datos obligatorios."
     }
 }
