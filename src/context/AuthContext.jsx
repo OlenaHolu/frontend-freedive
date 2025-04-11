@@ -1,6 +1,4 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { auth } from "../lib/firebaseClient";
-import { onAuthStateChanged, signOut } from "firebase/auth";
 import { getUser } from "../api/auth";
 
 const AuthContext = createContext();
@@ -10,40 +8,42 @@ export function AuthProvider({ children }) {
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, async (firebaseUser) => {
-      if (firebaseUser) {
-        try {
-          const token = await firebaseUser.getIdToken();
-          localStorage.setItem("firebaseToken", token);
-          const userData = await getUser(token);
-          setUser(userData);
-        } catch (error) {
-          console.error("Error fetching user:", error);
-          setUser(null);
-        }
-      } else {
-        setUser(null);
-        localStorage.removeItem("firebaseToken");
-      }
+  const checkAuth = async () => {
+    const token = localStorage.getItem("token");
+  
+    if (!token) {
+      setUser(null);
       setLoading(false);
-    });
+      return;
+    }
+  
+    try {
+      const user = await getUser();
+  
+      if (user) {
+        setUser(user);
+      } else {
+        console.warn("No se pudo obtener el usuario, pero hay token");
+      }
+    } catch (err) {
+      console.error("Error getting user:", err);
+    } finally {
+      setLoading(false);
+    }
+  };
+  
 
-    return () => unsubscribe();
+  useEffect(() => {
+    checkAuth();
   }, []);
 
-  const logout = async () => {
-    try {
-      await signOut(auth);
-      setUser(null);
-      localStorage.removeItem("firebaseToken");
-    } catch (error) {
-      console.error("Logout error:", error);
-    }
+  const logout = () => {
+    localStorage.removeItem("token");
+    setUser(null);
   };
 
   return (
-    <AuthContext.Provider value={{ user, setUser, loading, logout, email, setEmail }}>
+    <AuthContext.Provider value={{ user, setUser, email, setEmail, loading, logout }}>
       {children}
     </AuthContext.Provider>
   );

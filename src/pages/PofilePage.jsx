@@ -6,6 +6,8 @@ import { auth } from "../lib/firebaseClient";
 import { signOut } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import EditProfileForm from "../components/EditProfileForm";
+
 
 const tabs = [
   { key: "posts", label: "Posts" },
@@ -26,6 +28,7 @@ export default function ProfilePage() {
   const [selectedFile, setSelectedFile] = useState(null);
   const [loading, setLoading] = useState(false);
   const [activeTab, setActiveTab] = useState("posts");
+  const [isEditing, setIsEditing] = useState(false);
 
   if (!user) {
     return <p className="text-white text-center mt-8">{t("loading")}</p>;
@@ -94,6 +97,50 @@ export default function ProfilePage() {
       setLoading(false);
     }
   };
+
+  const handleSaveProfile = async () => {
+    try {
+      setLoading(true);
+      Swal.fire({
+        title: t("profile.saving"),
+        allowOutsideClick: false,
+        didOpen: () => Swal.showLoading(),
+      });
+
+      const token = await getFirebaseToken();
+      const res = await fetch(`${BACKEND_URL}/api/user/update`, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ name: newName }),
+      });
+
+      if (!res.ok) throw new Error("Failed to update");
+
+      const data = await res.json();
+      setUser(data.user);
+      setIsEditing(false);
+
+      Swal.fire({
+        icon: "success",
+        title: t("profile.updated"),
+        timer: 1500,
+        showConfirmButton: false,
+      });
+    } catch (err) {
+      console.error("Error updating profile:", err);
+      Swal.fire({
+        icon: "error",
+        title: t("profile.error"),
+        text: t("profile.update_error"),
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
+
 
   const handleDeleteProfile = async () => {
     const confirmed = await Swal.fire({
@@ -188,10 +235,17 @@ export default function ProfilePage() {
         </div>
 
         <div className="flex gap-2 mt-2">
-          <button 
-            className="bg-gray-200 text-sm px-4 py-1 rounded-md font-medium">
-            {t("profile.edit")}
-          </button>
+          {isEditing ? (
+            <EditProfileForm onClose={() => setIsEditing(false)} />
+          ) : (
+            <button
+              onClick={() => setIsEditing(true)}
+              className="bg-gray-200 text-sm px-4 py-1 rounded-md font-medium"
+            >
+              {t("profile.edit")}
+            </button>
+          )}
+
         </div>
       </div>
 
@@ -212,11 +266,10 @@ export default function ProfilePage() {
             <button
               key={tab.key}
               onClick={() => setActiveTab(tab.key)}
-              className={`py-3 w-full ${
-                activeTab === tab.key
-                  ? "border-t-2 border-black text-black"
-                  : "hover:text-black"
-              }`}
+              className={`py-3 w-full ${activeTab === tab.key
+                ? "border-t-2 border-black text-black"
+                : "hover:text-black"
+                }`}
             >
               {tab.label}
             </button>

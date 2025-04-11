@@ -1,7 +1,7 @@
 import Swal from "sweetalert2";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { loginWithGoogle } from "../api/auth";
+//import { loginWithGoogle } from "../api/auth";
 
 export default function GoogleLoginButton() {
   const [submitting, setSubmitting] = useState(false);

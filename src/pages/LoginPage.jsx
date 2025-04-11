@@ -11,7 +11,7 @@ import { getTranslatedError } from "../utils/getTranslatedError";
 export default function LoginPage() {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const { user, loading, email, setEmail } = useAuth();
+  const { user, loading, email, setEmail, setUser } = useAuth();
 
   const [password, setPassword] = useState("");
   const [submitting, setSubmitting] = useState(false);
@@ -27,14 +27,20 @@ export default function LoginPage() {
     setSubmitting(true);
 
     try {
-      await login(email, password);
+      const loggedInUser = await login(email, password);
+      setUser(loggedInUser);
+      Swal.fire({
+        icon: "success",
+        title: t("login.success_title"),
+        text: t("login.success_message"),
+      });
       navigate("/dashboard");
     } catch (err) {
       Swal.fire({
         icon: "error",
         title: t("login.error_title"),
         text: getTranslatedError(t, err)
-      });      
+      });
     } finally {
       setSubmitting(false);
     }
@@ -50,7 +56,7 @@ export default function LoginPage() {
         <form onSubmit={handleLogin} className="space-y-4">
           <input
             type="email"
-            placeholder={t("login.email")}
+            placeholder={t("profile.email_placeholder")}
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
@@ -58,7 +64,7 @@ export default function LoginPage() {
           />
           <input
             type="password"
-            placeholder={t("login.password")}
+            placeholder={t("profile.password_placeholder")}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
@@ -75,7 +81,7 @@ export default function LoginPage() {
 
         <p className="text-center text-sm mt-4">
           {t("login.no_account")}{" "}
-          <Link to="/signin" className="text-blue-600 underline">
+          <Link to="/register" className="text-blue-600 underline">
             {t("login.register_link")}
           </Link>
         </p>

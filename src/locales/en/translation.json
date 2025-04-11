@@ -1,20 +1,23 @@
 {
   "app_title": "Freedive App – Your Dive Logbook",
   "app_description": "Log your freediving sessions, track stats, and improve your performance with Freedive App.",
-  "back": "Back",
-  "home": "Home",
-  "leaderboard": "Leaderboard",
-  "community": "Community",
   "logout": "Logout",
   "discover": "Discover the depths!",
-  "enterEmail": "Enter your email",
-  "invalidEmail": "Please enter a valid email.",
-  "loading": "Loading...",
+  
   "loadingError": "Error loading data.",
+
+  "loading": "Loading...",
+  "back": "Back",
+  "home": "Home",
   "search": "Search...",
   "close": "Close",
   "cancel": "Cancel",
   "confirm": "Confirm",
+  "save": "Save",
+  "saving": "Saving ...",
+  "error": "Error",
+  "success": "Success!",
+
   "network": {
     "offline": "You are offline. Please check your internet connection.",
     "restored": "Connection restored. You are back online."
@@ -39,10 +42,26 @@
     "updated": "Avatar updated!",
     "error": "Upload failed",
     "upload_error": "There was a problem uploading your avatar.",
+    
+    "edit": "Edit Profile",
     "name": "Name",
+    "name_placeholder": "Enter your name",
     "email": "Email",
-    "settings": "Settings",
-    "comingSoon": "More settings coming soon",
+    "email_placeholder": "Enter your email",
+    "invalid_email": "Please enter a valid email.",
+
+    "password": "Password",
+    "password_placeholder": "Enter your password",
+    "confirm_password": "Confirm Password",
+    "confirm_password_placeholder": "Re-enter password",
+    "new_password": "New Password",
+    "new_password_placeholder": "Enter new password",
+    "confirm_new_password_placeholder": "Re-enter new password",
+    "password_mismatch": "Passwords do not match",
+
+    "updated_message": "Profile updated successfully.",
+    "update_error": "Error updating profile.",
+
     "delete_button": "Delete profile",
     "confirm_delete_title": "Are you sure?",
     "confirm_delete_text": "This action will permanently delete your account.",
@@ -50,8 +69,7 @@
     "deleted": "Account deleted",
     "deleted_message": "Your account has been successfully deleted.",
     "delete_error": "An error occurred while deleting your account.",
-    "deleting": "Deleting profile...",
-    "edit": "Edit Profile"
+    "deleting": "Deleting profile..."
   },
   "log": {
     "title": "Log a New Dive"
@@ -59,29 +77,27 @@
   "stats": {
     "title": "Dive Depth Over Time"
   },
-  "signIn": {
+  "register": {
     "title": "Create Account",
-    "name": "Name",
-    "email": "Email",
-    "password": "Password",
     "button": "Register",
     "loading": "Registering...",
     "already_account": "Already have an account?",
     "login_link": "Log in",
-    "success": "Success!",
     "welcome": "Welcome to Freedive Analyzer 🎉",
-    "error_title": "Registration failed"
+    "error_title": "Registration failed",
+    "success_title": "Registration successful!",
+    "success_message": "You are now logged in."
   },
   "login": {
     "title": "Log in",
-    "email": "Email address",
-    "password": "Password",
     "button": "Login",
     "loading": "Logging in...",
     "no_account": "Don't have an account?",
     "register_link": "Register here",
     "error_title": "Login failed",
-    "error_generic": "Invalid credentials"
+    "error_generic": "Invalid credentials",
+    "success_title": "Welcome back!",
+    "success_message": "You are now logged in."
   },
   "dive": {
     "loading": "Loading dive data...",
@@ -215,8 +231,6 @@
     "title": "Contact",
     "description": "Have a question, suggestion, or need support? Fill out the form or write us directly.",
     "form": {
-      "name": "Name",
-      "email": "Email",
       "message": "Message",
       "submit": "Send Message"
     },
@@ -258,10 +272,11 @@
     "1401": "We couldn’t verify your account. Please try again.",
     "1402": "There was a problem signing in with Google. Please try again.",
     "1403": "Please enter a valid email address.",
-    "1404": "Incorrect email or password. Please try again.",
+    
     "1405": "This email is already registered. Try logging in instead.",
     "1406": "We couldn't delete your account right now. Please try again later.",
     "1501": "No account found with that email.",
-    "1502": "Some required information is missing."
+    "1502": "Some required information is missing.",
+    "1503": "Incorrect email or password. Please try again."
   }
 }

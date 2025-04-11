@@ -23,18 +23,18 @@ const Home = () => {
 
   const validateEmail = (email) => /\S+@\S+\.\S+/.test(email);
 
-  const handleSignIn = () => {
+  const handleRegister = () => {
     if (!validateEmail(email)) {
-      setError(t("invalidEmail"));
+      setError(t("profile.invalid_email"));
       return;
     }
-    navigate("/signin");
+    navigate("/register");
   };
 
   return (
     <MainLayout backgroundImage="/home-bg.png">
        <Helmet>
-        <title>{t("seo.title")}</title>
+        <title>{t("seo.title")}</title> 
         <meta name="description" content={t("app_description")} />
         <meta property="og:title" content={t("app_title")} />
         <meta property="og:description" content={t("app_description")} />
@@ -49,7 +49,7 @@ const Home = () => {
       <div className="mt-6 w-full max-w-xs">
         <input
           type="email"
-          placeholder={t("enterEmail")}
+          placeholder={t("profile.email_placeholder")}
           value={email}
           onChange={(e) => {
             setEmail(e.target.value);
@@ -63,9 +63,9 @@ const Home = () => {
       <div className="mt-4 flex flex-col md:flex-row space-y-3 md:space-y-0 md:space-x-4 w-full max-w-xs">
         <button
           className="bg-white text-black px-6 py-3 rounded-lg font-bold w-full"
-          onClick={handleSignIn}
+          onClick={handleRegister}
         >
-          {t("signIn.title")}
+          {t("register.title")}
         </button>
         <button
           className="bg-blue-500 text-white px-6 py-3 rounded-lg font-bold w-full"

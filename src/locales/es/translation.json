@@ -1,20 +1,23 @@
 {
     "app_title": "Freedive App – Registro de Inmersiones",
     "app_description": "Registra tus inmersiones de apnea, consulta estadísticas y mejora tu rendimiento con Freedive App.",
-    "back": "Atrás",
-    "home": "Inicio",
-    "leaderboard": "Clasificación",
-    "community": "Comunidad",
     "logout": "Cerrar Sesión",
     "discover": "¡Descubre las profundidades!",
-    "enterEmail": "Introduce tu correo",
-    "invalidEmail": "Por favor, introduce un correo válido.",
-    "loading": "Cargando...",
+    
     "loadingError": "Error al cargar los datos.",
+    
+    "loading": "Cargando...",
+    "back": "Atrás",
+    "home": "Inicio",
+    "search": "Buscar",
     "close": "Cerrar",
     "cancel": "Cancelar",
     "confirm": "Confirmar",
-    "search": "Buscar",
+    "save": "Guardar",
+    "saving": "Guardando...",
+    "error": "Error",
+    "success": "¡Éxito!",
+    
     "network": {
         "offline": "Estás desconectado. Por favor, revisa tu conexión a internet.",
         "restored": "Conexión restaurada. Estás de nuevo en línea."
@@ -39,10 +42,22 @@
         "updated": "Avatar actualizado",
         "error": "Error al subir",
         "upload_error": "Hubo un problema al subir el avatar.",
+        
+        "edit":"Editar perfil",
         "name": "Nombre",
+        "name_placeholder": "Introduce tu nombre",
         "email": "Correo electrónico",
-        "settings": "Configuraciones",
-        "comingSoon": "Más configuraciones próximamente",
+        "email_placeholder": "Introduce tu correo electrónico",
+        "invalid_email": "Por favor, introduce un correo electrónico válido.",
+
+        "new_password": "Nueva contraseña",
+        "confirm_password": "Confirmar contraseña",
+        "password_placeholder": "Introduce tu nueva contraseña",
+        "confirm_password_placeholder": "Confirma tu nueva contraseña",
+        "password_mismatch": "Las contraseñas no coinciden.",
+        "updated_message": "Tu perfil ha sido actualizado correctamente.",
+        "update_error": "Ocurrió un error al actualizar tu perfil.",
+
         "delete_button": "Eliminar perfil",
         "confirm_delete_title": "¿Estás seguro?",
         "confirm_delete_text": "Esta acción eliminará tu cuenta de forma permanente.",
@@ -50,8 +65,7 @@
         "deleted": "Cuenta eliminada",
         "deleted_message": "Tu cuenta ha sido eliminada correctamente.",
         "delete_error": "Ocurrió un error al eliminar tu cuenta.",
-        "deleting": "Eliminando perfil...",
-        "edit": "Editar perfil"
+        "deleting": "Eliminando perfil..."
     },
     "log": {
         "title": "Registrar una nueva inmersión"
@@ -59,29 +73,27 @@
     "stats": {
         "title": "Profundidad de Inmersión a lo largo del tiempo"
     },
-    "signIn": {
+    "register": {
         "title": "Crear Cuenta",
-        "name": "Nombre",
-        "email": "Correo Electrónico",
-        "password": "Contraseña",
         "button": "Registrarse",
         "loading": "Registrando...",
         "already_account": "¿Ya tienes una cuenta?",
         "login_link": "Iniciar sesión",
-        "success": "¡Éxito!",
         "welcome": "Bienvenido a Freedive Analyzer 🎉",
-        "error_title": "Error al crear cuenta"
+        "error_title": "Error al crear cuenta",
+        "success_title": "¡Registro exitoso!",
+        "success_message": "Ya has iniciado sesión."
     },
     "login": {
         "title": "Iniciar sesión",
-        "email": "Correo electrónico",
-        "password": "Contraseña",
         "button": "Entrar",
         "loading": "Iniciando...",
         "no_account": "¿No tienes cuenta?",
         "register_link": "Regístrate aquí",
         "error_title": "Error al iniciar sesión",
-        "error_generic": "Correo o contraseña incorrectos"
+        "error_generic": "Correo o contraseña incorrectos",
+        "success_title": "¡Bienvenido de nuevo!",
+        "success_message": "Has iniciado sesión correctamente."
     },
     "dive": {
         "loading": "Cargando datos de la inmersión...",
@@ -212,8 +224,6 @@
         "title": "Contacto",
         "description": "¿Tienes alguna pregunta, sugerencia o necesitas soporte? Rellena el formulario o escríbenos directamente.",
         "form": {
-            "name": "Nombre",
-            "email": "Correo electrónico",
             "message": "Mensaje",
             "submit": "Enviar mensaje"
         },
@@ -255,10 +265,11 @@
         "1401": "No pudimos verificar tu cuenta. Intenta nuevamente.",
         "1402": "Ocurrió un problema al iniciar sesión con Google. Intenta de nuevo.",
         "1403": "Por favor, ingresa una dirección de correo válida.",
-        "1404": "Email o contraseña incorrectos. Intenta nuevamente.",
+        
         "1405": "Este correo ya está registrado. Intenta iniciar sesión.",
         "1406": "No pudimos eliminar tu cuenta en este momento. Por favor, intenta nuevamente más tarde.",
         "1501": "No se encontró una cuenta con ese correo electrónico.",
-        "1502": "Faltan algunos datos obligatorios."
+        "1502": "Faltan algunos datos obligatorios.",
+        "1503": "Email o contraseña incorrectos. Intenta nuevamente."
     }
 }
