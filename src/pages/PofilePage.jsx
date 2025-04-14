@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useAuth } from "../context/AuthContext";
 import { updateUserPhoto, deleteProfile } from "../api/auth";
-import { auth } from "../lib/firebaseClient";
-import { signOut } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import EditProfileForm from "../components/EditProfileForm";
@@ -29,6 +27,8 @@ export default function ProfilePage() {
   const [loading, setLoading] = useState(false);
   const [activeTab, setActiveTab] = useState("posts");
   const [isEditing, setIsEditing] = useState(false);
+  const [showSettings, setShowSettings] = useState(false);
+
 
   if (!user) {
     return <p className="text-white text-center mt-8">{t("loading")}</p>;
@@ -97,50 +97,6 @@ export default function ProfilePage() {
       setLoading(false);
     }
   };
-
-  const handleSaveProfile = async () => {
-    try {
-      setLoading(true);
-      Swal.fire({
-        title: t("profile.saving"),
-        allowOutsideClick: false,
-        didOpen: () => Swal.showLoading(),
-      });
-
-      const token = await getFirebaseToken();
-      const res = await fetch(`${BACKEND_URL}/api/user/update`, {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ name: newName }),
-      });
-
-      if (!res.ok) throw new Error("Failed to update");
-
-      const data = await res.json();
-      setUser(data.user);
-      setIsEditing(false);
-
-      Swal.fire({
-        icon: "success",
-        title: t("profile.updated"),
-        timer: 1500,
-        showConfirmButton: false,
-      });
-    } catch (err) {
-      console.error("Error updating profile:", err);
-      Swal.fire({
-        icon: "error",
-        title: t("profile.error"),
-        text: t("profile.update_error"),
-      });
-    } finally {
-      setLoading(false);
-    }
-  };
-
 
   const handleDeleteProfile = async () => {
     const confirmed = await Swal.fire({
@@ -302,18 +258,27 @@ export default function ProfilePage() {
 
       {/* Ajustes y eliminación */}
       <div className="pt-6 border-t border-gray-200">
-        <h2 className="text-xl font-semibold mb-2">{t("profile.settings")}</h2>
-        <p className="text-sm text-gray-500 mb-6">{t("profile.comingSoon")} ⚙️</p>
+        <button
+          onClick={() => setShowSettings((prev) => !prev)}
+          className="flex items-center gap-2 text-left text-gray-500 hover:text-black transition text-lg font-medium"
+        >
+          <span>⚙️</span>
+          <span>{t("settings")}</span>
+        </button>
 
-        <div className="flex justify-end">
-          <button
-            onClick={handleDeleteProfile}
-            className="bg-red-600 text-white py-2 px-5 rounded-md shadow hover:bg-red-700 transition"
-          >
-            {t("profile.delete_button")}
-          </button>
-        </div>
+        {showSettings && (
+          <div className="mt-4 flex justify-end">
+            <button
+              onClick={handleDeleteProfile}
+              className="bg-red-600 text-white py-2 px-5 rounded-md shadow hover:bg-red-700 transition"
+            >
+              🗑️ {t("profile.delete_button")}
+            </button>
+          </div>
+        )}
       </div>
+
+
     </div>
   );
 }  

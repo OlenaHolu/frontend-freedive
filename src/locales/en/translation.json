@@ -17,6 +17,7 @@
   "saving": "Saving ...",
   "error": "Error",
   "success": "Success!",
+  "settings": "Settings",
 
   "network": {
     "offline": "You are offline. Please check your internet connection.",
@@ -57,7 +58,7 @@
     "new_password": "New Password",
     "new_password_placeholder": "Enter new password",
     "confirm_new_password_placeholder": "Re-enter new password",
-    "password_mismatch": "Passwords do not match",
+    "passwords_mismatch": "Passwords do not match",
 
     "updated_message": "Profile updated successfully.",
     "update_error": "Error updating profile.",
@@ -220,7 +221,6 @@
     "usage_title": "Uso de los datos",
     "usage_desc": "Tus datos se utilizan exclusivamente para ofrecerte la funcionalidad de la aplicación. No se comparten con terceros ni se usan con fines publicitarios.",
     "storage_title": "Almacenamiento seguro",
-    "storage_desc": "Utilizamos Firebase como proveedor seguro para autenticación y almacenamiento de datos. Puedes consultar su política de privacidad en",
     "storage_link": "este enlace",
     "rights_title": "Tus derechos",
     "rights_desc": "De acuerdo con la legislación vigente, tienes derecho a acceder, modificar o eliminar tus datos personales. Puedes ejercer este derecho contactándonos.",

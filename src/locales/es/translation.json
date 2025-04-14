@@ -17,6 +17,7 @@
     "saving": "Guardando...",
     "error": "Error",
     "success": "¡Éxito!",
+    "settings": "Configuración",
     
     "network": {
         "offline": "Estás desconectado. Por favor, revisa tu conexión a internet.",
@@ -54,7 +55,7 @@
         "confirm_password": "Confirmar contraseña",
         "password_placeholder": "Introduce tu nueva contraseña",
         "confirm_password_placeholder": "Confirma tu nueva contraseña",
-        "password_mismatch": "Las contraseñas no coinciden.",
+        "passwords_mismatch": "Las contraseñas no coinciden.",
         "updated_message": "Tu perfil ha sido actualizado correctamente.",
         "update_error": "Ocurrió un error al actualizar tu perfil.",
 
@@ -213,7 +214,6 @@
         "usage_title": "Use of Data",
         "usage_desc": "Your data is used solely to provide app functionality. It is not shared with third parties or used for advertising.",
         "storage_title": "Secure Storage",
-        "storage_desc": "We use Firebase as a secure provider for authentication and data storage. You can review their privacy policy at",
         "storage_link": "this link",
         "rights_title": "Your Rights",
         "rights_desc": "Under current legislation, you have the right to access, modify, or delete your personal data. You may exercise this right by contacting us.",

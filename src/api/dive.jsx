@@ -1,82 +1,33 @@
-import axios from "axios";
-import { auth } from "../lib/firebaseClient";
-
-const BASE_URL = import.meta.env.VITE_APP_BACKEND_URL;
+import API from "./axiosInstance";
 
 export const saveDive = async (diveData) => {
-  const token = await auth.currentUser.getIdToken();
-
-  return axios.post(`${BASE_URL}/api/dives`, diveData, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
+   return API.post("/api/dives", diveData);
 };
 
 export const updateDive = async (diveId, diveData) => {
-  const token = await auth.currentUser.getIdToken();
-
-  return axios.put(`${BASE_URL}/api/dives/${diveId}`, diveData, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
+ return API.put(`/api/dives/${diveId}`, diveData);
 }
 
 export const getDives = async () => {
-  const token = await auth.currentUser.getIdToken();
-
-  const res = await axios.get(`${BASE_URL}/api/dives`, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
-
+  const res = await API.get("/api/dives");
   return res.data;
 };
 
 export const getDiveById = async (diveId) => {
-  const token = await auth.currentUser.getIdToken();
-
-  const res = await axios.get(`${BASE_URL}/api/dives/${diveId}`, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
-
+  const res = await API.get(`/api/dives/${diveId}`);
   return res.data;
 }
 
 export const saveMultipleDives = async (dives) => {
-  const token = await auth.currentUser.getIdToken();
-
-  return axios.post(`${BASE_URL}/api/dives/bulk`, dives, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-      "Content-Type": "application/json",
-    },
-  });
+  return API.post("/api/dives/bulk", dives);
 }
 
 export const deleteDive = async (diveId) => {
-  const token = await auth.currentUser.getIdToken();
-
-  return axios.delete(`${BASE_URL}/api/dives/${diveId}`, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
+  return API.delete(`/api/dives/${diveId}`);
 };
 
 export const deleteManyDives = async (ids) => {
-  const token = await auth.currentUser.getIdToken();
-
-  return axios.post(`${BASE_URL}/api/dives/delete-many`, { ids }, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-      "Content-Type": "application/json",
-    },
-  });
+  return API.post("/api/dives/delete-many", { ids });
 };
 
 

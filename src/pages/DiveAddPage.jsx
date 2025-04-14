@@ -41,7 +41,7 @@ const DiveAddPage = () => {
     };
 
     Swal.fire({
-      title: t("import.loading"),
+      title: t("dive.import.loading"),
       html: `
         <div style="margin-top: 10px;">
           <div style="width: 100%; background-color: #eee; border-radius: 8px; overflow: hidden; height: 20px;">
@@ -103,8 +103,8 @@ const DiveAddPage = () => {
         console.error("Import error:", saveError);
         return Swal.fire({
           icon: "error",
-          title: "❌ Error",
-          text: t("import.error"),
+          title: "❌ " + t("error"),
+          text: t("dive.import.error"),
         });
       }
 
@@ -127,8 +127,8 @@ const DiveAddPage = () => {
       console.error("Import error:", err);
       Swal.fire({
         icon: "error",
-        title: "❌ Error",
-        text: t("import.error"),
+        title: "❌" + t("error"),
+        text: t("dive.import.error"),
       });
     }
   };
