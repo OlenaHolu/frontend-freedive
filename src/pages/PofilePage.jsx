@@ -1,21 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useAuth } from "../context/AuthContext";
 import { updateUserPhoto, deleteProfile } from "../api/auth";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import EditProfileForm from "../components/EditProfileForm";
+import CreatePostModal from "../components/modals/CreatePostModal";
+import { getMyPosts } from "../api/post";
 
 
 const tabs = [
   { key: "posts", label: "Posts" },
   { key: "tagged", label: "Tagged" }
 ];
-
-const fakePosts = new Array(9).fill(null).map((_, i) => ({
-  id: i,
-  image: `https://source.unsplash.com/300x300/?freedive,sea,${i}`
-}));
 
 export default function ProfilePage() {
   const { user, setUser } = useAuth();
@@ -28,6 +25,27 @@ export default function ProfilePage() {
   const [activeTab, setActiveTab] = useState("posts");
   const [isEditing, setIsEditing] = useState(false);
   const [showSettings, setShowSettings] = useState(false);
+  const [showCreatePost, setShowCreatePost] = useState(false);
+  const [userPosts, setUserPosts] = useState([]);
+  const [loadingPosts, setLoadingPosts] = useState(true);
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      try {
+        const posts = await getMyPosts();
+        setUserPosts(posts);
+      } catch (err) {
+        console.error("Failed to load posts:", err);
+      } finally {
+        setLoadingPosts(false);
+      }
+    };
+
+    if (user) {
+      fetchPosts();
+    }
+  }, [user]);
+
 
 
   if (!user) {
@@ -185,10 +203,37 @@ export default function ProfilePage() {
         <h1 className="text-xl font-semibold">{user.name}</h1>
 
         <div className="flex gap-6 text-sm text-gray-600">
-          <div><strong>0</strong> {t("posts")}</div>
+          <div>
+            <strong>{userPosts.length}</strong> {t("posts")}
+          </div>
           <div><strong>0</strong> {t("followers")}</div>
           <div><strong>0</strong> {t("following")}</div>
         </div>
+
+        {/* Ajustes y eliminación */}
+        < div className="pt-6 border-t border-gray-200" >
+          <button
+            onClick={() => setShowSettings((prev) => !prev)}
+            className="flex items-center gap-2 text-sm text-left text-gray-500 hover:text-black transition font-medium"
+          >
+            <span>⚙️</span>
+            <span>{t("settings")}</span>
+          </button>
+
+          {
+            showSettings && (
+              <div className="mt-4 flex justify-end">
+                <button
+                  onClick={handleDeleteProfile}
+                  className="bg-red-600 text-white py-2 px-5 rounded-md shadow hover:bg-red-700 transition"
+                >
+                  🗑️ {t("profile.delete_button")}
+                </button>
+              </div>
+            )
+          }
+        </div >
+
 
         <div className="flex gap-2 mt-2">
           {isEditing ? (
@@ -208,15 +253,28 @@ export default function ProfilePage() {
       {/* Highlights */}
       <div className="mt-10 flex justify-center gap-4">
         <div className="flex flex-col items-center text-sm">
-          <div className="w-16 h-16 rounded-full border flex items-center justify-center bg-white shadow-inner text-3xl text-gray-400">
+          <button
+            onClick={() => setShowCreatePost(true)}
+            className="w-16 h-16 rounded-full border flex items-center justify-center bg-white shadow-inner text-3xl text-gray-400 hover:bg-gray-100 transition"
+          >
             +
-          </div>
+          </button>
           <span className="mt-1">New</span>
         </div>
+
+        {showCreatePost && (
+          <CreatePostModal
+            onClose={() => setShowCreatePost(false)}
+            onPostCreated={(newPost) => {
+              setShowCreatePost(false);
+              // Optionally add newPost to local state or refetch
+            }}
+          />
+        )}
       </div>
 
       {/* Tabs */}
-      <div className="mt-10 border-t border-gray-300">
+      < div className="mt-10 border-t border-gray-300" >
         <div className="flex justify-around text-sm font-medium text-gray-500">
           {tabs.map((tab) => (
             <button
@@ -231,54 +289,50 @@ export default function ProfilePage() {
             </button>
           ))}
         </div>
-      </div>
+      </div >
 
       {/* Content */}
-      <div className="mt-6">
-        {activeTab === "posts" && (
-          <div className="grid grid-cols-3 gap-1">
-            {fakePosts.map((post) => (
-              <div key={post.id} className="aspect-square bg-gray-200">
-                <img
-                  src={post.image}
-                  alt={`Post ${post.id}`}
-                  className="w-full h-full object-cover"
-                />
-              </div>
-            ))}
-          </div>
-        )}
-
-        {activeTab === "tagged" && (
-          <div className="text-center text-sm text-gray-500 py-10 italic">
-            {t("profile.no_tagged")}
-          </div>
-        )}
-      </div>
-
-      {/* Ajustes y eliminación */}
-      <div className="pt-6 border-t border-gray-200">
-        <button
-          onClick={() => setShowSettings((prev) => !prev)}
-          className="flex items-center gap-2 text-left text-gray-500 hover:text-black transition text-lg font-medium"
-        >
-          <span>⚙️</span>
-          <span>{t("settings")}</span>
-        </button>
-
-        {showSettings && (
-          <div className="mt-4 flex justify-end">
-            <button
-              onClick={handleDeleteProfile}
-              className="bg-red-600 text-white py-2 px-5 rounded-md shadow hover:bg-red-700 transition"
+      <div className="flex flex-col gap-6">
+        {loadingPosts ? (
+          <p className="text-center text-gray-500">{t("loading")}</p>
+        ) : userPosts.length === 0 ? (
+          <p className="text-center italic text-gray-500">{t("profile.no_posts")}</p>
+        ) : (
+          userPosts.map((post) => (
+            <div
+              key={post.id}
+              className="bg-white border rounded-lg shadow-md overflow-hidden"
             >
-              🗑️ {t("profile.delete_button")}
-            </button>
-          </div>
+              {/* Header */}
+              <div className="flex items-center justify-between px-4 py-2 text-sm text-gray-700">
+                <div className="font-semibold">{user.name}</div>
+                {post.location && <div className="italic text-gray-500">{post.location}</div>}
+              </div>
+
+              {/* Image */}
+              <img
+                src={post.image_url}
+                alt={`Post ${post.id}`}
+                className="w-full max-h-[600px] object-cover"
+              />
+
+              {/* Footer */}
+              <div className="px-4 py-3 text-sm space-y-2">
+                {post.description && (
+                  <p className="text-gray-800">{post.description}</p>
+                )}
+                {post.hashtags?.length > 0 && (
+                  <p className="text-blue-600">
+                    {post.hashtags.map((tag) => `#${tag}`).join(" ")}
+                  </p>
+                )}
+              </div>
+            </div>
+          ))
         )}
       </div>
 
 
-    </div>
+    </div >
   );
 }  
