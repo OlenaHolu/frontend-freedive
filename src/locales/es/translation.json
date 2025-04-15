@@ -3,9 +3,7 @@
     "app_description": "Registra tus inmersiones de apnea, consulta estadísticas y mejora tu rendimiento con Freedive App.",
     "logout": "Cerrar Sesión",
     "discover": "¡Descubre las profundidades!",
-    
     "loadingError": "Error al cargar los datos.",
-    
     "loading": "Cargando...",
     "back": "Atrás",
     "home": "Inicio",
@@ -13,12 +11,12 @@
     "close": "Cerrar",
     "cancel": "Cancelar",
     "confirm": "Confirmar",
+    "delete": "Eliminar",
     "save": "Guardar",
     "saving": "Guardando...",
     "error": "Error",
     "success": "¡Éxito!",
     "settings": "Configuración",
-    
     "network": {
         "offline": "Estás desconectado. Por favor, revisa tu conexión a internet.",
         "restored": "Conexión restaurada. Estás de nuevo en línea."
@@ -43,14 +41,12 @@
         "updated": "Avatar actualizado",
         "error": "Error al subir",
         "upload_error": "Hubo un problema al subir el avatar.",
-        
-        "edit":"Editar perfil",
+        "edit": "Editar perfil",
         "name": "Nombre",
         "name_placeholder": "Introduce tu nombre",
         "email": "Correo electrónico",
         "email_placeholder": "Introduce tu correo electrónico",
         "invalid_email": "Por favor, introduce un correo electrónico válido.",
-
         "new_password": "Nueva contraseña",
         "confirm_password": "Confirmar contraseña",
         "password_placeholder": "Introduce tu nueva contraseña",
@@ -58,7 +54,6 @@
         "passwords_mismatch": "Las contraseñas no coinciden.",
         "updated_message": "Tu perfil ha sido actualizado correctamente.",
         "update_error": "Ocurrió un error al actualizar tu perfil.",
-
         "delete_button": "Eliminar perfil",
         "confirm_delete_title": "¿Estás seguro?",
         "confirm_delete_text": "Esta acción eliminará tu cuenta de forma permanente.",
@@ -67,6 +62,23 @@
         "deleted_message": "Tu cuenta ha sido eliminada correctamente.",
         "delete_error": "Ocurrió un error al eliminar tu cuenta.",
         "deleting": "Eliminando perfil..."
+    },
+    "post": {
+        "no_posts": "No hay publicaciones aún.",
+        "create": "Crear publicación",
+        "created": "Publicación creada",
+        "posting": "Publicando...",
+        "button": "Publicar",
+        "location_placeholder": "Ubicación",
+        "textarea_placeholder": "Escribe algo...",
+        "delete_button": "Eliminar publicación",
+        "confirm_delete_title": "¿Estás seguro?",
+        "confirm_delete_text": "Esta acción eliminará tu publicación de forma permanente.",
+        "confirm_delete_button": "Sí, eliminar",
+        "deleted": "Publicación eliminada",
+        "deleted_message": "Tu publicación ha sido eliminada correctamente.",
+        "delete_error": "Ocurrió un error al eliminar tu publicación.",
+        "deleting": "Eliminando publicación..."
     },
     "log": {
         "title": "Registrar una nueva inmersión"
@@ -262,12 +274,7 @@
         "1101": "Por favor, inicia sesión para continuar.",
         "1102": "Tu sesión ha expirado. Inicia sesión nuevamente.",
         "1103": "No tienes permiso para realizar esta acción.",
-        "1401": "No pudimos verificar tu cuenta. Intenta nuevamente.",
-        "1402": "Ocurrió un problema al iniciar sesión con Google. Intenta de nuevo.",
-        "1403": "Por favor, ingresa una dirección de correo válida.",
-        
-        "1405": "Este correo ya está registrado. Intenta iniciar sesión.",
-        "1406": "No pudimos eliminar tu cuenta en este momento. Por favor, intenta nuevamente más tarde.",
+        "1300": "No se pudo publicar tu publicación. Por favor, intenta más tarde.",
         "1501": "No se encontró una cuenta con ese correo electrónico.",
         "1502": "Faltan algunos datos obligatorios.",
         "1503": "Email o contraseña incorrectos. Intenta nuevamente."

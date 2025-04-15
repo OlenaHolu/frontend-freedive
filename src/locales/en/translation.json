@@ -13,6 +13,7 @@
   "close": "Close",
   "cancel": "Cancel",
   "confirm": "Confirm",
+  "delete": "Delete",
   "save": "Save",
   "saving": "Saving ...",
   "error": "Error",
@@ -71,6 +72,25 @@
     "deleted_message": "Your account has been successfully deleted.",
     "delete_error": "An error occurred while deleting your account.",
     "deleting": "Deleting profile..."
+  },
+  "post":{
+    "no_posts": "No posts available.",
+    "create": "Create Post",
+    "created": "Post created!",
+    "posting": "Posting...",
+    "button": "Post",
+    "location_placeholder": "Location",
+    "textarea_placeholder": "Write your post here...",
+
+    "delete_button": "Delete Post",
+    "confirm_delete_title": "Are you sure?",
+    "confirm_delete_text": "This action will permanently delete your post.",
+    "confirm_delete_button": "Yes, delete",
+    "deleted": "Post deleted",
+    "deleted_message": "Your post has been successfully deleted.",
+    "delete_error": "An error occurred while deleting your post.",
+    "deleting": "Deleting post..."
+
   },
   "log": {
     "title": "Log a New Dive"
@@ -269,12 +289,7 @@
     "1101": "Please log in to continue.",
     "1102": "Your session has expired. Please log in again.",
     "1103": "You don't have permission to do this.",
-    "1401": "We couldn’t verify your account. Please try again.",
-    "1402": "There was a problem signing in with Google. Please try again.",
-    "1403": "Please enter a valid email address.",
-    
-    "1405": "This email is already registered. Try logging in instead.",
-    "1406": "We couldn't delete your account right now. Please try again later.",
+    "1300": "Unable to publish your post. Please try again later.",
     "1501": "No account found with that email.",
     "1502": "Some required information is missing.",
     "1503": "Incorrect email or password. Please try again."

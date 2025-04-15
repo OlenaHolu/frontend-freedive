@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import EditProfileForm from "../components/EditProfileForm";
 import CreatePostModal from "../components/modals/CreatePostModal";
-import { getMyPosts } from "../api/post";
+import { getMyPosts, deletePost } from "../api/post";
 
 
 const tabs = [
@@ -29,18 +29,18 @@ export default function ProfilePage() {
   const [userPosts, setUserPosts] = useState([]);
   const [loadingPosts, setLoadingPosts] = useState(true);
 
-  useEffect(() => {
-    const fetchPosts = async () => {
-      try {
-        const posts = await getMyPosts();
-        setUserPosts(posts);
-      } catch (err) {
-        console.error("Failed to load posts:", err);
-      } finally {
-        setLoadingPosts(false);
-      }
-    };
+  const fetchPosts = async () => {
+    try {
+      const posts = await getMyPosts();
+      setUserPosts(posts);
+    } catch (err) {
+      console.error("Failed to load posts:", err);
+    } finally {
+      setLoadingPosts(false);
+    }
+  };
 
+  useEffect(() => {
     if (user) {
       fetchPosts();
     }
@@ -162,6 +162,39 @@ export default function ProfilePage() {
     }
   };
 
+  const handleDeletePost = async (postId) => {
+    const confirmed = await Swal.fire({
+      title: t("post.confirm_delete_title"),
+      text: t("post.confirm_delete_text"),
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: t("post.confirm_delete_button"),
+      cancelButtonText: t("cancel"),
+      confirmButtonColor: "#e3342f"
+    });
+
+    if (!confirmed.isConfirmed) return;
+
+    try {
+      await deletePost(postId);
+      setUserPosts((prev) => prev.filter((p) => p.id !== postId));
+      Swal.fire({
+        icon: "success",
+        title: t("post.deleted"),
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    } catch (err) {
+      console.error("Failed to delete post:", err);
+      Swal.fire({
+        icon: "error",
+        title: t("post.error"),
+        text: t("post.delete_error"),
+      });
+    }
+  };
+
+
   return (
     <div className="max-w-3xl mx-auto px-4 py-10 text-black">
       {/* Header */}
@@ -265,9 +298,9 @@ export default function ProfilePage() {
         {showCreatePost && (
           <CreatePostModal
             onClose={() => setShowCreatePost(false)}
-            onPostCreated={(newPost) => {
+            onPostCreated={() => {
+              fetchPosts();
               setShowCreatePost(false);
-              // Optionally add newPost to local state or refetch
             }}
           />
         )}
@@ -296,7 +329,7 @@ export default function ProfilePage() {
         {loadingPosts ? (
           <p className="text-center text-gray-500">{t("loading")}</p>
         ) : userPosts.length === 0 ? (
-          <p className="text-center italic text-gray-500">{t("profile.no_posts")}</p>
+          <p className="text-center italic text-gray-500">{t("post.no_posts")}</p>
         ) : (
           userPosts.map((post) => (
             <div
@@ -314,6 +347,8 @@ export default function ProfilePage() {
                 src={post.image_url}
                 alt={`Post ${post.id}`}
                 className="w-full max-h-[600px] object-cover"
+                referrerPolicy="no-referrer"
+                crossOrigin="anonymous"
               />
 
               {/* Footer */}
@@ -326,6 +361,15 @@ export default function ProfilePage() {
                     {post.hashtags.map((tag) => `#${tag}`).join(" ")}
                   </p>
                 )}
+              </div>
+              {/* Delete Post */}
+              <div className="px-4 pb-3 text-right">
+                <button
+                  onClick={() => handleDeletePost(post.id)}
+                  className="text-red-600 text-sm hover:underline"
+                >
+                  🗑️ {t("delete")}
+                </button>
               </div>
             </div>
           ))
