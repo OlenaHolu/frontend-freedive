@@ -46,7 +46,7 @@ export default function LoginPage() {
     }
   };
 
-  if (loading) return <p>{t("loading")}</p>;
+  if (loading || user) return <p>{t("loading")}</p>;
 
   return (
     <MainLayout backgroundImage="/home-bg.png">
