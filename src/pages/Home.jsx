@@ -34,7 +34,7 @@ const Home = () => {
   return (
     <MainLayout backgroundImage="/home-bg.png">
        <Helmet>
-        <title>{t("seo.title")}</title> 
+        <title>{t("app_title")}</title> 
         <meta name="description" content={t("app_description")} />
         <meta property="og:title" content={t("app_title")} />
         <meta property="og:description" content={t("app_description")} />
