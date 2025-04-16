@@ -12,6 +12,7 @@ export default function GoogleCallback() {
     const fetchUser = async () => {
       const urlParams = new URLSearchParams(window.location.search);
       const token = urlParams.get("token");
+      console.log("Token from URL:", token);
   
       if (!token) {
         return navigate("/login");
@@ -21,6 +22,7 @@ export default function GoogleCallback() {
   
       try {
         const user = await getUser();
+        console.log("User from API:", user);
         if (user) {
           setUser(user);
           navigate("/dashboard");
