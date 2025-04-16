@@ -196,7 +196,12 @@ export default function DiveListPage() {
                 <Pagination
                   currentPage={currentPage}
                   totalPages={totalPages}
-                  onPageChange={(page) => !loadingDives && setCurrentPage(page)}
+                  onPageChange={(page) => {
+                    if (!loadingDives){
+                      setIsFiltering(true); 
+                      setCurrentPage(page);
+                    } 
+                  }}
                 />
               </div>
             </div>          
