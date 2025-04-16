@@ -39,6 +39,7 @@ export default function DiveListPage() {
     }, [loadingDives]);
 
     const handleSearch = (query) => {
+      setIsFiltering(true);
         setSearchQuery(query);
         setCurrentPage(1);
     };
@@ -49,6 +50,13 @@ export default function DiveListPage() {
         setPeriod("all");
         setCurrentPage(1);
     };
+
+    const handlePeriodChange = (newPeriod) => {
+      setIsFiltering(true);
+      setPeriod(newPeriod);
+      setCurrentPage(1);
+    };
+    
 
     const handleSort = (column) => {
         if (sortColumn === column) {
@@ -129,7 +137,7 @@ export default function DiveListPage() {
                   <DiveSearch onSearch={handleSearch} />
           
                   <div className="flex items-center gap-2 flex-wrap">
-                    <PeriodFilter period={period} setPeriod={setPeriod} t={t} />
+                    <PeriodFilter period={period} setPeriod={handlePeriodChange} t={t} />
           
                     {(searchQuery || period !== "all") && (
                       <button
