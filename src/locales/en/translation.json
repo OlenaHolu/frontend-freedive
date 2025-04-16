@@ -211,6 +211,7 @@
     "deleteConfirmation": "Are you sure you want to delete this dive?",
     "thisActionCannotBeUndone": "This action cannot be undone.",
     "deleteSelected": "Delete selected",
+    "clearSelection": "Clear selection",
     "deleting": "Deleting",
     "deletionCompleted": "Deletion completed",
     "divesDeleted": "dives deleted",

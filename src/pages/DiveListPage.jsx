@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useAuth } from "../context/AuthContext";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
@@ -21,6 +21,7 @@ export default function DiveListPage() {
     const [sortColumn, setSortColumn] = useState("StartTime");
     const [sortDirection, setSortDirection] = useState("desc");
     const [selectedDives, setSelectedDives] = useState([]);
+    const [isFiltering, setIsFiltering] = useState(false);
 
     const divesPerPage = 10;
 
@@ -31,12 +32,19 @@ export default function DiveListPage() {
         refetch: fetchDives,
     } = useDives(user, period, searchQuery, currentPage, divesPerPage);
 
+    useEffect(() => {
+      if (!loadingDives) {
+        setIsFiltering(false);
+      }
+    }, [loadingDives]);
+
     const handleSearch = (query) => {
         setSearchQuery(query);
         setCurrentPage(1);
     };
 
     const resetFilters = () => {
+      setIsFiltering(true);
         setSearchQuery("");
         setPeriod("all");
         setCurrentPage(1);
@@ -144,11 +152,17 @@ export default function DiveListPage() {
                     >
                       ❌ {t("divesList.deleteSelected")} ({selectedDives.length})
                     </button>
+                    <button
+                      onClick={() => setSelectedDives([])}
+                      className="ml-2 px-4 py-2 bg-gray-300 text-black rounded hover:bg-gray-400 transition"
+                    >
+                      {t("divesList.clearSelection")}
+                    </button>
                   </div>
                 )}
           
                 {/* List or Loading */}
-                {loadingDives ? (
+                {loadingDives || isFiltering ? (
                   <div className="text-center text-gray-500 text-lg">{t("loading")}</div>
                 ) : (
                   <div className="overflow-x-auto">

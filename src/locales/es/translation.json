@@ -193,6 +193,7 @@
         "next": "Siguiente",
         "deleteConfirmation": "¿Eliminar esta inmersión?",
         "deleteSelected": "Eliminar inmersiones seleccionadas",
+        "clearSelection": "Limpiar selección",
         "deleteMultipleConfirmation": "¿Eliminar inmersiones seleccionadas?",
         "thisActionCannotBeUndone": "Esta acción no se puede deshacer.",
         "deleting": "Eliminando...",

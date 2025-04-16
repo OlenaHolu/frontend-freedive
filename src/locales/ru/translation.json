@@ -197,6 +197,7 @@
         "next": "Следующая",
         "deleteConfirmation": "Вы уверены, что хотите удалить это погружение?",
         "deleteSelected": "Удалить выбранные погружения",
+        "clearSelection": "Очистить выбор",
         "deleteMultipleConfirmation": "Удалить выбранные погружения?",
         "thisActionCannotBeUndone": "Это действие невозможно отменить.",
         "deleting": "Удаление...",
