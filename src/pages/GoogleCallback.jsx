@@ -25,20 +25,18 @@ export default function GoogleCallback() {
           setUser(user);
           navigate("/dashboard");
         } else {
-          localStorage.removeItem("token");
-          Swal.fire("Error", "Failed to retrieve user information.", "error");
-          navigate("/login");
+          throw new Error("User object is null");
         }
       } catch (err) {
         console.error("Error loading user:", err);
-        Swal.fire("Error", "Unexpected error retrieving user.", "error");
+        localStorage.removeItem("token");
+        Swal.fire("Error", err?.response?.data?.error || "Unexpected error retrieving user.", "error");
         navigate("/login");
       }
     };
   
     fetchUser();
   }, [navigate, setUser]);
-  
   
   return <p className="text-center mt-8 text-white">Loading...</p>;
 }
