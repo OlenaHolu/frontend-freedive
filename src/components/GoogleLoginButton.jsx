@@ -56,7 +56,7 @@ export default function GoogleLoginButton() {
             alt="Google logo"
             className="w-5 h-5"
           />
-          <span>Sign in with Google</span>
+          <span>{t("login.login_with_google")}</span>
         </>
       )}
     </button>
