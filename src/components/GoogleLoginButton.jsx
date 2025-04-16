@@ -1,24 +1,21 @@
 import Swal from "sweetalert2";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-//import { loginWithGoogle } from "../api/auth";
+import { useTranslation } from "react-i18next";
 
 export default function GoogleLoginButton() {
   const [submitting, setSubmitting] = useState(false);
-  const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const handleGoogleLogin = async () => {
     setSubmitting(true);
     try {
-      await loginWithGoogle();
-
-      navigate("/dashboard");
+      window.location.href = `${import.meta.env.VITE_APP_BACKEND_URL}/api/auth/google`;
     } catch (error) {
       console.error("Google login error:", error);
       await Swal.fire({
         icon: "error",
-        title: "Oops...",
-        text: error.message || "Something went wrong during Google login",
+        title: t("error"),
+        text: t("google_login_error"),
       });
     } finally {
       setSubmitting(false);

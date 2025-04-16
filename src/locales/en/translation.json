@@ -118,7 +118,10 @@
     "error_title": "Login failed",
     "error_generic": "Invalid credentials",
     "success_title": "Welcome back!",
-    "success_message": "You are now logged in."
+    "success_message": "You are now logged in.",
+
+    "login_with_google": "Log in with Google",
+    "google_login_error": "Something went wrong during Google login"
   },
   "dive": {
     "loading": "Loading dive data...",

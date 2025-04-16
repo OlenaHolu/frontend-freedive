@@ -106,7 +106,10 @@
         "error_title": "Error al iniciar sesión",
         "error_generic": "Correo o contraseña incorrectos",
         "success_title": "¡Bienvenido de nuevo!",
-        "success_message": "Has iniciado sesión correctamente."
+        "success_message": "Has iniciado sesión correctamente.",
+
+        "login_with_google": "Iniciar sesión con Google",
+        "google_login_error": "Algo salió mal durante el inicio de sesión con Google. Por favor, intenta nuevamente."
     },
     "dive": {
         "loading": "Cargando datos de la inmersión...",

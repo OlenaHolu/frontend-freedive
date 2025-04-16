@@ -15,6 +15,7 @@ import TermsPage from "../pages/TermsPage";
 import ContactPage from "../pages/ContactPage";
 import DiveEditPage from "../pages/DiveEditPage";
 import DiveDetailsPage from "../pages/DiveDetailsPage";
+import GoogleCallback from "../pages/GoogleCallback";
 
 export default function AppRoutes() {
   return (
@@ -22,6 +23,7 @@ export default function AppRoutes() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<LoginPage />} />
+          <Route path="/google/callback" element={<GoogleCallback />} />
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/privacy" element={<PrivacyPage />} />
