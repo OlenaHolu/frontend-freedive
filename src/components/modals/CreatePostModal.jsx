@@ -141,7 +141,7 @@ export default function CreatePostModal({ onClose, onPostCreated }) {
             <button
               type="button"
               onClick={onClose}
-              className="px-4 py-2 bg-gray-200 rounded"
+              className="px-4 py-2 bg-gray-200 rounded"  
             >
               {t("cancel")}
             </button>

@@ -83,7 +83,6 @@ export default function DivesTable({
             <tr 
               key={dive.id} 
               className="hover:bg-gray-50"
-              onClick={() => navigate(`/dashboard/dives/${dive.id}`)}
             >
               <td className="px-4 py-2">
                 <input
@@ -92,33 +91,24 @@ export default function DivesTable({
                   onChange={(e) => toggleOne(dive.id, e.target.checked)}
                 />
               </td>
-              <td className="px-4 py-2">{new Date(dive.StartTime).toLocaleString()}</td>
-              <td className="px-4 py-2">{dive.MaxDepth} m</td>
-              <td className="px-4 py-2">{formatDuration(dive.Duration)}</td>
+              <td onClick={() => navigate(`/dashboard/dives/${dive.id}`)} className="px-4 py-2"> {new Date(dive.StartTime).toLocaleString()}</td>
+              <td onClick={() => navigate(`/dashboard/dives/${dive.id}`)} className="px-4 py-2">{dive.MaxDepth} m</td>
+              <td onClick={() => navigate(`/dashboard/dives/${dive.id}`)} className="px-4 py-2">{formatDuration(dive.Duration)}</td>
               <td className="px-4 py-2 space-x-2">
                 <button
-                  onClick={(e) => {
-                    e. stopPropagation();
-                    navigate(`/dashboard/dives/${dive.id}`);
-                  }}
+                  onClick={() => navigate(`/dashboard/dives/${dive.id}`)}
                   className="text-sm bg-gray-100 px-2 py-1 rounded hover:bg-gray-200"
                 >
                   🔍 {t("dive.view")}
                 </button>
                 <button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    navigate(`/dashboard/dives/edit/${dive.id}`);
-                  }}
+                  onClick={() => navigate(`/dashboard/dives/edit/${dive.id}`)}
                   className="text-sm bg-blue-500 text-white px-2 py-1 rounded hover:bg-blue-600"
                 >
                   ✏️ {t("dive.edit")}
                 </button>
                 <button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    handleDelete(dive.id);
-                  }}
+                  onClick={() => handleDelete(dive.id)}
                   className="text-sm bg-red-500 text-white px-2 py-1 rounded hover:bg-red-600"
                 >
                   ❌ {t("dive.delete")}
@@ -134,7 +124,6 @@ export default function DivesTable({
         {sortedDives.map((dive) => (
           <div
             key={dive.id}
-            onClick={() => navigate(`/dashboard/dives/${dive.id}`)}
             className="border rounded-lg shadow-sm p-4 bg-white flex flex-col gap-2"
           >
             <div className="flex justify-between items-center">
@@ -145,34 +134,25 @@ export default function DivesTable({
               />
               <span className="text-xs text-gray-500">{new Date(dive.StartTime).toLocaleString()}</span>
             </div>
-            <div>
+            <div onClick={() => navigate(`/dashboard/dives/${dive.id}`)}>
               <p><strong>🌊 {t("dive.details.maxDepth")}:</strong> {dive.MaxDepth} m</p>
               <p><strong>🕒 {t("dive.details.duration")}:</strong> {formatDuration(dive.Duration)}</p>
             </div>
             <div className="flex gap-2 flex-wrap">
               <button
-                onClick={(e) => {
-                  e.stopPropagation();
-                  navigate(`/dashboard/dives/${dive.id}`);
-                }}
+                onClick={(e) => navigate(`/dashboard/dives/${dive.id}`)}
                 className="text-sm bg-gray-100 px-2 py-1 rounded hover:bg-gray-200 w-full"
               >
                 🔍 {t("dive.view")}
               </button>
               <button
-                onClick={(e) => {
-                  e.stopPropagation();
-                  navigate(`/dashboard/dives/edit/${dive.id}`);
-                }}
+                onClick={(e) => navigate(`/dashboard/dives/edit/${dive.id}`)}
                 className="text-sm bg-blue-500 text-white px-2 py-1 rounded hover:bg-blue-600 w-full"
               >
                 ✏️ {t("dive.edit")}
               </button>
               <button
-                onClick={(e) => {
-                  e.stopPropagation();
-                  handleDelete(dive.id);
-                }}
+                onClick={(e) => handleDelete(dive.id)}
                 className="text-sm bg-red-500 text-white px-2 py-1 rounded hover:bg-red-600 w-full"
               >
                 ❌ {t("dive.delete")}
