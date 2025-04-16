@@ -51,6 +51,28 @@ export const login = async (email, password) => {
   }
 };
 
+export const loginWithGoogle = async (code) => {
+  try {
+    const res = await API.post("/api/auth/google/callback", { code });
+
+    const { user, token } = res.data;
+
+    localStorage.setItem("token", token);
+
+    return user;
+  } catch (error) {
+    throw {
+      response: {
+        data: {
+          errorCode: error.response?.data?.errorCode || 1000,
+          error: error.response?.data?.error || "Google login failed",
+        },
+      },
+    };
+  }
+};
+
+
 export const getUser = async () => {
   const token = localStorage.getItem("token");
   if (!token) return null;
