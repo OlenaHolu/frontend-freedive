@@ -4,9 +4,10 @@ import { useAuth } from "../context/AuthContext";
 import { updateUserPhoto, deleteProfile } from "../api/auth";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
-import EditProfileForm from "../components/EditProfileForm";
+import EditProfileForm from "../components/profile/EditProfileForm";
 import CreatePostModal from "../components/modals/CreatePostModal";
 import { getMyPosts, deletePost } from "../api/post";
+import ProfileHeader from "../components/profile/ProfileHeader";
 
 
 const tabs = [
@@ -194,94 +195,23 @@ export default function ProfilePage() {
     }
   };
 
-
   return (
     <div className="max-w-3xl mx-auto px-4 py-10 text-black">
       {/* Header */}
-      {/* Avatar + Upload */}
-      <div className="flex flex-col items-center gap-4">
-        <div className="relative group cursor-pointer">
-          <img
-            src={preview || "/default-avatar.png"}
-            alt={t("profile.avatar")}
-            className="w-32 h-32 rounded-full border-4 border-blue-500 shadow object-cover transition duration-300 group-hover:brightness-75"
-            referrerPolicy="no-referrer"
-          />
-          <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition">
-            <span className="bg-black bg-opacity-50 text-white text-sm px-3 py-1 rounded-full">
-              {t("profile.change_photo")}
-            </span>
-          </div>
-          {/* Hidden input */}
-          <input
-            type="file"
-            accept="image/*"
-            onChange={handleFileChange}
-            aria-label={t("profile.change_photo")}
-            className="absolute inset-0 opacity-0 cursor-pointer"
-          />
-        </div>
-
-        {selectedFile && (
-          <button
-            onClick={handleUpload}
-            disabled={loading}
-            className="bg-blue-600 text-white py-2 px-5 rounded-md shadow hover:bg-blue-700 transition disabled:opacity-50 disabled:cursor-not-allowed"
-          >
-            {loading ? t("profile.uploading") : t("profile.update_button")}
-          </button>
-        )}
-
-
-        <h1 className="text-xl font-semibold">{user.name}</h1>
-
-        <div className="flex gap-6 text-sm text-gray-600">
-          <div>
-            <strong>{userPosts.length}</strong> {t("posts")}
-          </div>
-          <div><strong>0</strong> {t("followers")}</div>
-          <div><strong>0</strong> {t("following")}</div>
-        </div>
-
-        {/* Ajustes y eliminación */}
-        < div className="pt-6 border-t border-gray-200" >
-          <button
-            onClick={() => setShowSettings((prev) => !prev)}
-            className="flex items-center gap-2 text-sm text-left text-gray-500 hover:text-black transition font-medium"
-          >
-            <span>⚙️</span>
-            <span>{t("settings")}</span>
-          </button>
-
-          {
-            showSettings && (
-              <div className="mt-4 flex justify-end">
-                <button
-                  onClick={handleDeleteProfile}
-                  className="bg-red-600 text-white py-2 px-5 rounded-md shadow hover:bg-red-700 transition"
-                >
-                  🗑️ {t("profile.delete_button")}
-                </button>
-              </div>
-            )
-          }
-        </div >
-
-
-        <div className="flex gap-2 mt-2">
-          {isEditing ? (
-            <EditProfileForm onClose={() => setIsEditing(false)} />
-          ) : (
-            <button
-              onClick={() => setIsEditing(true)}
-              className="bg-gray-200 text-sm px-4 py-1 rounded-md font-medium"
-            >
-              {t("profile.edit")}
-            </button>
-          )}
-
-        </div>
-      </div>
+      <ProfileHeader
+  user={{ ...user, postCount: userPosts.length }}
+  t={t}
+  preview={preview}
+  selectedFile={selectedFile}
+  loading={loading}
+  isEditing={isEditing}
+  showSettings={showSettings}
+  setIsEditing={setIsEditing}
+  setShowSettings={setShowSettings}
+  handleFileChange={handleFileChange}
+  handleUpload={handleUpload}
+  handleDeleteProfile={handleDeleteProfile}
+/>
 
       {/* Highlights */}
       <div className="mt-10 flex justify-center gap-4">

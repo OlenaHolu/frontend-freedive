@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import Swal from "sweetalert2";
-import { useAuth } from "../context/AuthContext";
-import { updateProfile as updateUserProfile } from "../api/auth";
+import { updateProfile as updateUserProfile } from "../../api/auth";
+import { useAuth } from "../../context/AuthContext";
 
 export default function EditProfileForm({ onClose }) {
   const { user, setUser } = useAuth();
