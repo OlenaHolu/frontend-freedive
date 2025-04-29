@@ -1,6 +1,5 @@
 import React from "react";
 import EditProfileForm from "./EditProfileForm";
-import Swal from "sweetalert2";
 
 export default function ProfileHeader({
   user,
