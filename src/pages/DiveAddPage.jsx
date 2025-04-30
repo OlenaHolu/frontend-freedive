@@ -4,9 +4,12 @@ import Swal from "sweetalert2";
 import DiveImportButton from "../components/DiveImportButton";
 import { parseDiveXml, parseSmlDive } from "../utils/diveParsers";
 import { saveMultipleDives } from "../api/dive";
+import { useNavigate } from "react-router-dom";
 
 const DiveAddPage = () => {
   const { t } = useTranslation();
+  const navigate = useNavigate();
+  
 
   const handleImportedFiles = async (files) => {
     const totalFiles = files.length;
@@ -91,8 +94,8 @@ const DiveAddPage = () => {
           savingDone = true;
         })
         .catch((err) => {
-          saveError = err;       // guardar error sin lanzar
-          savingDone = true;     // marcar progreso como terminado
+          saveError = err;       
+          savingDone = true;
         });
 
 
@@ -117,12 +120,13 @@ const DiveAddPage = () => {
       }
       await new Promise((res) => setTimeout(res, 1500));
 
-      Swal.fire({
+      await Swal.fire({
         icon: "success",
         title: t("dive.import.success"),
         text: `${totalDives.length} ${t("dive.import.divesImported")}`,
         confirmButtonColor: "#10b981",
       });
+      navigate("/dashboard/list");
     } catch (err) {
       console.error("Import error:", err);
       Swal.fire({

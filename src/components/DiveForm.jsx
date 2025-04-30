@@ -3,10 +3,12 @@ import { saveDive, updateDive } from "../api/dive";
 import Swal from "sweetalert2";
 import { useTranslation } from "react-i18next";
 import { formatDuration, mmssToSeconds } from "../utils/time";
+import { useNavigate } from "react-router-dom";
 
 export default function DiveForm({ editMode, initialData = {}, onClose }) {
   const isEdit = editMode && initialData?.id;
   const { t } = useTranslation();
+  const navigate = useNavigate();
 
   const [form, setForm] = useState({
     startTime: initialData.StartTime || "",
@@ -65,6 +67,7 @@ export default function DiveForm({ editMode, initialData = {}, onClose }) {
       if (onClose) onClose();
 
       Swal.fire(t("dive.successTitle"), t("dive.successText"), "success");
+      navigate("/dashboard/list");
 
       setForm({
         startTime: "",
