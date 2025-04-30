@@ -79,7 +79,6 @@ export const getUser = async () => {
 
   try {
     const res = await API.get("/api/user");
-    console.log("User fetched:", res.data.user);
     return res.data.user;
   } catch (error) {
     if (error.code === "ECONNABORTED") {

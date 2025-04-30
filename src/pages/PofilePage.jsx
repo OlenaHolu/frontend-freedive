@@ -27,6 +27,7 @@ export default function ProfilePage() {
   const [showCreatePost, setShowCreatePost] = useState(false);
   const [userPosts, setUserPosts] = useState([]);
   const [loadingPosts, setLoadingPosts] = useState(true);
+  const [deletingPostId, setDeletingPostId] = useState(null);
 
   const fetchPosts = async () => {
     try {
@@ -169,15 +170,25 @@ export default function ProfilePage() {
       showCancelButton: true,
       confirmButtonText: t("post.confirm_delete_button"),
       cancelButtonText: t("cancel"),
-      confirmButtonColor: "#e3342f"
+      confirmButtonColor: "#e3342f",
+      allowOutsideClick: true,
     });
 
     if (!confirmed.isConfirmed) return;
 
+    setDeletingPostId(postId);
+
     try {
+      Swal.fire({
+        title: t("post.deleting"),
+        allowOutsideClick: false,
+        didOpen: () => Swal.showLoading(),
+      });
+
       await deletePost(postId);
       setUserPosts((prev) => prev.filter((p) => p.id !== postId));
-      Swal.fire({
+
+      await Swal.fire({
         icon: "success",
         title: t("post.deleted"),
         showConfirmButton: false,
@@ -185,11 +196,13 @@ export default function ProfilePage() {
       });
     } catch (err) {
       console.error("Failed to delete post:", err);
-      Swal.fire({
+      await Swal.fire({
         icon: "error",
         title: t("post.error"),
         text: t("post.delete_error"),
       });
+    } finally {
+      setDeletingPostId(null);
     }
   };
 
@@ -292,9 +305,11 @@ export default function ProfilePage() {
               <div className="px-4 pb-3 text-right">
                 <button
                   onClick={() => handleDeletePost(post.id)}
-                  className="text-red-600 text-sm hover:underline"
+                  disabled={deletingPostId === post.id}
+                  className={`text-red-600 text-sm hover:underline transition ${deletingPostId === post.id ? "opacity-50 cursor-not-allowed" : ""
+                    }`}
                 >
-                  🗑️ {t("delete")}
+                  {deletingPostId === post.id ? t("post.deleting") : `🗑️ ${t("delete")}`}
                 </button>
               </div>
             </div>
