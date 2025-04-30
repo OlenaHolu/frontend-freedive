@@ -4,7 +4,7 @@ import Swal from "sweetalert2";
 import { updateProfile as updateUserProfile } from "../../api/auth";
 import { useAuth } from "../../context/AuthContext";
 
-export default function EditProfileForm({ onClose }) {
+export default function EditProfileForm({ onClose, handleDeleteProfile }) {
   const { user, setUser } = useAuth();
   const { t } = useTranslation();
 
@@ -38,13 +38,13 @@ export default function EditProfileForm({ onClose }) {
         name: newName,
         email: newEmail,
       };
-      
+
       // Solo agregar contraseña si se están editando
       if (newPassword && confirmPassword) {
         payload.password = newPassword;
         payload.password_confirmation = confirmPassword;
       }
-      
+
       const updatedUser = await updateUserProfile(payload);
 
       setUser(updatedUser);
@@ -70,6 +70,7 @@ export default function EditProfileForm({ onClose }) {
       setLoading(false);
     }
   };
+
 
   return (
     <div className="w-full max-w-sm space-y-4 mt-4">
@@ -150,6 +151,16 @@ export default function EditProfileForm({ onClose }) {
           className="bg-gray-300 text-black py-2 px-4 rounded hover:bg-gray-400 transition"
         >
           {t("cancel")}
+        </button>
+      </div>
+
+      {/* Delete Account */}
+      <div className="mt-4">
+        <button
+          onClick={handleDeleteProfile}
+          className="bg-red-600 text-white py-2 px-4 rounded hover:bg-red-700 transition"
+        >
+          🗑️ {t("profile.delete_button")}
         </button>
       </div>
     </div>

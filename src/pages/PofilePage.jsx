@@ -4,7 +4,6 @@ import { useAuth } from "../context/AuthContext";
 import { updateUserPhoto, deleteProfile } from "../api/auth";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
-import EditProfileForm from "../components/profile/EditProfileForm";
 import CreatePostModal from "../components/modals/CreatePostModal";
 import { getMyPosts, deletePost } from "../api/post";
 import ProfileHeader from "../components/profile/ProfileHeader";
@@ -24,7 +23,6 @@ export default function ProfilePage() {
   const [selectedFile, setSelectedFile] = useState(null);
   const [loading, setLoading] = useState(false);
   const [activeTab, setActiveTab] = useState("posts");
-  const [isEditing, setIsEditing] = useState(false);
   const [showSettings, setShowSettings] = useState(false);
   const [showCreatePost, setShowCreatePost] = useState(false);
   const [userPosts, setUserPosts] = useState([]);
@@ -199,19 +197,17 @@ export default function ProfilePage() {
     <div className="max-w-3xl mx-auto px-4 py-10 text-black">
       {/* Header */}
       <ProfileHeader
-  user={{ ...user, postCount: userPosts.length }}
-  t={t}
-  preview={preview}
-  selectedFile={selectedFile}
-  loading={loading}
-  isEditing={isEditing}
-  showSettings={showSettings}
-  setIsEditing={setIsEditing}
-  setShowSettings={setShowSettings}
-  handleFileChange={handleFileChange}
-  handleUpload={handleUpload}
-  handleDeleteProfile={handleDeleteProfile}
-/>
+        user={{ ...user, postCount: userPosts.length }}
+        t={t}
+        preview={preview}
+        selectedFile={selectedFile}
+        loading={loading}
+        showSettings={showSettings}
+        setShowSettings={setShowSettings}
+        handleFileChange={handleFileChange}
+        handleUpload={handleUpload}
+        handleDeleteProfile={handleDeleteProfile}
+      />
 
       {/* Highlights */}
       <div className="mt-10 flex justify-center gap-4">
