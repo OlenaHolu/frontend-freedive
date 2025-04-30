@@ -15,6 +15,22 @@ export default function EditProfileForm({ onClose, handleDeleteProfile }) {
   const [passwordError, setPasswordError] = useState("");
   const [loading, setLoading] = useState(false);
 
+  const isUnchanged =
+    newName === user.name &&
+    newEmail === user.email &&
+    newPassword === "" &&
+    confirmPassword === "";
+
+
+  useEffect(() => {
+    if (user) {
+      setNewName(user.name || "");
+      setNewEmail(user.email || "");
+      setNewPassword("");
+      setConfirmPassword("");
+    }
+  }, [user]);
+
   useEffect(() => {
     if (newPassword && confirmPassword && newPassword !== confirmPassword) {
       setPasswordError(t("profile.passwords_mismatch"));
@@ -59,13 +75,23 @@ export default function EditProfileForm({ onClose, handleDeleteProfile }) {
       onClose?.();
     } catch (err) {
       console.error("Update error:", err);
+
+      const errorCode = err.response?.data?.errorCode;
+      const defaultMessage = t("profile.update_error");
+      const translated = errorCode ? t(`errors.${errorCode}`) : defaultMessage;
       Swal.fire({
         icon: "error",
         title: t("error"),
-        text: t("profile.update_error"),
+        text: translated,
         confirmButtonText: t("close"),
         showCloseButton: true,
       });
+
+      setNewName(user.name || "");
+      setNewEmail(user.email || "");
+      setNewPassword("");
+      setConfirmPassword("");
+
     } finally {
       setLoading(false);
     }
@@ -141,9 +167,13 @@ export default function EditProfileForm({ onClose, handleDeleteProfile }) {
       <div className="flex gap-3 mt-4">
         <button
           onClick={handleSaveProfile}
-          disabled={loading || !!passwordError}
-          className="bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 transition disabled:opacity-50"
-        >
+          disabled={loading || !!passwordError || isUnchanged}
+          className={`py-2 px-4 rounded text-white transition ${
+            loading || passwordError || isUnchanged
+              ? "bg-gray-300 cursor-not-allowed"
+              : "bg-blue-600 hover:bg-blue-700"
+          }`}
+      >
           {loading ? t("saving") : t("save")}
         </button>
         <button

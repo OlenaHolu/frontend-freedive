@@ -290,13 +290,22 @@
   "errors": {
     "1000": "Something went wrong on our end. Please try again later.",
     "1001": "An unexpected error occurred.",
+
     "1101": "Please log in to continue.",
     "1102": "Your session has expired. Please log in again.",
     "1103": "You don't have permission to do this.",
-    "1201": "The email field is required.",
-    "1202": "The password is too short. Minimum 6 characters.",
-    "1203": "An account with this email already exists.",
+
+    "1200": "Validation error. Please check the fields.",
+    "1201": "Name is required.",
+    "1202": "Email is required.",
+    "1203": "Email is too long.",
+    "1204": "An account with this email already exists.",
+    "1205": "Invalid email format.",
+    "1206": "Password is too short. Minimum 6 characters.",
+    "1207": "Passwords do not match.",
+
     "1300": "Unable to publish your post. Please try again later.",
+
     "1501": "No account found with that email.",
     "1502": "Some required information is missing.",
     "1503": "Incorrect email or password. Please try again."

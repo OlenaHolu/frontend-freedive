@@ -275,13 +275,22 @@
     "errors": {
         "1000": "Algo salió mal de nuestro lado. Por favor, intenta nuevamente más tarde.",
         "1001": "Ocurrió un error inesperado.",
+        
         "1101": "Por favor, inicia sesión para continuar.",
         "1102": "Tu sesión ha expirado. Inicia sesión nuevamente.",
         "1103": "No tienes permiso para realizar esta acción.",
-        "1201": "El campo de correo electrónico es obligatorio.",
-        "1202": "La contraseña es demasiado corta. Mínimo 6 caracteres.",
-        "1203": "Ya existe una cuenta con este correo electrónico.",
+
+        "1200": "Error de validación. Por favor, revisa los campos.",
+        "1201": "El nombre es obligatorio.",
+        "1202": "El correo electrónico es obligatorio.",
+        "1203": "El correo electrónico es demasiado largo.",
+        "1204": "Ya existe una cuenta con este correo electrónico.",
+        "1205": "Formato de correo electrónico inválido.",
+        "1206": "La contraseña es demasiado corta. Mínimo 6 caracteres.",
+        "1207": "Las contraseñas no coinciden.",
+
         "1300": "No se pudo publicar tu publicación. Por favor, intenta más tarde.",
+
         "1501": "No se encontró una cuenta con ese correo electrónico.",
         "1502": "Faltan algunos datos obligatorios.",
         "1503": "Email o contraseña incorrectos. Intenta nuevamente."

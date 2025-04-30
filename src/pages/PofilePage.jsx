@@ -138,6 +138,8 @@ export default function ProfilePage() {
 
       await deleteProfile();
       setUser(null);
+      localStorage.removeItem("token");
+      navigate("/login");
 
       const result = await Swal.fire({
         icon: "success",
@@ -146,8 +148,6 @@ export default function ProfilePage() {
         showConfirmButton: true,
         confirmButtonText: t("ok"),
       });
-
-      await signOut(auth);
 
       if (result.isConfirmed) {
         navigate("/login");
