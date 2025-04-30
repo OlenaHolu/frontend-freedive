@@ -10,9 +10,8 @@ import { getTranslatedError } from '../utils/getTranslatedError';
 
 export default function RegisterPage() {
   const navigate = useNavigate();
-  const { user, loading } = useAuth();
+  const { user, loading, setUser, email, setEmail } = useAuth();
 
-  const { email, setEmail } = useAuth();
   const [password, setPassword] = useState("");
   const [password_confirmation, setPassword_confirmation] = useState("");
   const [name, setName] = useState("");
@@ -31,19 +30,23 @@ export default function RegisterPage() {
 
     try {
       await register(name, email, password, password_confirmation);
-      await login(email, password);
+      const userData = await login(email, password);
+      setUser(userData);
       Swal.fire({
         icon: "success",
         title: t("register.success_title"),
         text: t("register.success_message"),
       });
-      navigate("/dashboard", { replace: true });  
-
     } catch (err) {
+
+      const errorCode = err.response?.data?.errorCode;
+      const defaultMessage = t("errors.1001");
+      const translated = errorCode ? t(`errors.${errorCode}`) : defaultMessage;
+
       Swal.fire({
         icon: "error",
         title: t("register.error_title"),
-        text: getTranslatedError(t, err),
+        text: translated,
       });
 
     } finally {
@@ -94,7 +97,11 @@ export default function RegisterPage() {
           <button
             type="submit"
             disabled={submitting}
-            className="w-full bg-blue-500 text-white py-3 rounded font-bold"
+            className={`w-full text-white py-3 rounded font-bold transition ${
+              submitting
+                ? "bg-gray-300 cursor-not-allowed"
+                : "bg-blue-600 hover:bg-blue-700"
+            }`}
           >
             {submitting ? t("register.loading") : t("register.button")}
           </button>

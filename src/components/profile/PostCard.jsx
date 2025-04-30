@@ -6,7 +6,7 @@ export default function PostCard({ post, user, onDelete, t }) {
           {post.location && <div className="italic text-gray-500">{post.location}</div>}
         </div>
         <img
-          src={post.image_url}
+          src={post.image_path}
           alt={`Post ${post.id}`}
           className="w-full max-h-[600px] object-cover"
           referrerPolicy="no-referrer"
