@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { getDives } from "../api/dive";
 import {
+  ScatterChart,
+  Scatter,
   LineChart,
   Line,
   XAxis,
@@ -53,8 +55,36 @@ const StatsPage = () => {
     .map((dive) => ({
       date: new Date(dive.StartTime).toLocaleDateString(),
       depth: Number(dive.MaxDepth),
-      time: Number(dive.DiveTimeMinutes || 0),
+      time: Number(dive.DiveTime || 0),
     }));
+
+  const scatterData = dives
+    .filter(d => d.SurfaceTime != null && d.DiveTime != null)
+    .map(d => ({
+      surface: d.SurfaceTime / 60,
+      dive: d.DiveTime / 60
+    }));
+
+  const groupedByDate = {};
+  dives.forEach(d => {
+    const date = new Date(d.StartTime).toLocaleDateString();
+    if (!groupedByDate[date]) groupedByDate[date] = [];
+    groupedByDate[date].push(d);
+  });
+
+  const avgSessionData = Object.entries(groupedByDate).map(([date, entries]) => {
+    const avgSurface = entries.reduce((sum, d) => sum + (d.SurfaceTime || 0), 0) / entries.length;
+    const avgDive = entries.reduce((sum, d) => sum + (d.DiveTime || 0), 0) / entries.length;
+
+    return {
+      date,
+      avgSurface: Math.round(avgSurface / 60),
+      avgDive: Math.round(avgDive / 60)
+    };
+  });
+
+  const totalDive = chartData.reduce((sum, d) => sum + d.time, 0);
+  const totalSurface = dives.reduce((sum, d) => sum + (d.SurfaceTime || 0), 0) / 60;
 
   if (loading || loadingDives || !user) {
     return (
@@ -75,8 +105,8 @@ const StatsPage = () => {
             key={tab.key}
             onClick={() => setActiveTab(tab.key)}
             className={`pb-2 px-4 font-medium ${activeTab === tab.key
-                ? "border-b-2 border-blue-500 text-blue-600"
-                : "text-gray-500"
+              ? "border-b-2 border-blue-500 text-blue-600"
+              : "text-gray-500"
               }`}
           >
             {tab.label}
@@ -90,78 +120,108 @@ const StatsPage = () => {
       ) : (
         <>
           {activeTab === "time" && (
-            <ResponsiveContainer width="100%" height={300}>
-              <LineChart data={chartData}>
-                <XAxis dataKey="date" />
-                <YAxis />
-                <Tooltip />
-                <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
-                <Line
-                  type="monotone"
-                  dataKey="time"
-                  stroke="#007bff"
-                  strokeWidth={2}
-                />
-              </LineChart>
-            </ResponsiveContainer>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div>
+                <h3 className="text-lg font-semibold mb-2">
+                  {t("Dive Time vs. Surface Time (Scatter Plot)")}
+                </h3>
+                <ResponsiveContainer width="100%" height={300}>
+                  <ScatterChart>
+                    <XAxis dataKey="surface" name="Surface Time (min)" />
+                    <YAxis dataKey="dive" name="Dive Time (min)" />
+                    <Tooltip />
+                    <Scatter name="Dives" data={scatterData} fill="#8884d8" />
+                  </ScatterChart>
+                </ResponsiveContainer>
+              </div>
+
+              <div>
+                <h3 className="text-lg font-semibold mb-2">
+                  {t("Average Surface Time vs. Dive Time per Session")}
+                </h3>
+                <ResponsiveContainer width="100%" height={300}>
+                  <LineChart data={avgSessionData}>
+                    <XAxis dataKey="date" />
+                    <YAxis />
+                    <Tooltip />
+                    <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
+                    <Line type="monotone" dataKey="avgSurface" stroke="#00bcd4" name="Surface Time" />
+                    <Line type="monotone" dataKey="avgDive" stroke="#ff9800" name="Dive Time" />
+                  </LineChart>
+                </ResponsiveContainer>
+              </div>
+            </div>
           )}
 
           {activeTab === "date" && (
-            <ResponsiveContainer width="100%" height={300}>
-              <BarChart data={chartData}>
-                <XAxis dataKey="date" />
-                <YAxis />
-                <Tooltip />
-                <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
-                <Bar dataKey="depth" fill="#8884d8" />
-              </BarChart>
-            </ResponsiveContainer>
+            <div>
+              <h3 className="text-lg font-semibold mb-2">
+                {t("Total Dives per Day")}
+              </h3>
+              <ResponsiveContainer width="100%" height={300}>
+                <BarChart data={chartData}>
+                  <XAxis dataKey="date" />
+                  <YAxis />
+                  <Tooltip />
+                  <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
+                  <Bar dataKey="depth" fill="#8884d8" />
+                </BarChart>
+              </ResponsiveContainer>
+            </div>
           )}
 
           {activeTab === "performance" && (
-            <ResponsiveContainer width="100%" height={300}>
-              <PieChart>
-                <Pie
-                  data={[
-                    { name: "Underwater", value: chartData.reduce((sum, d) => sum + d.time, 0) },
-                    { name: "Surface", value: chartData.length * 10 - chartData.reduce((sum, d) => sum + d.time, 0) }
-                  ]}
-                  cx="50%"
-                  cy="50%"
-                  outerRadius={100}
-                  fill="#8884d8"
-                  dataKey="value"
-                  label
-                >
-                  <Cell fill="#00bcd4" />
-                  <Cell fill="#ff9800" />
-                </Pie>
-                <Tooltip />
-              </PieChart>
-            </ResponsiveContainer>
+            <div>
+              <h3 className="text-lg font-semibold mb-2">
+                {t("Underwater vs. Surface Time (Proportion)")}
+              </h3>
+              <ResponsiveContainer width="100%" height={300}>
+                <PieChart>
+                  <Pie
+                    data={[
+                      { name: "Underwater", value: totalDive },
+                      { name: "Surface", value: totalSurface }
+                    ]}
+                    cx="50%"
+                    cy="50%"
+                    outerRadius={100}
+                    fill="#8884d8"
+                    dataKey="value"
+                    label
+                  >
+                    <Cell fill="#00bcd4" />
+                    <Cell fill="#ff9800" />
+                  </Pie>
+                  <Tooltip />
+                </PieChart>
+              </ResponsiveContainer>
+            </div>
           )}
 
           {activeTab === "progress" && (
             <div>
-              <h2 className="text-2xl font-semibold mb-6">📈 {t("stats.title")}</h2>
-            <ResponsiveContainer width="100%" height={300}>
-              <LineChart data={chartData}>
-                <XAxis dataKey="date" />
-                <YAxis domain={['auto', 'auto']} />
-                <Tooltip />
-                <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
-                <Line
-                  type="monotone"
-                  dataKey="depth"
-                  stroke="#007bff"
-                  strokeWidth={2}
-                  dot={{ r: 4 }}
-                  activeDot={{ r: 6 }}
-                />
-              </LineChart>
-            </ResponsiveContainer>
+              <h3 className="text-lg font-semibold mb-2">
+                {t("Max Depth Over Time")}
+              </h3>
+              <ResponsiveContainer width="100%" height={300}>
+                <LineChart data={chartData}>
+                  <XAxis dataKey="date" />
+                  <YAxis domain={['auto', 'auto']} />
+                  <Tooltip />
+                  <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
+                  <Line
+                    type="monotone"
+                    dataKey="depth"
+                    stroke="#007bff"
+                    strokeWidth={2}
+                    dot={{ r: 4 }}
+                    activeDot={{ r: 6 }}
+                  />
+                </LineChart>
+              </ResponsiveContainer>
             </div>
           )}
+
         </>
       )}
     </div>
