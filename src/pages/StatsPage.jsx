@@ -55,14 +55,14 @@ const StatsPage = () => {
     .map((dive) => ({
       date: new Date(dive.StartTime).toLocaleDateString(),
       depth: Number(dive.MaxDepth),
-      time: Number(dive.DiveTime || 0),
+      time: Number(dive.Duration || 0),
     }));
 
   const scatterData = dives
-    .filter(d => d.SurfaceTime != null && d.DiveTime != null)
+    .filter(d => d.SurfaceTime != null && d.Duration != null)
     .map(d => ({
       surface: d.SurfaceTime / 60,
-      dive: d.DiveTime / 60
+      dive: d.Duration / 60
     }));
 
   const groupedByDate = {};
@@ -74,7 +74,7 @@ const StatsPage = () => {
 
   const avgSessionData = Object.entries(groupedByDate).map(([date, entries]) => {
     const avgSurface = entries.reduce((sum, d) => sum + (d.SurfaceTime || 0), 0) / entries.length;
-    const avgDive = entries.reduce((sum, d) => sum + (d.DiveTime || 0), 0) / entries.length;
+    const avgDive = entries.reduce((sum, d) => sum + (d.Duration || 0), 0) / entries.length;
 
     return {
       date,
@@ -127,8 +127,15 @@ const StatsPage = () => {
                 </h3>
                 <ResponsiveContainer width="100%" height={300}>
                   <ScatterChart>
-                    <XAxis dataKey="surface" name="Surface Time (min)" />
-                    <YAxis dataKey="dive" name="Dive Time (min)" />
+                    <XAxis 
+                      dataKey="surface" 
+                      type="number"
+                      domain={[0, "dataMax"]}
+                      interval={0}
+                      tickCount={10}
+                      name="Surface Time (min)" 
+                    />
+                    <YAxis dataKey="dive" type="number" name="Dive Time (min)" />
                     <Tooltip />
                     <Scatter name="Dives" data={scatterData} fill="#8884d8" />
                   </ScatterChart>

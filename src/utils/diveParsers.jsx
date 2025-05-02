@@ -118,7 +118,7 @@ export const parseSmlDive = (xmlText) => {
       SurfaceTime: Number(getText(header, "SurfaceTime")) || null,
       SurfacePressure: Number(getText(header, "SurfacePressure")) || null,
       PreviousMaxDepth: parseFloat(getText(header, "PreviousDiveDepth")) || null,
-      DiveTime: Number(getText(header, "Duration")) || null,
+      DiveTime: Number(getText(header, "DiveTime")) || null,
       Deleted: false,
       Weight: null,
       Weather: null,

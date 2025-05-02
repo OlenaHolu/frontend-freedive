@@ -169,7 +169,7 @@ export default function DiveDetailsPage() {
             <InfoRow icon={<Compass size={16} />} label={t("dive.details.avgDepth")} value={`${dive.AvgDepth ?? "—"} m`} />
             <InfoRow icon={<Clock size={16} />} label={t("dive.details.sampleInterval")} value={`${dive.SampleInterval ?? "—"} s`} />
             <InfoRow icon={<TrendingDown size={16} />} label={t("dive.details.previousMax")} value={`${dive.PreviousMaxDepth ?? "—"} m`} />
-            <InfoRow icon={<Clock size={16} />} label={t("dive.details.diveTime")} value={`${dive.DiveTime ?? "—"} s`} />
+            <InfoRow icon={<Clock size={16} />} label={t("dive.details.diveTime")} value={`${dive.Duration ?? "—"} s`} />
             <InfoRow icon={<Weight size={16} />} label={t("dive.details.weight")} value={`${dive.Weight ?? "—"} kg`} />
             <InfoRow icon={<ListOrdered size={16} />} label={t("dive.details.diveNumberInSerie")} value={dive.DiveNumberInSerie ?? "—"} />
           </TableSection>
