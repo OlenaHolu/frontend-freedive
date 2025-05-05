@@ -47,19 +47,7 @@ export const parseDiveXml = (xmlText) => {
       SurfacePressure: Number(getText("SurfacePressure")) || null,
       PreviousMaxDepth: parseFloat(getText("PreviousMaxDepth")) || null,
       DiveTime: Number(getText("DiveTime")) || null,
-      Deleted: false,
-      Weight: Number(getText("Weight")) || null,
-      Weather: Number(getText("Weather")) || null,
-      Visibility: Number(getText("Visibility")) || null,
-      Software: getText("Software") || null,
       SerialNumber: getText("SerialNumber") || '',
-      TimeFromReset: Number(getText("TimeFromReset")) || null,
-      Battery: Number(getText("BatteryLevel")) || null,
-      LastDecoStopDepth: getText("LastDecoStopDepth") !== undefined
-        ? Number(getText("LastDecoStopDepth"))
-        : null,
-
-      AscentMode: Number(getText("AscentMode")) || 0,
       samples,
     };
   });
@@ -119,16 +107,7 @@ export const parseSmlDive = (xmlText) => {
       SurfacePressure: Number(getText(header, "SurfacePressure")) || null,
       PreviousMaxDepth: parseFloat(getText(header, "PreviousDiveDepth")) || null,
       DiveTime: Number(getText(header, "DiveTime")) || null,
-      Deleted: false,
-      Weight: null,
-      Weather: null,
-      Visibility: null,
-      Software: getText(xmlDoc, "SW") || null,
       SerialNumber: getText(xmlDoc, "SerialNumber") || '',
-      TimeFromReset: null,
-      Battery: Number(getText(header, "Battery")) || null,
-      LastDecoStopDepth: null,
-      AscentMode: 0,
       samples,
     };
   });

@@ -15,12 +15,8 @@ import {
   Compass,
   Settings,
   Cpu,
-  BatteryFull,
   FileText,
-  CloudSun,
-  Eye,
-  ListOrdered,
-  Weight
+  ListOrdered
 } from "lucide-react";
 
 
@@ -170,7 +166,6 @@ export default function DiveDetailsPage() {
             <InfoRow icon={<Clock size={16} />} label={t("dive.details.sampleInterval")} value={`${dive.SampleInterval ?? "—"} s`} />
             <InfoRow icon={<TrendingDown size={16} />} label={t("dive.details.previousMax")} value={`${dive.PreviousMaxDepth ?? "—"} m`} />
             <InfoRow icon={<Clock size={16} />} label={t("dive.details.diveTime")} value={`${dive.Duration ?? "—"} s`} />
-            <InfoRow icon={<Weight size={16} />} label={t("dive.details.weight")} value={`${dive.Weight ?? "—"} kg`} />
             <InfoRow icon={<ListOrdered size={16} />} label={t("dive.details.diveNumberInSerie")} value={dive.DiveNumberInSerie ?? "—"} />
           </TableSection>
         )}
@@ -187,8 +182,6 @@ export default function DiveDetailsPage() {
 
         {activeTab === "environment" && (
           <TableSection>
-            <InfoRow icon={<CloudSun size={16} />} label={t("dive.details.weather")} value={dive.Weather ?? "—"} />
-            <InfoRow icon={<Eye size={16} />} label={t("dive.details.visibility")} value={dive.Visibility ?? "—"} />
             <InfoRow icon={<Waves size={16} />} label={t("dive.details.surfacePressure")} value={dive.SurfacePressure ?? "—"} />
             <InfoRow icon={<Clock size={16} />} label={t("dive.details.surfaceTime")} value={dive.SurfaceTime ?? "—"} />
             <InfoRow icon={<Waves size={16} />} label={t("dive.details.altitudeMode")} value={dive.AltitudeMode ?? "—"} />
@@ -202,10 +195,6 @@ export default function DiveDetailsPage() {
             <InfoRow icon={<Cpu size={16} />} label={t("dive.details.mode")} value={dive.Mode ?? "—"} />
             <InfoRow icon={<Settings size={16} />} label={t("dive.details.personalMode")} value={dive.PersonalMode ?? "—"} />
             <InfoRow icon={<Cpu size={16} />} label={t("dive.details.serial")} value={dive.SerialNumber || "—"} />
-            <InfoRow icon={<BatteryFull size={16} />} label={t("dive.details.battery")} value={`${dive.Battery ?? "—"} %`} />
-            <InfoRow icon={<Compass size={16} />} label={t("dive.details.ascentMode")} value={dive.AscentMode} />
-            <InfoRow icon={<Waves size={16} />} label={t("dive.details.lastDecoStop")} value={`${dive.LastDecoStopDepth ?? "—"} m`} />
-            <InfoRow icon={<FileText size={16} />} label={t("dive.details.software")} value={dive.Software || "—"} />
           </TableSection>
         )}
 

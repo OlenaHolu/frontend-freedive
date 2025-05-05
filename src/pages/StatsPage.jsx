@@ -58,12 +58,20 @@ const StatsPage = () => {
       time: Number(dive.Duration || 0),
     }));
 
-  const scatterData = dives
+    const formatTime = (seconds) => {
+      const min = Math.floor(seconds / 60);
+      const sec = seconds % 60;
+      return `${min}:${sec.toString().padStart(2, '0')}`;
+    };
+
+    const scatterData = dives
     .filter(d => d.SurfaceTime != null && d.Duration != null)
     .map(d => ({
-      surface: d.SurfaceTime / 60,
-      dive: d.Duration / 60
+      surface: Number(d.SurfaceTime),
+      dive: Number(d.Duration)
     }));
+      
+    
 
   const groupedByDate = {};
   dives.forEach(d => {
@@ -131,11 +139,16 @@ const StatsPage = () => {
                       dataKey="surface" 
                       type="number"
                       domain={[0, "dataMax"]}
-                      interval={0}
-                      tickCount={10}
+                      tickFormatter={formatTime}
                       name="Surface Time (min)" 
                     />
-                    <YAxis dataKey="dive" type="number" name="Dive Time (min)" />
+                    <YAxis 
+                      dataKey="dive" 
+                      type="number" 
+                      domain={[0, "dataMax"]}
+                      tickFormatter={formatTime}
+                      name="Dive Time (min)" 
+                    />
                     <Tooltip />
                     <Scatter name="Dives" data={scatterData} fill="#8884d8" />
                   </ScatterChart>
