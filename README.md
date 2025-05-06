@@ -1,70 +1,48 @@
-# Getting Started with Create React App
+# FreediveAnalyzer – Frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This repository contains the web interface for **FreediveAnalyzer**, a platform designed to log and analyze freediving or spearfishing sessions. The application is built as a Single Page Application (SPA) using React and Vite.
 
-## Available Scripts
+## 🚀 Technologies
 
-In the project directory, you can run:
+- ⚛️ React  
+- ⚡ Vite  
+- 💅 Tailwind CSS  
+- 🌍 i18next (internationalization)  
+- 📊 Recharts (data visualization)
 
-### `npm start`
+## 🧪 Available Scripts
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Inside the project directory, you can run:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### `npm run dev`
 
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Starts the app in development mode.  
+Open [http://localhost:5173](http://localhost:5173) to view it in your browser.
 
 ### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Builds the app for production into the `dist` folder.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### `npm run preview`
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Serves the production build locally for testing.
 
-### `npm run eject`
+### `npm run lint`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Runs ESLint to check code quality.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## 🔐 Authentication
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Authentication is based on JWT tokens. Once the user logs in, the token is stored in `localStorage` and attached to all authenticated API requests.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## 🌍 Internationalization
 
-## Learn More
+The frontend supports multiple languages using `i18next`. Language files are loaded dynamically and can be extended by adding JSON files in `/locales`.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## 🖼 Responsive Design
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+All views and components are fully responsive, optimized for both desktop and mobile usage.
 
-### Code Splitting
+## 📄 License
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+This project is licensed under the MIT License. See the `LICENSE` file for details.
