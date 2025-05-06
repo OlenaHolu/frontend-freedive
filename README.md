@@ -2,6 +2,10 @@
 
 This repository contains the web interface for **FreediveAnalyzer**, a platform designed to log and analyze freediving or spearfishing sessions. The application is built as a Single Page Application (SPA) using React and Vite.
 
+## 🌐 Live Demo
+
+You can try the app here: [https://frontend-freedive.vercel.app/](https://frontend-freedive.vercel.app/)
+
 ## 🚀 Technologies
 
 - ⚛️ React  
