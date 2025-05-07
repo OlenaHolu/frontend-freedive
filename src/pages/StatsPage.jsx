@@ -66,11 +66,20 @@ const StatsPage = () => {
   const lineChartData = dives
     .filter(d => d.SurfaceTime != null && d.Duration != null && d.StartTime)
     .sort((a, b) => new Date(a.StartTime) - new Date(b.StartTime))
-    .map(d => ({
-      date: new Date(d.StartTime).toLocaleDateString(),
-      diveSeconds: d.Duration,
-      surfaceSeconds: d.SurfaceTime,
-    }));
+    .map(d => {
+      const dateObj = new Date(d.StartTime);
+      const mm = String(dateObj.getMonth() + 1).padStart(2, '0');
+      const yy = String(dateObj.getFullYear()).slice(-2);
+      return {
+        shortDate: `${mm}/${yy}`, // para eje X
+        fullDate: dateObj.toLocaleDateString(undefined, {
+          day: 'numeric', month: 'short', year: 'numeric'
+        }),
+        diveSeconds: d.Duration,
+        surfaceSeconds: d.SurfaceTime,
+      };
+    });
+
 
   const formatMinutesOnly = (seconds) => Math.floor(seconds / 60);
 
@@ -138,15 +147,27 @@ const StatsPage = () => {
                 <ResponsiveContainer width="100%" height={300}>
                   <LineChart data={lineChartData}>
                     <CartesianGrid strokeDasharray="3 3" />
-                    <XAxis dataKey="date" />
+                    <XAxis dataKey="shortDate" />
                     <YAxis
                       tickFormatter={formatMinutesOnly}
                       label={{ value: t("Minutes"), angle: -90, position: 'insideLeft' }}
                     />
                     <Tooltip
-                      formatter={(value) => formatTime(value)} // min:sec en dot
-                      labelFormatter={(label) => `${t("Date")}: ${label}`}
+                      content={({ label, payload }) => {
+                        if (!payload || payload.length === 0) return null;
+
+                        const dataPoint = payload[0].payload;
+
+                        return (
+                          <div className="bg-white p-2 border rounded shadow text-sm text-gray-800">
+                            <div><strong>{dataPoint.fullDate || label}</strong></div>
+                            <div>{t("Dive Duration")}: {formatTime(dataPoint.diveSeconds)}</div>
+                            <div>{t("Surface Time")}: {formatTime(dataPoint.surfaceSeconds)}</div>
+                          </div>
+                        );
+                      }}
                     />
+
                     <Legend />
                     <Line
                       type="monotone"
