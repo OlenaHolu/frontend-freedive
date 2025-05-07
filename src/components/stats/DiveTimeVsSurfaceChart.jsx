@@ -8,12 +8,30 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const DiveTimeVsSurfaceChart = ({ dives, t }) => {
   const [range, setRange] = useState("months"); // "months" | "days"
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [showCalendar, setShowCalendar] = useState(false);
+
+  useEffect(() => {
+    if (dives.length > 0) {
+      const latestDive = dives.reduce((latest, current) => {
+        const latestTime = new Date(latest.StartTime).getTime();
+        const currentTime = new Date(current.StartTime).getTime();
+        return currentTime > latestTime ? current : latest;
+      });
+  
+      const latestDate = new Date(latestDive.StartTime);
+      const defaultDate =
+        range === "months"
+          ? new Date(latestDate.getFullYear(), latestDate.getMonth(), 1)
+          : latestDate;
+  
+      setSelectedDate(defaultDate);
+    }
+  }, [dives]);
 
   const currentYear = new Date().getFullYear();
   const years = Array.from({ length: currentYear - 2000 + 1 }, (_, i) => 2000 + i);
@@ -69,6 +87,7 @@ const DiveTimeVsSurfaceChart = ({ dives, t }) => {
       (d) =>
         d.SurfaceTime != null && d.Duration != null && d.StartTime != null
     )
+    .sort((a, b) => new Date(a.StartTime) - new Date(b.StartTime))
     .filter((d) => {
       const diveDate = new Date(d.StartTime);
       if (range === "months") {
