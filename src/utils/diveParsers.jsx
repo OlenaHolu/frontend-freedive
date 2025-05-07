@@ -18,16 +18,6 @@ export const parseDiveXml = (xmlText) => {
       ),
     }));
 
-    const avgTemp =
-      samples.length > 0
-        ? Number(
-          (
-            samples.reduce((sum, s) => sum + (s.temperature || 0), 0) /
-            samples.length
-          ).toFixed(1)
-        )
-        : null;
-
     return {
       StartTime: getText("StartTime"),
       Duration: Number(getText("Duration")),

@@ -1,22 +1,12 @@
 import { useEffect, useState } from "react";
 import { getDives } from "../api/dive";
-import {
-  Legend,
-  LineChart,
-  Line,
-  XAxis,
-  YAxis,
-  Tooltip,
-  ResponsiveContainer,
-  CartesianGrid,
-  BarChart,
-  Bar,
-  PieChart,
-  Pie,
-  Cell
-} from "recharts";
 import { useTranslation } from "react-i18next";
 import { useAuth } from "../context/AuthContext";
+import DiveTimeVsSurfaceChart from "../components/stats/DiveTimeVsSurfaceChart.jsx";
+import AverageDiveTimeVsSurfaceChart from "../components/stats/AverageDiveTimeVsSurfaceChart.jsx";
+import UnderwaterPieChart from "../components/stats/UnderwaterPieChart.jsx";
+import DepthOverTimeChart from "../components/stats/DepthOverTimeChart";
+import DivesPerDateChart from "../components/stats/DivesPerDateChart.jsx";
 
 const TABS = [
   { key: "time", label: "Dive Time & Surface" },
@@ -27,10 +17,11 @@ const TABS = [
 
 const StatsPage = () => {
   const { user, loading } = useAuth();
+  const { t } = useTranslation();
+
   const [dives, setDives] = useState([]);
   const [loadingDives, setLoadingDives] = useState(true);
   const [activeTab, setActiveTab] = useState("time");
-  const { t } = useTranslation();
 
   useEffect(() => {
     const fetchDives = async () => {
@@ -48,23 +39,23 @@ const StatsPage = () => {
     if (user) fetchDives();
   }, [user]);
 
+  const formatTime = (seconds) => {
+    const total = Math.round(seconds);
+    const min = Math.floor(total / 60);
+    const sec = total % 60;
+    return `${min}:${sec.toString().padStart(2, '0')}`;
+  };
+
+  const formatMinutesOnly = (seconds) => Math.floor(seconds / 60);
+
   const chartData = dives
-    .filter(d => d.StartTime && d.MaxDepth)
+    .filter((d) => d.StartTime && d.MaxDepth)
     .sort((a, b) => new Date(a.StartTime) - new Date(b.StartTime))
     .map((dive) => ({
       date: new Date(dive.StartTime).toLocaleDateString(),
       depth: Number(dive.MaxDepth),
       time: Number(dive.Duration || 0),
     }));
-
-  const formatTime = (seconds) => {
-    const total = Math.round(seconds); // 🔧 redondeo general
-    const min = Math.floor(total / 60);
-    const sec = total % 60;
-    return `${min}:${sec.toString().padStart(2, '0')}`;
-  };
-
-
 
   const lineChartData = dives
     .filter(d => d.SurfaceTime != null && d.Duration != null && d.StartTime)
@@ -74,7 +65,7 @@ const StatsPage = () => {
       const mm = String(dateObj.getMonth() + 1).padStart(2, '0');
       const yy = String(dateObj.getFullYear()).slice(-2);
       return {
-        shortDate: `${mm}/${yy}`, // para eje X
+        shortDate: `${mm}/${yy}`,
         fullDate: dateObj.toLocaleDateString(undefined, {
           day: 'numeric', month: 'short', year: 'numeric'
         }),
@@ -82,10 +73,6 @@ const StatsPage = () => {
         surfaceSeconds: d.SurfaceTime,
       };
     });
-
-
-  const formatMinutesOnly = (seconds) => Math.floor(seconds / 60);
-
 
   const groupedByDate = {};
   dives.forEach(d => {
@@ -104,7 +91,6 @@ const StatsPage = () => {
       avgDive: avgDive
     };
   });
-
 
   const totalDive = chartData.reduce((sum, d) => sum + d.time, 0);
   const totalSurface = dives.reduce((sum, d) => sum + (d.SurfaceTime || 0), 0) / 60;
@@ -138,199 +124,46 @@ const StatsPage = () => {
       </div>
 
       {/* Tab content */}
-      {chartData.length === 0 ? (
+      {dives.length === 0 ? (
         <p className="text-gray-500">{t("divesList.noDives")}</p>
       ) : (
         <>
           {activeTab === "time" && (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <div>
-                <h3 className="text-lg font-semibold mb-2">
-                  {t("Dive Time vs. Surface Time")}
-                </h3>
-                <ResponsiveContainer width="100%" height={300}>
-                  <LineChart data={lineChartData}>
-                    <CartesianGrid strokeDasharray="3 3" />
-                    <XAxis dataKey="shortDate" />
-                    <YAxis
-                      tickFormatter={formatMinutesOnly}
-                      label={{ value: t("Minutes"), angle: -90, position: 'insideLeft' }}
-                    />
-                    <Tooltip
-                      content={({ label, payload }) => {
-                        if (!payload || payload.length === 0) return null;
+              <DiveTimeVsSurfaceChart
+                data={lineChartData}
+                formatTime={formatTime}
+                formatMinutesOnly={formatMinutesOnly}
+                t={t}
+              />
 
-                        const dataPoint = payload[0].payload;
-
-                        return (
-                          <div className="bg-white p-2 border rounded shadow text-sm text-gray-800">
-                            <div><strong>{dataPoint.fullDate || label}</strong></div>
-                            <div>{t("Dive Duration")}: {formatTime(dataPoint.diveSeconds)}</div>
-                            <div>{t("Surface Time")}: {formatTime(dataPoint.surfaceSeconds)}</div>
-                          </div>
-                        );
-                      }}
-                    />
-
-                    <Legend />
-                    <Line
-                      type="monotone"
-                      dataKey="diveSeconds"
-                      name={t("Dive Duration")}
-                      stroke="#8884d8"
-                      dot={{ r: 3 }}
-                    />
-                    <Line
-                      type="monotone"
-                      dataKey="surfaceSeconds"
-                      name={t("Surface Time")}
-                      stroke="#82ca9d"
-                      dot={{ r: 3 }}
-                    />
-                  </LineChart>
-                </ResponsiveContainer>
-
-              </div>
-
-              <div>
-                <h3 className="text-lg font-semibold mb-2">
-                  {t("Daily Average Dive Time vs. Surface Time")}
-                </h3>
-                <ResponsiveContainer width="100%" height={300}>
-                  <LineChart data={avgSessionData}>
-                    <CartesianGrid strokeDasharray="3 3" />
-                    <XAxis
-                      dataKey="date"
-                      angle={-45}
-                      textAnchor="end"
-                      height={60}
-                    />
-                    <YAxis
-                      tickFormatter={formatTime}
-                      domain={[0, 'dataMax']}
-                      label={{ value: t("Minutes"), angle: -90, position: 'insideLeft' }}
-                    />
-                    <Tooltip
-                      content={({ label, payload }) => {
-                        if (!payload || payload.length === 0) return null;
-
-                        const surface = payload.find(p => p.dataKey === "avgSurface");
-                        const dive = payload.find(p => p.dataKey === "avgDive");
-
-                        return (
-                          <div className="bg-white p-3 border rounded shadow text-sm text-gray-800">
-                            <div className="font-semibold mb-2">{t("Session Date")}: {label}</div>
-                            {surface && (
-                              <div style={{ color: "#82ca9d" }}>
-                                {t("Avg Surface Time")}: {formatTime(surface.value)}
-                              </div>
-                            )}
-                            {dive && (
-                              <div style={{ color: "#8884d8" }}>
-                                {t("Avg Dive Time")}: {formatTime(dive.value)}
-                              </div>
-                            )}
-                          </div>
-                        );
-                      }}
-                    />
-
-                    <Legend />
-                    <Line
-                      type="monotone"
-                      dataKey="avgDive"
-                      name={t("Avg Dive Time")}
-                      stroke="#8884d8"
-                      dot={{ r: 3 }}
-                    />
-                    <Line
-                      type="monotone"
-                      dataKey="avgSurface"
-                      name={t("Avg Surface Time")}
-                      stroke="#82ca9d"
-                      dot={{ r: 3 }}
-                    />
-                  </LineChart>
-                </ResponsiveContainer>
-
-              </div>
+              <AverageDiveTimeVsSurfaceChart
+                data={avgSessionData}
+                formatTime={formatTime}
+                formatMinutesOnly={formatMinutesOnly}
+                t={t}
+              />
 
             </div>
           )}
 
-          {activeTab === "date" && (
-            <div>
-              <h3 className="text-lg font-semibold mb-2">
-                {t("Total Dives per Day")}
-              </h3>
-              <ResponsiveContainer width="100%" height={300}>
-                <BarChart data={chartData}>
-                  <XAxis dataKey="date" />
-                  <YAxis />
-                  <Tooltip />
-                  <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
-                  <Bar dataKey="depth" fill="#8884d8" />
-                </BarChart>
-              </ResponsiveContainer>
-            </div>
-          )}
+{activeTab === "date" && <DivesPerDateChart dives={dives} t={t} />}
 
-          {activeTab === "performance" && (
-            <div>
-              <h3 className="text-lg font-semibold mb-2">
-                {t("Underwater vs. Surface Time (Proportion)")}
-              </h3>
-              <ResponsiveContainer width="100%" height={300}>
-                <PieChart>
-                  <Pie
-                    data={[
-                      { name: "Underwater", value: totalDive },
-                      { name: "Surface", value: totalSurface }
-                    ]}
-                    cx="50%"
-                    cy="50%"
-                    outerRadius={100}
-                    fill="#8884d8"
-                    dataKey="value"
-                    label
-                  >
-                    <Cell fill="#00bcd4" />
-                    <Cell fill="#ff9800" />
-                  </Pie>
-                  <Tooltip />
-                </PieChart>
-              </ResponsiveContainer>
-            </div>
-          )}
+{activeTab === "performance" && (
+  <UnderwaterPieChart
+    totalDive={totalDive}
+    totalSurface={totalSurface}
+    t={t}
+  />
+)}
 
-          {activeTab === "progress" && (
-            <div>
-              <h3 className="text-lg font-semibold mb-2">
-                {t("Max Depth Over Time")}
-              </h3>
-              <ResponsiveContainer width="100%" height={300}>
-                <LineChart data={chartData}>
-                  <XAxis dataKey="date" />
-                  <YAxis domain={['auto', 'auto']} />
-                  <Tooltip />
-                  <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
-                  <Line
-                    type="monotone"
-                    dataKey="depth"
-                    stroke="#007bff"
-                    strokeWidth={2}
-                    dot={{ r: 4 }}
-                    activeDot={{ r: 6 }}
-                  />
-                </LineChart>
-              </ResponsiveContainer>
-            </div>
-          )}
-
-        </>
-      )}
-    </div>
-  );
+{activeTab === "progress" && (
+  <DepthOverTimeChart data={chartData} t={t} />
+)}
+</>
+)}
+</div>
+);
 };
 
 export default StatsPage;
