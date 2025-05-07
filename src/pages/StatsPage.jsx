@@ -57,11 +57,13 @@ const StatsPage = () => {
       time: Number(dive.Duration || 0),
     }));
 
-  const formatTime = (seconds) => {
-    const min = Math.floor(seconds / 60);
-    const sec = seconds % 60;
-    return `${min}:${sec.toString().padStart(2, '0')}`;
-  };
+    const formatTime = (seconds) => {
+      const total = Math.round(seconds); // 🔧 redondeo aquí
+      const min = Math.floor(total / 60);
+      const sec = total % 60;
+      return `${min}:${sec.toString().padStart(2, '0')}`;
+    };
+    
 
   const lineChartData = dives
     .filter(d => d.SurfaceTime != null && d.Duration != null && d.StartTime)
@@ -94,13 +96,14 @@ const StatsPage = () => {
   const avgSessionData = Object.entries(groupedByDate).map(([date, entries]) => {
     const avgSurface = entries.reduce((sum, d) => sum + (d.SurfaceTime || 0), 0) / entries.length;
     const avgDive = entries.reduce((sum, d) => sum + (d.Duration || 0), 0) / entries.length;
-
+  
     return {
       date,
-      avgSurface: Math.round(avgSurface / 60),
-      avgDive: Math.round(avgDive / 60)
+      avgSurface: avgSurface, 
+      avgDive: avgDive
     };
   });
+  
 
   const totalDive = chartData.reduce((sum, d) => sum + d.time, 0);
   const totalSurface = dives.reduce((sum, d) => sum + (d.SurfaceTime || 0), 0) / 60;
@@ -189,20 +192,46 @@ const StatsPage = () => {
               </div>
 
               <div>
-                <h3 className="text-lg font-semibold mb-2">
-                  {t("Average Surface Time vs. Dive Time per Session")}
-                </h3>
-                <ResponsiveContainer width="100%" height={300}>
-                  <LineChart data={avgSessionData}>
-                    <XAxis dataKey="date" />
-                    <YAxis />
-                    <Tooltip />
-                    <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
-                    <Line type="monotone" dataKey="avgSurface" stroke="#00bcd4" name="Surface Time" />
-                    <Line type="monotone" dataKey="avgDive" stroke="#ff9800" name="Dive Time" />
-                  </LineChart>
-                </ResponsiveContainer>
-              </div>
+  <h3 className="text-lg font-semibold mb-2">
+    {t("Average Surface Time vs. Dive Time per Session")}
+  </h3>
+  <ResponsiveContainer width="100%" height={300}>
+  <LineChart data={avgSessionData}>
+    <CartesianGrid strokeDasharray="3 3" />
+    <XAxis 
+      dataKey="date"
+      angle={-45}
+      textAnchor="end"
+      height={60}
+    />
+    <YAxis 
+      tickFormatter={(seconds) => Math.floor(seconds / 60)}
+      label={{ value: t("Minutes"), angle: -90, position: 'insideLeft' }} 
+    />
+    <Tooltip 
+      formatter={(value) => formatTime(value)} // ✅ min:sec
+      labelFormatter={(label) => `${t("Session Date")}: ${label}`}
+    />
+    <Legend />
+    <Line 
+      type="monotone" 
+      dataKey="avgDive" 
+      name={t("Avg Dive Time")} 
+      stroke="#8884d8" 
+      dot={{ r: 3 }}
+    />
+    <Line 
+      type="monotone" 
+      dataKey="avgSurface" 
+      name={t("Avg Surface Time")} 
+      stroke="#82ca9d" 
+      dot={{ r: 3 }}
+    />
+  </LineChart>
+</ResponsiveContainer>
+
+</div>
+
             </div>
           )}
 
