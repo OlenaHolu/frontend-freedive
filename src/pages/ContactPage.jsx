@@ -24,12 +24,13 @@ const ContactPage = () => {
         <form className="space-y-6">
           <div>
             <label className="block text-sm font-medium mb-1" htmlFor="name">
-              {t("contact.form.name")}
+              {t("profile.name")}
             </label>
             <input
               type="text"
               id="name"
               name="name"
+              placeholder={t("profile.name_placeholder")}
               required
               className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
@@ -37,12 +38,13 @@ const ContactPage = () => {
 
           <div>
             <label className="block text-sm font-medium mb-1" htmlFor="email">
-              {t("contact.form.email")}
+              {t("profile.email")}
             </label>
             <input
               type="email"
               id="email"
               name="email"
+              placeholder={t("profile.email_placeholder")}
               required
               className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
