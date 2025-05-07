@@ -3,7 +3,7 @@ const BACKEND_URL = import.meta.env.VITE_APP_BACKEND_URL;
 
 const API = axios.create({
   baseURL: BACKEND_URL,
-  timeout: 10000,
+  timeout: 60000,
 });
 
 API.interceptors.request.use(config => {

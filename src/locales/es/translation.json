@@ -166,7 +166,7 @@
             "description.limit": "Límite: hasta 100 archivos por carga",
             "loading": "Importing...",
             "tooManyFiles": "Demasiados archivos",
-            "maxFilesMessage": "Solo puedes subir hasta 100 archivos .sml o .xml a la vez.",
+            "maxFilesMessage": "Solo puedes subir hasta 200 archivos .sml o .xml a la vez.",
             "processingFile": "Processing dive file",
             "success": "Import successful!",
             "divesImported": "dives imported successfully",

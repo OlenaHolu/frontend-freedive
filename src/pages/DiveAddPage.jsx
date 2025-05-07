@@ -13,16 +13,15 @@ const DiveAddPage = () => {
 
   const handleImportedFiles = async (files) => {
     const totalFiles = files.length;
-/*
-    // ❗ Límite de archivos
-    if (totalFiles > 100) {
+
+    if (totalFiles > 200) {
       return Swal.fire({
         icon: "warning",
         title: t("dive.import.tooManyFiles"),
         text: t("dive.import.maxFilesMessage"),
       });
     }
-*/
+
     let totalDives = [];
 
     const simulateProgressUntilDone = async (start, end, duration, isDone) => {

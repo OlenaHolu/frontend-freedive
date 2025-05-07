@@ -20,7 +20,8 @@ export default function DiveForm({ editMode, initialData = {}, onClose }) {
     startTemperature: initialData.StartTemperature || "",
     bottomTemperature: initialData.BottomTemperature || "",
     endTemperature: initialData.EndTemperature || "",
-    previousMaxDepth: initialData.PreviousMaxDepth || ""
+    previousMaxDepth: initialData.PreviousMaxDepth || "",
+    surfaceTime: initialData.SurfaceTime || ""
   });
 
   const handleChange = (e) => {
@@ -59,6 +60,7 @@ export default function DiveForm({ editMode, initialData = {}, onClose }) {
         BottomTemperature: form.bottomTemperature,
         EndTemperature: form.endTemperature,
         PreviousMaxDepth: form.previousMaxDepth,
+        SurfaceTime: form.surfaceTime,
         Mode: 3
       };
 
@@ -77,7 +79,8 @@ export default function DiveForm({ editMode, initialData = {}, onClose }) {
         startTemperature: "",
         bottomTemperature: "",
         endTemperature: "",
-        previousMaxDepth: ""
+        previousMaxDepth: "",
+        surfaceTime: "",
       });
     } catch (err) {
       console.error(err);
@@ -189,6 +192,11 @@ export default function DiveForm({ editMode, initialData = {}, onClose }) {
       <div>
         <label className={labelClass}>{t("dive.details.previousMax")}</label>
         <input name="previousMaxDepth" type="number" value={form.previousMaxDepth} onChange={handleChange} className={inputClass} />
+      </div>
+
+      <div>
+        <label className={labelClass}>{t("dive.details.surfaceTime")}</label>
+        <input name="surfaceTime" type="number" value={form.surfaceTime} onChange={handleChange} className={inputClass} />
       </div>
 
       <div className="md:col-span-2 lg:col-span-3 flex flex-col sm:flex-row sm:justify-center gap-4 mt-4">

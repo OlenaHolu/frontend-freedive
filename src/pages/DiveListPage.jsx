@@ -22,7 +22,7 @@ export default function DiveListPage() {
   const [selectedDives, setSelectedDives] = useState([]);
   const [isFiltering, setIsFiltering] = useState(false);
 
-  const divesPerPage = 10;
+  const divesPerPage = 50;
 
   const {
     dives,
