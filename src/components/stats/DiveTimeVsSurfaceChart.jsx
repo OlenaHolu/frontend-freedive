@@ -10,6 +10,24 @@ import {
 } from "recharts";
 import { useEffect, useState } from "react";
 
+
+const calculateCorrelation = (x, y) => {
+  const n = x.length;
+  if (n !== y.length || n === 0) return 0;
+
+  const avgX = x.reduce((a, b) => a + b, 0) / n;
+  const avgY = y.reduce((a, b) => a + b, 0) / n;
+
+  const numerator = x.reduce((sum, xi, i) => sum + (xi - avgX) * (y[i] - avgY), 0);
+  const denominator = Math.sqrt(
+    x.reduce((sum, xi) => sum + (xi - avgX) ** 2, 0) *
+    y.reduce((sum, yi) => sum + (yi - avgY) ** 2, 0)
+  );
+
+  return denominator === 0 ? 0 : numerator / denominator;
+};
+
+
 const DiveTimeVsSurfaceChart = ({ dives, t }) => {
   const [range, setRange] = useState("months"); // "months" | "days"
   const [selectedDate, setSelectedDate] = useState(new Date());
@@ -117,6 +135,10 @@ const DiveTimeVsSurfaceChart = ({ dives, t }) => {
         rawSurface: originalSurface, // store original for tooltip
       };
     });
+
+    const surfaceArray = filteredData.map(d => d.rawSurface);
+const diveArray = filteredData.map(d => d.diveSeconds);
+const correlation = calculateCorrelation(surfaceArray, diveArray);
 
 
   return (
@@ -258,6 +280,17 @@ const DiveTimeVsSurfaceChart = ({ dives, t }) => {
           />
         </LineChart>
       </ResponsiveContainer>
+
+      {correlation && filteredData.length > 2 && (
+  <p className="mt-2 text-sm text-gray-700">
+    {correlation > 0.6
+      ? t("There is a strong positive relationship between surface time and dive duration.")
+      : correlation < -0.6
+      ? t("There is a strong negative relationship between surface time and dive duration.")
+      : t("No strong correlation detected between surface and dive times.")}
+  </p>
+)}
+
     </div>
   );
 };
