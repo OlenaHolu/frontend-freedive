@@ -129,11 +129,9 @@ const StatsPage = () => {
       ) : (
         <>
           {activeTab === "time" && (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="gap-8">
               <DiveTimeVsSurfaceChart
-                data={lineChartData}
-                formatTime={formatTime}
-                formatMinutesOnly={formatMinutesOnly}
+                dives={dives}
                 t={t}
               />
 
@@ -147,23 +145,23 @@ const StatsPage = () => {
             </div>
           )}
 
-{activeTab === "date" && <DivesPerDateChart dives={dives} t={t} />}
+          {activeTab === "date" && <DivesPerDateChart dives={dives} t={t} />}
 
-{activeTab === "performance" && (
-  <UnderwaterPieChart
-    totalDive={totalDive}
-    totalSurface={totalSurface}
-    t={t}
-  />
-)}
+          {activeTab === "performance" && (
+            <UnderwaterPieChart
+              totalDive={totalDive}
+              totalSurface={totalSurface}
+              t={t}
+            />
+          )}
 
-{activeTab === "progress" && (
-  <DepthOverTimeChart data={chartData} t={t} />
-)}
-</>
-)}
-</div>
-);
+          {activeTab === "progress" && (
+            <DepthOverTimeChart data={chartData} t={t} />
+          )}
+        </>
+      )}
+    </div>
+  );
 };
 
 export default StatsPage;
