@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import { getDives } from "../api/dive";
 import {
-  ScatterChart,
-  Scatter,
+  Legend,
   LineChart,
   Line,
   XAxis,
@@ -58,20 +57,23 @@ const StatsPage = () => {
       time: Number(dive.Duration || 0),
     }));
 
-    const formatTime = (seconds) => {
-      const min = Math.floor(seconds / 60);
-      const sec = seconds % 60;
-      return `${min}:${sec.toString().padStart(2, '0')}`;
-    };
+  const formatTime = (seconds) => {
+    const min = Math.floor(seconds / 60);
+    const sec = seconds % 60;
+    return `${min}:${sec.toString().padStart(2, '0')}`;
+  };
 
-    const scatterData = dives
-    .filter(d => d.SurfaceTime != null && d.Duration != null)
+  const lineChartData = dives
+    .filter(d => d.SurfaceTime != null && d.Duration != null && d.StartTime)
+    .sort((a, b) => new Date(a.StartTime) - new Date(b.StartTime))
     .map(d => ({
-      surface: Number(d.SurfaceTime),
-      dive: Number(d.Duration)
+      date: new Date(d.StartTime).toLocaleDateString(),
+      diveSeconds: d.Duration,
+      surfaceSeconds: d.SurfaceTime,
     }));
-      
-    
+
+  const formatMinutesOnly = (seconds) => Math.floor(seconds / 60);
+
 
   const groupedByDate = {};
   dives.forEach(d => {
@@ -131,28 +133,38 @@ const StatsPage = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <div>
                 <h3 className="text-lg font-semibold mb-2">
-                  {t("Dive Time vs. Surface Time (Scatter Plot)")}
+                  {t("Dive Time vs. Surface Time")}
                 </h3>
                 <ResponsiveContainer width="100%" height={300}>
-                  <ScatterChart>
-                    <XAxis 
-                      dataKey="surface" 
-                      type="number"
-                      domain={[0, "dataMax"]}
-                      tickFormatter={formatTime}
-                      name="Surface Time (min)" 
+                  <LineChart data={lineChartData}>
+                    <CartesianGrid strokeDasharray="3 3" />
+                    <XAxis dataKey="date" />
+                    <YAxis
+                      tickFormatter={formatMinutesOnly}
+                      label={{ value: t("Minutes"), angle: -90, position: 'insideLeft' }}
                     />
-                    <YAxis 
-                      dataKey="dive" 
-                      type="number" 
-                      domain={[0, "dataMax"]}
-                      tickFormatter={formatTime}
-                      name="Dive Time (min)" 
+                    <Tooltip
+                      formatter={(value) => formatTime(value)} // min:sec en dot
+                      labelFormatter={(label) => `${t("Date")}: ${label}`}
                     />
-                    <Tooltip />
-                    <Scatter name="Dives" data={scatterData} fill="#8884d8" />
-                  </ScatterChart>
+                    <Legend />
+                    <Line
+                      type="monotone"
+                      dataKey="diveSeconds"
+                      name={t("Dive Duration")}
+                      stroke="#8884d8"
+                      dot={{ r: 3 }}
+                    />
+                    <Line
+                      type="monotone"
+                      dataKey="surfaceSeconds"
+                      name={t("Surface Time")}
+                      stroke="#82ca9d"
+                      dot={{ r: 3 }}
+                    />
+                  </LineChart>
                 </ResponsiveContainer>
+
               </div>
 
               <div>
