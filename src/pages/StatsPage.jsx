@@ -57,23 +57,6 @@ const StatsPage = () => {
       time: Number(dive.Duration || 0),
     }));
 
-  const lineChartData = dives
-    .filter(d => d.SurfaceTime != null && d.Duration != null && d.StartTime)
-    .sort((a, b) => new Date(a.StartTime) - new Date(b.StartTime))
-    .map(d => {
-      const dateObj = new Date(d.StartTime);
-      const mm = String(dateObj.getMonth() + 1).padStart(2, '0');
-      const yy = String(dateObj.getFullYear()).slice(-2);
-      return {
-        shortDate: `${mm}/${yy}`,
-        fullDate: dateObj.toLocaleDateString(undefined, {
-          day: 'numeric', month: 'short', year: 'numeric'
-        }),
-        diveSeconds: d.Duration,
-        surfaceSeconds: d.SurfaceTime,
-      };
-    });
-
   const groupedByDate = {};
   dives.forEach(d => {
     const date = new Date(d.StartTime).toLocaleDateString();
@@ -129,7 +112,7 @@ const StatsPage = () => {
       ) : (
         <>
           {activeTab === "time" && (
-            <div className="gap-8">
+            <div className="flex flex-col space-y-6">
               <DiveTimeVsSurfaceChart
                 dives={dives}
                 t={t}
