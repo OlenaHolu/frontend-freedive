@@ -40,13 +40,13 @@ const DiveTimeVsSurfaceChart = ({ dives, t }) => {
         const currentTime = new Date(current.StartTime).getTime();
         return currentTime > latestTime ? current : latest;
       });
-  
+
       const latestDate = new Date(latestDive.StartTime);
       const defaultDate =
         range === "months"
           ? new Date(latestDate.getFullYear(), latestDate.getMonth(), 1)
           : latestDate;
-  
+
       setSelectedDate(defaultDate);
     }
   }, [dives]);
@@ -136,9 +136,9 @@ const DiveTimeVsSurfaceChart = ({ dives, t }) => {
       };
     });
 
-    const surfaceArray = filteredData.map(d => d.rawSurface);
-const diveArray = filteredData.map(d => d.diveSeconds);
-const correlation = calculateCorrelation(surfaceArray, diveArray);
+  const surfaceArray = filteredData.map(d => d.rawSurface);
+  const diveArray = filteredData.map(d => d.diveSeconds);
+  const correlation = calculateCorrelation(surfaceArray, diveArray);
 
 
   return (
@@ -282,14 +282,14 @@ const correlation = calculateCorrelation(surfaceArray, diveArray);
       </ResponsiveContainer>
 
       {correlation && filteredData.length > 2 && (
-  <p className="mt-2 text-sm text-gray-700">
-    {correlation > 0.6
-      ? t("There is a strong positive relationship between surface time and dive duration.")
-      : correlation < -0.6
-      ? t("There is a strong negative relationship between surface time and dive duration.")
-      : t("No strong correlation detected between surface and dive times.")}
-  </p>
-)}
+        <p className="mt-2 text-sm text-gray-700">
+          {correlation > 0.6
+            ? t("There is a strong positive relationship between surface time and dive duration.")
+            : correlation < -0.6
+              ? t("There is a strong negative relationship between surface time and dive duration.")
+              : t("No strong correlation detected between surface and dive times.")}
+        </p>
+      )}
 
     </div>
   );
