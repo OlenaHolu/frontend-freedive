@@ -84,7 +84,21 @@
         "title": "Registrar una nueva inmersión"
     },
     "stats": {
+        "title": "📈 Estadísticas",
         "minutes": "Minutos",
+        "tabs": {
+            "time": "Tiempo de inmersión y superficie",
+            "date": "Análisis por fecha",
+            "performance": "Rendimiento",
+            "progress": "Progreso"
+        },
+        "dateSelector": {
+            "byMonth": "Por mes",
+            "byDay": "Por día"
+        },
+        "diveTimeVsSurfaceTitle": "Tiempo de inmersión vs. tiempo en superficie",
+        "diveDuration": "Duración de la inmersión",
+        "surfaceTime": "Tiempo en superficie",
         "avgDiveVsSurfaceTitle": "Promedio diario de tiempo de inmersión vs. tiempo en superficie",
         "avgSurfaceTime": "Tiempo en superficie promedio",
         "avgDiveTime": "Tiempo de inmersión promedio",

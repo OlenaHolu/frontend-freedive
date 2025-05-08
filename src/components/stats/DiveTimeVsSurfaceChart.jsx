@@ -68,7 +68,7 @@ const DiveTimeVsSurfaceChart = ({ dives, t }) => {
   return (
     <div>
       <h3 className="text-lg font-semibold mb-2">
-        {t("Dive Time vs. Surface Time")}
+        {t("stats.diveTimeVsSurfaceTitle")}
       </h3>
 
       {/* Filters */}
@@ -101,7 +101,7 @@ const DiveTimeVsSurfaceChart = ({ dives, t }) => {
               return formatMinutesOnly(value);
             }}
             label={{
-              value: t("Minutes"),
+              value: t("stats.minutes"),
               angle: -90,
               position: "insideLeft"
             }}
@@ -117,9 +117,9 @@ const DiveTimeVsSurfaceChart = ({ dives, t }) => {
                     <strong>{dp.fullDate}</strong>
                   </div>
                   <div>
-                    {t("Dive Duration")}: {formatTime(dp.diveSeconds)}
+                    {t("stats.diveDuration")}: {formatTime(dp.diveSeconds)}
                   </div>
-                  <div>{t("Surface Time")}: {formatTime(dp.rawSurface)}</div>
+                  <div>{t("stats.surfaceTime")}: {formatTime(dp.rawSurface)}</div>
 
                 </div>
               );
@@ -129,14 +129,14 @@ const DiveTimeVsSurfaceChart = ({ dives, t }) => {
           <Line
             type="monotone"
             dataKey="diveSeconds"
-            name={t("Dive Duration")}
+            name={t("stats.diveDuration")}
             stroke="#8884d8"
             dot={range === "days" ? { r: 3 } : false}
           />
           <Line
             type="monotone"
             dataKey="surfaceSeconds"
-            name={t("Surface Time")}
+            name={t("stats.surfaceTime")}
             stroke="#82ca9d"
             dot={range === "days" ? { r: 3 } : false}
           />

@@ -8,16 +8,16 @@ import UnderwaterPieChart from "../components/stats/UnderwaterPieChart.jsx";
 import DepthOverTimeChart from "../components/stats/DepthOverTimeChart";
 import DivesPerDateChart from "../components/stats/DivesPerDateChart.jsx";
 
-const TABS = [
-  { key: "time", label: "Dive Time & Surface" },
-  { key: "date", label: "Date Analysis" },
-  { key: "performance", label: "Performance" },
-  { key: "progress", label: "Progress" }
-];
-
 const StatsPage = () => {
   const { user, loading } = useAuth();
   const { t } = useTranslation();
+
+  const TABS = [
+    { key: "time", label: t("stats.tabs.time") },
+    { key: "date", label: t("stats.tabs.date") },
+    { key: "performance", label: t("stats.tabs.performance") },
+    { key: "progress", label: t("stats.tabs.progress") },
+  ];
 
   const [dives, setDives] = useState([]);
   const [loadingDives, setLoadingDives] = useState(true);
@@ -61,7 +61,7 @@ const StatsPage = () => {
 
   return (
     <div>
-      <h2 className="text-2xl font-semibold mb-6">📈 Stats</h2>
+      <h2 className="text-2xl font-semibold mb-6">{t("stats.title")}</h2>
 
       {/* Tabs */}
       <div className="flex space-x-4 border-b mb-6">

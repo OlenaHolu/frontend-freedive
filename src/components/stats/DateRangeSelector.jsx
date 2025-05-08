@@ -52,8 +52,8 @@ const DateRangeSelector = ({
           onChange={(e) => setRange(e.target.value)}
           className="border px-2 py-1 rounded"
         >
-          <option value="months">{t("By Month")}</option>
-          <option value="days">{t("By Day")}</option>
+          <option value="months">{t("stats.dateSelector.byMonth")}</option>
+          <option value="days">{t("stats.dateSelector.byDay")}</option>
         </select>
       </div>
 

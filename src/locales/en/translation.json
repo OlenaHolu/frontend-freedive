@@ -3,9 +3,7 @@
   "app_description": "Log your freediving sessions, track stats, and improve your performance with Freedive App.",
   "logout": "Logout",
   "discover": "Discover the depths!",
-  
   "loadingError": "Error loading data.",
-
   "loading": "Loading...",
   "back": "Back",
   "home": "Home",
@@ -19,7 +17,6 @@
   "error": "Error",
   "success": "Success!",
   "settings": "Settings",
-
   "network": {
     "offline": "You are offline. Please check your internet connection.",
     "restored": "Connection restored. You are back online."
@@ -44,14 +41,12 @@
     "updated": "Avatar updated!",
     "error": "Upload failed",
     "upload_error": "There was a problem uploading your avatar.",
-    
     "edit": "Edit Profile",
     "name": "Name",
     "name_placeholder": "Enter your name",
     "email": "Email",
     "email_placeholder": "Enter your email",
     "invalid_email": "Please enter a valid email.",
-
     "password": "Password",
     "password_placeholder": "Enter your password",
     "confirm_password": "Confirm Password",
@@ -60,10 +55,8 @@
     "new_password_placeholder": "Enter new password",
     "confirm_new_password_placeholder": "Re-enter new password",
     "passwords_mismatch": "Passwords do not match",
-
     "updated_message": "Profile updated successfully.",
     "update_error": "Error updating profile.",
-
     "delete_button": "Delete profile",
     "confirm_delete_title": "Are you sure?",
     "confirm_delete_text": "This action will permanently delete your account.",
@@ -73,7 +66,7 @@
     "delete_error": "An error occurred while deleting your account.",
     "deleting": "Deleting profile..."
   },
-  "post":{
+  "post": {
     "no_posts": "No posts available.",
     "create": "Create Post",
     "created": "Post created!",
@@ -81,7 +74,6 @@
     "button": "Post",
     "location_placeholder": "Location",
     "textarea_placeholder": "Write your post here...",
-
     "delete_button": "Delete Post",
     "confirm_delete_title": "Are you sure?",
     "confirm_delete_text": "This action will permanently delete your post.",
@@ -90,18 +82,30 @@
     "deleted_message": "Your post has been successfully deleted.",
     "delete_error": "An error occurred while deleting your post.",
     "deleting": "Deleting post..."
-
   },
   "log": {
     "title": "Log a New Dive"
   },
   "stats": {
-      "minutes": "Minutes",
-      "avgDiveVsSurfaceTitle": "Daily Average Dive Time vs. Surface Time",
-      "avgSurfaceTime": "Avg Surface Time",
-      "avgDiveTime": "Avg Dive Time",
-      "sessionDate": "Session Date"
-      
+    "title": "📈 Stats",
+    "minutes": "Minutes",
+    "tabs": {
+      "time": "Dive Time & Surface",
+      "date": "Date Analysis",
+      "performance": "Performance",
+      "progress": "Progress"
+    },
+    "dateSelector": {
+      "byMonth": "By Month",
+      "byDay": "By Day"
+    },
+    "diveTimeVsSurfaceTitle": "Dive Time vs. Surface Time",
+    "diveDuration": "Dive Duration",
+    "surfaceTime": "Surface Time",
+    "avgDiveVsSurfaceTitle": "Daily Average Dive Time vs. Surface Time",
+    "avgSurfaceTime": "Avg Surface Time",
+    "avgDiveTime": "Avg Dive Time",
+    "sessionDate": "Session Date"
   },
   "register": {
     "title": "Create Account",
@@ -124,7 +128,6 @@
     "error_generic": "Invalid credentials",
     "success_title": "Welcome back!",
     "success_message": "You are now logged in.",
-
     "login_with_google": "Log in with Google",
     "google_login_error": "Something went wrong during Google login"
   },
@@ -293,11 +296,9 @@
   "errors": {
     "1000": "Something went wrong on our end. Please try again later.",
     "1001": "An unexpected error occurred.",
-
     "1101": "Please log in to continue.",
     "1102": "Your session has expired. Please log in again.",
     "1103": "You don't have permission to do this.",
-
     "1200": "Validation error. Please check the fields.",
     "1201": "Name is required.",
     "1202": "Email is required.",
@@ -306,9 +307,7 @@
     "1205": "Invalid email format.",
     "1206": "Password is too short. Minimum 6 characters.",
     "1207": "Passwords do not match.",
-
     "1300": "Unable to publish your post. Please try again later.",
-
     "1501": "No account found with that email.",
     "1502": "Some required information is missing.",
     "1503": "Incorrect email or password. Please try again."
