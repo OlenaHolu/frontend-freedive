@@ -90,8 +90,8 @@
     "title": "📈 Stats",
     "minutes": "Minutes",
     "tabs": {
-      "time": "Dive Time & Surface",
-      "date": "Date Analysis",
+      "diveVsSurface": "Dive Time & Surface",
+      "diveCount": "Dive Count",
       "performance": "Performance",
       "progress": "Progress"
     },

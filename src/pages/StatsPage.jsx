@@ -13,8 +13,8 @@ const StatsPage = () => {
   const { t } = useTranslation();
 
   const TABS = [
-    { key: "time", label: t("stats.tabs.time") },
-    { key: "date", label: t("stats.tabs.date") },
+    { key: "time", label: t("stats.tabs.diveVsSurface") },
+    { key: "date", label: t("stats.tabs.diveCount") },
     { key: "performance", label: t("stats.tabs.performance") },
     { key: "progress", label: t("stats.tabs.progress") },
   ];

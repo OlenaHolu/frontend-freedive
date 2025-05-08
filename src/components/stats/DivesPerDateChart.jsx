@@ -1,12 +1,4 @@
-import {
-    BarChart,
-    Bar,
-    XAxis,
-    YAxis,
-    Tooltip,
-    CartesianGrid,
-    ResponsiveContainer
-} from "recharts";
+import { BarChart, Bar, XAxis, YAxis, Tooltip, CartesianGrid, ResponsiveContainer } from "recharts";
 import { useState } from "react";
 
 const getDaysOfMonth = (year, monthIndex) => {
@@ -44,21 +36,13 @@ const DivesPerDateChart = ({ dives, t }) => {
         setSelectedDate(newDate);
     };
 
-
     const formatPeriodLabel = () => {
-        const month = selectedDate.toLocaleString("default", { month: "short" });
         const year = selectedDate.getFullYear();
-
-        if (range === "daily") {
-            return `${month} ${year}`;
-        }
-        if (range === "monthly") {
-            return `${year}`;
-        }
+        if (range === "monthly") return `${year}`;
+        if (range === "daily") return selectedDate.toLocaleDateString("en-GB", { month: "short", year: "numeric" });
         return "";
-    };
-
-    // === 📊 DATA PREPARATION ===
+      };
+      
     let chartData = [];
 
     if (range === "daily") {
@@ -80,11 +64,16 @@ const DivesPerDateChart = ({ dives, t }) => {
     }
 
     if (range === "monthly") {
-        chartData = groupBy(dives, (date) => {
-            const mm = String(date.getMonth() + 1).padStart(2, "0");
-            return `${mm}/${date.getFullYear()}`;
+        const filtered = dives.filter(
+          (d) => new Date(d.StartTime).getFullYear() === selectedDate.getFullYear()
+        );
+      
+        chartData = groupBy(filtered, (date) => {
+          const mm = String(date.getMonth() + 1).padStart(2, "0");
+          return `${mm}/${date.getFullYear()}`;
         });
-    }
+      }
+      
 
     if (range === "yearly") {
         chartData = groupBy(dives, (date) => `${date.getFullYear()}`);
@@ -96,7 +85,6 @@ const DivesPerDateChart = ({ dives, t }) => {
                 {t("Total Dives per Day")}
             </h3>
 
-            {/* === Filtro + Navegación === */}
             <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center gap-4">
                     <select
@@ -120,7 +108,6 @@ const DivesPerDateChart = ({ dives, t }) => {
 
             </div>
 
-            {/* === Bar Chart === */}
             <ResponsiveContainer width="100%" height={300}>
                 <BarChart data={chartData}>
                     <CartesianGrid strokeDasharray="3 3" />

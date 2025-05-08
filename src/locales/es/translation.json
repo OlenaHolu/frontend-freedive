@@ -87,8 +87,8 @@
         "title": "📈 Estadísticas",
         "minutes": "Minutos",
         "tabs": {
-            "time": "Tiempo de inmersión y superficie",
-            "date": "Análisis por fecha",
+            "diveVsSurface": "Tiempo de inmersión y superficie",
+            "diveCount": "Cantidad de Inmersiones",
             "performance": "Rendimiento",
             "progress": "Progreso"
         },
