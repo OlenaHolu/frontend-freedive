@@ -143,7 +143,6 @@ const DiveTimeVsSurfaceChart = ({ dives, t }) => {
         </LineChart>
       </ResponsiveContainer>
 
-      {/* Correlación */}
       {filteredData.length > 2 && (
         <CorrelationNote
           data={filteredData}

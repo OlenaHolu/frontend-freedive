@@ -2,6 +2,7 @@ import { useState } from "react";
 import { LineChart, Line, XAxis, YAxis, Tooltip, CartesianGrid, Legend, ResponsiveContainer } from "recharts";
 import { formatTime, formatMinutesOnly } from "../../utils/time";
 import CorrelationNote from "./CorrelationNote";
+import YearSelector from "./YearSelector";
 
 const AverageDiveTimeVsSurfaceChart = ({ dives, t }) => {
 
@@ -28,15 +29,6 @@ const AverageDiveTimeVsSurfaceChart = ({ dives, t }) => {
 
   const years = [...new Set(avgSessionData.map(d => new Date(d.date).getFullYear()))].sort();
   const [selectedYear, setSelectedYear] = useState(years[0]);
-  const [showYearSelect, setShowYearSelect] = useState(false);
-
-  const changeYear = (direction) => {
-    const currentIndex = years.indexOf(selectedYear);
-    const newIndex = currentIndex + direction;
-    if (newIndex >= 0 && newIndex < years.length) {
-      setSelectedYear(years[newIndex]);
-    }
-  };
 
   const filteredData = avgSessionData
     .filter(d => new Date(d.date).getFullYear() === selectedYear)
@@ -49,34 +41,11 @@ const AverageDiveTimeVsSurfaceChart = ({ dives, t }) => {
         <h3 className="text-lg font-semibold">
           {t("Daily Average Dive Time vs. Surface Time")}
         </h3>
-
-        <div className="flex items-center gap-2 relative">
-          <button onClick={() => changeYear(-1)} className="text-xl px-2">←</button>
-
-          <span
-            onClick={() => setShowYearSelect(prev => !prev)}
-            className="cursor-pointer font-semibold hover:underline"
-          >
-            {selectedYear}
-          </span>
-
-          {showYearSelect && (
-            <select
-              onChange={(e) => {
-                setSelectedYear(Number(e.target.value));
-                setShowYearSelect(false);
-              }}
-              value={selectedYear}
-              className="absolute top-full mt-1 left-1/2 -translate-x-1/2 border rounded p-1 bg-white shadow z-10"
-            >
-              {years.map((year) => (
-                <option key={year} value={year}>{year}</option>
-              ))}
-            </select>
-          )}
-
-          <button onClick={() => changeYear(1)} className="text-xl px-2">→</button>
-        </div>
+        <YearSelector
+          years={years}
+          selectedYear={selectedYear}
+          setSelectedYear={setSelectedYear}
+        />
       </div>
 
       <ResponsiveContainer width="100%" height={300}>
@@ -95,8 +64,6 @@ const AverageDiveTimeVsSurfaceChart = ({ dives, t }) => {
               });
             }}
           />
-
-
           <YAxis
             domain={[0, 300]}
             ticks={[0, 60, 120, 180, 240, 300]}
@@ -139,7 +106,6 @@ const AverageDiveTimeVsSurfaceChart = ({ dives, t }) => {
         </LineChart>
       </ResponsiveContainer>
 
-      {/* Correlación */}
       {filteredData.length > 2 && (
         <CorrelationNote
           data={filteredData}

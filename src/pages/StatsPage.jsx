@@ -48,8 +48,6 @@ const StatsPage = () => {
       time: Number(dive.Duration || 0),
     }));
 
-
-
   const totalDive = chartData.reduce((sum, d) => sum + d.time, 0);
   const totalSurface = dives.reduce((sum, d) => sum + (d.SurfaceTime || 0), 0) / 60;
 
