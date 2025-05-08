@@ -19,3 +19,19 @@ export const formatTime = (seconds) => {
 };
 
 export const formatMinutesOnly = (seconds) => Math.floor(seconds / 60);
+
+export function formatMinutesToDaysHoursMinutesSeconds(totalMinutes, t) {
+  const totalSeconds = Math.round(totalMinutes * 60);
+  const days = Math.floor(totalSeconds / 86400);
+  const hours = Math.floor((totalSeconds % 86400) / 3600);
+  const minutes = Math.floor((totalSeconds % 3600) / 60);
+  const seconds = totalSeconds % 60;
+
+  const parts = [];
+  if (days) parts.push(`${days}${t("stats.time.days")}`);
+  if (hours) parts.push(`${hours}${t("stats.time.hours")}`);
+  if (minutes) parts.push(`${minutes}${t("stats.time.minutes")}`);
+  if (seconds || parts.length === 0) parts.push(`${seconds}${t("stats.time.seconds")}`);
+  
+  return parts.join(" ");
+}

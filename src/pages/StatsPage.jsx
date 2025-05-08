@@ -39,18 +39,6 @@ const StatsPage = () => {
     if (user) fetchDives();
   }, [user]);
 
-  const chartData = dives
-    .filter((d) => d.StartTime && d.MaxDepth)
-    .sort((a, b) => new Date(a.StartTime) - new Date(b.StartTime))
-    .map((dive) => ({
-      date: new Date(dive.StartTime).toLocaleDateString(),
-      depth: Number(dive.MaxDepth),
-      time: Number(dive.Duration || 0),
-    }));
-
-  const totalDive = chartData.reduce((sum, d) => sum + d.time, 0);
-  const totalSurface = dives.reduce((sum, d) => sum + (d.SurfaceTime || 0), 0) / 60;
-
   if (loading || loadingDives || !user) {
     return (
       <div className="flex justify-center items-center h-64 text-gray-700 text-lg font-semibold">
@@ -96,7 +84,7 @@ const StatsPage = () => {
           }
 
           {activeTab === "performance" && (
-            <UnderwaterPieChart totalDive={totalDive} totalSurface={totalSurface} t={t}
+            <UnderwaterPieChart dives={dives} t={t}
             />
           )}
 
