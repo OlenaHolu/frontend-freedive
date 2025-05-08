@@ -1,8 +1,8 @@
 import { LineChart, Line, XAxis, YAxis, Tooltip, CartesianGrid, Legend, ResponsiveContainer } from "recharts";
 import { useEffect, useState } from "react";
-import { calculateCorrelation } from "../../utils/calculateCorrelation";
 import { formatTime, formatMinutesOnly } from "../../utils/time";
 import DateRangeSelector from "./DateRangeSelector";
+import CorrelationNote from "./CorrelationNote";
 
 const DiveTimeVsSurfaceChart = ({ dives, t }) => {
   const [range, setRange] = useState("months"); // "months" | "days"
@@ -60,14 +60,10 @@ const DiveTimeVsSurfaceChart = ({ dives, t }) => {
           day: "numeric", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit"
         }),
         diveSeconds: d.Duration,
-        surfaceSeconds: Math.min(d.SurfaceTime, 300), // clamp to 10 min (for Y axis)
+        surfaceSeconds: Math.min(d.SurfaceTime, 300), // clamp to 5 min (for Y axis)
         rawSurface: originalSurface, // store original for tooltip
       };
     });
-
-  const surfaceArray = filteredData.map(d => d.rawSurface);
-  const diveArray = filteredData.map(d => d.diveSeconds);
-  const correlation = calculateCorrelation(surfaceArray, diveArray);
 
   return (
     <div>
@@ -76,7 +72,7 @@ const DiveTimeVsSurfaceChart = ({ dives, t }) => {
       </h3>
 
       {/* Filters */}
-     <DateRangeSelector
+      <DateRangeSelector
         range={range}
         setRange={setRange}
         selectedDate={selectedDate}
@@ -84,7 +80,7 @@ const DiveTimeVsSurfaceChart = ({ dives, t }) => {
         years={years}
         t={t}
       />
-      
+
       <ResponsiveContainer width="100%" height={300}>
         <LineChart data={filteredData}>
           <CartesianGrid strokeDasharray="3 3" />
@@ -147,17 +143,15 @@ const DiveTimeVsSurfaceChart = ({ dives, t }) => {
         </LineChart>
       </ResponsiveContainer>
 
-      {correlation && filteredData.length > 2 && (
-        <p className="mt-2 text-sm text-gray-700">
-          {correlation > 0.6
-            ? t("Longer surface times tend to lead to longer dives.")
-            : correlation < -0.6
-              ? t("Longer surface times tend to lead to shorter dives.")
-              : t("No clear pattern between surface time and dive duration.")}
-
-        </p>
+      {/* Correlación */}
+      {filteredData.length > 2 && (
+        <CorrelationNote
+          data={filteredData}
+          xKey="rawSurface"
+          yKey="diveSeconds"
+          t={t}
+        />
       )}
-
     </div>
   );
 };

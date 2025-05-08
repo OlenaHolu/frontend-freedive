@@ -266,6 +266,11 @@
         "law_text": "Estos Términos se rigen por la legislación española. En caso de conflicto, las partes se someten a los tribunales de {{city}}.",
         "contact_text": "Si tienes dudas sobre estos términos, contáctanos a:"
     },
+    "correlation": {
+        "positive": "Tiempos más largos en superficie tienden a generar inmersiones más largas.",
+        "negative": "Tiempos más largos en superficie tienden a generar inmersiones más cortas.",
+        "none": "No hay un patrón claro entre el tiempo en superficie y la duración de la inmersión."
+    },
     "errors": {
         "1000": "Algo salió mal de nuestro lado. Por favor, intenta nuevamente más tarde.",
         "1001": "Ocurrió un error inesperado.",

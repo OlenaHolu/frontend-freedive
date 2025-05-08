@@ -48,23 +48,7 @@ const StatsPage = () => {
       time: Number(dive.Duration || 0),
     }));
 
-  const groupedByDate = {};
-  dives.forEach(d => {
-    const date = new Date(d.StartTime).toLocaleDateString();
-    if (!groupedByDate[date]) groupedByDate[date] = [];
-    groupedByDate[date].push(d);
-  });
 
-  const avgSessionData = Object.entries(groupedByDate).map(([date, entries]) => {
-    const avgSurface = entries.reduce((sum, d) => sum + (d.SurfaceTime || 0), 0) / entries.length;
-    const avgDive = entries.reduce((sum, d) => sum + (d.Duration || 0), 0) / entries.length;
-
-    return {
-      date,
-      avgSurface: avgSurface,
-      avgDive: avgDive
-    };
-  });
 
   const totalDive = chartData.reduce((sum, d) => sum + d.time, 0);
   const totalSurface = dives.reduce((sum, d) => sum + (d.SurfaceTime || 0), 0) / 60;
@@ -104,26 +88,17 @@ const StatsPage = () => {
         <>
           {activeTab === "time" && (
             <div className="flex flex-col space-y-6">
-              <DiveTimeVsSurfaceChart
-                dives={dives}
-                t={t}
-              />
-
-              <AverageDiveTimeVsSurfaceChart
-                data={avgSessionData}
-                t={t}
-              />
-
+              <DiveTimeVsSurfaceChart dives={dives} t={t} />
+              <AverageDiveTimeVsSurfaceChart dives={dives} t={t} />
             </div>
           )}
 
-          {activeTab === "date" && <DivesPerDateChart dives={dives} t={t} />}
+          {activeTab === "date" && 
+          <DivesPerDateChart dives={dives} t={t} />
+          }
 
           {activeTab === "performance" && (
-            <UnderwaterPieChart
-              totalDive={totalDive}
-              totalSurface={totalSurface}
-              t={t}
+            <UnderwaterPieChart totalDive={totalDive} totalSurface={totalSurface} t={t}
             />
           )}
 

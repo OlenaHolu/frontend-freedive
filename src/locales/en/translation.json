@@ -280,6 +280,11 @@
     "law_text": "These terms are governed by Spanish law. In case of dispute, the parties submit to the courts of {{city}}.",
     "contact_text": "If you have any questions about these terms, contact us at:"
   },
+  "correlation": {
+    "positive": "Longer surface times tend to lead to longer dives.",
+    "negative": "Longer surface times tend to lead to shorter dives.",
+    "none": "No clear pattern between surface time and dive duration."
+  },
   "errors": {
     "1000": "Something went wrong on our end. Please try again later.",
     "1001": "An unexpected error occurred.",
