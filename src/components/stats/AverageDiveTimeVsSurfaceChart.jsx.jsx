@@ -16,22 +16,24 @@ const AverageDiveTimeVsSurfaceChart = ({ dives, t }) => {
   const avgSessionData = Object.entries(groupedByDate)
     .sort(([dateA], [dateB]) => new Date(dateA) - new Date(dateB))
     .map(([date, entries]) => {
-      const avgSurface = Math.min((entries.reduce((sum, d) => sum + (d.SurfaceTime || 0), 0) / entries.length), 300); // clamp to 5 min
+      const fullDate = new Date(date);
+      const avgSurface = Math.min((entries.reduce((sum, d) => sum + (d.SurfaceTime || 0), 0) / entries.length), 300);
       const avgDive = entries.reduce((sum, d) => sum + (d.Duration || 0), 0) / entries.length;
+
       return {
-        date: date,
-        fullDate: new Date(date),
+        date: fullDate.toLocaleDateString("en-GB", { day: "2-digit", month: "short" }),
+        fullDate,
+        year: fullDate.getFullYear(),
         avgSurface,
         avgDive
       };
-
     });
 
-  const years = [...new Set(avgSessionData.map(d => new Date(d.date).getFullYear()))].sort();
+  const years = [...new Set(avgSessionData.map(d => d.year))].sort();
   const [selectedYear, setSelectedYear] = useState(years[0]);
 
   const filteredData = avgSessionData
-    .filter(d => new Date(d.date).getFullYear() === selectedYear)
+    .filter(d => d.year === selectedYear)
     .sort((a, b) => new Date(a.date) - new Date(b.date));
 
 
@@ -39,7 +41,7 @@ const AverageDiveTimeVsSurfaceChart = ({ dives, t }) => {
     <div>
       <div className="flex justify-between items-center mb-2">
         <h3 className="text-lg font-semibold">
-          {t("Daily Average Dive Time vs. Surface Time")}
+          {t("stats.avgDiveVsSurfaceTitle")}
         </h3>
         <YearSelector
           years={years}
@@ -56,14 +58,8 @@ const AverageDiveTimeVsSurfaceChart = ({ dives, t }) => {
             angle={-45}
             textAnchor="end"
             height={60}
-            tickFormatter={(value) => {
-              const date = new Date(value);
-              return date.toLocaleDateString("en-GB", {
-                day: "2-digit",
-                month: "short",
-              });
-            }}
           />
+
           <YAxis
             domain={[0, 300]}
             ticks={[0, 60, 120, 180, 240, 300]}
@@ -72,7 +68,7 @@ const AverageDiveTimeVsSurfaceChart = ({ dives, t }) => {
               return formatMinutesOnly(value);
             }}
             label={{
-              value: t("Minutes"),
+              value: t("stats.minutes"),
               angle: -90,
               position: "insideLeft"
             }}
@@ -85,15 +81,15 @@ const AverageDiveTimeVsSurfaceChart = ({ dives, t }) => {
               const dive = payload.find(p => p.dataKey === "avgDive");
               return (
                 <div className="bg-white p-3 border rounded shadow text-sm text-gray-800">
-                  <div className="font-semibold mb-2">{t("Session Date")}: {label}</div>
+                  <div className="font-semibold mb-2">{t("stats.sessionDate")}: {label}</div>
                   {surface && (
                     <div style={{ color: "#82ca9d" }}>
-                      {t("Avg Surface Time")}: {formatTime(surface.value)}
+                      {t("stats.avgSurfaceTime")}: {formatTime(surface.value)}
                     </div>
                   )}
                   {dive && (
                     <div style={{ color: "#8884d8" }}>
-                      {t("Avg Dive Time")}: {formatTime(dive.value)}
+                      {t("stats.avgDiveTime")}: {formatTime(dive.value)}
                     </div>
                   )}
                 </div>
@@ -101,8 +97,8 @@ const AverageDiveTimeVsSurfaceChart = ({ dives, t }) => {
             }}
           />
           <Legend />
-          <Line type="monotone" dataKey="avgDive" name={t("Avg Dive Time")} stroke="#8884d8" dot={{ r: 3 }} />
-          <Line type="monotone" dataKey="avgSurface" name={t("Avg Surface Time")} stroke="#82ca9d" dot={{ r: 3 }} />
+          <Line type="monotone" dataKey="avgDive" name={t("stats.avgDiveTime")} stroke="#8884d8" dot={{ r: 3 }} />
+          <Line type="monotone" dataKey="avgSurface" name={t("stats.avgSurfaceTime")} stroke="#82ca9d" dot={{ r: 3 }} />
         </LineChart>
       </ResponsiveContainer>
 

@@ -96,7 +96,12 @@
     "title": "Log a New Dive"
   },
   "stats": {
-    "title": "Dive Depth Over Time"
+      "minutes": "Minutes",
+      "avgDiveVsSurfaceTitle": "Daily Average Dive Time vs. Surface Time",
+      "avgSurfaceTime": "Avg Surface Time",
+      "avgDiveTime": "Avg Dive Time",
+      "sessionDate": "Session Date"
+      
   },
   "register": {
     "title": "Create Account",
