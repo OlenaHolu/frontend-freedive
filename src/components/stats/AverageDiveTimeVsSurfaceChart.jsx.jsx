@@ -1,8 +1,7 @@
-import {
-    LineChart, Line, XAxis, YAxis, Tooltip, CartesianGrid, Legend, ResponsiveContainer
-  } from "recharts";
+import { LineChart, Line, XAxis, YAxis, Tooltip, CartesianGrid, Legend, ResponsiveContainer } from "recharts";
+import { formatTime } from "../../utils/time";
   
-  const AverageDiveTimeVsSurfaceChart = ({ data, formatTime, t }) => (
+  const AverageDiveTimeVsSurfaceChart = ({ data, t }) => (
     <div>
       <h3 className="text-lg font-semibold mb-2">
         {t("Daily Average Dive Time vs. Surface Time")}

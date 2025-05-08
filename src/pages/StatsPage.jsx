@@ -39,15 +39,6 @@ const StatsPage = () => {
     if (user) fetchDives();
   }, [user]);
 
-  const formatTime = (seconds) => {
-    const total = Math.round(seconds);
-    const min = Math.floor(total / 60);
-    const sec = total % 60;
-    return `${min}:${sec.toString().padStart(2, '0')}`;
-  };
-
-  const formatMinutesOnly = (seconds) => Math.floor(seconds / 60);
-
   const chartData = dives
     .filter((d) => d.StartTime && d.MaxDepth)
     .sort((a, b) => new Date(a.StartTime) - new Date(b.StartTime))
@@ -120,8 +111,6 @@ const StatsPage = () => {
 
               <AverageDiveTimeVsSurfaceChart
                 data={avgSessionData}
-                formatTime={formatTime}
-                formatMinutesOnly={formatMinutesOnly}
                 t={t}
               />
 
