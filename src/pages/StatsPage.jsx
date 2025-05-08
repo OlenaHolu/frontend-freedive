@@ -101,7 +101,7 @@ const StatsPage = () => {
           )}
 
           {activeTab === "progress" && (
-            <DepthOverTimeChart data={chartData} t={t} />
+            <DepthOverTimeChart dives={dives} t={t} />
           )}
         </>
       )}

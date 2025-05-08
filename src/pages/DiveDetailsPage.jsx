@@ -131,12 +131,28 @@ export default function DiveDetailsPage() {
           ) : (
             <ResponsiveContainer width="100%" height={350}>
               <LineChart data={formattedSamples}>
-                <XAxis dataKey="time" type="number" domain={["dataMin", "dataMax"]} ticks={ticks}
-                  label={{ value: t("dive.time") + " (s)", position: "insideBottom", offset: -5 }} tick={{ fontSize: 12 }} />
-                <YAxis domain={[0, yMax]} reversed={true}
-                  label={{ value: t("dive.depth") + " (m)", angle: -90, position: "insideLeft" }} tick={{ fontSize: 12 }} />
+                <XAxis 
+                  dataKey="time" 
+                  type="number" 
+                  domain={["dataMin", "dataMax"]} 
+                  ticks={ticks}
+                  label={{ value: t("dive.time") + " (s)", position: "insideBottom", offset: -5 }} 
+                  tick={{ fontSize: 12 }}
+                />
+                <YAxis 
+                  domain={[0, yMax]} 
+                  reversed={true}
+                  label={{ value: t("dive.depth") + " (m)", angle: -90, position: "insideLeft" }} 
+                  tick={{ fontSize: 12 }} 
+                />
                 <Tooltip formatter={(value, name) => name === "depth" ? [`${value} m`, t("dive.depth")] : value} />
-                <Line type="monotone" dataKey="depth" stroke="#0ea5e9" strokeWidth={2} dot={renderCustomDot} />
+                <Line 
+                  type="monotone" 
+                  dataKey="depth" 
+                  stroke="#0ea5e9" 
+                  strokeWidth={2} 
+                  dot={renderCustomDot} 
+                />
               </LineChart>
             </ResponsiveContainer>
           )}
