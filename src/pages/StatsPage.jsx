@@ -4,9 +4,9 @@ import { useTranslation } from "react-i18next";
 import { useAuth } from "../context/AuthContext";
 import DiveTimeVsSurfaceChart from "../components/stats/DiveTimeVsSurfaceChart.jsx";
 import AverageDiveTimeVsSurfaceChart from "../components/stats/AverageDiveTimeVsSurfaceChart.jsx";
-import UnderwaterPieChart from "../components/stats/UnderwaterPieChart.jsx";
 import DepthOverTimeChart from "../components/stats/DepthOverTimeChart";
 import DivesPerDateChart from "../components/stats/DivesPerDateChart.jsx";
+import UnderwaterComparison from "../components/stats/UnderwaterComparison.jsx";
 
 const StatsPage = () => {
   const { user, loading } = useAuth();
@@ -84,7 +84,7 @@ const StatsPage = () => {
           }
 
           {activeTab === "performance" && (
-            <UnderwaterPieChart dives={dives} t={t}
+            <UnderwaterComparison dives={dives} t={t}
             />
           )}
 

@@ -18,14 +18,27 @@ const UnderwaterPieChart = ({ dives, t }) => {
 
   const colors = ["#00bcd4", "#ff9800"];
 
-  const renderCustomLabel = ({ percent, name }) =>
-    `${name}: ${(percent * 100).toFixed(1)}%`;
+  const renderCustomLabel = ({ percent }) =>
+    `${(percent * 100).toFixed(1)}%`;
 
   return (
     <div>
       <h3 className="text-lg font-semibold mb-2">
         {t("stats.underwaterVsSurfaceTitle")}
       </h3>
+
+      {/* Leyenda personalizada */}
+      <div className="flex gap-4 text-sm mb-2">
+        {data.map((entry, index) => (
+          <div key={index} className="flex items-center gap-2">
+            <span
+              className="inline-block w-3 h-3 rounded-full"
+              style={{ backgroundColor: colors[index] }}
+            />
+            <span>{entry.name}</span>
+          </div>
+        ))}
+      </div>
 
       <ResponsiveContainer width="100%" height={300}>
         <PieChart>
@@ -49,11 +62,10 @@ const UnderwaterPieChart = ({ dives, t }) => {
       </ResponsiveContainer>
 
       <SummaryStatsPanel
-  totalDive={totalDive}
-  totalSurface={totalSurface}
-  t={t}
-/>
-
+        totalDive={totalDive}
+        totalSurface={totalSurface}
+        t={t}
+      />
     </div>
   );
 };

@@ -116,6 +116,8 @@
     "recoveryRatio": "Recovery Ratio",
     "divePerDateTitle": "Number of dives per day / month / year",
     "underwaterVsSurfaceTitle": "Underwater vs. Surface Time (Proportion)",
+    "allTime": "All Time",
+    "filteredPeriod": "Filtered Period",
     "timeSpentUnderwater": "Total time spent underwater during dives.",
     "surfaceRecoveryTime": "Total time spent resting on the surface.",
     "totalTimeExplanation": "Sum of underwater and surface time.",

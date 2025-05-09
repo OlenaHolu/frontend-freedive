@@ -113,6 +113,8 @@
         "recoveryRatio": "Proporción de recuperación",
         "divePerDateTitle": "Cantidad de inmersiones por día / mes / año",
         "underwaterVsSurfaceTitle": "Tiempo bajo el agua vs. en superficie (Proporción)",
+        "allTime": "Todo el tiempo",
+        "filteredPeriod": "Periodo seleccionado",
         "timeSpentUnderwater": "Tiempo total pasado bajo el agua durante las inmersiones.",
         "surfaceRecoveryTime": "Tiempo total de descanso en la superficie.",
         "totalTimeExplanation": "Suma del tiempo bajo el agua y en superficie.",
