@@ -18,9 +18,6 @@ const DepthOverTimeChart = ({ dives, t }) => {
       time: Number(dive.Duration || 0),
     }))
 
-
-
-
   return (
     <div>
       <h3 className="text-lg font-semibold mb-2">

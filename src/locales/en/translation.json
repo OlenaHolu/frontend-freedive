@@ -99,9 +99,9 @@
       "byYear": "By Year",
       "byMonth": "By Month",
       "byDay": "By Day",
-      "daily": "Daily",
-      "monthly": "Monthly",
-      "yearly": "Yearly"
+      "daily": "per day",
+      "monthly": "per month",
+      "yearly": "por year"
     },
     "diveTimeVsSurfaceTitle": "Dive Time vs. Surface Time",
     "diveDuration": "Dive Duration",
@@ -114,6 +114,7 @@
     "surface": "Surface",
     "total": "Total",
     "recoveryRatio": "Recovery Ratio",
+    "divePerDateTitle": "Number of dives per day / month / year",
     "underwaterVsSurfaceTitle": "Underwater vs. Surface Time (Proportion)",
     "timeSpentUnderwater": "Total time spent underwater during dives.",
     "surfaceRecoveryTime": "Total time spent resting on the surface.",

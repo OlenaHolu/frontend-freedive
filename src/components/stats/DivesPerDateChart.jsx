@@ -76,11 +76,11 @@ const DivesPerDateChart = ({ dives, t }) => {
       } else if (range === "yearly") {
         chartData.sort((a, b) => Number(a.date) - Number(b.date));
       }
-      
+
     return (
         <div>
             <h3 className="text-lg font-semibold mb-2">
-                {t("Total Dives per Day")}
+                {t("stats.divePerDateTitle")}
             </h3>
 
             <div className="flex justify-between items-center mb-4">

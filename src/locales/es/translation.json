@@ -96,9 +96,9 @@
             "byYear": "Por año",
             "byMonth": "Por mes",
             "byDay": "Por día",
-            "dayly": "Diario",
-            "monthly": "Mensual",
-            "yearly": "Anual"
+            "dayly": "por día",
+            "monthly": "por mes",
+            "yearly": "por año"
         },
         "diveTimeVsSurfaceTitle": "Tiempo de inmersión vs. tiempo en superficie",
         "diveDuration": "Duración de la inmersión",
@@ -111,6 +111,7 @@
         "surface": "En superficie",
         "total": "Total",
         "recoveryRatio": "Proporción de recuperación",
+        "divePerDateTitle": "Cantidad de inmersiones por día / mes / año",
         "underwaterVsSurfaceTitle": "Tiempo bajo el agua vs. en superficie (Proporción)",
         "timeSpentUnderwater": "Tiempo total pasado bajo el agua durante las inmersiones.",
         "surfaceRecoveryTime": "Tiempo total de descanso en la superficie.",
