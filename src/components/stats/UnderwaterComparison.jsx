@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import DateRangeSelector from "./DateRangeSelector";
 import PeriodNavigator from "./PeriodNavigator";
 import UnderwaterPieChart from "./UnderwaterPieChart";
@@ -6,6 +6,26 @@ import UnderwaterPieChart from "./UnderwaterPieChart";
 const UnderwaterComparison = ({ dives, t }) => {
   const [range, setRange] = useState("months");
   const [selectedDate, setSelectedDate] = useState(new Date());
+
+   useEffect(() => {
+      if (dives.length > 0) {
+        const latestDive = dives.reduce((latest, current) => {
+          const latestTime = new Date(latest.StartTime).getTime();
+          const currentTime = new Date(current.StartTime).getTime();
+          return currentTime > latestTime ? current : latest;
+        });
+  
+        const latestDate = new Date(latestDive.StartTime);
+        const defaultDate =
+          range === "months"
+            ? new Date(latestDate.getFullYear(), latestDate.getMonth(), 1)
+            : range === "years"
+              ? new Date(latestDate.getFullYear(), 0, 1)
+              : latestDate;
+  
+        setSelectedDate(defaultDate);
+      }
+    }, [dives, range]); 
 
   const currentYear = new Date().getFullYear();
   const years = Array.from({ length: currentYear - 2000 + 1 }, (_, i) => 2000 + i);
@@ -72,15 +92,15 @@ const UnderwaterComparison = ({ dives, t }) => {
       <div className="flex flex-col lg:flex-row gap-8">
         {/* Gráfico filtrado */}
         <div className="lg:w-1/2 w-full bg-white rounded-xl shadow-sm p-4">
-          <h3 className="text-base font-semibold text-gray-700 mb-2">
-            {t("stats.filteredPeriod")}: <span className="text-gray-900">{formatPeriodLabel()}</span>
+          <h3 className="text-base font-semibold text-gray-500 mb-2">
+            {t("stats.filteredPeriod")}
           </h3>
           <UnderwaterPieChart dives={filteredDives} t={t} />
         </div>
 
         {/* Gráfico general */}
         <div className="lg:w-1/2 w-full bg-white rounded-xl shadow-sm p-4">
-          <h3 className="text-base font-semibold text-gray-700 mb-2">
+          <h3 className="text-base font-semibold text-gray-500 mb-2">
             {t("stats.allTime")}
           </h3>
           <UnderwaterPieChart dives={dives} t={t} />
