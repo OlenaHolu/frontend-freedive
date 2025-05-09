@@ -1,5 +1,5 @@
 import { BarChart, Bar, XAxis, YAxis, Tooltip, CartesianGrid, ResponsiveContainer } from "recharts";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import DateRangeSelector from "./DateRangeSelector";
 import PeriodNavigator from "./PeriodNavigator";
 
@@ -8,6 +8,26 @@ const DivesPerDateChart = ({ dives, t }) => {
     const [selectedDate, setSelectedDate] = useState(new Date());
     const currentYear = new Date().getFullYear();
     const years = Array.from({ length: currentYear - 2000 + 1 }, (_, i) => 2000 + i);
+
+     useEffect(() => {
+        if (dives.length > 0) {
+          const latestDive = dives.reduce((latest, current) => {
+            const latestTime = new Date(latest.StartTime).getTime();
+            const currentTime = new Date(current.StartTime).getTime();
+            return currentTime > latestTime ? current : latest;
+          });
+    
+          const latestDate = new Date(latestDive.StartTime);
+          const defaultDate =
+            range === "months"
+              ? new Date(latestDate.getFullYear(), latestDate.getMonth(), 1)
+              : range === "years"
+                ? new Date(latestDate.getFullYear(), 0, 1)
+                : latestDate;
+    
+          setSelectedDate(defaultDate);
+        }
+      }, [dives, range]);
 
     const getDaysOfMonth = (year, monthIndex) => {
         const days = [];

@@ -69,7 +69,7 @@ const PeriodNavigator = ({ range, selectedDate, setSelectedDate, years, t }) => 
 
       {showCalendar && (
         <div className="absolute z-10 bg-white border rounded p-2 mt-2 shadow">
-          {range === "months" ? (
+          {range === "months" || range === "daily" ? (
             <select
               onChange={handleDateSelect}
               value={`${selectedDate.getFullYear()}-${String(selectedDate.getMonth() + 1).padStart(2, "0")}`}
@@ -86,7 +86,7 @@ const PeriodNavigator = ({ range, selectedDate, setSelectedDate, years, t }) => 
                 })
               )}
             </select>
-          ) : range === "years" ? (
+          ) : range === "years" || range === "monthly"? (
             <select
               onChange={handleDateSelect}
               value={selectedDate.getFullYear()}

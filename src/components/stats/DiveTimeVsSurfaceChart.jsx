@@ -86,10 +86,10 @@ const DiveTimeVsSurfaceChart = ({ dives, t }) => {
 
       {/* Filters */}
       <div className="flex justify-between items-center mb-4">
-        <DateRangeSelector 
-          range={range} 
-          setRange={setRange} 
-          t={t} 
+        <DateRangeSelector
+          range={range}
+          setRange={setRange}
+          t={t}
         />
         <PeriodNavigator
           range={range}
