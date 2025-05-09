@@ -123,10 +123,10 @@
     "totalTimeExplanation": "Sum of underwater and surface time.",
     "recoveryRatioExplanation": "✅ Recommended values:\n\n1:1 – absolute minimum; only for very gentle apneas and highly controlled training.\n\n2:1 – recommended for recreational or moderate training sessions.\n\n3:1 or more – ideal for spearfishing or intense training; promotes better safety and recovery.\n\n>4:1 – very conservative recovery, advised after long apneas or in difficult conditions (cold, current, fatigue).",
     "time": {
-      "days": " d",
-      "hours": " h",
-      "minutes": " m",
-      "seconds": " s"
+      "days": "d",
+      "hours": "h",
+      "minutes": "m",
+      "seconds": "s"
     }
   },
   "register": {

@@ -120,10 +120,10 @@
         "totalTimeExplanation": "Suma del tiempo bajo el agua y en superficie.",
         "recoveryRatioExplanation": "✅ Valores orientativos:\n\n1:1 – mínimo absoluto; solo para apneas muy suaves y entrenamientos muy controlados.\n\n2:1 – recomendado para sesiones recreativas o de entrenamiento moderado.\n\n3:1 o más – ideal para pesca submarina o entrenamiento intenso; promueve mayor seguridad y mejor recuperación.\n\n>4:1 – recuperación muy conservadora, recomendable tras apneas largas o en condiciones difíciles (frío, corriente, fatiga).",
         "time": {
-            "days": " d",
-            "hours": " h",
-            "minutes": " m",
-            "seconds": " s"
+            "days": "d",
+            "hours": "h",
+            "minutes": "m",
+            "seconds": "s"
         },
         "diveCountTitle": "Cantidad de inmersiones",
         "totalDives": "Total de inmersiones",

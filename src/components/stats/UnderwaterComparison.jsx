@@ -55,7 +55,7 @@ const UnderwaterComparison = ({ dives, t }) => {
       <h2 className="text-2xl font-bold mb-6">{t("stats.underwaterVsSurfaceTitle")}</h2>
 
       {/* Filtros y periodo */}
-      <div className="flex flex-col lg::flex-row justify-between items-start lg:items-center gap-4 mb-6">
+      <div className="flex flex-col lg::flex-row justify-between items-start gap-4 mb-6">
         <div className="flex flex-wrap items-center gap-4">
           <DateRangeSelector range={range} setRange={setRange} t={t} />
           <PeriodNavigator

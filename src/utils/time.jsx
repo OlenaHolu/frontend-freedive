@@ -28,9 +28,9 @@ export function formatMinutesToDaysHoursMinutesSeconds(totalMinutes, t) {
   const seconds = totalSeconds % 60;
 
   const parts = [];
-  if (days) parts.push(`${days}${t("stats.time.days")}`);
-  if (hours) parts.push(`${hours}${t("stats.time.hours")}`);
-  if (minutes) parts.push(`${minutes}${t("stats.time.minutes")}`);
+  if (days) parts.push(`${days}${t("stats.time.days")} `);
+  if (hours) parts.push(`${hours}${t("stats.time.hours")} `);
+  if (minutes) parts.push(`${minutes}${t("stats.time.minutes")} `);
   if (seconds || parts.length === 0) parts.push(`${seconds}${t("stats.time.seconds")}`);
   
   return parts.join(" ");
