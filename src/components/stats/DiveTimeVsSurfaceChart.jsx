@@ -2,6 +2,7 @@ import { LineChart, Line, XAxis, YAxis, Tooltip, CartesianGrid, Legend, Responsi
 import { useEffect, useState } from "react";
 import { formatTime, formatMinutesOnly } from "../../utils/time";
 import DateRangeSelector from "./DateRangeSelector";
+import PeriodNavigator from "./PeriodNavigator";
 import CorrelationNote from "./CorrelationNote";
 
 const DiveTimeVsSurfaceChart = ({ dives, t }) => {
@@ -21,8 +22,8 @@ const DiveTimeVsSurfaceChart = ({ dives, t }) => {
         range === "months"
           ? new Date(latestDate.getFullYear(), latestDate.getMonth(), 1)
           : range === "years"
-          ? new Date(latestDate.getFullYear(), 0, 1)
-          : latestDate;
+            ? new Date(latestDate.getFullYear(), 0, 1)
+            : latestDate;
 
       setSelectedDate(defaultDate);
     }
@@ -63,7 +64,7 @@ const DiveTimeVsSurfaceChart = ({ dives, t }) => {
       } else if (range === "days") {
         xLabel = dateObj.toLocaleTimeString("en-GB", { hour: "2-digit", minute: "2-digit", hour12: false });
       } else if (range === "years") {
-        xLabel = dateObj.toLocaleDateString("en-GB", { month: "short"});
+        xLabel = dateObj.toLocaleDateString("en-GB", { month: "short" });
       }
 
       return {
@@ -84,14 +85,20 @@ const DiveTimeVsSurfaceChart = ({ dives, t }) => {
       </h3>
 
       {/* Filters */}
-      <DateRangeSelector
-        range={range}
-        setRange={setRange}
-        selectedDate={selectedDate}
-        setSelectedDate={setSelectedDate}
-        years={years}
-        t={t}
-      />
+      <div className="flex justify-between items-center mb-4">
+        <DateRangeSelector 
+          range={range} 
+          setRange={setRange} 
+          t={t} 
+        />
+        <PeriodNavigator
+          range={range}
+          selectedDate={selectedDate}
+          setSelectedDate={setSelectedDate}
+          years={years}
+          t={t}
+        />
+      </div>
 
       <ResponsiveContainer width="100%" height={300}>
         <LineChart data={filteredData}>

@@ -95,7 +95,10 @@
         "dateSelector": {
             "byYear": "По годам",
             "byMonth": "По месяцам",
-            "byDay": "По дням"
+            "byDay": "По дням",
+            "daily": "Ежедневно",
+            "monthly": "Ежемесячно",
+            "yearly": "Ежегодно"
         },
         "diveTimeVsSurfaceTitle": "Время погружения vs. время на поверхности",
         "diveDuration": "Длительность погружения",

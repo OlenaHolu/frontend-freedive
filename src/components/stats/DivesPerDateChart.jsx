@@ -1,48 +1,35 @@
 import { BarChart, Bar, XAxis, YAxis, Tooltip, CartesianGrid, ResponsiveContainer } from "recharts";
 import { useState } from "react";
-
-const getDaysOfMonth = (year, monthIndex) => {
-    const days = [];
-    const date = new Date(year, monthIndex, 1);
-    while (date.getMonth() === monthIndex) {
-        const str = date.toLocaleDateString("en-GB");
-        days.push(str);
-        date.setDate(date.getDate() + 1);
-    }
-    return days;
-};
-
-const groupBy = (dives, keyFn) => {
-    const counts = {};
-    dives.forEach(d => {
-        const date = new Date(d.StartTime);
-        const key = keyFn(date);
-        counts[key] = (counts[key] || 0) + 1;
-    });
-    return Object.entries(counts).map(([date, count]) => ({ date, count }));
-};
+import DateRangeSelector from "./DateRangeSelector";
+import PeriodNavigator from "./PeriodNavigator";
 
 const DivesPerDateChart = ({ dives, t }) => {
     const [range, setRange] = useState("monthly");
     const [selectedDate, setSelectedDate] = useState(new Date());
+    const currentYear = new Date().getFullYear();
+    const years = Array.from({ length: currentYear - 2000 + 1 }, (_, i) => 2000 + i);
 
-    const changePeriod = (direction) => {
-        const newDate = new Date(selectedDate);
-        if (range === "daily") {
-            newDate.setMonth(newDate.getMonth() + direction); // ⬅ cambia a mes
-        } else if (range === "monthly") {
-            newDate.setFullYear(newDate.getFullYear() + direction);
+    const getDaysOfMonth = (year, monthIndex) => {
+        const days = [];
+        const date = new Date(year, monthIndex, 1);
+        while (date.getMonth() === monthIndex) {
+            const str = date.toLocaleDateString("en-GB");
+            days.push(str);
+            date.setDate(date.getDate() + 1);
         }
-        setSelectedDate(newDate);
+        return days;
     };
 
-    const formatPeriodLabel = () => {
-        const year = selectedDate.getFullYear();
-        if (range === "monthly") return `${year}`;
-        if (range === "daily") return selectedDate.toLocaleDateString("en-GB", { month: "short", year: "numeric" });
-        return "";
-      };
-      
+    const groupBy = (dives, keyFn) => {
+        const counts = {};
+        dives.forEach(d => {
+            const date = new Date(d.StartTime);
+            const key = keyFn(date);
+            counts[key] = (counts[key] || 0) + 1;
+        });
+        return Object.entries(counts).map(([date, count]) => ({ date, count }));
+    };
+
     let chartData = [];
 
     if (range === "daily") {
@@ -65,47 +52,51 @@ const DivesPerDateChart = ({ dives, t }) => {
 
     if (range === "monthly") {
         const filtered = dives.filter(
-          (d) => new Date(d.StartTime).getFullYear() === selectedDate.getFullYear()
+            (d) => new Date(d.StartTime).getFullYear() === selectedDate.getFullYear()
         );
-      
+
         chartData = groupBy(filtered, (date) => {
-          const mm = String(date.getMonth() + 1).padStart(2, "0");
-          return `${mm}/${date.getFullYear()}`;
+            const mm = String(date.getMonth() + 1).padStart(2, "0");
+            return `${mm}/${date.getFullYear()}`;
         });
-      }
-      
+    }
 
     if (range === "yearly") {
         chartData = groupBy(dives, (date) => `${date.getFullYear()}`);
     }
 
+    if (range === "daily") {
+        chartData.sort((a, b) => new Date(a.date) - new Date(b.date));
+      } else if (range === "monthly") {
+        chartData.sort((a, b) => {
+          const [aMonth, aYear] = a.date.split("/").map(Number);
+          const [bMonth, bYear] = b.date.split("/").map(Number);
+          return new Date(aYear, aMonth - 1) - new Date(bYear, bMonth - 1);
+        });
+      } else if (range === "yearly") {
+        chartData.sort((a, b) => Number(a.date) - Number(b.date));
+      }
+      
     return (
         <div>
             <h3 className="text-lg font-semibold mb-2">
                 {t("Total Dives per Day")}
             </h3>
 
-            <div className="flex items-center justify-between mb-4">
-                <div className="flex items-center gap-4">
-                    <select
-                        value={range}
-                        onChange={(e) => setRange(e.target.value)}
-                        className="border px-2 py-1 rounded"
-                    >
-                        <option value="daily">{t("Daily")}</option>
-                        <option value="monthly">{t("Monthly")}</option>
-                        <option value="yearly">{t("Yearly")}</option>
-                    </select>
-                </div>
-
-                {range !== "yearly" && (
-                    <div className="flex items-center gap-2">
-                        <button onClick={() => changePeriod(-1)} className="text-xl px-2">←</button>
-                        <span className="font-semibold">{formatPeriodLabel()}</span>
-                        <button onClick={() => changePeriod(1)} className="text-xl px-2">→</button>
-                    </div>
-                )}
-
+            <div className="flex justify-between items-center mb-4">
+                <DateRangeSelector
+                    range={range}
+                    setRange={setRange}
+                    mode="report"
+                    t={t}
+                />
+                <PeriodNavigator
+                    range={range}
+                    selectedDate={selectedDate}
+                    setSelectedDate={setSelectedDate}
+                    years={years}
+                    t={t}
+                />
             </div>
 
             <ResponsiveContainer width="100%" height={300}>

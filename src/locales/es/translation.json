@@ -95,7 +95,10 @@
         "dateSelector": {
             "byYear": "Por año",
             "byMonth": "Por mes",
-            "byDay": "Por día"
+            "byDay": "Por día",
+            "dayly": "Diario",
+            "monthly": "Mensual",
+            "yearly": "Anual"
         },
         "diveTimeVsSurfaceTitle": "Tiempo de inmersión vs. tiempo en superficie",
         "diveDuration": "Duración de la inmersión",

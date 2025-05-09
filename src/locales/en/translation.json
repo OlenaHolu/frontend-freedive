@@ -98,7 +98,10 @@
     "dateSelector": {
       "byYear": "By Year",
       "byMonth": "By Month",
-      "byDay": "By Day"
+      "byDay": "By Day",
+      "daily": "Daily",
+      "monthly": "Monthly",
+      "yearly": "Yearly"
     },
     "diveTimeVsSurfaceTitle": "Dive Time vs. Surface Time",
     "diveDuration": "Dive Duration",
