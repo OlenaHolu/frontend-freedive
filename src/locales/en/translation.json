@@ -96,6 +96,7 @@
       "progress": "Progress"
     },
     "dateSelector": {
+      "byYear": "By Year",
       "byMonth": "By Month",
       "byDay": "By Day"
     },

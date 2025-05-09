@@ -14,6 +14,8 @@ const DateRangeSelector = ({
     const newDate = new Date(selectedDate);
     if (range === "months") {
       newDate.setMonth(newDate.getMonth() + direction);
+    } else if (range === "years") {
+      newDate.setFullYear(newDate.getFullYear() + direction);
     } else {
       newDate.setDate(newDate.getDate() + direction);
     }
@@ -26,6 +28,8 @@ const DateRangeSelector = ({
         month: "short",
         year: "numeric",
       });
+    } else if (range === "years") {
+      return selectedDate.getFullYear();
     }
     return selectedDate.toLocaleDateString("en-GB", {
       day: "2-digit",
@@ -35,11 +39,16 @@ const DateRangeSelector = ({
   };
 
   const handleDateSelect = (e) => {
-    const [year, monthOrDay] = e.target.value.split("-");
-    const newDate =
-      range === "months"
-        ? new Date(Number(year), Number(monthOrDay) - 1, 1)
-        : new Date(e.target.value);
+    const value = e.target.value;
+    let newDate;
+    if (range === "months") {
+      const [year, month] = value.split("-");
+      newDate = new Date(Number(year), Number(month) - 1, 1);
+    } else if (range === "years") {
+      newDate = new Date(Number(value), 0, 1);
+    } else {
+      newDate = new Date(value);
+    }
     setSelectedDate(newDate);
     setShowCalendar(false);
   };
@@ -54,13 +63,12 @@ const DateRangeSelector = ({
         >
           <option value="months">{t("stats.dateSelector.byMonth")}</option>
           <option value="days">{t("stats.dateSelector.byDay")}</option>
+          <option value="years">{t("stats.dateSelector.byYear")}</option>
         </select>
       </div>
 
       <div className="flex items-center gap-2 relative">
-        <button onClick={() => changePeriod(-1)} className="text-xl px-2">
-          ←
-        </button>
+        <button onClick={() => changePeriod(-1)} className="text-xl px-2">←</button>
 
         <span
           onClick={() => setShowCalendar((prev) => !prev)}
@@ -83,15 +91,24 @@ const DateRangeSelector = ({
                   [...Array(12).keys()].map((m) => {
                     const month = String(m + 1).padStart(2, "0");
                     return (
-                      <option
-                        key={`${year}-${month}`}
-                        value={`${year}-${month}`}
-                      >
+                      <option key={`${year}-${month}`} value={`${year}-${month}`}>
                         {month}/{year}
                       </option>
                     );
                   })
                 )}
+              </select>
+            ) : range === "years" ? (
+              <select
+                onChange={handleDateSelect}
+                value={selectedDate.getFullYear()}
+                className="border p-1 w-full"
+              >
+                {years.map((year) => (
+                  <option key={year} value={year}>
+                    {year}
+                  </option>
+                ))}
               </select>
             ) : (
               <input
@@ -105,9 +122,7 @@ const DateRangeSelector = ({
           </div>
         )}
 
-        <button onClick={() => changePeriod(1)} className="text-xl px-2">
-          →
-        </button>
+        <button onClick={() => changePeriod(1)} className="text-xl px-2">→</button>
       </div>
     </div>
   );

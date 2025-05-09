@@ -5,7 +5,7 @@ import DateRangeSelector from "./DateRangeSelector";
 import CorrelationNote from "./CorrelationNote";
 
 const DiveTimeVsSurfaceChart = ({ dives, t }) => {
-  const [range, setRange] = useState("months"); // "months" | "days"
+  const [range, setRange] = useState("months"); // "months" | "days" | "years"
   const [selectedDate, setSelectedDate] = useState(new Date());
 
   useEffect(() => {
@@ -20,11 +20,13 @@ const DiveTimeVsSurfaceChart = ({ dives, t }) => {
       const defaultDate =
         range === "months"
           ? new Date(latestDate.getFullYear(), latestDate.getMonth(), 1)
+          : range === "years"
+          ? new Date(latestDate.getFullYear(), 0, 1)
           : latestDate;
 
       setSelectedDate(defaultDate);
     }
-  }, [dives]);
+  }, [dives, range]);
 
   const currentYear = new Date().getFullYear();
   const years = Array.from({ length: currentYear - 2000 + 1 }, (_, i) => 2000 + i);
@@ -46,16 +48,26 @@ const DiveTimeVsSurfaceChart = ({ dives, t }) => {
       if (range === "days") {
         return diveDate.toDateString() === selectedDate.toDateString();
       }
+      if (range === "years") {
+        return diveDate.getFullYear() === selectedDate.getFullYear();
+      }
       return true;
     })
     .map((d) => {
       const dateObj = new Date(d.StartTime);
       const originalSurface = d.SurfaceTime;
 
+      let xLabel = "";
+      if (range === "months") {
+        xLabel = dateObj.toLocaleDateString("en-GB", { day: "2-digit", month: "short" });
+      } else if (range === "days") {
+        xLabel = dateObj.toLocaleTimeString("en-GB", { hour: "2-digit", minute: "2-digit", hour12: false });
+      } else if (range === "years") {
+        xLabel = dateObj.toLocaleDateString("en-GB", { month: "short"});
+      }
+
       return {
-        xLabel: range === "months"
-          ? dateObj.toLocaleDateString("en-GB", { day: "2-digit", month: "short" })
-          : dateObj.toLocaleTimeString("en-GB", { hour: "2-digit", minute: "2-digit" }),
+        xLabel,
         fullDate: dateObj.toLocaleString("en-GB", {
           day: "numeric", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit"
         }),
@@ -120,7 +132,6 @@ const DiveTimeVsSurfaceChart = ({ dives, t }) => {
                     {t("stats.diveDuration")}: {formatTime(dp.diveSeconds)}
                   </div>
                   <div>{t("stats.surfaceTime")}: {formatTime(dp.rawSurface)}</div>
-
                 </div>
               );
             }}

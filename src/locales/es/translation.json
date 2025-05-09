@@ -93,6 +93,7 @@
             "progress": "Progreso"
         },
         "dateSelector": {
+            "byYear": "Por año",
             "byMonth": "Por mes",
             "byDay": "Por día"
         },
