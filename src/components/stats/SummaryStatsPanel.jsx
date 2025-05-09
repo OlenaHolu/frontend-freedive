@@ -24,7 +24,7 @@ const SummaryStatsPanel = ({ totalDive, totalSurface, t }) => {
                     {formatMinutesToDaysHoursMinutesSeconds(total, t)}
                 </div>
             </div>
-            <div title={t("stats.recoveryRatioExplanation")} className="bg-green-100 p-4 rounded-lg shadow text-center">
+            <div title={t("stats.recoveryRatioTooltip")} className="bg-green-100 p-4 rounded-lg shadow text-center">
                 <div className="text-xs text-gray-500">{t("stats.recoveryRatio")}</div>
                 <div className="text-sm font-semibold">{ratio} : 1</div>
             </div>
