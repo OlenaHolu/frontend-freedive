@@ -1,7 +1,25 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 
 const PeriodNavigator = ({ range, selectedDate, setSelectedDate, years, t }) => {
   const [showCalendar, setShowCalendar] = useState(false);
+  const calendarRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (calendarRef.current && !calendarRef.current.contains(event.target)) {
+        setShowCalendar(false);
+      }
+    };
+
+    if (showCalendar) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [showCalendar]);
 
   const changePeriod = (direction) => {
     const newDate = new Date(selectedDate);
@@ -57,7 +75,10 @@ const PeriodNavigator = ({ range, selectedDate, setSelectedDate, years, t }) => 
   };
 
   return (
-    <div className="flex items-center gap-2 relative">
+    <div 
+      className="flex items-center gap-2 relative"
+      ref={calendarRef}
+    >
       <button onClick={() => changePeriod(-1)} className="text-xl px-2">←</button>
 
       <span
