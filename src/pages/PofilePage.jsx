@@ -108,8 +108,8 @@ export default function ProfilePage() {
       console.error("Error uploading avatar:", err);
       Swal.fire({
         icon: "error",
-        title: t("profile.error"),
-        text: t("profile.upload_error"),
+        title: t("profile.uploadErrorTitle"),
+        text: t("profile.uploadError"),
       });
     } finally {
       setLoading(false);
@@ -156,8 +156,8 @@ export default function ProfilePage() {
       console.error("Error deleting profile:", err);
       Swal.fire({
         icon: "error",
-        title: t("profile.error"),
-        text: t("profile.delete_error"),
+        title: t("profile.deleteErrorTitle"),
+        text: t("profile.deleteError"),
       });
     }
   };

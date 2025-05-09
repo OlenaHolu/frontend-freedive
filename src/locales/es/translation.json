@@ -39,8 +39,8 @@
         "update_button": "Actualizar avatar",
         "uploading": "Subiendo avatar...",
         "updated": "Avatar actualizado",
-        "error": "Error al subir",
-        "upload_error": "Hubo un problema al subir el avatar.",
+        "uploadErrorTitle": "Error al subir",
+        "uploadError": "Hubo un problema al subir el avatar.",
         "edit": "Editar perfil",
         "name": "Nombre",
         "name_placeholder": "Introduce tu nombre",
@@ -60,7 +60,8 @@
         "confirm_delete_button": "Sí, eliminar",
         "deleted": "Cuenta eliminada",
         "deleted_message": "Tu cuenta ha sido eliminada correctamente.",
-        "delete_error": "Ocurrió un error al eliminar tu cuenta.",
+        "deleteErrorTitle": "Error al eliminar cuenta",
+        "deleteError": "Ocurrió un error al eliminar tu cuenta.",
         "deleting": "Eliminando perfil..."
     },
     "post": {

@@ -39,8 +39,8 @@
     "update_button": "Update Avatar",
     "uploading": "Uploading avatar...",
     "updated": "Avatar updated!",
-    "error": "Upload failed",
-    "upload_error": "There was a problem uploading your avatar.",
+    "uploadErrorTitle": "Upload failed",
+    "uploadError": "There was a problem uploading your avatar.",
     "edit": "Edit Profile",
     "name": "Name",
     "name_placeholder": "Enter your name",
@@ -63,7 +63,8 @@
     "confirm_delete_button": "Yes, delete",
     "deleted": "Account deleted",
     "deleted_message": "Your account has been successfully deleted.",
-    "delete_error": "An error occurred while deleting your account.",
+    "deleteErrorTitle": "Error deleting account",
+    "deleteError": "An error occurred while deleting your account.",
     "deleting": "Deleting profile..."
   },
   "post": {
