@@ -1,10 +1,24 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { LineChart, Line, XAxis, YAxis, Tooltip, CartesianGrid, Legend, ResponsiveContainer } from "recharts";
 import { formatTime, formatMinutesOnly } from "../../utils/time";
 import CorrelationNote from "./CorrelationNote";
-import YearSelector from "./YearSelector";
+import PeriodNavigator from "./PeriodNavigator";
 
 const AverageDiveTimeVsSurfaceChart = ({ dives, t }) => {
+  const [selectedDate, setSelectedDate] = useState(new Date());
+
+  useEffect(() => {
+    if (dives.length > 0) {
+      const latestDive = dives.reduce((latest, current) => {
+        const latestTime = new Date(latest.StartTime).getTime();
+        const currentTime = new Date(current.StartTime).getTime();
+        return currentTime > latestTime ? current : latest;
+      });
+
+      const defaultDate = new Date(latestDive.StartTime);
+      setSelectedDate(defaultDate);
+    }
+  }, [dives]);
 
   const groupedByDate = {};
   dives.forEach(d => {
@@ -30,11 +44,10 @@ const AverageDiveTimeVsSurfaceChart = ({ dives, t }) => {
     });
 
   const years = [...new Set(avgSessionData.map(d => d.year))].sort();
-  const [selectedYear, setSelectedYear] = useState(years[0]);
 
   const filteredData = avgSessionData
-    .filter(d => d.year === selectedYear)
-    .sort((a, b) => new Date(a.date) - new Date(b.date));
+    .filter(d => d.fullDate.getFullYear() === selectedDate.getFullYear())
+    .sort((a, b) => a.fullDate - b.fullDate);
 
 
   return (
@@ -43,10 +56,12 @@ const AverageDiveTimeVsSurfaceChart = ({ dives, t }) => {
         <h3 className="text-lg font-semibold">
           {t("stats.avgDiveVsSurfaceTitle")}
         </h3>
-        <YearSelector
+        <PeriodNavigator
+          range="monthly"
+          selectedDate={selectedDate}
+          setSelectedDate={setSelectedDate}
           years={years}
-          selectedYear={selectedYear}
-          setSelectedYear={setSelectedYear}
+          t={t}
         />
       </div>
 
