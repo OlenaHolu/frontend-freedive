@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import Swal from "sweetalert2";
 import MainLayout from "../layouts/MainLayout";
 import { sendContactMessage } from "../api/contact";
+import ContactForm from "../components/ContactForm";
 
 const ContactPage = () => {
   const { t, ready } = useTranslation(undefined, { useSuspense: false });
@@ -53,65 +54,13 @@ const ContactPage = () => {
     );
   }
 
-
   return (
     <MainLayout>
       <div className="max-w-3xl mx-auto px-4 py-10 text-gray-900">
         <h1 className="text-3xl font-bold mb-6">{t("contact.title")}</h1>
         <p className="mb-6 text-gray-700">{t("contact.description")}</p>
 
-        <form className="space-y-6" onSubmit={handleSubmit}>
-          <div>
-            <label className="block text-sm font-medium mb-1" htmlFor="name">
-              {t("profile.name")}
-            </label>
-            <input
-              type="text"
-              id="name"
-              name="name"
-              placeholder={t("profile.name_placeholder")}
-              required
-              className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium mb-1" htmlFor="email">
-              {t("profile.email")}
-            </label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              placeholder={t("profile.email_placeholder")}
-              required
-              className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium mb-1" htmlFor="message">
-              {t("contact.form.message")}
-            </label>
-            <textarea
-              id="message"
-              name="message"
-              rows="5"
-              required
-              className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            ></textarea>
-          </div>
-
-          <button
-            type="submit"
-            disabled={loading}
-            className={`bg-blue-600 text-white px-6 py-2 rounded-lg transition ${
-              loading ? "opacity-50 cursor-not-allowed" : "hover:bg-blue-700"
-            }`}
-          >
-            {loading ? "Sending..." : t("contact.form.submit")}
-          </button>
-        </form>
+        <ContactForm t={t} loading={loading} handleSubmit={handleSubmit} />
 
         <div className="mt-12 border-t pt-6">
           <h2 className="text-xl font-semibold mb-2">{t("contact.also_contact")}</h2>
