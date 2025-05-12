@@ -10,6 +10,7 @@ const LanguageSwitcher = () => {
     <div className="flex space-x-3 text-xl">
       <button onClick={() => changeLanguage("en")} title="English">🇬🇧</button>
       <button onClick={() => changeLanguage("es")} title="Español">🇪🇸</button>
+      <button onClick={() => changeLanguage("uk")} title="Українська">🇺🇦</button>
       <button onClick={() => changeLanguage("ru")} title="Русский">🇷🇺</button>
     </div>
   );
