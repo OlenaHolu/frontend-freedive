@@ -129,7 +129,8 @@
       "hours": "h",
       "minutes": "m",
       "seconds": "s"
-    }
+    },
+    "maxDepthOverTheTime": "Max Depth Over Time"
   },
   "register": {
     "title": "Create Account",
@@ -269,7 +270,6 @@
     "collect_data": "Datos que tú introduces voluntariamente",
     "usage_title": "Uso de los datos",
     "usage_desc": "Tus datos se utilizan exclusivamente para ofrecerte la funcionalidad de la aplicación. No se comparten con terceros ni se usan con fines publicitarios.",
-    "storage_title": "Almacenamiento seguro",
     "storage_link": "este enlace",
     "rights_title": "Tus derechos",
     "rights_desc": "De acuerdo con la legislación vigente, tienes derecho a acceder, modificar o eliminar tus datos personales. Puedes ejercer este derecho contactándonos.",
@@ -289,7 +289,7 @@
   "terms": {
     "title": "Terms and Conditions of Use",
     "last_update": "Last updated: ",
-    "intro": "Welcome to Freedive Analyzer. By accessing or using this website (www.freediveanalyzer.com), you agree to be bound by the following Terms and Conditions. If you do not agree, please do not use this site.",
+    "intro": "Welcome to Freedive Analyzer. By accessing or using this website (https://frontend-freedive.vercel.app/), you agree to be bound by the following Terms and Conditions. If you do not agree, please do not use this site.",
     "general_title": "1. General Information",
     "general_text": "This website is operated by Freedive Analyzer. We reserve the right to modify or update these terms at any time, so we recommend checking them regularly.",
     "service_title": "2. Description of Service",
@@ -309,7 +309,7 @@
     "modifications_title": "8. Service Modifications",
     "modifications_text": "We reserve the right to modify or suspend the website or parts of it at any time without prior notice.",
     "law_title": "9. Governing Law and Jurisdiction",
-    "law_text": "These terms are governed by Spanish law. In case of dispute, the parties submit to the courts of {{city}}.",
+    "law_text": "These terms are governed by Spanish law. In case of dispute, the parties submit to the courts of Madrid.",
     "contact_text": "If you have any questions about these terms, contact us at:"
   },
   "correlation": {

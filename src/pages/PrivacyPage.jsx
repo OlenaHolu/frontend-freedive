@@ -22,19 +22,6 @@ export default function Privacy() {
         <h2 className="text-xl font-semibold mt-6 mb-2">{t("privacy.usage_title")}</h2>
         <p className="mb-4">{t("privacy.usage_desc")}</p>
 
-        <h2 className="text-xl font-semibold mt-6 mb-2">{t("privacy.storage_title")}</h2>
-        <p className="mb-4">
-          {t("privacy.storage_desc")}{" "}
-          <a
-            href="https://firebase.google.com/support/privacy"
-            className="text-blue-600 underline"
-            target="_blank"
-            rel="noreferrer"
-          >
-            {t("privacy.storage_link")}
-          </a>.
-        </p>
-
         <h2 className="text-xl font-semibold mt-6 mb-2">{t("privacy.rights_title")}</h2>
         <p className="mb-4">{t("privacy.rights_desc")}</p>
 

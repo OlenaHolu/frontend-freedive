@@ -47,10 +47,13 @@
         "email": "Correo electrónico",
         "email_placeholder": "Introduce tu correo electrónico",
         "invalid_email": "Por favor, introduce un correo electrónico válido.",
-        "new_password": "Nueva contraseña",
+        "password": "Contraseña",
+        "password_placeholder": "Introduce tu contraseña",
         "confirm_password": "Confirmar contraseña",
-        "password_placeholder": "Introduce tu nueva contraseña",
         "confirm_password_placeholder": "Confirma tu nueva contraseña",
+        "new_password": "Nueva contraseña",
+        "new_password_placeholder": "Introduce tu nueva contraseña",
+        "confirm_new_password_placeholder": "Confirma tu nueva contraseña",
         "passwords_mismatch": "Las contraseñas no coinciden.",
         "updated_message": "Tu perfil ha sido actualizado correctamente.",
         "update_error": "Ocurrió un error al actualizar tu perfil.",
@@ -127,16 +130,7 @@
             "minutes": "m",
             "seconds": "s"
         },
-        "diveCountTitle": "Cantidad de inmersiones",
-        "totalDives": "Total de inmersiones",
-        "avgDives": "Inmersiones promedio por día",
-        "performanceTitle": "Rendimiento",
-        "avgDepthTitle": "Profundidad promedio",
-        "maxDepthTitle": "Profundidad máxima",
-        "avgDurationTitle": "Duración promedio",
-        "progressTitle": "Progreso",
-        "progressDescription": "Tu progreso en el tiempo.",
-        "progressChartTitle": "Progreso de inmersiones"
+        "maxDepthOverTheTime": "Profundidad máxima a lo largo del tiempo"        
 },
     "register": {
         "title": "Crear Cuenta",
@@ -208,9 +202,12 @@
             "serial": "Número de serie",
             "mode": "Modo",
             "source": "Fuente",
-            "previousMax": "Profundidad máxima anterior"
+            "previousMax": "Profundidad máxima anterior",
+            "diveTime": "Hora de la inmersión",
+            "diveNumberInSeries": "Número de inmersión en la serie"
         },
         "import": {
+            "title": "Importar Inmersiones",
             "description.title": "Importa tus registros de inmersiones",
             "description.text": "Lleva un seguimiento de tu progreso y mejora tu rendimiento.",
             "description.formats": "Formatos compatibles: .xml y .sml",
@@ -242,7 +239,6 @@
         "deleteMultipleConfirmation": "¿Eliminar inmersiones seleccionadas?",
         "thisActionCannotBeUndone": "Esta acción no se puede deshacer.",
         "deleting": "Eliminando...",
-        "divesInProgress": "inmersiones en proceso",
         "deletionCompleted": "Eliminación completada",
         "divesDeleted": "inmersiones eliminadas",
         "diveDeletedMessage": "La inmersión ha sido eliminada correctamente.",
@@ -274,7 +270,6 @@
         "collect_data": "Data you voluntarily provide",
         "usage_title": "Use of Data",
         "usage_desc": "Your data is used solely to provide app functionality. It is not shared with third parties or used for advertising.",
-        "storage_title": "Secure Storage",
         "storage_link": "this link",
         "rights_title": "Your Rights",
         "rights_desc": "Under current legislation, you have the right to access, modify, or delete your personal data. You may exercise this right by contacting us.",
@@ -294,7 +289,7 @@
     "terms": {
         "title": "Términos y Condiciones de Uso",
         "last_update": "Última actualización: ",
-        "intro": "Bienvenido a Freedive Analyzer. Al acceder o utilizar este sitio web (www.freediveanalyzer.com), usted acepta quedar vinculado por los siguientes Términos y Condiciones. Si no está de acuerdo con alguno de ellos, por favor, no utilice este sitio web.",
+        "intro": "Bienvenido a Freedive Analyzer. Al acceder o utilizar este sitio web (https://frontend-freedive.vercel.app/), usted acepta quedar vinculado por los siguientes Términos y Condiciones. Si no está de acuerdo con alguno de ellos, por favor, no utilice este sitio web.",
         "general_title": "1. Información general",
         "general_text": "Este sitio web es operado por Freedive Analyzer. Nos reservamos el derecho de modificar o actualizar estos términos en cualquier momento, por lo que le recomendamos revisarlos periódicamente.",
         "service_title": "2. Descripción del servicio",
@@ -314,7 +309,7 @@
         "modifications_title": "8. Modificaciones del servicio",
         "modifications_text": "Nos reservamos el derecho de modificar o suspender el sitio o sus partes en cualquier momento sin previo aviso.",
         "law_title": "9. Legislación aplicable y jurisdicción",
-        "law_text": "Estos Términos se rigen por la legislación española. En caso de conflicto, las partes se someten a los tribunales de {{city}}.",
+        "law_text": "Estos Términos se rigen por la legislación española. En caso de conflicto, las partes se someten a los tribunales de Madrid.",
         "contact_text": "Si tienes dudas sobre estos términos, contáctanos a:"
     },
     "correlation": {

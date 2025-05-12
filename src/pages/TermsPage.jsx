@@ -61,7 +61,7 @@ const TermsPage = () => {
 
         <section className="mb-6">
           <h2 className="text-xl font-semibold mb-2">{t("terms.law_title")}</h2>
-          <p>{t("terms.law_text", { city: "Madrid" })}</p>
+          <p>{t("terms.law_text")}</p>
         </section>
 
         <p className="mt-10">

@@ -20,7 +20,10 @@ export default function DiveForm({ editMode, initialData = {}, onClose }) {
     startTemperature: initialData.StartTemperature || "",
     bottomTemperature: initialData.BottomTemperature || "",
     endTemperature: initialData.EndTemperature || "",
-    surfaceTime: initialData.SurfaceTime || ""
+    surfaceTime: initialData.SurfaceTime || "",
+    surfaceTimeFormatted: initialData.SurfaceTime
+      ? formatDuration(initialData.SurfaceTime)
+      : "",
   });
 
   const handleChange = (e) => {
@@ -30,7 +33,7 @@ export default function DiveForm({ editMode, initialData = {}, onClose }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const required = ["startTime", "depth", "duration"];
+    const required = ["startTime", "depth", "duration", "surfaceTime"];
     const missing = required.find((key) => !form[key]);
     if (missing) {
       Swal.fire({
@@ -78,6 +81,7 @@ export default function DiveForm({ editMode, initialData = {}, onClose }) {
         bottomTemperature: "",
         endTemperature: "",
         surfaceTime: "",
+        surfaceTimeFormatted: "",
       });
     } catch (err) {
       console.error(err);
@@ -186,8 +190,23 @@ export default function DiveForm({ editMode, initialData = {}, onClose }) {
       </div>
 
       <div>
-        <label className={labelClass}>{t("dive.details.surfaceTime")}</label>
-        <input name="surfaceTime" type="number" value={form.surfaceTime} onChange={handleChange} className={inputClass} />
+        <label className={labelClass}>{t("dive.details.surfaceTime")} *</label>
+        <input
+          name="surfaceTimeFormatted"
+          type="text"
+          placeholder="mm:ss"
+          value={form.surfaceTimeFormatted}
+          onChange={(e) => {
+            const value = e.target.value;
+            setForm({
+              ...form,
+              surfaceTimeFormatted: value,
+              surfaceTime: mmssToSeconds(value),
+            });
+          }}
+          className={inputClass}
+          required
+        />
       </div>
 
       <div className="md:col-span-2 lg:col-span-3 flex flex-col sm:flex-row sm:justify-center gap-4 mt-4">
