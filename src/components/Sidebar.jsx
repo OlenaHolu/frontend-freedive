@@ -8,8 +8,6 @@ const Sidebar = ({ mobile }) => {
   const linkClass =
     "py-2 px-4 flex items-center gap-2 hover:bg-blue-600 transition rounded text-sm md:text-base font-medium";
 
-  // Movile
-
   const baseClasses =
     "flex flex-col items-center text-xs transition duration-200";
 

@@ -55,7 +55,6 @@ export default function EditProfileForm({ onClose, handleDeleteProfile }) {
         email: newEmail,
       };
 
-      // Solo agregar contraseña si se están editando
       if (newPassword && confirmPassword) {
         payload.password = newPassword;
         payload.password_confirmation = confirmPassword;
@@ -96,7 +95,6 @@ export default function EditProfileForm({ onClose, handleDeleteProfile }) {
       setLoading(false);
     }
   };
-
 
   return (
     <div className="w-full max-w-sm space-y-4 mt-4">

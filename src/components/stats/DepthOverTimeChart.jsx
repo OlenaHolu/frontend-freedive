@@ -5,7 +5,7 @@ const DepthOverTimeChart = ({ dives, t }) => {
     .filter((d) => d.StartTime && d.MaxDepth)
     .sort((a, b) => new Date(a.StartTime) - new Date(b.StartTime))
     .map((dive) => ({
-      date: new Date(dive.StartTime), // <- guarda como Date
+      date: new Date(dive.StartTime),
       depth: Number(dive.MaxDepth),
       time: Number(dive.Duration || 0),
     }))

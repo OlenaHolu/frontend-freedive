@@ -4,6 +4,7 @@ import LanguageDetector from 'i18next-browser-languagedetector';
 
 import translationEN from './locales/en/translation.json';
 import translationES from './locales/es/translation.json';
+import translationUA from './locales/ua/translation.json';
 import translationRU from './locales/ru/translation.json';
 
 i18n

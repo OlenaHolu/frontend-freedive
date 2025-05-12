@@ -5,11 +5,11 @@ import { login, register } from '../api/auth';
 import { useAuth } from "../context/AuthContext";
 import GoogleLoginButton from '../components/GoogleLoginButton';
 import MainLayout from '../layouts/MainLayout';
-import { t } from 'i18next';
-import { getTranslatedError } from '../utils/getTranslatedError';
+import { useTranslation } from "react-i18next";
 
 export default function RegisterPage() {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const { user, loading, setUser, email, setEmail } = useAuth();
 
   const [password, setPassword] = useState("");
@@ -17,7 +17,6 @@ export default function RegisterPage() {
   const [name, setName] = useState("");
   const [submitting, setSubmitting] = useState(false);
 
-  // 🔁 Redirección automática si ya está autenticado
   useEffect(() => {
     if (!loading && user) {
       navigate("/dashboard", { replace: true });

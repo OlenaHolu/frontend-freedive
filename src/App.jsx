@@ -14,7 +14,6 @@ export default function App() {
   useEffect(() => {
     if (prevStatus.current !== isOnline) {
       if (isOnline) {
-        // ✅ Mostrar toast de reconexión solo cuando vuelve
         Swal.fire({
           toast: true,
           position: "top",
@@ -33,14 +32,11 @@ export default function App() {
 
   return (
     <AuthProvider>
-      {/* 🔴 Banner visible todo el tiempo mientras no hay conexión */}
       {!isOnline && (
         <div className="fixed top-0 left-0 right-0 z-50 bg-red-600 text-white text-center py-2 text-sm font-semibold shadow-md">
           {t("network.offline", "Sin conexión a internet")}
         </div>
       )}
-
-      {/* Evitar que la app se solape con el banner */}
       <div className={!isOnline ? "pt-10" : ""}>
         <AppRoutes />
       </div>

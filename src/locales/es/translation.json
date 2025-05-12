@@ -214,7 +214,7 @@
             "description.title": "Importa tus registros de inmersiones",
             "description.text": "Lleva un seguimiento de tu progreso y mejora tu rendimiento.",
             "description.formats": "Formatos compatibles: .xml y .sml",
-            "description.limit": "Límite: hasta 100 archivos por carga",
+            "description.limit": "Límite: hasta 200 archivos por carga",
             "loading": "Importing...",
             "tooManyFiles": "Demasiados archivos",
             "maxFilesMessage": "Solo puedes subir hasta 200 archivos .sml o .xml a la vez.",

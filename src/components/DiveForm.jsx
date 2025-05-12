@@ -20,7 +20,6 @@ export default function DiveForm({ editMode, initialData = {}, onClose }) {
     startTemperature: initialData.StartTemperature || "",
     bottomTemperature: initialData.BottomTemperature || "",
     endTemperature: initialData.EndTemperature || "",
-    previousMaxDepth: initialData.PreviousMaxDepth || "",
     surfaceTime: initialData.SurfaceTime || ""
   });
 
@@ -59,7 +58,6 @@ export default function DiveForm({ editMode, initialData = {}, onClose }) {
         StartTemperature: form.startTemperature,
         BottomTemperature: form.bottomTemperature,
         EndTemperature: form.endTemperature,
-        PreviousMaxDepth: form.previousMaxDepth,
         SurfaceTime: form.surfaceTime,
         Mode: 3
       };
@@ -79,7 +77,6 @@ export default function DiveForm({ editMode, initialData = {}, onClose }) {
         startTemperature: "",
         bottomTemperature: "",
         endTemperature: "",
-        previousMaxDepth: "",
         surfaceTime: "",
       });
     } catch (err) {
@@ -145,7 +142,7 @@ export default function DiveForm({ editMode, initialData = {}, onClose }) {
 
       {/* Start Temperature */}
       <div>
-        <label className={labelClass}>{t("dive.startTemp")}</label>
+        <label className={labelClass}>{t("dive.details.startTemp")}</label>
         <div className="flex items-center border rounded px-3 py-2 bg-white text-black">
           <input
             name="startTemperature"
@@ -160,7 +157,7 @@ export default function DiveForm({ editMode, initialData = {}, onClose }) {
 
       {/* Bottom Temperature */}
       <div>
-        <label className={labelClass}>{t("dive.bottomTemp")}</label>
+        <label className={labelClass}>{t("dive.details.bottomTemp")}</label>
         <div className="flex items-center border rounded px-3 py-2 bg-white text-black">
           <input
             name="bottomTemperature"
@@ -175,7 +172,7 @@ export default function DiveForm({ editMode, initialData = {}, onClose }) {
 
       {/* End Temperature */}
       <div>
-        <label className={labelClass}>{t("dive.endTemp")}</label>
+        <label className={labelClass}>{t("dive.details.endTemp")}</label>
         <div className="flex items-center border rounded px-3 py-2 bg-white text-black">
           <input
             name="endTemperature"
@@ -186,12 +183,6 @@ export default function DiveForm({ editMode, initialData = {}, onClose }) {
             placeholder="e.g. 24"
           />
         </div>
-      </div>
-
-
-      <div>
-        <label className={labelClass}>{t("dive.details.previousMax")}</label>
-        <input name="previousMaxDepth" type="number" value={form.previousMaxDepth} onChange={handleChange} className={inputClass} />
       </div>
 
       <div>

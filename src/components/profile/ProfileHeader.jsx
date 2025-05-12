@@ -49,6 +49,7 @@ export default function ProfileHeader({
 
             <h1 className="text-xl font-semibold">{user.name}</h1>
 
+            {/* }
             <div className="flex gap-6 text-sm text-gray-600">
                 <div>
                     <strong>{user.postCount}</strong> {t("posts")}
@@ -56,7 +57,8 @@ export default function ProfileHeader({
                 <div><strong>0</strong> {t("followers")}</div>
                 <div><strong>0</strong> {t("following")}</div>
             </div>
-
+            */}
+            
             {/* Settings */}
             <div className="pt-6 border-t border-gray-200">
                 <button

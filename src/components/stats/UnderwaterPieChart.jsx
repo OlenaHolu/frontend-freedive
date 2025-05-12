@@ -27,7 +27,6 @@ const UnderwaterPieChart = ({ dives, t }) => {
         {t("stats.underwaterVsSurfaceTitle")}
       </h3>
 
-      {/* Leyenda personalizada */}
       <div className="flex gap-4 text-sm mb-2">
         {data.map((entry, index) => (
           <div key={index} className="flex items-center gap-2">

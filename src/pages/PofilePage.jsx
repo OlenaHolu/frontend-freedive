@@ -4,15 +4,15 @@ import { useAuth } from "../context/AuthContext";
 import { updateUserPhoto, deleteProfile } from "../api/auth";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
-import CreatePostModal from "../components/modals/CreatePostModal";
-import { getMyPosts, deletePost } from "../api/post";
+// import CreatePostModal from "../components/modals/CreatePostModal";
+// import { getMyPosts, deletePost } from "../api/post";
 import ProfileHeader from "../components/profile/ProfileHeader";
 
 
-const tabs = [
-  { key: "posts", label: "Posts" },
-  { key: "tagged", label: "Tagged" }
-];
+// const tabs = [
+//   { key: "posts", label: "Posts" },
+//   { key: "tagged", label: "Tagged" }
+// ];
 
 export default function ProfilePage() {
   const { user, setUser } = useAuth();
@@ -22,8 +22,10 @@ export default function ProfilePage() {
   const [preview, setPreview] = useState(user?.photo || null);
   const [selectedFile, setSelectedFile] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [activeTab, setActiveTab] = useState("posts");
   const [showSettings, setShowSettings] = useState(false);
+
+  /*
+  const [activeTab, setActiveTab] = useState("posts");
   const [showCreatePost, setShowCreatePost] = useState(false);
   const [userPosts, setUserPosts] = useState([]);
   const [loadingPosts, setLoadingPosts] = useState(true);
@@ -46,7 +48,7 @@ export default function ProfilePage() {
     }
   }, [user]);
 
-
+*/
 
   if (!user) {
     return <p className="text-white text-center mt-8">{t("loading")}</p>;
@@ -162,6 +164,7 @@ export default function ProfilePage() {
     }
   };
 
+  /*
   const handleDeletePost = async (postId) => {
     const confirmed = await Swal.fire({
       title: t("post.confirm_delete_title"),
@@ -205,12 +208,14 @@ export default function ProfilePage() {
       setDeletingPostId(null);
     }
   };
+  */
 
   return (
     <div className="max-w-3xl mx-auto px-4 py-10 text-black">
       {/* Header */}
       <ProfileHeader
-        user={{ ...user, postCount: userPosts.length }}
+        //user={{ ...user, postCount: userPosts.length }}
+        user={user}
         t={t}
         preview={preview}
         selectedFile={selectedFile}
@@ -221,8 +226,8 @@ export default function ProfilePage() {
         handleUpload={handleUpload}
         handleDeleteProfile={handleDeleteProfile}
       />
-
-      {/* Highlights */}
+      
+      {/*  
       <div className="mt-10 flex justify-center gap-4">
         <div className="flex flex-col items-center text-sm">
           <button
@@ -245,7 +250,6 @@ export default function ProfilePage() {
         )}
       </div>
 
-      {/* Tabs */}
       < div className="mt-10 border-t border-gray-300" >
         <div className="flex justify-around text-sm font-medium text-gray-500">
           {tabs.map((tab) => (
@@ -263,7 +267,6 @@ export default function ProfilePage() {
         </div>
       </div >
 
-      {/* Content */}
       <div className="flex flex-col gap-6">
         {loadingPosts ? (
           <p className="text-center text-gray-500">{t("loading")}</p>
@@ -275,13 +278,13 @@ export default function ProfilePage() {
               key={post.id}
               className="bg-white border rounded-lg shadow-md overflow-hidden"
             >
-              {/* Header */}
+            
               <div className="flex items-center justify-between px-4 py-2 text-sm text-gray-700">
                 <div className="font-semibold">{user.name}</div>
                 {post.location && <div className="italic text-gray-500">{post.location}</div>}
               </div>
 
-              {/* Image */}
+        
               <img
                 src={post.image_url}
                 alt={`Post ${post.id}`}
@@ -290,7 +293,7 @@ export default function ProfilePage() {
                 crossOrigin="anonymous"
               />
 
-              {/* Footer */}
+              
               <div className="px-4 py-3 text-sm space-y-2">
                 {post.description && (
                   <p className="text-gray-800">{post.description}</p>
@@ -301,7 +304,7 @@ export default function ProfilePage() {
                   </p>
                 )}
               </div>
-              {/* Delete Post */}
+              
               <div className="px-4 pb-3 text-right">
                 <button
                   onClick={() => handleDeletePost(post.id)}
@@ -317,7 +320,8 @@ export default function ProfilePage() {
         )}
       </div>
 
-
+      */}
+      
     </div >
   );
 }  

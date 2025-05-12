@@ -71,10 +71,8 @@ const UnderwaterComparison = ({ dives, t }) => {
 
   return (
     <div className="w-full">
-      {/* Título general */}
       <h2 className="text-2xl font-bold mb-6">{t("stats.underwaterVsSurfaceTitle")}</h2>
 
-      {/* Filtros y periodo */}
       <div className="flex flex-col lg::flex-row justify-between items-start gap-4 mb-6">
         <div className="flex flex-wrap items-center gap-4">
           <DateRangeSelector range={range} setRange={setRange} t={t} />
@@ -88,9 +86,8 @@ const UnderwaterComparison = ({ dives, t }) => {
         </div>
       </div>
 
-      {/* Gráficos en paralelo */}
       <div className="flex flex-col lg:flex-row gap-8">
-        {/* Gráfico filtrado */}
+        {/* Filtred Chart */}
         <div className="lg:w-1/2 w-full bg-white rounded-xl shadow-sm p-4">
           <h3 className="text-base font-semibold text-gray-500 mb-2">
             {t("stats.filteredPeriod")}
@@ -98,7 +95,7 @@ const UnderwaterComparison = ({ dives, t }) => {
           <UnderwaterPieChart dives={filteredDives} t={t} />
         </div>
 
-        {/* Gráfico general */}
+        {/* Main Chart */}
         <div className="lg:w-1/2 w-full bg-white rounded-xl shadow-sm p-4">
           <h3 className="text-base font-semibold text-gray-500 mb-2">
             {t("stats.allTime")}

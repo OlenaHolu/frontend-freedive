@@ -57,7 +57,7 @@ const DiveAddPage = () => {
       didOpen: () => Swal.showLoading(),
     });
 
-    // Fase 1: parseo real (0-1%)
+    // Step 1: Parsing real
     for (let i = 0; i < totalFiles; i++) {
       const file = files[i];
       const text = await file.text();
@@ -84,7 +84,7 @@ const DiveAddPage = () => {
     }
 
     try {
-      // Fase 3: simulación + guardado
+      // Step 2: simulate, saving
       let savingDone = false;
       let saveError = null;
 
@@ -110,7 +110,7 @@ const DiveAddPage = () => {
         });
       }
 
-      // Asegurarse que se muestre 100%
+      // Step 3: simulate, done
       const bar = document.getElementById("swal-progress-bar");
       const textEl = document.getElementById("swal-progress-text");
       if (bar && textEl) {
@@ -147,7 +147,7 @@ const DiveAddPage = () => {
         <p>{t("dive.import.description.text")}</p>
         <p>✔️ <strong>{t("dive.import.description.formats")}</strong></p>
         
-        { /* <p>📁 <strong>{t("dive.import.description.limit")}</strong></p> */}
+        <p>📁 <strong>{t("dive.import.description.limit")}</strong></p>
       </div>
     );
   };

@@ -210,7 +210,7 @@
       "description.title": "Import your dive logs",
       "description.text": "Track your progress and improve your performance.",
       "description.formats": "Supported formats: .xml and .sml",
-      "description.limit": "Limit: up to 100 files per upload",
+      "description.limit": "Limit: up to 200 files per upload",
       "loading": "Importing...",
       "tooManyFiles": "Too many files",
       "maxFilesMessage": "You can only upload up to 200 .sml or .xml files at once.",
