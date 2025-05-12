@@ -284,7 +284,11 @@
             "submit": "Enviar mensaje"
         },
         "also_contact": "También puedes contactarnos en:",
-        "location": "España"
+        "location": "España",
+        "success_title": "Mensaje enviado",
+        "success_message": "¡Gracias por tu mensaje! Nos pondremos en contacto contigo lo antes posible.",
+        "error_title": "Error al enviar mensaje",
+        "error_message": "Ocurrió un error al enviar tu mensaje. Por favor, intenta nuevamente más tarde."
     },
     "terms": {
         "title": "Términos y Condiciones de Uso",

@@ -284,7 +284,11 @@
       "submit": "Send Message"
     },
     "also_contact": "You can also reach us at:",
-    "location": "Spain"
+    "location": "Spain",
+    "success_title": "Message sent!",
+    "success_message": "Thank you for reaching out! We'll get back to you as soon as possible.",
+    "error_title": "Error sending message",
+    "error_message": "There was a problem sending your message. Please try again later."
   },
   "terms": {
     "title": "Terms and Conditions of Use",
