@@ -103,7 +103,7 @@ const Home = () => {
       {/* Características destacadas */}
 <div className="mt-16 max-w-5xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-10 text-center">
   {/* Registro de inmersiones */}
-  <div className="flex flex-col items-center  bg-gray-600 bg-opacity-20 rounded-lg p-6">
+  <div className="flex flex-col items-center bg-gray-600 bg-opacity-20 rounded-lg p-6">
     <BookOpenCheck size={48} className="text-white mb-4" />
     <h3 className="text-lg font-semibold text-white">{t("feature_log")}</h3>
     <p className="text-sm text-gray-300 mt-2 leading-relaxed">
@@ -112,7 +112,7 @@ const Home = () => {
   </div>
 
   {/* Estadísticas visuales */}
-  <div className="flex flex-col items-center  bg-gray-600 bg-opacity-20 rounded-lg p-6">
+  <div className="flex flex-col items-center bg-gray-600 bg-opacity-20 rounded-lg p-6">
     <BarChartBig size={48} className="text-white mb-4" />
     <h3 className="text-lg font-semibold text-white">{t("feature_stats")}</h3>
     <p className="text-sm text-gray-300 mt-2 leading-relaxed">
@@ -121,7 +121,7 @@ const Home = () => {
   </div>
 
   {/* Soporte multilingüe */}
-  <div className="flex flex-col items-center  bg-gray-600 bg-opacity-20 rounded-lg p-6">
+  <div className="flex flex-col items-center bg-gray-600 bg-opacity-20 rounded-lg p-6">
     <Languages size={48} className="text-white mb-4" />
     <h3 className="text-lg font-semibold text-white">{t("feature_langs")}</h3>
     <p className="text-sm text-gray-300 mt-2 leading-relaxed ">

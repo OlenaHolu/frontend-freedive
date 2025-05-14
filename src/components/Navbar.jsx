@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import LanguageSwitcher from "./LanguageSwitcher";
@@ -7,8 +7,24 @@ import { useTranslation } from "react-i18next";
 const Navbar = () => {
     const navigate = useNavigate();
     const [menuOpen, setMenuOpen] = useState(false);
+    const menuRef = useRef(null);
     const { user, logout } = useAuth();
     const { t } = useTranslation();
+
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (menuRef.current && !menuRef.current.contains(event.target)) {
+                setMenuOpen(false);
+            }
+        };
+
+        if (menuOpen) {
+            document.addEventListener("mousedown", handleClickOutside);
+        }
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, [menuOpen]);
 
     return (
         <nav className="w-full bg-black bg-opacity-80 text-white py-4 px-6 flex justify-between items-center z-50">
@@ -43,7 +59,10 @@ const Navbar = () => {
 
             {/* Mobile menu */}
             {menuOpen && (
-                <div className="absolute top-14 left-0 w-full bg-black bg-opacity-90 flex flex-col items-center py-4 space-y-4">
+                <div 
+                    ref={menuRef}
+                    className="absolute top-14 left-0 w-full bg-black bg-opacity-90 flex flex-col items-center py-4 space-y-4"
+                >
                     <a href="/">{t("home")}</a>
                     <a href="/dashboard">{t("dashboard.title")}</a>
                     <a href="/about">{t("about.title")}</a>
