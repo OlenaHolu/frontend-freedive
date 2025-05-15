@@ -3,11 +3,10 @@ import { useNavigate } from "react-router-dom";
 import MainLayout from "../layouts/MainLayout";
 import { useTranslation } from "react-i18next";
 import { useAuth } from "../context/AuthContext";
-import { Helmet } from "react-helmet";
 import { BookOpenCheck, BarChartBig, Languages } from "lucide-react";
 
 const Home = () => {
-  const { email, setEmail } = useAuth();
+  const { user, email, setEmail, loading } = useAuth();
   const [error, setError] = useState("");
   const navigate = useNavigate();
   const { t, ready } = useTranslation(undefined, { useSuspense: false });
@@ -34,52 +33,43 @@ const Home = () => {
 
   return (
     <MainLayout backgroundImage="/home-bg.png">
-      <Helmet>
-        <title>{t("app_title")}</title>
-        <meta name="description" content={t("app_description")} />
-        <meta property="og:title" content={t("app_title")} />
-        <meta property="og:description" content={t("app_description")} />
-        <meta property="og:url" content="https://frontend-freedive.vercel.app/" />
-        <meta property="og:type" content="website" />
-        <meta name="twitter:card" content="summary_large_image" />
-      </Helmet>
-
       <div className="w-full max-w-6xl mx-auto mt-16 px-4 flex flex-col md:flex-row items-start justify-between">
+        {!loading && !user && (
+          <div className="w-full md:w-1/2 text-left">
+            <h1 className="text-5xl md:text-6xl font-bold mb-2">FREEDIVE<br />ANALYZER</h1>
+            <p className="text-md md:text-lg text-gray-100 mb-6">{t("discover")}</p>
 
-        <div className="w-full md:w-1/2 text-left">
-          <h1 className="text-5xl md:text-6xl font-bold mb-2">FREEDIVE<br />ANALYZER</h1>
-          <p className="text-md md:text-lg text-gray-100 mb-6">{t("discover")}</p>
+            {/* Email Input */}
+            <div className="w-full max-w-sm">
+              <input
+                type="email"
+                placeholder={t("profile.email_placeholder")}
+                value={email}
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                  setError("");
+                }}
+                className="w-full p-3 text-black rounded-lg"
+              />
+              {error && <p className="text-red-500 mt-1">{error}</p>}
+            </div>
 
-          {/* Email Input */}
-          <div className="w-full max-w-sm">
-            <input
-              type="email"
-              placeholder={t("profile.email_placeholder")}
-              value={email}
-              onChange={(e) => {
-                setEmail(e.target.value);
-                setError("");
-              }}
-              className="w-full p-3 text-black rounded-lg"
-            />
-            {error && <p className="text-red-500 mt-1">{error}</p>}
+            <div className="mt-4 flex flex-col md:flex-row space-y-3 md:space-y-0 md:space-x-4 w-full max-w-sm">
+              <button
+                className="bg-white text-black px-6 py-3 rounded-lg font-bold w-full"
+                onClick={handleRegister}
+              >
+                {t("register.title")}
+              </button>
+              <button
+                className="bg-blue-500 text-white px-6 py-3 rounded-lg font-bold w-full"
+                onClick={() => navigate("/login")}
+              >
+                {t("login.title")}
+              </button>
+            </div>
           </div>
-
-          <div className="mt-4 flex flex-col md:flex-row space-y-3 md:space-y-0 md:space-x-4 w-full max-w-sm">
-            <button
-              className="bg-white text-black px-6 py-3 rounded-lg font-bold w-full"
-              onClick={handleRegister}
-            >
-              {t("register.title")}
-            </button>
-            <button
-              className="bg-blue-500 text-white px-6 py-3 rounded-lg font-bold w-full"
-              onClick={() => navigate("/login")}
-            >
-              {t("login.title")}
-            </button>
-          </div>
-        </div>
+        )}
 
         <div className="w-full md:w-1/2 mt-10 md:mt-0 md:pl-12 text-gray-100 bg-gray-600 bg-opacity-20 rounded-lg p-6">
           <h2 className="text-xl font-semibold mb-4">{t("what_is_this") || "¿Qué es FreediveAnalyzer?"}</h2>
