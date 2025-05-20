@@ -29,11 +29,6 @@ export default function LoginPage() {
     try {
       const loggedInUser = await login(email, password);
       setUser(loggedInUser);
-      await Swal.fire({
-        icon: "success",
-        title: t("login.success_title"),
-        text: t("login.success_message"),
-      });
       navigate("/dashboard");
     } catch (err) {
       Swal.fire({
