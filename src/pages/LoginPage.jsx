@@ -29,7 +29,7 @@ export default function LoginPage() {
     try {
       const loggedInUser = await login(email, password);
       setUser(loggedInUser);
-      Swal.fire({
+      await Swal.fire({
         icon: "success",
         title: t("login.success_title"),
         text: t("login.success_message"),
