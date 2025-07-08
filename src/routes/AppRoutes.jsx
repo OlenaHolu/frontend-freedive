@@ -9,7 +9,7 @@ import DiveListPage from "../pages/DiveListPage";
 import StatsPage from "../pages/StatsPage";
 import ProfilePage from "../pages/PofilePage";
 import DashboardLayout from "../layouts/DashboardLayout";
-import AboutPage from "../pages/AboutPage";
+import AboutPage from "../pages/AboutPage/AboutPage";
 import PrivacyPage from "../pages/PrivacyPage";
 import TermsPage from "../pages/TermsPage";
 import ContactPage from "../pages/ContactPage";
