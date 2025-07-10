@@ -3,7 +3,7 @@ import Home from "../pages/Home";
 import LoginPage from "../pages/LoginPage";
 import RegisterPage from "../pages/RegisterPage";
 import ProtectedRoute from "../components/ProtectedRoute";
-import DashboardHome from "../pages/DashboardHome";
+import DashboardHome from "../pages/DashboardHome/DashboardHome";
 import DiveAddPage from "../pages/DiveAddPage";
 import DiveListPage from "../pages/DiveListPage";
 import StatsPage from "../pages/StatsPage";
