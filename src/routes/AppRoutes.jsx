@@ -6,7 +6,7 @@ import ProtectedRoute from "../components/ProtectedRoute";
 import DashboardHome from "../pages/DashboardHome/DashboardHome";
 import DiveAddPage from "../pages/DiveAddPage";
 import DiveListPage from "../pages/DiveListPage";
-import StatsPage from "../pages/StatsPage";
+import StatsPage from "../pages/StatsPage/StatsPage";
 import ProfilePage from "../pages/PofilePage";
 import DashboardLayout from "../layouts/DashboardLayout";
 import AboutPage from "../pages/AboutPage/AboutPage";
