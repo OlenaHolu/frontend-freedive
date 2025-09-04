@@ -1,6 +1,6 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import MainLayout from "../layouts/MainLayout";
+import MainLayout from "../../components/Layouts/MainLayout";
 
 const TermsPage = () => {
   const { t } = useTranslation();
