@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
-import { login } from "../api/auth";
+import { login } from "../../api/auth";
 import { useNavigate, Link } from "react-router-dom";
-import { useAuth } from "../context/AuthContext";
+import { useAuth } from "../../context/AuthContext";
 import Swal from "sweetalert2";
-import GoogleLoginButton from "../components/GoogleLoginButton";
-import MainLayout from "../layouts/MainLayout";
+import GoogleLoginButton from "../../components/GoogleLoginButton";
+import MainLayout from "../../layouts/MainLayout";
 import { useTranslation } from "react-i18next";
-import { getTranslatedError } from "../utils/getTranslatedError";
+import { getTranslatedError } from "../../utils/getTranslatedError";
 
 export default function LoginPage() {
   const { t } = useTranslation();
