@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useAuth } from "../../context/AuthContext";
-import { updateUserPhoto, deleteProfile } from "../api/auth";
+import { updateUserPhoto, deleteProfile } from "../../api/auth";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 // import CreatePostModal from "../components/modals/CreatePostModal";
 // import { getMyPosts, deletePost } from "../api/post";
-import ProfileHeader from "../components/profile/ProfileHeader";
+import ProfileHeader from "../../components/profile/ProfileHeader";
 
 
 // const tabs = [
