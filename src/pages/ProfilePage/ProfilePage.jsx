@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { useAuth } from "../context/AuthContext";
+import { useAuth } from "../../context/AuthContext";
 import { updateUserPhoto, deleteProfile } from "../api/auth";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
