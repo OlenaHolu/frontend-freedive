@@ -1,4 +1,4 @@
-import API from "../api/axiosInstance";
+import API from "./axiosInstance";
 import { supabase } from "../lib/supabaseClient";
 
 export const register = async (name, email, password, password_confirmation) => {
