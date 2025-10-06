@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 // import CreatePostModal from "../components/modals/CreatePostModal";
 // import { getMyPosts, deletePost } from "../api/post";
-import ProfileHeader from "../../components/profile/ProfileHeader";
+import ProfileHeader from "./ProfileHeader";
 
 
 // const tabs = [
