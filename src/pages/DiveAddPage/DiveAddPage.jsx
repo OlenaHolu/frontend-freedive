@@ -1,9 +1,9 @@
 import { useTranslation } from "react-i18next";
-import DiveForm from "../components/DiveForm";
+import DiveForm from "../../components/DiveForm";
 import Swal from "sweetalert2";
-import DiveImportButton from "../components/DiveImportButton";
-import { parseDiveXml, parseSmlDive } from "../utils/diveParsers";
-import { saveMultipleDives } from "../api/dive";
+import DiveImportButton from "./DiveImportButton";
+import { parseDiveXml, parseSmlDive } from "../../utils/diveParsers";
+import { saveMultipleDives } from "../../api/dive";
 import { useNavigate } from "react-router-dom";
 
 const DiveAddPage = () => {

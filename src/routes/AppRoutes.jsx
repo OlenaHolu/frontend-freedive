@@ -4,7 +4,7 @@ import LoginPage from "../pages/LoginPage/LoginPage";
 import RegisterPage from "../pages/RegisterPage";
 import ProtectedRoute from "../components/ProtectedRoute";
 import DashboardHome from "../pages/DashboardHome/DashboardHome";
-import DiveAddPage from "../pages/DiveAddPage";
+import DiveAddPage from "../pages/DiveAddPage/DiveAddPage";
 import DiveListPage from "../pages/DiveListPage";
 import StatsPage from "../pages/StatsPage/StatsPage";
 import ProfilePage from "../pages/ProfilePage/ProfilePage";
