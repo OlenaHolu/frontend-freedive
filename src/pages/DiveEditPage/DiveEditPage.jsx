@@ -1,7 +1,7 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { getDiveById } from "../api/dive";
-import DiveForm from "../components/DiveForm";
+import { getDiveById } from "../../api/dive";
+import DiveForm from "../../components/DiveForm";
 import { useTranslation } from "react-i18next";
 import Swal from "sweetalert2";
 
