@@ -13,7 +13,7 @@ import AboutPage from "../pages/AboutPage/AboutPage";
 import PrivacyPage from "../pages/PrivacyPage/PrivacyPage";
 import TermsPage from "../pages/TermsPage/TermsPage";
 import ContactPage from "../pages/ContactPage/ContactPage";
-import DiveEditPage from "../pages/DiveEditPage";
+import DiveEditPage from "../pages/DiveEditPage/DiveEditPage";
 import DiveDetailsPage from "../pages/DiveDetailsPage/DiveDetailsPage";
 import GoogleCallback from "../pages/GoogleCallback";
 
