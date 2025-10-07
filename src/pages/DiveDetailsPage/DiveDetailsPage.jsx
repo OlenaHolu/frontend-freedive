@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { getDiveById } from "../api/dive";
-import { formatDuration } from "../utils/time";
+import { getDiveById } from "../../api/dive";
+import { formatDuration } from "../../utils/time";
 import {
   LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer,
 } from "recharts";
