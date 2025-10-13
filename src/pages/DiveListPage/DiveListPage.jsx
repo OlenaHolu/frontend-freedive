@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useAuth } from "../../context/AuthContext";
 import { useTranslation } from "react-i18next";
-import DivesTable from "../../components/DivesTable";
+import DivesTable from "./DivesTable";
 import Pagination from "./Pagination";
 import useDives from "../../hooks/useDives";
 import { deleteDive, deleteManyDives } from "../../api/dive";
