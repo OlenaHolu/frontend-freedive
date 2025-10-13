@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { formatDuration } from "../utils/time";
+import { formatDuration } from "../../utils/time";
 
 export default function DivesTable({
   dives,
