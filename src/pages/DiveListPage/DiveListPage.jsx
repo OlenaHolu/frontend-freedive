@@ -1,18 +1,16 @@
 import { useState, useEffect } from "react";
-import { useAuth } from "../context/AuthContext";
+import { useAuth } from "../../context/AuthContext";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
-import DivesTable from "../components/DivesTable";
-import Pagination from "../components/Pagination";
-import useDives from "../hooks/useDives";
-import { deleteDive, deleteManyDives } from "../api/dive";
+import DivesTable from "../../components/DivesTable";
+import Pagination from "./Pagination";
+import useDives from "../../hooks/useDives";
+import { deleteDive, deleteManyDives } from "../../api/dive";
 import Swal from "sweetalert2";
-import DiveFilters from "../components/DiveFilters";
+import DiveFilters from "../../components/DiveFilters";
 
 export default function DiveListPage() {
   const { user, loading } = useAuth();
   const { t } = useTranslation();
-  const navigate = useNavigate();
 
   const [searchQuery, setSearchQuery] = useState("");
   const [period, setPeriod] = useState("all");
