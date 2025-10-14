@@ -4,15 +4,15 @@ import { useAuth } from "../../context/AuthContext";
 import { updateUserPhoto, deleteProfile } from "../../api/auth";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
-// import CreatePostModal from "../components/modals/CreatePostModal";
-// import { getMyPosts, deletePost } from "../api/post";
+import CreatePostModal from "../components/modals/CreatePostModal";
+import { getMyPosts, deletePost } from "../api/post";
 import ProfileHeader from "./ProfileHeader";
 
 
-// const tabs = [
-//   { key: "posts", label: "Posts" },
-//   { key: "tagged", label: "Tagged" }
-// ];
+const tabs = [
+  { key: "posts", label: "Posts" },
+  { key: "tagged", label: "Tagged" }
+];
 
 export default function ProfilePage() {
   const { user, setUser } = useAuth();
@@ -24,7 +24,6 @@ export default function ProfilePage() {
   const [loading, setLoading] = useState(false);
   const [showSettings, setShowSettings] = useState(false);
 
-  /*
   const [activeTab, setActiveTab] = useState("posts");
   const [showCreatePost, setShowCreatePost] = useState(false);
   const [userPosts, setUserPosts] = useState([]);
@@ -48,7 +47,6 @@ export default function ProfilePage() {
     }
   }, [user]);
 
-*/
 
   if (!user) {
     return <p className="text-white text-center mt-8">{t("loading")}</p>;
@@ -164,7 +162,6 @@ export default function ProfilePage() {
     }
   };
 
-  /*
   const handleDeletePost = async (postId) => {
     const confirmed = await Swal.fire({
       title: t("post.confirm_delete_title"),
@@ -208,14 +205,13 @@ export default function ProfilePage() {
       setDeletingPostId(null);
     }
   };
-  */
 
   return (
     <div className="max-w-3xl mx-auto px-4 py-10 text-black">
       {/* Header */}
       <ProfileHeader
-        //user={{ ...user, postCount: userPosts.length }}
-        user={user}
+        user={{ ...user, postCount: userPosts.length }}
+        //user={user}
         t={t}
         preview={preview}
         selectedFile={selectedFile}
@@ -227,7 +223,7 @@ export default function ProfilePage() {
         handleDeleteProfile={handleDeleteProfile}
       />
       
-      {/*  
+      {/* Posts Section */} 
       <div className="mt-10 flex justify-center gap-4">
         <div className="flex flex-col items-center text-sm">
           <button
@@ -319,8 +315,6 @@ export default function ProfilePage() {
           ))
         )}
       </div>
-
-      */}
       
     </div >
   );
