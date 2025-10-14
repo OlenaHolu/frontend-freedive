@@ -1,10 +1,10 @@
 import React, { use, useEffect, useState } from 'react';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
-import { login, register } from '../api/auth';
-import { useAuth } from "../context/AuthContext";
-import GoogleLoginButton from '../components/GoogleLoginButton';
-import MainLayout from '../layouts/MainLayout';
+import { login, register } from '../../api/auth';
+import { useAuth } from "../../context/AuthContext";
+import GoogleLoginButton from '../../components/GoogleLoginButton';
+import MainLayout from '../../layouts/MainLayout';
 import { useTranslation } from "react-i18next";
 
 export default function RegisterPage() {

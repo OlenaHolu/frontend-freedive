@@ -1,7 +1,7 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "../pages/Home";
 import LoginPage from "../pages/LoginPage/LoginPage";
-import RegisterPage from "../pages/RegisterPage";
+import RegisterPage from "../pages/RegisterPage/RegisterPage";
 import ProtectedRoute from "../components/ProtectedRoute";
 import DashboardHome from "../pages/DashboardHome/DashboardHome";
 import DiveAddPage from "../pages/DiveAddPage/DiveAddPage";
