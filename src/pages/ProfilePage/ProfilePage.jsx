@@ -4,8 +4,8 @@ import { useAuth } from "../../context/AuthContext";
 import { updateUserPhoto, deleteProfile } from "../../api/auth";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
-import CreatePostModal from "../components/modals/CreatePostModal";
-import { getMyPosts, deletePost } from "../api/post";
+import CreatePostModal from "./CreatePostModal";
+import { getMyPosts, deletePost } from "../../api/post";
 import ProfileHeader from "./ProfileHeader";
 
 
