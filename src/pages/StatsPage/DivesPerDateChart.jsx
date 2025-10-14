@@ -1,7 +1,7 @@
 import { BarChart, Bar, XAxis, YAxis, Tooltip, CartesianGrid, ResponsiveContainer } from "recharts";
 import { useState, useEffect } from "react";
 import DateRangeSelector from "./DateRangeSelector";
-import PeriodNavigator from "./PeriodNavigator";
+import PeriodNavigator from "../../pages/StatsPage/PeriodNavigator";
 
 const DivesPerDateChart = ({ dives, t }) => {
     const [range, setRange] = useState("monthly");

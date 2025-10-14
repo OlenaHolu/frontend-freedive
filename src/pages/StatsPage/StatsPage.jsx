@@ -2,11 +2,11 @@ import { useEffect, useState } from "react";
 import { getDives } from "../../api/dive";
 import { useTranslation } from "react-i18next";
 import { useAuth } from "../../context/AuthContext";
-import DiveTimeVsSurfaceChart from "../../components/stats/DiveTimeVsSurfaceChart.jsx";
-import AverageDiveTimeVsSurfaceChart from "../../components/stats/AverageDiveTimeVsSurfaceChart.jsx";
-import DepthOverTimeChart from "../../components/stats/DepthOverTimeChart";
-import DivesPerDateChart from "../../components/stats/DivesPerDateChart.jsx";
-import UnderwaterComparison from "../../components/stats/UnderwaterComparison.jsx";
+import DiveTimeVsSurfaceChart from "./DiveTimeVsSurfaceChart.jsx";
+import AverageDiveTimeVsSurfaceChart from "./AverageDiveTimeVsSurfaceChart.jsx.jsx";
+import DepthOverTimeChart from "./DepthOverTimeChart.jsx";
+import DivesPerDateChart from "./DivesPerDateChart.jsx";
+import UnderwaterComparison from "./UnderwaterComparison.jsx";
 
 const StatsPage = () => {
   const { user, loading } = useAuth();

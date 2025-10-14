@@ -2,8 +2,8 @@ import { LineChart, Line, XAxis, YAxis, Tooltip, CartesianGrid, Legend, Responsi
 import { useEffect, useState } from "react";
 import { formatTime, formatMinutesOnly } from "../../utils/time";
 import DateRangeSelector from "./DateRangeSelector";
-import PeriodNavigator from "./PeriodNavigator";
-import CorrelationNote from "./CorrelationNote";
+import PeriodNavigator from "../../pages/StatsPage/PeriodNavigator";
+import CorrelationNote from "../../pages/StatsPage/CorrelationNote";
 
 const DiveTimeVsSurfaceChart = ({ dives, t }) => {
   const [range, setRange] = useState("months"); // "months" | "days" | "years"
