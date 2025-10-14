@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 import Swal from "sweetalert2";
 import MainLayout from "../../layouts/MainLayout";
 import { sendContactMessage } from "../../api/contact";
-import ContactForm from "../../components/ContactForm";
+import ContactForm from "./ContactForm";
 
 const ContactPage = () => {
   const { t, ready } = useTranslation(undefined, { useSuspense: false });
